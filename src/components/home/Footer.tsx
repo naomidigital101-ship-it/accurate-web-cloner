@@ -4,10 +4,8 @@ export function Footer() {
       <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 text-center md:text-right">
         <div>
           <div className="flex items-center gap-2 justify-center md:justify-start">
-            <div className="size-14 rounded-full bg-white flex items-center justify-center">
-              <span className="font-display text-teal-deep text-[10px] font-bold leading-tight text-center">
-                קשר של<br />תפילין
-              </span>
+            <div className="size-14 rounded-full bg-white flex items-center justify-center p-1.5">
+              <img src="/logo.svg" alt="קשר של תפילין" className="w-full h-full object-contain" />
             </div>
             <span className="font-display text-2xl font-bold text-white">אור חדש</span>
           </div>

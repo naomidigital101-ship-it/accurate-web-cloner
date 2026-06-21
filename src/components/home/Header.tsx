@@ -19,10 +19,8 @@ export function Header() {
         {/* Right side: logos */}
         <div className="flex items-center gap-3">
           <a href="/" aria-label="קשר של תפילין - דף הבית" className="block">
-            <div className="size-20 lg:size-24 rounded-full bg-white shadow-soft flex items-center justify-center">
-              <span className="font-display text-teal-deep text-xs lg:text-sm font-bold leading-tight text-center px-1">
-                קשר של<br />תפילין
-              </span>
+            <div className="size-20 lg:size-24 rounded-full bg-white shadow-soft flex items-center justify-center p-2">
+              <img src="/logo.svg" alt="קשר של תפילין" className="w-full h-full object-contain" />
             </div>
           </a>
           <div className="hidden sm:flex items-center gap-1 text-white">
