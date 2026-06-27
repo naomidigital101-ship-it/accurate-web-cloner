@@ -69,5 +69,5 @@ function Index() {
     );
   }
 
-  return <div className="tefilin-mirror" dangerouslySetInnerHTML={{ __html: html }} />;
+  return <div className="tefilin-mirror elementor-kit-7" dangerouslySetInnerHTML={{ __html: html }} />;
 }
