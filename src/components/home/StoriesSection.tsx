@@ -41,7 +41,7 @@ export function StoriesSection() {
       <div className="max-w-7xl mx-auto">
         <div className="flex items-end justify-between flex-wrap gap-4 mb-10">
           <div>
-            <h2 className="font-display font-black text-5xl md:text-6xl text-teal-deep leading-none">הסיפורים</h2>
+            <h2 className="font-display font-black text-6xl md:text-7xl text-link-sky leading-none">הסיפורים</h2>
             <p className="font-display font-bold text-2xl md:text-3xl text-ink mt-2">שמאחורי התפילין</p>
           </div>
           <Button asChild variant="ghost" className="text-teal-deep font-bold hover:text-orange">

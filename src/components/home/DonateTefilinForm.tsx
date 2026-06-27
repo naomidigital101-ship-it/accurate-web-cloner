@@ -23,7 +23,7 @@ export function DonateTefilinForm() {
     <section id="donate" className="py-20 px-4 bg-cream">
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-8">
-          <h2 className="font-display font-black text-4xl md:text-5xl text-ink">
+          <h2 className="font-display font-bold text-3xl md:text-[32px] text-ink leading-tight">
             יש לך תפילין מיותרות?
           </h2>
           <p className="mt-3 text-muted-foreground text-lg">
