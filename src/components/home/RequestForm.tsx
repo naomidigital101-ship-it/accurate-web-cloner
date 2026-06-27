@@ -25,10 +25,10 @@ export function RequestForm() {
     <section id="request" className="relative bg-gradient-hero py-20 px-4">
       <div className="max-w-2xl mx-auto">
         <div className="text-center text-white mb-8">
-          <h2 className="font-display font-black text-4xl md:text-5xl">
+          <h2 className="font-display font-bold text-3xl md:text-[32px] leading-tight">
             רוצה להניח תפילין משלך?
           </h2>
-          <p className="mt-3 text-white/90 text-lg">
+          <p className="mt-3 text-white/90 text-base md:text-lg">
             אנא מלא את הטופס המצורף כדי שנוכל לעזור לך לקבל תפילין משלך!
           </p>
         </div>
@@ -82,7 +82,7 @@ export function RequestForm() {
               <Button
                 type="button"
                 onClick={next}
-                className="w-full h-12 rounded-full bg-teal hover:bg-mint-hover text-navy font-bold text-lg"
+                className="w-full h-12 rounded-[10px] bg-teal hover:bg-mint-hover text-navy font-semibold text-xl"
               >
                 הבא
               </Button>
@@ -96,10 +96,10 @@ export function RequestForm() {
               <Field label="כתובת למסירה"><Input className="h-12" /></Field>
               <Field label="עיר / ישוב"><Input className="h-12" /></Field>
               <div className="flex gap-3">
-                <Button type="button" variant="outline" onClick={prev} className="flex-1 h-12 rounded-full">
+                <Button type="button" variant="outline" onClick={prev} className="flex-1 h-12 rounded-[10px] font-semibold text-xl">
                   הקודם
                 </Button>
-                <Button type="button" onClick={next} className="flex-1 h-12 rounded-full bg-teal hover:bg-mint-hover text-navy font-bold">
+                <Button type="button" onClick={next} className="flex-1 h-12 rounded-[10px] bg-teal hover:bg-mint-hover text-navy font-semibold text-xl">
                   הבא
                 </Button>
               </div>
@@ -114,10 +114,10 @@ export function RequestForm() {
                 בשליחת הבקשה לא יעשה שום שימוש במידע שהזנתם מלבד לצרכים הטכניים של העמותה.
               </p>
               <div className="flex gap-3">
-                <Button type="button" variant="outline" onClick={prev} className="flex-1 h-12 rounded-full">
+                <Button type="button" variant="outline" onClick={prev} className="flex-1 h-12 rounded-[10px] font-semibold text-xl">
                   הקודם
                 </Button>
-                <Button type="submit" className="flex-1 h-12 rounded-full bg-teal hover:bg-mint-hover text-navy font-bold">
+                <Button type="submit" className="flex-1 h-12 rounded-[10px] bg-teal hover:bg-mint-hover text-navy font-semibold text-xl">
                   שליחת בקשה
                 </Button>
               </div>

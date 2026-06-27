@@ -23,7 +23,7 @@ export function DonateTefilinForm() {
     <section id="donate" className="py-20 px-4 bg-cream">
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-8">
-          <h2 className="font-display font-black text-4xl md:text-5xl text-ink">
+          <h2 className="font-display font-bold text-3xl md:text-[32px] text-ink leading-tight">
             יש לך תפילין מיותרות?
           </h2>
           <p className="mt-3 text-muted-foreground text-lg">
@@ -52,7 +52,7 @@ export function DonateTefilinForm() {
                   </SelectContent>
                 </Select>
               </Field>
-              <Button type="button" onClick={() => setStep(2)} className="w-full h-12 rounded-full bg-teal hover:bg-mint-hover text-navy font-bold text-lg">
+              <Button type="button" onClick={() => setStep(2)} className="w-full h-12 rounded-[10px] bg-teal hover:bg-mint-hover text-navy font-semibold text-xl">
                 הבא
               </Button>
             </>
@@ -65,8 +65,8 @@ export function DonateTefilinForm() {
                 בשליחת הבקשה לא יעשה שום שימוש במידע שהזנתם מלבד לצרכים הטכניים של העמותה.
               </p>
               <div className="flex gap-3">
-                <Button type="button" variant="outline" onClick={() => setStep(1)} className="flex-1 h-12 rounded-full">הקודם</Button>
-                <Button type="submit" className="flex-1 h-12 rounded-full bg-teal hover:bg-mint-hover text-navy font-bold">שליחה</Button>
+                <Button type="button" variant="outline" onClick={() => setStep(1)} className="flex-1 h-12 rounded-[10px] font-semibold text-xl">הקודם</Button>
+                <Button type="submit" className="flex-1 h-12 rounded-[10px] bg-teal hover:bg-mint-hover text-navy font-semibold text-xl">שליחה</Button>
               </div>
             </>
           )}
