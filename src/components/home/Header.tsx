@@ -23,11 +23,9 @@ export function Header() {
               <img src="/logo.svg" alt="קשר של תפילין" className="w-full h-full object-contain" />
             </div>
           </a>
-          <div className="hidden sm:flex items-center gap-1 text-white">
-            <span className="size-6 rounded-full bg-orange flex items-center justify-center text-white font-bold text-xs">
-              אור
-            </span>
-            <span className="font-display font-bold text-lg">חדש</span>
+          <div className="hidden sm:flex items-baseline gap-0.5 text-white font-display font-bold text-2xl">
+            <span className="text-orange">אור</span>
+            <span>חדש</span>
           </div>
         </div>
 

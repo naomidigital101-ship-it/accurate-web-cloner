@@ -4,38 +4,39 @@ const cards = [
   {
     title: "הסכמות רבנים",
     href: "#agreements",
-    img: "https://vangus-cdn.com/tefilin.or-hadash.org.il/wp-content/uploads/2024/04/%D7%9E%D7%9B%D7%AA%D7%91-%D7%94%D7%A1%D7%9B%D7%9E%D7%94-%D7%9E%D7%94%D7%A8%D7%91-%D7%96%D7%99%D7%9C%D7%91%D7%A8%D7%A9%D7%98%D7%99%D7%99%D7%9F-scaled.webp",
+    img: "https://tefilin.or-hadash.org.il/wp-content/uploads/2024/01/מכתב-הסכמה-מהרב-זילברשטיין-scaled.webp",
+    gradient: "from-[oklch(0.28_0.08_265)] to-[oklch(0.42_0.12_255)]",
   },
   {
     title: "מכתבי תודה",
     href: "#letters",
-    img: "https://vangus-cdn.com/tefilin.or-hadash.org.il/wp-content/uploads/2024/04/-%D7%AA%D7%95%D7%93%D7%94-%D7%90%D7%9E%D7%90-%D7%9C%D7%97%D7%99%D7%99%D7%9C-e1712736869916.webp",
+    img: "https://tefilin.or-hadash.org.il/wp-content/uploads/2024/01/-תודה-אמא-לחייל-e1712736869916.webp",
+    gradient: "from-[oklch(0.55_0.15_230)] to-[oklch(0.75_0.13_220)]",
   },
 ];
 
 export function FeatureCards() {
   return (
-    <section className="py-16 px-4 bg-cream">
-      <div className="max-w-5xl mx-auto grid sm:grid-cols-2 gap-6">
+    <section className="py-16 px-4 bg-background">
+      <div className="max-w-5xl mx-auto grid sm:grid-cols-2 gap-7">
         {cards.map((c) => (
           <a
             key={c.title}
             href={c.href}
-            className="group relative aspect-[4/3] rounded-3xl overflow-hidden shadow-card"
+            className={`group relative overflow-hidden rounded-3xl shadow-card bg-gradient-to-br ${c.gradient} h-44 md:h-52 flex items-center pr-8`}
           >
+            <div className="relative z-10 text-white flex items-center gap-3">
+              <h3 className="font-display font-black text-3xl md:text-4xl">{c.title}</h3>
+              <span className="size-10 rounded-full bg-white/15 grid place-items-center group-hover:bg-orange transition-colors">
+                <ArrowLeft className="size-5 text-white" />
+              </span>
+            </div>
             <img
               src={c.img}
               alt={c.title}
               loading="lazy"
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              className="absolute -left-6 -bottom-6 h-[130%] w-auto object-contain drop-shadow-2xl rotate-[8deg] group-hover:rotate-[4deg] transition-transform duration-500"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/30 to-transparent" />
-            <div className="absolute bottom-0 inset-x-0 p-6 flex items-center justify-between text-white">
-              <h3 className="font-display font-black text-3xl">{c.title}</h3>
-              <span className="size-12 rounded-full bg-teal flex items-center justify-center group-hover:bg-orange transition-colors">
-                <ArrowLeft className="size-5 text-ink" />
-              </span>
-            </div>
           </a>
         ))}
       </div>
