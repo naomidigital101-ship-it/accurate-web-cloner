@@ -19,7 +19,7 @@ export function HeroSection() {
         <img
           src="/__l5e/assets-v1/a5b0cc1f-d4c2-4469-8883-c4132453799d/hero-title.svg"
           alt="קשר של תפילין"
-          className="mx-auto w-[clamp(280px,55vw,640px)] h-auto drop-shadow-[0_10px_40px_rgba(0,0,0,0.35)]"
+          className="mx-auto w-full max-w-[685px] h-auto drop-shadow-[0_10px_40px_rgba(0,0,0,0.35)]"
         />
 
 
