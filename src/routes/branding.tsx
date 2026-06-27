@@ -15,7 +15,6 @@ const palette = [
   { name: "Primary / שמיים", hex: "#73CAF0", text: "#2D2E83" },
   { name: "Secondary / מנטה", hex: "#67FFD1", text: "#2D2E83" },
   { name: "Text / כחול עמוק", hex: "#2D2E83", text: "#FFFFFF" },
-  { name: "Accent / ורוד", hex: "#CC3366", text: "#FFFFFF" },
   { name: "רקע", hex: "#FFFFFF", text: "#2D2E83" },
 ];
 
