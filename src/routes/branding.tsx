@@ -119,7 +119,7 @@ box-shadow: none`}</Code>
             <div className="flex flex-wrap items-center gap-6">
               <button
                 style={{
-                  background: "#2D2E83", color: "#CC3366",
+                  background: "#2D2E83", color: "#FFFFFF",
                   borderRadius: "20px", padding: "10px 24px",
                   fontWeight: 600, fontSize: "18px", fontFamily: "Maadim, sans-serif",
                   boxShadow: "rgba(0, 0, 0, 0.2) 0px 5px 15px 0px",
@@ -130,7 +130,7 @@ box-shadow: none`}</Code>
               <img src="/branding/el_3.png" alt="צילום כפתור משני" className="h-16 border border-border rounded" />
             </div>
             <Code>{`background: #2D2E83
-color: #CC3366
+color: #FFFFFF
 border-radius: 20px
 padding: 10px 24px
 box-shadow: 0 5px 15px rgba(0,0,0,0.2)`}</Code>
