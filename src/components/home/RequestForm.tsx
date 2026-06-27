@@ -82,7 +82,7 @@ export function RequestForm() {
               <Button
                 type="button"
                 onClick={next}
-                className="w-full h-12 rounded-full bg-teal hover:bg-teal-deep text-ink font-bold text-lg"
+                className="w-full h-12 rounded-full bg-teal hover:bg-mint-hover text-navy font-bold text-lg"
               >
                 הבא
               </Button>
@@ -99,7 +99,7 @@ export function RequestForm() {
                 <Button type="button" variant="outline" onClick={prev} className="flex-1 h-12 rounded-full">
                   הקודם
                 </Button>
-                <Button type="button" onClick={next} className="flex-1 h-12 rounded-full bg-teal hover:bg-teal-deep text-ink font-bold">
+                <Button type="button" onClick={next} className="flex-1 h-12 rounded-full bg-teal hover:bg-mint-hover text-navy font-bold">
                   הבא
                 </Button>
               </div>
@@ -117,7 +117,7 @@ export function RequestForm() {
                 <Button type="button" variant="outline" onClick={prev} className="flex-1 h-12 rounded-full">
                   הקודם
                 </Button>
-                <Button type="submit" className="flex-1 h-12 rounded-full bg-teal hover:bg-teal-deep text-ink font-bold">
+                <Button type="submit" className="flex-1 h-12 rounded-full bg-teal hover:bg-mint-hover text-navy font-bold">
                   שליחת בקשה
                 </Button>
               </div>

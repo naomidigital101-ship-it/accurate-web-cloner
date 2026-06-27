@@ -37,7 +37,7 @@ export function HeroSection() {
         </p>
 
         <div className="mt-6 flex flex-wrap gap-4 justify-center">
-          <Button asChild size="lg" className="rounded-full bg-teal hover:bg-teal-deep text-ink font-bold text-base md:text-lg px-8 h-12 shadow-soft">
+          <Button asChild size="lg" className="rounded-full bg-teal hover:bg-mint-hover text-navy font-bold text-base md:text-lg px-8 h-12 shadow-soft">
             <a href="#request">מתעניין בתפילין</a>
           </Button>
           <Button asChild size="lg" variant="outline" className="rounded-full bg-transparent hover:bg-white/10 text-white border-white/70 hover:text-white font-bold text-base md:text-lg px-8 h-12">
