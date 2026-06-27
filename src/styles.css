@@ -170,105 +170,168 @@
   }
 }
 
-/* ===== Elementor-accurate Buttons (Source of truth: /branding) ===== */
+/* ===== Elementor-accurate Buttons (Source of truth: post-10.css) ===== */
 @layer components {
   .btn-e {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    font-family: var(--font-display);
-    font-weight: 700;
-    line-height: 1;
+    gap: 6px;
+    font-family: "Maadim OS", "Maadim", system-ui, sans-serif;
+    font-weight: bold;
     text-align: center;
     cursor: pointer;
     border: none;
-    transition: var(--transition-elementor);
+    transition: var(--transition-elementor, all 0.3s ease);
     white-space: nowrap;
     user-select: none;
     text-decoration: none;
   }
-  .btn-e:focus-visible { outline: 2px solid var(--e-link-sky); outline-offset: 3px; }
+  .btn-e:focus-visible { outline: 2px solid #009FE3; outline-offset: 3px; }
   .btn-e:disabled { opacity: 0.5; pointer-events: none; }
 
-  /* Primary CTA — מנטה (Hero) */
+  /* Variant A — Hero White (a7f2958 / e80d39e / 88ee652 / f9cbe0e)
+     לבן→מנטה, טקסט תכלת→נייבי, shadow עדין→מנטה */
   .btn-mint {
-    background: var(--e-accent);
-    color: var(--e-secondary);
+    background-color: #FFFFFF;
+    color: #009FE3;
+    fill: #009FE3;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 0.9em;
+    letter-spacing: 0;
     border-radius: 12px;
-    padding: 10px 22px;
-    font-size: 16px;
-    font-weight: 700;
-    box-shadow: var(--shadow-mint-strong);
+    padding: 14px 20px 10px 20px;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.17);
   }
-  .btn-mint:hover {
-    background: var(--e-mint-hover);
-    color: var(--e-text);
-    box-shadow: var(--shadow-mint-huge);
-    transform: translateY(-1px);
+  .btn-mint:hover,
+  .btn-mint:focus {
+    background-color: #67FFD1;
+    color: #060633;
+    fill: #060633;
+    border-color: #67FFD1;
+    box-shadow: 0 20px 50px 0 rgba(103, 255, 209, 0.53);
+  }
+  @media (max-width: 767px) {
+    .btn-mint { font-size: 18px; line-height: 1em; padding: 12px 20px 8px 24px; }
   }
 
-  /* Outline על רקע כהה */
+  /* Variant B — Mint Solid CTA (999cd9f) */
+  .btn-mint-solid {
+    background-color: #67FFD1;
+    color: #060633;
+    fill: #060633;
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 1.4em;
+    letter-spacing: 1px;
+    border: 2px solid #67FFD1;
+    border-radius: 12px;
+    padding: 12px 28px;
+    box-shadow: 0 10px 30px 0 rgba(103, 255, 209, 0.82);
+  }
+  .btn-mint-solid:hover,
+  .btn-mint-solid:focus {
+    background-color: #FFFFFF;
+    color: #009FE3;
+    fill: #009FE3;
+    border-color: #FFFFFF;
+  }
+  @media (max-width: 767px) {
+    .btn-mint-solid { font-size: 18px; }
+  }
+
+  /* Variant C — Ghost Outline על רקע כהה (c70dd6d) */
   .btn-outline-light {
-    background: transparent;
-    color: var(--e-white);
-    border: 2px solid var(--e-white);
+    background-color: transparent;
+    color: #FFFFFF;
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 1.4em;
+    letter-spacing: 1px;
+    border: 2px solid #FFFFFF;
     border-radius: 12px;
-    padding: 8px 22px;
-    font-size: 16px;
-    font-weight: 700;
+    padding: 10px 28px;
   }
-  .btn-outline-light:hover { background: var(--e-white); color: var(--e-secondary); }
+  .btn-outline-light:hover,
+  .btn-outline-light:focus {
+    background-color: #67FFD1;
+    color: #060633;
+    border-color: #67FFD1;
+  }
+  @media (max-width: 767px) {
+    .btn-outline-light { font-size: 18px; }
+  }
 
-  /* Form Submit */
+  /* Outline נייבי על רקע בהיר (אותו Variant C בהיפוך) */
+  .btn-outline-navy {
+    background-color: transparent;
+    color: #2D2E83;
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 1.4em;
+    letter-spacing: 1px;
+    border: 2px solid #2D2E83;
+    border-radius: 12px;
+    padding: 10px 28px;
+  }
+  .btn-outline-navy:hover,
+  .btn-outline-navy:focus {
+    background-color: #2D2E83;
+    color: #FFFFFF;
+  }
+  @media (max-width: 767px) {
+    .btn-outline-navy { font-size: 18px; }
+  }
+
+  /* Variant D — Form Submit (d32b220) */
   .btn-form {
-    background: var(--e-accent);
-    color: var(--e-secondary);
+    background-color: #67FFD1;
+    color: #060633;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.2em;
+    border: 2px solid #67FFD1;
     border-radius: 10px;
     height: 48px;
     padding: 0 28px;
-    font-size: 20px;
-    font-weight: 600;
     width: 100%;
   }
-  .btn-form:hover { background: var(--e-mint-hover); color: var(--e-text); }
+  .btn-form:hover,
+  .btn-form:focus {
+    background-color: #FFFFFF;
+    color: #009FE3;
+    border-color: #FFFFFF;
+  }
+  @media (max-width: 767px) {
+    .btn-form { font-size: 18px; line-height: 1.2em; }
+  }
 
-  /* Secondary — נייבי */
+  /* נייבי מלא — לא קיים במקור כ-CTA, נשמר ל-fallback */
   .btn-navy {
-    background: var(--e-secondary);
-    color: var(--e-white);
+    background-color: #2D2E83;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 0.9em;
     border-radius: 12px;
-    padding: 10px 22px;
-    font-size: 16px;
-    font-weight: 700;
-    box-shadow: var(--shadow-button);
+    padding: 14px 20px 10px 20px;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.17);
   }
-  .btn-navy:hover {
-    background: var(--e-text);
-    box-shadow: var(--shadow-section);
-    transform: translateY(-1px);
+  .btn-navy:hover,
+  .btn-navy:focus {
+    background-color: #060633;
+    box-shadow: 0 20px 50px 0 rgba(45, 46, 131, 0.35);
   }
-
-  /* Outline נייבי על רקע בהיר */
-  .btn-outline-navy {
-    background: transparent;
-    color: var(--e-secondary);
-    border: 2px solid var(--e-secondary);
-    border-radius: 12px;
-    padding: 8px 22px;
-    font-size: 16px;
-    font-weight: 700;
-  }
-  .btn-outline-navy:hover { background: var(--e-secondary); color: var(--e-white); }
 
   /* באדג' סטטיסטיקה (פיל מגרדיאנט) */
   .badge-stat {
     display: inline-block;
     background: var(--gradient-badge);
-    color: var(--e-white);
+    color: #FFFFFF;
     border-radius: 1000px;
     padding: 10px 24px;
-    font-family: var(--font-display);
+    font-family: "Maadim OS", "Maadim", system-ui, sans-serif;
     font-size: 16px;
     font-weight: 400;
     line-height: 1em;
