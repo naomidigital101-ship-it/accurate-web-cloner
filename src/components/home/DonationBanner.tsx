@@ -19,7 +19,7 @@ export function DonationBanner() {
           הודות לשותפים רבים שלוקחים חלק בזיכוי הרבים שאין כמותו. תרום עכשיו, ובזכותך עוד יהודי יניח תפילין!
         </p>
         <p className="mt-3 text-sm text-white/80">התרומה מוכרת לצרכי מס</p>
-        <a href="#donate-money" className="btn-e btn-outline-light mt-8 inline-flex">
+        <a href="#donate-money" className="btn-e btn-mint-solid mt-8 inline-flex">
           לתרומה
         </a>
       </div>
