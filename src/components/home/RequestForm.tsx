@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
+
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -79,13 +79,9 @@ export function RequestForm() {
                   </SelectContent>
                 </Select>
               </Field>
-              <Button
-                type="button"
-                onClick={next}
-                className="w-full h-12 rounded-[10px] bg-teal hover:bg-mint-hover text-navy font-semibold text-xl"
-              >
+              <button type="button" onClick={next} className="btn-e btn-form">
                 הבא
-              </Button>
+              </button>
             </div>
           )}
 
@@ -96,12 +92,12 @@ export function RequestForm() {
               <Field label="כתובת למסירה"><Input className="h-12" /></Field>
               <Field label="עיר / ישוב"><Input className="h-12" /></Field>
               <div className="flex gap-3">
-                <Button type="button" variant="outline" onClick={prev} className="flex-1 h-12 rounded-[10px] font-semibold text-xl">
+                <button type="button" onClick={prev} className="btn-e btn-outline-navy flex-1 h-12 text-xl">
                   הקודם
-                </Button>
-                <Button type="button" onClick={next} className="flex-1 h-12 rounded-[10px] bg-teal hover:bg-mint-hover text-navy font-semibold text-xl">
+                </button>
+                <button type="button" onClick={next} className="btn-e btn-form flex-1">
                   הבא
-                </Button>
+                </button>
               </div>
             </div>
           )}

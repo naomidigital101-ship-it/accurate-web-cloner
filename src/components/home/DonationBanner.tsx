@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+
 
 export function DonationBanner() {
   return (
@@ -19,9 +19,9 @@ export function DonationBanner() {
           הודות לשותפים רבים שלוקחים חלק בזיכוי הרבים שאין כמותו. תרום עכשיו, ובזכותך עוד יהודי יניח תפילין!
         </p>
         <p className="mt-3 text-sm text-white/80">התרומה מוכרת לצרכי מס</p>
-        <Button asChild size="lg" variant="outline" className="mt-8 rounded-full bg-transparent border-white text-white hover:bg-white hover:text-teal-dark font-bold px-12 h-12">
-          <a href="#donate-money">לתרומה</a>
-        </Button>
+        <a href="#donate-money" className="btn-e btn-outline-light mt-8 inline-flex">
+          לתרומה
+        </a>
       </div>
     </section>
   );
