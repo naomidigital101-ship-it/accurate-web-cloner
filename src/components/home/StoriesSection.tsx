@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+
 
 const stories = [
   {
@@ -44,9 +44,9 @@ export function StoriesSection() {
             <h2 className="font-display font-black text-6xl md:text-7xl text-link-sky leading-none">הסיפורים</h2>
             <p className="font-display font-bold text-2xl md:text-3xl text-ink mt-2">שמאחורי התפילין</p>
           </div>
-          <Button asChild variant="ghost" className="text-teal-deep font-bold hover:text-orange">
-            <a href="#all-stories">לכל הסיפורים ←</a>
-          </Button>
+          <a href="#all-stories" className="font-display font-bold text-[var(--e-link-sky)] hover:text-[var(--e-primary)] transition-colors">
+            לכל הסיפורים ←
+          </a>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">

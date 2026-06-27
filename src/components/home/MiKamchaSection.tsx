@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+
 
 export function MiKamchaSection() {
   return (
@@ -26,9 +26,9 @@ export function MiKamchaSection() {
               במעשה זה של זיכוי הרבים ואחדות ישראל הוא כביכול כותב את ה'תפילין דמארי עלמא'…
             </p>
           </div>
-          <Button asChild size="lg" className="mt-7 rounded-full bg-teal hover:bg-mint-hover text-navy font-bold px-10 h-12">
-            <a href="#donate">למסירת/תרומת תפילין</a>
-          </Button>
+          <a href="#donate" className="btn-e btn-mint mt-7 inline-flex">
+            למסירת/תרומת תפילין
+          </a>
         </div>
       </div>
     </section>

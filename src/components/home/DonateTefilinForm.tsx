@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
+
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -52,9 +52,9 @@ export function DonateTefilinForm() {
                   </SelectContent>
                 </Select>
               </Field>
-              <Button type="button" onClick={() => setStep(2)} className="w-full h-12 rounded-[10px] bg-teal hover:bg-mint-hover text-navy font-semibold text-xl">
+              <button type="button" onClick={() => setStep(2)} className="btn-e btn-form">
                 הבא
-              </Button>
+              </button>
             </>
           ) : (
             <>
@@ -65,8 +65,8 @@ export function DonateTefilinForm() {
                 בשליחת הבקשה לא יעשה שום שימוש במידע שהזנתם מלבד לצרכים הטכניים של העמותה.
               </p>
               <div className="flex gap-3">
-                <Button type="button" variant="outline" onClick={() => setStep(1)} className="flex-1 h-12 rounded-[10px] font-semibold text-xl">הקודם</Button>
-                <Button type="submit" className="flex-1 h-12 rounded-[10px] bg-teal hover:bg-mint-hover text-navy font-semibold text-xl">שליחה</Button>
+                <button type="button" onClick={() => setStep(1)} className="btn-e btn-outline-navy flex-1 h-12 text-xl">הקודם</button>
+                <button type="submit" className="btn-e btn-form flex-1">שליחה</button>
               </div>
             </>
           )}

@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+
 
 export function AboutTefilinSection() {
   return (
@@ -28,9 +28,9 @@ export function AboutTefilinSection() {
               לאמונה בה' לתורה ולמצוות כולם.
             </p>
           </div>
-          <Button asChild size="lg" className="mt-7 rounded-full bg-teal hover:bg-mint-hover text-navy font-bold px-10 h-12">
-            <a href="#request">לבקשת תפילין</a>
-          </Button>
+          <a href="#request" className="btn-e btn-mint mt-7 inline-flex">
+            לבקשת תפילין
+          </a>
         </div>
       </div>
     </section>
