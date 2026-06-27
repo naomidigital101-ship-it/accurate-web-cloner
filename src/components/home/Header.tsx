@@ -23,10 +23,11 @@ export function Header() {
               <img src="/logo.svg" alt="קשר של תפילין" className="w-full h-full object-contain" />
             </div>
           </a>
-          <div className="hidden sm:flex items-baseline gap-0.5 text-white font-display font-bold text-2xl">
-            <span className="text-orange">אור</span>
-            <span>חדש</span>
-          </div>
+          <img
+            src="/__l5e/assets-v1/6354c1b7-3147-4a7a-930a-0a83c9bbe26e/or-hadash-logo.svg"
+            alt="אור חדש"
+            className="hidden sm:block h-10 lg:h-12 w-auto"
+          />
         </div>
 
         {/* Desktop nav */}
