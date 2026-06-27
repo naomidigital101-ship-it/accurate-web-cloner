@@ -25,10 +25,10 @@ export function RequestForm() {
     <section id="request" className="relative bg-gradient-hero py-20 px-4">
       <div className="max-w-2xl mx-auto">
         <div className="text-center text-white mb-8">
-          <h2 className="font-display font-black text-4xl md:text-5xl">
+          <h2 className="font-display font-bold text-3xl md:text-[32px] leading-tight">
             רוצה להניח תפילין משלך?
           </h2>
-          <p className="mt-3 text-white/90 text-lg">
+          <p className="mt-3 text-white/90 text-base md:text-lg">
             אנא מלא את הטופס המצורף כדי שנוכל לעזור לך לקבל תפילין משלך!
           </p>
         </div>
