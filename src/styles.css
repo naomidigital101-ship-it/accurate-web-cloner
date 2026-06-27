@@ -338,3 +338,14 @@
     box-shadow: var(--shadow-soft);
   }
 }
+
+/* Tefilin mirror — emulate Elementor sticky header so the hero doesn't paint over it */
+.tefilin-mirror .elementor-element-444acc0 {
+  position: sticky !important;
+  top: 0;
+  z-index: 99;
+}
+.tefilin-mirror [data-elementor-type="header"] {
+  position: relative;
+  z-index: 99;
+}
