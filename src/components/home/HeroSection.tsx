@@ -22,9 +22,9 @@ export function HeroSection() {
           className="mx-auto w-full max-w-[320px] sm:max-w-[420px] md:max-w-[520px] lg:max-w-[600px] h-auto drop-shadow-[0_10px_40px_rgba(0,0,0,0.35)]"
         />
 
-        <p className="font-display font-bold text-xl md:text-3xl lg:text-4xl mt-3 text-white drop-shadow-md">
+        <h2 className="font-display font-black text-2xl md:text-3xl mt-3 text-white drop-shadow-md leading-tight">
           מיזם של ערבות הדדית וזיכוי הרבים
-        </p>
+        </h2>
 
         <div className="inline-flex mt-5 px-6 py-2 rounded-full bg-gradient-orange shadow-soft">
           <span className="text-white font-bold text-base md:text-lg">
@@ -37,10 +37,10 @@ export function HeroSection() {
         </p>
 
         <div className="mt-6 flex flex-wrap gap-4 justify-center">
-          <Button asChild size="lg" className="rounded-full bg-teal hover:bg-mint-hover text-navy font-bold text-base md:text-lg px-8 h-12 shadow-soft">
+          <Button asChild className="rounded-[12px] bg-teal hover:bg-mint-hover text-navy font-bold text-base px-5 py-[10px] h-auto shadow-soft">
             <a href="#request">מתעניין בתפילין</a>
           </Button>
-          <Button asChild size="lg" variant="outline" className="rounded-full bg-transparent hover:bg-white/10 text-white border-white/70 hover:text-white font-bold text-base md:text-lg px-8 h-12">
+          <Button asChild variant="outline" className="rounded-[12px] bg-transparent hover:bg-white/10 text-white border-white/70 hover:text-white font-bold text-base px-5 py-[10px] h-auto">
             <a href="#donate">לתרומת תפילין</a>
           </Button>
         </div>
