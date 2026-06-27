@@ -58,43 +58,74 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: #FFFFFF;
-  --foreground: #2D2E83;
-  --card: #FFFFFF;
-  --card-foreground: #2D2E83;
-  --popover: #FFFFFF;
-  --popover-foreground: #2D2E83;
-  --primary: #67FFD1;
-  --primary-foreground: #2D2E83;
+  /* ===== Elementor Kit (elementor-kit-7) — Source of Truth ===== */
+  --e-primary: #F9B233;        /* כתום — אייקונים / באדג'ים */
+  --e-secondary: #2D2E83;      /* נייבי — כותרות / טקסט */
+  --e-text: #060633;            /* נייבי עמוק — טקסט גוף */
+  --e-accent: #67FFD1;          /* מנטה — CTA */
+  --e-link-sky: #009FE3;        /* כחול קישור */
+  --e-white: #FFFFFF;
+
+  /* גוונים נוספים שחולצו מסקשנים בפועל */
+  --e-mint-hover: #BDFFEB;
+  --e-sky-alpha: #009FE3AD;     /* כרטיס טופס שקוף */
+  --e-page-soft: #C3E7F6;
+  --e-badge-end: #E65A38;
+
+  --radius: 12px;               /* Elementor default ל-Hero CTAs */
+  --background: var(--e-white);
+  --foreground: var(--e-secondary);
+  --card: var(--e-white);
+  --card-foreground: var(--e-secondary);
+  --popover: var(--e-white);
+  --popover-foreground: var(--e-secondary);
+  --primary: var(--e-accent);
+  --primary-foreground: var(--e-secondary);
   --secondary: #EEF6FF;
-  --secondary-foreground: #2D2E83;
+  --secondary-foreground: var(--e-secondary);
   --muted: #F4F7FB;
   --muted-foreground: #5A5B8F;
-  --accent: #BDFFEB;
-  --accent-foreground: #2D2E83;
+  --accent: var(--e-mint-hover);
+  --accent-foreground: var(--e-secondary);
   --destructive: oklch(0.6 0.22 25);
-  --destructive-foreground: #FFFFFF;
+  --destructive-foreground: var(--e-white);
   --border: #E2E8F0;
   --input: #E2E8F0;
-  --ring: #73CAF0;
+  --ring: var(--e-link-sky);
 
-  /* Brand — מתועד 1:1 ב-/branding */
-  --brand-teal: #67FFD1;          /* mint CTA */
-  --brand-mint-hover: #BDFFEB;    /* mint hover */
-  --brand-teal-deep: #2D2E83;     /* navy — כותרות וטקסט */
-  --brand-teal-dark: #060633;     /* deep navy — hero / hover טקסט */
-  --brand-sky: #73CAF0;           /* שמיים / accent */
-  --brand-link-sky: #009FE3;      /* קישורים בולטים */
-  --brand-orange: #009FE3;        /* legacy alias → link sky */
-  --brand-orange-soft: #73CAF0;   /* legacy alias → sky */
-  --brand-ink: #2D2E83;           /* טקסט ראשי */
-  --brand-cream: #F7FAFC;         /* רקע רך */
+  /* Legacy brand aliases (לשמירת תאימות עם הקומפוננטות הקיימות) */
+  --brand-teal: var(--e-accent);
+  --brand-mint-hover: var(--e-mint-hover);
+  --brand-teal-deep: var(--e-secondary);
+  --brand-teal-dark: var(--e-text);
+  --brand-sky: #73CAF0;
+  --brand-link-sky: var(--e-link-sky);
+  --brand-orange: var(--e-primary);
+  --brand-orange-soft: var(--e-badge-end);
+  --brand-ink: var(--e-secondary);
+  --brand-cream: #F7FAFC;
 
-  --gradient-hero: linear-gradient(180deg, #2D2E83 0%, #060633 100%);
-  --gradient-orange: linear-gradient(90deg, #73CAF0, #009FE3);
-  --shadow-soft: 0 5px 15px rgba(0,0,0,0.08);
-  --shadow-card: 0 10px 40px rgba(45,46,131,0.08);
+  /* ===== Gradients (1:1 מ-Elementor) ===== */
+  --gradient-hero-overlay: radial-gradient(at top left, #67FFD1 0%, #009FE3 100%);
+  --gradient-badge: linear-gradient(135deg, #F9B233 0%, #E65A38 100%);
+  --gradient-image-overlay: linear-gradient(180deg, #060633B5 0%, #06063300 100%);
+  --gradient-page-transition: radial-gradient(at center center, #FFFFFF 50%, #C3E7F6 100%);
+  --gradient-sky-navy: linear-gradient(180deg, #009FE300 0%, #2D2E83 100%);
+  --gradient-hero: linear-gradient(180deg, #2D2E83 0%, #060633 100%); /* legacy */
+  --gradient-orange: var(--gradient-badge);                            /* legacy */
+
+  /* ===== Shadows (1:1 מ-Elementor) ===== */
+  --shadow-soft:    0px 3px 9px 0px rgba(0,0,0,0.1);
+  --shadow-button:  0px 5px 15px 0px rgba(0,0,0,0.2);
+  --shadow-section: 0px 10px 30px 0px rgba(0,0,0,0.2);
+  --shadow-card:    0px 20px 40px 0px rgba(0,0,0,0.2);
+  --shadow-form:    0px 25px 50px 0px rgba(0,0,0,0.2);
+  --shadow-mint-soft:  0px 0px 40px 0px #67FFD1;
+  --shadow-mint-strong: 0px 10px 30px 0px rgba(103,255,209,0.82);
+  --shadow-mint-huge:   0px 20px 50px 0px rgba(103,255,209,0.53);
+
+  /* Elementor transition default */
+  --transition-elementor: background 0.3s, color 0.3s, border 0.3s, box-shadow 0.3s, transform 0.3s;
 }
 
 
