@@ -110,12 +110,12 @@ export function RequestForm() {
                 בשליחת הבקשה לא יעשה שום שימוש במידע שהזנתם מלבד לצרכים הטכניים של העמותה.
               </p>
               <div className="flex gap-3">
-                <Button type="button" variant="outline" onClick={prev} className="flex-1 h-12 rounded-[10px] font-semibold text-xl">
+                <button type="button" onClick={prev} className="btn-e btn-outline-navy flex-1 h-12 text-xl">
                   הקודם
-                </Button>
-                <Button type="submit" className="flex-1 h-12 rounded-[10px] bg-teal hover:bg-mint-hover text-navy font-semibold text-xl">
+                </button>
+                <button type="submit" className="btn-e btn-form flex-1">
                   שליחת בקשה
-                </Button>
+                </button>
               </div>
             </div>
           )}
