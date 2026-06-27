@@ -3,12 +3,13 @@ import { Button } from "@/components/ui/button";
 export function HeroSection() {
   return (
     <section className="relative overflow-hidden text-white">
-      {/* Background image */}
-      <div className="absolute inset-0">
-        <img
-          src="https://tefilin.or-hadash.org.il/wp-content/uploads/2024/06/AdobeStock_817584046-min.webp"
-          alt="הנחת תפילין"
-          className="absolute inset-0 w-full h-full object-cover"
+      {/* Background video */}
+      <div className="absolute inset-0 overflow-hidden">
+        <iframe
+          src="https://player.vimeo.com/video/906687611?background=1&autoplay=1&loop=1&muted=1&autopause=0&controls=0&dnt=1"
+          title="רקע וידאו"
+          allow="autoplay; fullscreen"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.78vh] h-[56.25vw] min-w-full min-h-full pointer-events-none border-0"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-teal-dark/55 via-teal-deep/55 to-teal/55 mix-blend-multiply" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,oklch(0.42_0.08_210/0.5)_85%)]" />
