@@ -22,7 +22,7 @@ export function FounderSection() {
             הרב עמיחי איל הקים את עמותת 'אור חדש' מתוך מטרה לחבר יהודים לזהותם, לתורה ולמצוות.
             מיזם 'קשר של תפילין' הוא אחד הפרויקטים המרכזיים של העמותה, ובמסגרתו חולקו עד היום מעל 1,300 זוגות תפילין.
           </p>
-          <Button asChild size="lg" className="mt-7 rounded-full bg-teal hover:bg-teal-deep text-ink font-bold px-8 h-12 gap-2">
+          <Button asChild size="lg" className="mt-7 rounded-full bg-teal hover:bg-mint-hover text-navy font-bold px-8 h-12 gap-2">
             <a href="https://wa.me/972000000000" target="_blank" rel="noreferrer">
               <MessageCircle className="size-5" /> ליצירת קשר
             </a>

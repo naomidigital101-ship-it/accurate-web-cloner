@@ -52,7 +52,7 @@ export function DonateTefilinForm() {
                   </SelectContent>
                 </Select>
               </Field>
-              <Button type="button" onClick={() => setStep(2)} className="w-full h-12 rounded-full bg-teal hover:bg-teal-deep text-ink font-bold text-lg">
+              <Button type="button" onClick={() => setStep(2)} className="w-full h-12 rounded-full bg-teal hover:bg-mint-hover text-navy font-bold text-lg">
                 הבא
               </Button>
             </>
@@ -66,7 +66,7 @@ export function DonateTefilinForm() {
               </p>
               <div className="flex gap-3">
                 <Button type="button" variant="outline" onClick={() => setStep(1)} className="flex-1 h-12 rounded-full">הקודם</Button>
-                <Button type="submit" className="flex-1 h-12 rounded-full bg-teal hover:bg-teal-deep text-ink font-bold">שליחה</Button>
+                <Button type="submit" className="flex-1 h-12 rounded-full bg-teal hover:bg-mint-hover text-navy font-bold">שליחה</Button>
               </div>
             </>
           )}

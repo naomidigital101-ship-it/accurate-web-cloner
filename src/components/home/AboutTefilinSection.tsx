@@ -28,7 +28,7 @@ export function AboutTefilinSection() {
               לאמונה בה' לתורה ולמצוות כולם.
             </p>
           </div>
-          <Button asChild size="lg" className="mt-7 rounded-full bg-teal hover:bg-teal-deep text-ink font-bold px-10 h-12">
+          <Button asChild size="lg" className="mt-7 rounded-full bg-teal hover:bg-mint-hover text-navy font-bold px-10 h-12">
             <a href="#request">לבקשת תפילין</a>
           </Button>
         </div>

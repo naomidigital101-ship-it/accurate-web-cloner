@@ -26,7 +26,7 @@ export function MiKamchaSection() {
               במעשה זה של זיכוי הרבים ואחדות ישראל הוא כביכול כותב את ה'תפילין דמארי עלמא'…
             </p>
           </div>
-          <Button asChild size="lg" className="mt-7 rounded-full bg-teal hover:bg-teal-deep text-ink font-bold px-10 h-12">
+          <Button asChild size="lg" className="mt-7 rounded-full bg-teal hover:bg-mint-hover text-navy font-bold px-10 h-12">
             <a href="#donate">למסירת/תרומת תפילין</a>
           </Button>
         </div>
