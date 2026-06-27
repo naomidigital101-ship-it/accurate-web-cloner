@@ -17,7 +17,7 @@ export function HeroSection() {
 
       <div className="relative pt-20 pb-32 lg:pt-24 lg:pb-44 px-4 lg:px-8 max-w-7xl mx-auto text-center">
         <img
-          src="/__l5e/assets-v1/0aca4c58-4bae-4e9c-9096-cbc88f1f4852/hero-title.webp"
+          src="/__l5e/assets-v1/e7eeb952-98cf-4a04-b757-b112ca4f9083/hero-title-transparent.png"
           alt="קשר של תפילין"
           className="mx-auto w-[clamp(280px,55vw,640px)] h-auto drop-shadow-[0_10px_40px_rgba(0,0,0,0.35)]"
         />
