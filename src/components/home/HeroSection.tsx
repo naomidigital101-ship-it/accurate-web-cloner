@@ -1,4 +1,6 @@
-import { Button } from "@/components/ui/button";
+
+
+
 
 export function HeroSection() {
   return (
@@ -37,12 +39,12 @@ export function HeroSection() {
         </p>
 
         <div className="mt-6 flex flex-wrap gap-4 justify-center">
-          <Button asChild className="rounded-[12px] bg-teal hover:bg-mint-hover text-navy font-bold text-base px-5 py-[10px] h-auto shadow-soft">
-            <a href="#request">מתעניין בתפילין</a>
-          </Button>
-          <Button asChild variant="outline" className="rounded-[12px] bg-transparent hover:bg-white/10 text-white border-white/70 hover:text-white font-bold text-base px-5 py-[10px] h-auto">
-            <a href="#donate">לתרומת תפילין</a>
-          </Button>
+          <a href="#request" className="btn-e btn-mint">
+            מתעניין בתפילין
+          </a>
+          <a href="#donate" className="btn-e btn-outline-light">
+            לתרומת תפילין
+          </a>
         </div>
       </div>
 
