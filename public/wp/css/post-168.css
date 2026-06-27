@@ -1,0 +1,64 @@
+.elementor-168 .elementor-element.elementor-element-9cb1cf1{--display:flex;--min-height:30vh;--flex-direction:column;--container-widget-width:100%;--container-widget-height:initial;--container-widget-flex-grow:0;--container-widget-align-self:initial;--flex-wrap-mobile:wrap;--justify-content:flex-end;--border-radius:20px 20px 20px 20px;box-shadow:0px 5px 15px 0px rgba(0, 0, 0, 0.2);--padding-top:0px;--padding-bottom:0px;--padding-left:0px;--padding-right:0px;}.elementor-168 .elementor-element.elementor-element-9cb1cf1.e-con:hover{--e-con-transform-translateY:-10px;--e-con-transform-scale:1.05;}.elementor-168 .elementor-element.elementor-element-9cb1cf1:not(.elementor-motion-effects-element-type-background), .elementor-168 .elementor-element.elementor-element-9cb1cf1 > .elementor-motion-effects-container > .elementor-motion-effects-layer{background-position:center center;background-size:cover;}.elementor-168 .elementor-element.elementor-element-9cb1cf1:hover{box-shadow:0px 20px 40px 0px rgba(0, 0, 0, 0.2);}.elementor-168 .elementor-element.elementor-element-af9614c{--display:flex;--min-height:15vh;--justify-content:flex-end;--overlay-opacity:0.75;--overlay-mix-blend-mode:multiply;--border-radius:20px 20px 20px 20px;--padding-top:20px;--padding-bottom:20px;--padding-left:20px;--padding-right:20px;}.elementor-168 .elementor-element.elementor-element-af9614c::before, .elementor-168 .elementor-element.elementor-element-af9614c > .elementor-background-video-container::before, .elementor-168 .elementor-element.elementor-element-af9614c > .e-con-inner > .elementor-background-video-container::before, .elementor-168 .elementor-element.elementor-element-af9614c > .elementor-background-slideshow::before, .elementor-168 .elementor-element.elementor-element-af9614c > .e-con-inner > .elementor-background-slideshow::before, .elementor-168 .elementor-element.elementor-element-af9614c > .elementor-motion-effects-container > .elementor-motion-effects-layer::before{background-color:transparent;--background-overlay:'';background-image:linear-gradient(180deg, #009FE300 0%, var( --e-global-color-secondary ) 100%);}.elementor-widget-heading .elementor-heading-title{font-family:var( --e-global-typography-primary-font-family ), Sans-serif;font-size:var( --e-global-typography-primary-font-size );font-weight:var( --e-global-typography-primary-font-weight );line-height:var( --e-global-typography-primary-line-height );color:var( --e-global-color-primary );}.elementor-168 .elementor-element.elementor-element-ef7f452 .elementor-heading-title{font-family:"Maadim OS", Sans-serif;font-size:24px;font-weight:bold;line-height:1em;text-shadow:0px 3px 10px rgba(0, 0, 0, 0.3);color:#FFFFFF;}.jet-listing-item.single-jet-engine.elementor-page-168 > .elementor{width:300px;margin-left:auto;margin-right:auto;}@media(max-width:1024px){.elementor-widget-heading .elementor-heading-title{font-size:var( --e-global-typography-primary-font-size );line-height:var( --e-global-typography-primary-line-height );}}@media(max-width:767px){.elementor-168 .elementor-element.elementor-element-9cb1cf1.e-con:hover{--e-con-transform-translateY:-10px;--e-con-transform-scale:1.05;}.elementor-widget-heading .elementor-heading-title{font-size:var( --e-global-typography-primary-font-size );line-height:var( --e-global-typography-primary-line-height );}.elementor-168 .elementor-element.elementor-element-ef7f452 .elementor-heading-title{font-size:22px;}}/* Start Custom Fonts CSS */@font-face {
+	font-family: 'Maadim OS';
+	font-style: normal;
+	font-weight: 200;
+	font-display: auto;
+	src: url('/wp/assets/Maadim-ExtraLight.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Maadim OS';
+	font-style: normal;
+	font-weight: 300;
+	font-display: auto;
+	src: url('/wp/assets/Maadim-Light.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Maadim OS';
+	font-style: normal;
+	font-weight: 100;
+	font-display: auto;
+	src: url('/wp/assets/Maadim-Thin.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Maadim OS';
+	font-style: normal;
+	font-weight: normal;
+	font-display: auto;
+	src: url('/wp/assets/Maadim-Regular.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Maadim OS';
+	font-style: normal;
+	font-weight: 500;
+	font-display: auto;
+	src: url('/wp/assets/Maadim-Medium.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Maadim OS';
+	font-style: normal;
+	font-weight: 600;
+	font-display: auto;
+	src: url('/wp/assets/Maadim-SemiBold.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Maadim OS';
+	font-style: normal;
+	font-weight: bold;
+	font-display: auto;
+	src: url('/wp/assets/Maadim-Bold.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Maadim OS';
+	font-style: normal;
+	font-weight: 800;
+	font-display: auto;
+	src: url('/wp/assets/Maadim-ExtraBold.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Maadim OS';
+	font-style: normal;
+	font-weight: 900;
+	font-display: auto;
+	src: url('/wp/assets/Maadim-Black.woff2') format('woff2');
+}
+/* End Custom Fonts CSS */
