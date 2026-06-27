@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Header } from "@/components/home/Header";
+
 
 
 const STYLESHEETS = [
@@ -72,11 +72,6 @@ function Index() {
   }
 
   return (
-    <>
-      <Header />
-      {/* Hide the WordPress mirror's own header so the React Header is the single source */}
-      <style>{`.tefilin-mirror [data-elementor-type="header"]{display:none !important;}`}</style>
-      <div className="tefilin-mirror elementor-kit-7" dangerouslySetInnerHTML={{ __html: html }} />
-    </>
+    <div className="tefilin-mirror elementor-kit-7" dangerouslySetInnerHTML={{ __html: html }} />
   );
 }
