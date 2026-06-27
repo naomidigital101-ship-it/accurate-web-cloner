@@ -2,11 +2,21 @@
 @source "../src";
 @import "tw-animate-css";
 
+@font-face { font-family: "Maadim"; font-style: normal; font-weight: 100; font-display: swap; src: url("/__l5e/assets-v1/70991163-1f06-4dc0-90a6-120fd473c493/Maadim-Thin.woff2") format("woff2"); }
+@font-face { font-family: "Maadim"; font-style: normal; font-weight: 200; font-display: swap; src: url("/__l5e/assets-v1/705ef8ae-493d-47c2-afd3-81dc4b271074/Maadim-ExtraLight.woff2") format("woff2"); }
+@font-face { font-family: "Maadim"; font-style: normal; font-weight: 300; font-display: swap; src: url("/__l5e/assets-v1/3a9143aa-4704-441b-8b51-64657297e547/Maadim-Light.woff2") format("woff2"); }
+@font-face { font-family: "Maadim"; font-style: normal; font-weight: 400; font-display: swap; src: url("/__l5e/assets-v1/df7a4f6a-a8bc-4efb-acf6-fd90848ca0a9/Maadim-Regular.woff2") format("woff2"); }
+@font-face { font-family: "Maadim"; font-style: normal; font-weight: 500; font-display: swap; src: url("/__l5e/assets-v1/55fa964f-799f-42c7-8bc1-ce4e0506d01e/Maadim-Medium.woff2") format("woff2"); }
+@font-face { font-family: "Maadim"; font-style: normal; font-weight: 600; font-display: swap; src: url("/__l5e/assets-v1/496cbbd2-b074-432b-b71f-d56d51706988/Maadim-SemiBold.woff2") format("woff2"); }
+@font-face { font-family: "Maadim"; font-style: normal; font-weight: 700; font-display: swap; src: url("/__l5e/assets-v1/7c7038b8-410a-4a58-a1ee-3995c1dc1eac/Maadim-Bold.woff2") format("woff2"); }
+@font-face { font-family: "Maadim"; font-style: normal; font-weight: 800; font-display: swap; src: url("/__l5e/assets-v1/8ceb3dd7-9fdf-45dd-891b-0e449e0b043a/Maadim-ExtraBold.woff2") format("woff2"); }
+@font-face { font-family: "Maadim"; font-style: normal; font-weight: 900; font-display: swap; src: url("/__l5e/assets-v1/cd64a0e7-ca05-4708-8a67-9672aa309413/Maadim-Black.woff2") format("woff2"); }
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: "Heebo", system-ui, sans-serif;
-  --font-display: "Frank Ruhl Libre", "David Libre", serif;
+  --font-sans: "Maadim", "Heebo", system-ui, sans-serif;
+  --font-display: "Maadim", "Frank Ruhl Libre", "David Libre", serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
