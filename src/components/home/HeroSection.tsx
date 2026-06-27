@@ -15,16 +15,13 @@ export function HeroSection() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,oklch(0.42_0.08_210/0.5)_85%)]" />
       </div>
 
-      <div className="relative pt-28 pb-32 lg:pt-36 lg:pb-44 px-4 lg:px-8 max-w-7xl mx-auto text-center">
-        <h1 className="font-display font-black leading-[0.92] text-white drop-shadow-[0_6px_30px_rgba(0,0,0,0.35)]">
-          <span className="block text-[clamp(3.5rem,11vw,9rem)]">קשר של</span>
-          <span className="block text-[clamp(4.5rem,15vw,13rem)] -mt-3">תפילין</span>
-        </h1>
+      <div className="relative pt-20 pb-32 lg:pt-24 lg:pb-44 px-4 lg:px-8 max-w-7xl mx-auto text-center">
+        <img
+          src="/__l5e/assets-v1/0aca4c58-4bae-4e9c-9096-cbc88f1f4852/hero-title.webp"
+          alt="קשר של תפילין"
+          className="mx-auto w-[clamp(280px,55vw,640px)] h-auto drop-shadow-[0_10px_40px_rgba(0,0,0,0.35)]"
+        />
 
-        <div className="flex items-center justify-center gap-4 mt-6 text-[oklch(0.72_0.18_220)]">
-          <span className="text-2xl">✦</span>
-          <span className="text-2xl">✦</span>
-        </div>
 
         <p className="font-display font-bold text-2xl md:text-4xl mt-3 text-white drop-shadow-md">
           מיזם של ערבות הדדית וזיכוי הרבים
