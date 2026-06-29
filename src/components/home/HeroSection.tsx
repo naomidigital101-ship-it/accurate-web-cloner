@@ -103,7 +103,7 @@ export function HeroSection() {
         preserveAspectRatio="none"
       >
         <path
-          d="M0,0 Q720,200 1440,0 L1440,200 L0,200 Z"
+          d="M0,0 C 360,10 420,200 720,200 C 1020,200 1080,10 1440,0 L1440,200 L0,200 Z"
           fill="white"
         />
       </svg>
