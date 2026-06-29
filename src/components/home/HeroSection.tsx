@@ -83,19 +83,19 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Bottom white wave */}
-      <svg
-        className="absolute left-0 w-full text-background"
-        style={{ bottom: -1, height: 90, zIndex: 3 }}
-        viewBox="0 0 1440 110"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-      >
-        <path
-          fill="currentColor"
-          d="M0,70 C320,130 720,10 1080,50 C1260,70 1380,90 1440,80 L1440,110 L0,110 Z"
-        />
-      </svg>
+      {/* Bottom rounded separator */}
+      <div
+        className="absolute bg-white"
+        style={{
+          bottom: 0,
+          left: "-10%",
+          width: "120%",
+          height: 200,
+          borderTopLeftRadius: "50% 100%",
+          borderTopRightRadius: "50% 100%",
+          zIndex: 3,
+        }}
+      />
     </section>
   );
 }
