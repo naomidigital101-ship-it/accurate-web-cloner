@@ -1,78 +1,40 @@
-# תיקון כפתורים 1:1 לאתר המקורי
+## בנייה פיזית של עמוד הבית ב-React 1:1
 
-חילצתי מ-`public/wp/css/post-10.css` את ההגדרות המדויקות של כל כפתור באתר המקורי וגיליתי שהמימוש הנוכחי שלי שגוי בכמה נקודות מהותיות.
+המטרה: להחליף את המירור (`mirror-body.html` + `dangerouslySetInnerHTML`) בעמוד React מלא שמשחזר את `tefilin.or-hadash.org.il` 1:1, עם שליטה מלאה על הקוד, ה-SEO, וההתאמה לנייד.
 
-## הבעיה העיקרית
+### גישה כללית
+- שמירה על אותם נכסים (תמונות, פונטים, SVG) שכבר ירדו ל-`public/wp/`.
+- שימוש בטוקנים הקיימים מ-`elementor-kit-7` (Navy `#2D2E83`, Mint `#67FFD1`, Sky `#009FE3`, Yellow `#F9B233`, Text `#060633`) ובפונט Maadim OS.
+- בניית כל סקציה כקומפוננטת React עצמאית תחת `src/components/home/`, עם Tailwind v4 בלבד (ללא Elementor CSS).
+- ניקוי הקבצים הזרים של Elementor משרשרת הטעינה — שמירה רק על הפונטים והתמונות.
 
-הגדרתי את `btn-mint` (הכפתור הראשי של ה-Hero) כרקע מנטה עם טקסט נייבי — אבל **באתר המקורי הכפתור הוא לבן עם טקסט בתכלת (#009FE3)**, והופך למנטה רק ב-hover. זה הבדל ויזואלי משמעותי שגורם לכל ה-Hero להיראות שונה.
+### סקציות (לפי סדר באתר המקורי)
+1. **Header** — Sticky, רקע Navy חצי-שקוף + גרדיאנט, לוגו עגול תלוי מתחת לקו, תפריט Maadim 600/16px, hover מנטה, drawer במובייל.
+2. **Hero** — וידאו Vimeo ברקע (כיסוי מלא), שכבת overlay כהה, תמונת כותרת SVG (`hero-title.svg`) ממורכזת, שני כפתורים (לבן→מנטה).
+3. **About / מה זה תפילין** — שתי עמודות: תמונה ברדיוס גדול + טקסט + CTA מנטה.
+4. **HowItWorks** — שלושה צעדים ממוספרים (כרטיסים עם רקע Sky בהיר, מספר בגדול, אייקון).
+5. **RequestForm** — טופס בקשה רב-שלבי, כפתורי `.btn-form`, ולידציה עם sonner.
+6. **DonationBanner** — באנר Navy עם וידאו/תמונה ברקע + CTA מנטה.
+7. **DonateTefilinForm** — טופס תרומת תפילין יד שנייה.
+8. **Stories** — גריד 3 עמודות של סיפורים אישיים עם תמונה+שם+ציטוט.
+9. **Interviews** — שני embed של YouTube + כותרת.
+10. **Rabbis / הסכמות** — קרוסלת ציטוטים של רבנים, רקע cream.
+11. **Letters** — גריד תמונות של מכתבי תודה (lightbox פשוט).
+12. **Press** — לוגואי מדיה + כותרות כתבות.
+13. **FAQ** — Accordion (shadcn).
+14. **Founder** — תמונה + ביוגרפיה של מייסד המיזם.
+15. **Footer** — Navy, לוגו אור חדש, תפריט, זכויות יוצרים.
 
-## מה חולץ מהמקור (post-10.css)
+### עבודה טכנית
+- `src/routes/index.tsx`: להסיר את `dangerouslySetInnerHTML` ואת כל ה-STYLESHEETS, להחזיר רינדור של קומפוננטות `<Header/> <main>...</main> <Footer/>`.
+- `src/styles.css`: לוודא טוקני `@theme` (color-navy, color-mint, color-sky, color-yellow, color-ink, color-cream) + פונט Maadim OS כברירת מחדל + מחלקות `.btn-mint` / `.btn-form` (קיימות).
+- שימוש מחדש בקומפוננטות הקיימות (`HeroSection`, `RequestForm`, `Stories`, וכו') לאחר רענון עיצובי כדי שיתאימו בדיוק לסטיילים שחולצו מאלמנטור.
+- בדיקה ב-Playwright מול האתר המקורי (צילומי מסך side-by-side ב-1280 ובמובייל) ל-QA פדנטי.
 
-### Variant A — "Hero White" (a7f2958, e80d39e, 88ee652, f9cbe0e)
-מופיע ב-Hero, סקציית "איך זה עובד", "על מצוות תפילין" ועוד.
-```text
-background:    #FFFFFF
-color:         #009FE3   (sky blue)
-font:          "Maadim OS" 18px / bold / line-height 0.9em
-padding:       14px 20px 10px 20px   (mobile: 12px 20px 8px 24px)
-border-radius: 12px
-wrapper shadow: 0 5px 10px rgba(0,0,0,0.17)
-hover bg:      #67FFD1
-hover color:   #060633   (text)
-hover border:  #67FFD1
-hover shadow:  0 20px 50px rgba(103,255,209,0.53)
-```
+### SEO ונגישות
+- `<title>`, `<meta description>`, canonical, og: ב-`Route.head()`.
+- H1 אחד (תמונת כותרת תקבל `alt` עברי), היררכיית H2/H3, `aria-label` בעברית לכל אינטראקטיבי.
+- כל התמונות עם `loading="lazy"` ו-`alt` תיאורי.
 
-### Variant B — "Mint Solid CTA" (999cd9f)
-כפתור התרומה הגדול בבאנר.
-```text
-background:    #67FFD1
-color:         #060633
-font:          "Maadim OS" 22px / bold / line-height 1.4em / letter-spacing 1px
-border:        2px solid #67FFD1
-border-radius: 12px
-box-shadow:    0 10px 30px rgba(103,255,209,0.82)
-mobile:        font-size 18px
-```
-
-### Variant C — "Ghost Outline" (c70dd6d)
-```text
-background:    transparent
-font:          "Maadim OS" 22px / bold / letter-spacing 1px
-border:        2px solid (current color)
-border-radius: 12px
-mobile:        font-size 18px
-```
-
-### Variant D — "Form Submit" (d32b220)
-```text
-font:          "Maadim OS" 20px / 600
-border:        2px solid
-border-radius: 10px
-mobile:        font-size 18px / line-height 1.2em
-```
-
-## תיקונים
-
-### 1. `src/styles.css` — שכתוב מחלקות הכפתורים
-- **`.btn-mint`** → להחליף לשם נכון יותר אך לשמור backwards-compat: רקע לבן, טקסט `#009FE3`, פינות 12px, padding `14px 20px 10px`, `box-shadow:0 5px 10px rgba(0,0,0,.17)`. ב-hover: רקע `#67FFD1`, טקסט `#060633`, shadow `0 20px 50px rgba(103,255,209,.53)`. הסרת ה-`transform: translateY` (לא קיים במקור).
-- **הוספת `.btn-mint-solid`** חדש לבאנר התרומה (Variant B): רקע מנטה, טקסט נייבי, 22px, letter-spacing 1px, border 2px מנטה, shadow `0 10px 30px rgba(103,255,209,.82)`.
-- **`.btn-outline-light`** → להוסיף letter-spacing 1px, font-size 22px (18px במובייל), line-height 1.4em כדי להתאים ל-Variant C.
-- **`.btn-form`** → להוריד מ-`background: accent` ל-נטרלי (לא קיים רקע ב-CSS המקורי על השדה הזה — Elementor משתמש בצבע ברירת מחדל). font 20px/600, radius 10px, border 2px. במובייל font 18px.
-- **`.btn-outline-navy` / `.btn-navy`** → התאמת font-weight ל-bold ו-letter-spacing 1px במידת הצורך (Variant C/B navy).
-- הוספת media query למובייל לכל הכפתורים (font-size 18px, padding 12px 20px 8px 24px).
-- הסרת `font-family: var(--font-display)` כפול והכרזה מפורשת על `"Maadim OS"` כדי שהפונט יהיה זהה למקור.
-
-### 2. החלפת שימושים בקומפוננטות
-- **`HeroSection.tsx`** — הכפתורים "לבקשת תפילין" ו"למסירת/תרומת תפילין" כיום משתמשים ב-`btn-mint`. הם נשארים על `btn-mint` אחרי השכתוב (שעכשיו = לבן→מנטה), כך שיתאימו ל-a7f2958/e80d39e המקוריים.
-- **`DonationBanner.tsx`** — להחליף את ה-CTA הראשי מ-`btn-mint` ל-`btn-mint-solid` החדש (זה ה-999cd9f במקור).
-- **`MiKamchaSection.tsx`, `AboutTefilinSection.tsx`, `FounderSection.tsx`** — לוודא שה-CTA הלבן משתמש ב-`btn-mint` (Variant A) ושכפתור משני משתמש ב-`btn-outline-navy` עם הגדלים המעודכנים.
-- **`RequestForm.tsx`, `DonateTefilinForm.tsx`** — כפתורי "הבא/הקודם" יישארו `btn-form`, כפתור "שליחה" סופי יקבל `btn-mint-solid` (כך זה במקור).
-
-### 3. בדיקה ויזואלית
-- אחרי השינוי, פתיחת `/` ו-`/branding` והשוואה לסקרינשוט של המקור: לבדוק צבע ברירת מחדל (לבן), צבע hover (מנטה), shadow לפני ואחרי hover, מידות פונט במובייל ובדסקטופ.
-
-## נושאים פתוחים
-
-1. **פונט `Maadim OS`** — באתר המקורי שם המשפחה הוא `"Maadim OS"` בעוד שאצלנו ייתכן שהפונט נטען כ-`"Maadim"`. אם זה המצב, אצטרך להוסיף alias `font-family: "Maadim OS"` ל-`@font-face` ב-`src/styles.css` כדי שהמראה יהיה זהה לחלוטין.
-2. **לא נוגעים** ב-Header/Footer/Sections עצמם — רק במחלקות הכפתורים ובשימוש בהן.
+### תוצר סופי
+עמוד `/` שנראה כמו האתר המקורי אבל מורכב 100% מ-React + Tailwind, ללא תלות בקבצי Elementor.
