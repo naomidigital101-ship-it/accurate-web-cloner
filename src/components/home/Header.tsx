@@ -45,15 +45,15 @@ export function Header() {
         scrolled ? "bg-[#2D2E83]/95 backdrop-blur-sm shadow-md" : "bg-transparent"
       }`}
     >
-      <div className="mx-auto h-full max-w-[1400px] px-4 lg:px-8 flex items-center justify-between gap-4">
-        {/* ===== Right: logos ===== */}
-        <div className="flex items-center gap-4 lg:gap-6 shrink-0 h-full">
-          {/* Tefilin circle logo — hangs below the header line */}
+      <div className="mx-auto h-full max-w-[1400px] px-4 lg:px-8 flex flex-row-reverse items-center justify-between gap-4">
+        {/* ===== Left side (visually): logos ===== */}
+        <div className="flex flex-row-reverse items-center gap-4 lg:gap-6 shrink-0 h-full">
+          {/* Tefilin circle logo — hangs below the header line, larger and bolder */}
           <a
             href="/"
             aria-label="קשר של תפילין - דף הבית"
             className="relative block shrink-0"
-            style={{ width: 112, height: 112, marginTop: 0 }}
+            style={{ width: 140, height: 140, marginTop: 0 }}
           >
             <span
               className="absolute inset-0 bg-white"
@@ -66,9 +66,9 @@ export function Header() {
             <img
               src="/wp/img/לוגו-קשר-של-תפילין-01.svg"
               alt="קשר של תפילין"
-              width={100}
-              height={100}
-              className="relative block w-[100px] h-[100px] m-[6px]"
+              width={128}
+              height={128}
+              className="relative block w-[128px] h-[128px] m-[6px]"
             />
           </a>
 
