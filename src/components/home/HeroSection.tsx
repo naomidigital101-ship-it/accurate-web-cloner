@@ -34,13 +34,13 @@ export function HeroSection() {
       {/* Center content */}
       <div
         className="relative z-[2] flex flex-col items-center justify-center text-center px-4"
-        style={{ paddingTop: 110, paddingBottom: 90, transform: "translateY(-10px)" }}
+        style={{ paddingTop: 90, paddingBottom: 90 }}
       >
         {/* Big graphic title */}
         <img
           src="/__l5e/assets-v1/a5b0cc1f-d4c2-4469-8883-c4132453799d/hero-title.svg"
           alt="קשר של תפילין"
-          className="mx-auto w-[685px] h-[362px] max-w-full drop-shadow-[0_8px_30px_rgba(0,0,0,0.4)]"
+          className="mx-auto w-[620px] max-w-full h-auto drop-shadow-[0_8px_30px_rgba(0,0,0,0.4)]"
         />
 
         {/* Subtitle */}
