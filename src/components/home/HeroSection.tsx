@@ -2,7 +2,8 @@ export function HeroSection() {
   return (
     <section
       dir="rtl"
-      className="relative overflow-hidden text-white min-h-[100svh] flex items-center justify-center"
+      className="relative w-screen overflow-hidden text-white"
+      style={{ minHeight: 760 }}
     >
       {/* Background video */}
       <div className="absolute inset-0 overflow-hidden">
@@ -11,28 +12,38 @@ export function HeroSection() {
           title="רקע וידאו"
           allow="autoplay; fullscreen"
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.78vh] h-[56.25vw] min-w-full min-h-full pointer-events-none border-0"
+          style={{ objectFit: "cover" }}
         />
-        {/* Teal overlay — matches original deep turquoise mood */}
-        <div className="absolute inset-0 bg-[#0d6b6b]/55 mix-blend-multiply" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,60,70,0)_0%,rgba(0,40,55,0.55)_100%)]" />
+        {/* Strong contrast overlay */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(90deg, rgba(0,95,88,0.62) 0%, rgba(0,120,125,0.42) 45%, rgba(0,0,0,0.72) 100%)",
+          }}
+        />
+        <div className="absolute inset-0 bg-black/25" />
       </div>
 
       {/* Center content */}
-      <div className="relative w-full px-4 lg:px-8 max-w-[1200px] mx-auto text-center pt-28 md:pt-32 pb-28">
+      <div
+        className="relative z-[2] flex flex-col items-center justify-center text-center px-4"
+        style={{ paddingTop: 110, paddingBottom: 90, transform: "translateY(-10px)" }}
+      >
         {/* Big graphic title */}
         <img
           src="/__l5e/assets-v1/a5b0cc1f-d4c2-4469-8883-c4132453799d/hero-title.svg"
           alt="קשר של תפילין"
-          className="mx-auto w-full max-w-[340px] sm:max-w-[480px] md:max-w-[620px] lg:max-w-[720px] h-auto drop-shadow-[0_8px_30px_rgba(0,0,0,0.35)]"
+          className="mx-auto w-full max-w-[300px] sm:max-w-[420px] md:max-w-[540px] lg:max-w-[620px] h-auto drop-shadow-[0_8px_30px_rgba(0,0,0,0.4)]"
         />
 
         {/* Subtitle */}
-        <h2 className="font-sans font-extrabold text-2xl md:text-[34px] leading-tight mt-4 text-white drop-shadow-md">
+        <h2 className="font-sans font-extrabold text-xl md:text-[30px] leading-tight mt-5 text-white drop-shadow-md">
           מיזם של ערבות הדדית וזיכוי הרבים
         </h2>
 
         {/* Orange pill badge */}
-        <div className="mt-6 flex justify-center">
+        <div className="mt-5">
           <span
             className="inline-block rounded-full px-7 py-2.5 text-white font-bold text-base md:text-lg shadow-[0_8px_20px_rgba(0,0,0,0.25)]"
             style={{
@@ -41,7 +52,7 @@ export function HeroSection() {
             }}
           >
             חילקנו מעל{" "}
-            <span className="font-black text-xl md:text-2xl align-middle">
+            <span className="font-black text-2xl md:text-3xl align-middle mx-1">
               1,300
             </span>{" "}
             זוגות תפילין
@@ -49,17 +60,24 @@ export function HeroSection() {
         </div>
 
         {/* Paragraph */}
-        <p className="mt-6 max-w-[640px] mx-auto text-base md:text-xl text-white font-medium leading-relaxed">
-          מטרתינו לעזור לכל יהודי שרוצה להתחיל להניח תפילין ולהיות יותר מחובר
+        <p className="mt-5 max-w-[640px] mx-auto text-base md:text-xl text-white font-medium leading-relaxed drop-shadow">
+          מטרתנו לעזור לכל יהודי שרוצה להתחיל להניח תפילין ולהיות יותר מחובר
           לה' יתברך.
         </p>
 
         {/* CTA buttons */}
         <div className="mt-7 flex flex-wrap gap-3 justify-center">
-          <a href="#request" className="btn-e btn-mint">
+          <a
+            href="#request"
+            className="inline-block rounded-full px-8 py-3 font-bold text-base md:text-lg transition-colors"
+            style={{ background: "#67FFD1", color: "#2D2E83" }}
+          >
             מתעניין בתפילין
           </a>
-          <a href="#donate" className="btn-e btn-outline-light">
+          <a
+            href="#donate"
+            className="inline-block rounded-full px-8 py-3 font-bold text-base md:text-lg border-2 border-white text-white hover:bg-white/10 transition-colors"
+          >
             לתרומת תפילין
           </a>
         </div>
@@ -67,14 +85,15 @@ export function HeroSection() {
 
       {/* Bottom white wave */}
       <svg
-        className="absolute bottom-0 inset-x-0 w-full h-[80px] md:h-[110px] text-background"
+        className="absolute left-0 w-full text-background"
+        style={{ bottom: -1, height: 90, zIndex: 3 }}
         viewBox="0 0 1440 110"
         preserveAspectRatio="none"
         aria-hidden="true"
       >
         <path
           fill="currentColor"
-          d="M0,60 C320,120 720,0 1080,40 C1260,60 1380,80 1440,70 L1440,110 L0,110 Z"
+          d="M0,70 C320,130 720,10 1080,50 C1260,70 1380,90 1440,80 L1440,110 L0,110 Z"
         />
       </svg>
     </section>
