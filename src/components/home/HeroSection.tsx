@@ -2,8 +2,8 @@ export function HeroSection() {
   return (
     <section
       dir="rtl"
-      className="relative w-screen overflow-hidden text-white"
-      style={{ minHeight: 760 }}
+      className="relative w-full overflow-hidden text-white"
+      style={{ height: "75vh", minHeight: 520 }}
     >
       {/* Background video */}
       <div className="absolute inset-0 overflow-hidden">
