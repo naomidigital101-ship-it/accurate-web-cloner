@@ -37,22 +37,22 @@ export function HeroSection() {
       {/* Center content */}
       <div
         className="relative z-[2] flex flex-col items-center justify-center text-center px-4"
-        style={{ paddingTop: 90, paddingBottom: 90 }}
+        style={{ paddingTop: 70, paddingBottom: 70 }}
       >
-        {/* Big graphic title */}
+        {/* Big graphic title — smaller & closer to header */}
         <img
           src="/__l5e/assets-v1/a5b0cc1f-d4c2-4469-8883-c4132453799d/hero-title.svg"
           alt="קשר של תפילין"
-          className="mx-auto w-[620px] max-w-full h-auto drop-shadow-[0_8px_30px_rgba(0,0,0,0.4)]"
+          className="mx-auto w-[560px] max-w-full h-auto drop-shadow-[0_8px_30px_rgba(0,0,0,0.4)]"
         />
 
         {/* Subtitle */}
-        <h2 className="font-sans font-extrabold text-xl md:text-[30px] leading-tight mt-5 text-white drop-shadow-md">
+        <h2 className="font-sans font-extrabold text-xl md:text-[30px] leading-tight mt-2 text-white drop-shadow-md">
           מיזם של ערבות הדדית וזיכוי הרבים
         </h2>
 
         {/* Orange pill badge */}
-        <div className="mt-5">
+        <div className="mt-2">
           <span
             className="inline-block rounded-full px-7 py-2.5 text-white font-bold text-base md:text-lg shadow-[0_8px_20px_rgba(0,0,0,0.25)]"
             style={{
@@ -69,13 +69,13 @@ export function HeroSection() {
         </div>
 
         {/* Paragraph */}
-        <p className="mt-5 max-w-[640px] mx-auto text-base md:text-xl text-white font-medium leading-relaxed drop-shadow">
+        <p className="mt-2 max-w-[640px] mx-auto text-base md:text-xl text-white font-medium leading-relaxed drop-shadow">
           מטרתנו לעזור לכל יהודי שרוצה להתחיל להניח תפילין ולהיות יותר מחובר
           לה' יתברך.
         </p>
 
         {/* CTA buttons */}
-        <div className="mt-7 flex flex-wrap gap-3 justify-center">
+        <div className="mt-4 flex flex-wrap gap-3 justify-center">
           <a
             href="#request"
             className="inline-block rounded-full px-8 py-3 font-bold text-base md:text-lg transition-colors"
