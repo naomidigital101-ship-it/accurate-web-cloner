@@ -83,19 +83,24 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Bottom rounded separator */}
-      <div
-        className="absolute bg-white"
+      {/* Bottom inverted (concave) rounded separator */}
+      <svg
+        className="absolute pointer-events-none"
         style={{
           bottom: 0,
           left: "-10%",
           width: "120%",
           height: 200,
-          borderTopLeftRadius: "50% 100%",
-          borderTopRightRadius: "50% 100%",
           zIndex: 3,
         }}
-      />
+        viewBox="0 0 1440 200"
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M0,0 Q720,200 1440,0 L1440,200 L0,200 Z"
+          fill="white"
+        />
+      </svg>
     </section>
   );
 }
