@@ -16,10 +16,13 @@ export function HeroSection() {
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.78vh] h-[56.25vw] min-w-full min-h-full pointer-events-none border-0"
           style={{ objectFit: "cover" }}
         />
-        {/* Blue tint over video */}
+        {/* Elementor radial gradient overlay — exact match */}
         <div
           className="absolute inset-0"
-          style={{ background: "#009FE3", opacity: 0.55, mixBlendMode: "multiply" }}
+          style={{
+            background: "radial-gradient(circle at top left, #67FFD1 0%, #009FE3 100%)",
+            mixBlendMode: "multiply",
+          }}
         />
         {/* Contrast overlay for text legibility */}
         <div
