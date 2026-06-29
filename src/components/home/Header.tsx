@@ -66,9 +66,9 @@ export function Header() {
             <img
               src="/wp/img/לוגו-קשר-של-תפילין-01.svg"
               alt="קשר של תפילין"
-              width={100}
-              height={100}
-              className="relative block w-[100px] h-[100px] m-[6px]"
+              width={128}
+              height={128}
+              className="relative block w-[128px] h-[128px] m-[6px]"
             />
           </a>
 
