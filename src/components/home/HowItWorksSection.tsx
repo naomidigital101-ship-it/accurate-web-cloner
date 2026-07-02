@@ -1,55 +1,58 @@
-import { ChevronDown } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const steps = [
-  {
-    title: "אוספים",
-    text: "אוספים את התפילין מבית התורם או על ידי הבאת התפילין לנקודת איסוף.",
-    img: "https://tefilin.or-hadash.org.il/wp-content/uploads/2024/01/cropped-hand-wrapped-tefillin-min.webp",
-  },
-  {
-    title: "בודקים",
-    text: 'ומגיהים את פרשיות התפילין שנאספו, במכוני הסת"ם המחמירים ביותר.',
-    img: "https://tefilin.or-hadash.org.il/wp-content/uploads/2024/01/AdobeStock_93382125-min.webp",
-  },
-  {
-    title: "מחדשים",
-    text: "את הבתים, או מחליפים את הישנים בחדשים, וכן מחליפים רצועות וקופסאות חדשות. הכל בהתאמה אישית למבקש התפילין.",
-    img: "https://tefilin.or-hadash.org.il/wp-content/uploads/2024/01/midsection-woman-with-tape-rolled-hand-holding-book-min.webp",
-  },
-  {
-    title: "מחלקים",
-    text: "את התפילין, ומביאים עד לבית המבקש, או לנקודת החלוקה, בתיאום מראש.",
-    img: "https://tefilin.or-hadash.org.il/wp-content/uploads/2025/08/unfocused-people-walking-min.webp",
-  },
+  { title: "אוספים", text: "אוספים את התפילין מבית התורם או על ידי הבאת התפילין לנקודת איסוף." },
+  { title: "בודקים", text: "ומגיהים את פרשיות התפילין שנאספו, במכוני הסת\"ם המחמירים ביותר." },
+  { title: "מחדשים", text: "את הבתים, או מחליפים את הישנים בחדשים, וכן מחליפים רצועות וקופסאות חדשות. הכל בהתאמה אישית למבקש התפילין." },
+  { title: "מחלקים", text: "את התפלין, ומביאים עד לבית המבקש, או לנקודת החלוקה, בתיאום מראש." },
+];
+
+const slides = [
+  "https://tefilin.or-hadash.org.il/wp-content/uploads/2024/01/%D7%AA%D7%9E%D7%95%D7%A0%D7%94-%D7%A9%D7%9C-WhatsApp%E2%80%8F-2024-01-28-%D7%91%D7%A9%D7%A2%D7%94-13.38.37_c078ad2d.jpg",
+  "https://tefilin.or-hadash.org.il/wp-content/uploads/2024/01/%D7%A7%D7%A9%D7%AA-1-min.webp",
+  "https://tefilin.or-hadash.org.il/wp-content/uploads/2024/01/%D7%AA%D7%9E%D7%95%D7%A0%D7%94-%D7%A9%D7%9C-WhatsApp%E2%80%8F-2024-01-22-%D7%91%D7%A9%D7%A2%D7%94-17.46.08_77e1df03.jpg",
 ];
 
 export function HowItWorksSection() {
+  const [slide, setSlide] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setSlide((s) => (s + 1) % slides.length), 2500);
+    return () => clearInterval(t);
+  }, []);
   return (
-    <section id="how" className="py-20 px-4 bg-background">
-      <div className="max-w-5xl mx-auto">
-        <h2 className="font-display font-black text-4xl md:text-5xl text-ink text-center mb-14">
-          איך זה מתבצע?
-        </h2>
-
-        <div className="space-y-10">
-          {steps.map((s, i) => (
-            <div key={s.title}>
-              <div className={`grid md:grid-cols-2 gap-8 items-center ${i % 2 ? "md:[direction:ltr]" : ""}`}>
-                <div className="rounded-3xl overflow-hidden shadow-card aspect-[4/3]">
-                  <img src={s.img} alt={s.title} loading="lazy" className="w-full h-full object-cover" />
-                </div>
-                <div className="text-center md:text-right [direction:rtl]">
-                  <h3 className="font-display font-black text-3xl md:text-4xl text-teal-deep">{s.title}</h3>
-                  <p className="mt-3 text-ink/80 text-lg leading-relaxed max-w-md mx-auto md:mx-0">{s.text}</p>
-                </div>
-              </div>
-              {i < steps.length - 1 && (
-                <div className="flex justify-center mt-8">
-                  <ChevronDown className="size-10 text-teal animate-bounce" />
-                </div>
-              )}
-            </div>
+    <section dir="rtl" className="how-e">
+      <div className="how-steps">
+        <h2 className="e-h2-navy how-center">איך זה מתבצע?</h2>
+        {steps.map((s, i) => (
+          <div key={s.title} className="how-step">
+            <h3 className="how-step-title">{s.title}</h3>
+            <p className="how-step-text">{s.text}</p>
+            {i < steps.length - 1 && (
+              <img src="/wp/img/חוצץ-משולש.png" alt="" className="how-divider" loading="lazy" />
+            )}
+          </div>
+        ))}
+      </div>
+      <div className="how-visual">
+        <div className="how-slideshow">
+          {slides.map((src, i) => (
+            <span
+              key={src}
+              className={`how-slide ${i === slide ? "on" : ""}`}
+              style={{ backgroundImage: `url('${src}')` }}
+            />
           ))}
+          <span className="how-slideshow-overlay" aria-hidden="true" />
+        </div>
+        <div className="how-ba">
+          <figure className="how-ba-before">
+            <img src="/wp/img/לפני-1-min.webp" alt="לפני" loading="lazy" />
+            <figcaption>לפני</figcaption>
+          </figure>
+          <figure className="how-ba-after">
+            <img src="/wp/img/אחרי-1-min.webp" alt="אחרי" loading="lazy" />
+            <figcaption>אחרי</figcaption>
+          </figure>
         </div>
       </div>
     </section>

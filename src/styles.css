@@ -1041,3 +1041,165 @@
 }
 .qc-more:hover, .qc-more:focus { border-color: #67ffd1; }
 @media (max-width: 767px) { .qc-more { font-size: 18px; line-height: 1.4em; } }
+
+/* ===== Phase 3a: About (a6f5bae) + How it works (ae585c1) ===== */
+.e-h2-navy {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 4vw;
+  font-weight: bold;
+  line-height: 1em;
+  color: #2d2e83;
+  margin: 0;
+}
+@media (max-width: 767px) { .e-h2-navy { font-size: 40px; } }
+.e-body-navy {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.4em;
+  color: #2d2e83;
+  margin: 0;
+}
+@media (max-width: 767px) { .e-body-navy { line-height: 1.2em; } }
+
+.about-e { display: flex; flex-direction: row; }
+@media (max-width: 767px) { .about-e { flex-direction: column-reverse; } }
+.about-imgs { width: 60%; display: flex; flex-direction: column; padding: 3% 0; }
+@media (max-width: 767px) { .about-imgs { width: 100%; } }
+.about-photo { position: relative; z-index: 5; }
+.about-photo-top { width: 70%; max-width: 70%; align-self: flex-end; }
+.about-photo-top .about-photo-inner { margin: 0 0 -35% 10%; }
+.about-photo-bottom { width: 70%; max-width: 70%; align-self: flex-start; }
+.about-photo-bottom .about-photo-inner2 { margin: -35% 10% 0 0; }
+.about-photo img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  object-position: center center;
+  border: 3px solid #ffffff;
+  border-radius: 20px;
+  box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.2);
+  display: block;
+}
+.about-bigblock {
+  position: relative;
+  min-height: 70vh;
+  background-image: url("/wp/assets/קשת-3-min.webp");
+  background-position: top center;
+  background-size: cover;
+}
+.about-bigblock-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: #009fe3;
+  mix-blend-mode: multiply;
+}
+.about-text {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  padding: 2% 2% 2% 10%;
+}
+@media (max-width: 767px) { .about-text { width: 100%; padding: 16px; } }
+
+.how-e { display: flex; flex-direction: row; }
+@media (max-width: 767px) { .how-e { flex-direction: column; } }
+.how-steps {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 2% 10% 2% 2%;
+}
+@media (max-width: 767px) { .how-steps { width: 100%; padding: 16px; } }
+.how-center { text-align: center; }
+.how-step { display: flex; flex-direction: column; gap: 6px; align-items: center; }
+.how-step-title {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 2.5vw;
+  font-weight: 900;
+  line-height: 0.9em;
+  color: #009fe3;
+  text-align: center;
+  margin: 0;
+}
+@media (max-width: 767px) { .how-step-title { font-size: 32px; } }
+.how-step-text {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.2em;
+  color: #2d2e83;
+  text-align: center;
+  margin: 0;
+}
+@media (max-width: 767px) { .how-step-text { line-height: 1.1em; } }
+.how-divider { width: 75%; display: block; margin: 0 auto; }
+.how-visual { width: 60%; display: flex; flex-direction: column; }
+@media (max-width: 767px) { .how-visual { width: 100%; } }
+.how-slideshow { position: relative; min-height: 73vh; overflow: hidden; }
+.how-slide {
+  position: absolute;
+  inset: 0;
+  background-position: center center;
+  background-size: cover;
+  opacity: 0;
+  transition: opacity 2s;
+  transform: scale(1);
+}
+.how-slide.on { opacity: 1; animation: how-kenburns 5s linear forwards; }
+@keyframes how-kenburns { from { transform: scale(1); } to { transform: scale(1.12); } }
+.how-slideshow-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: #009fe3;
+  mix-blend-mode: multiply;
+  z-index: 1;
+}
+.how-ba {
+  width: 400px;
+  align-self: center;
+  margin-top: -250px;
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+}
+@media (max-width: 767px) { .how-ba { width: 300px; margin-top: -250px; } }
+.how-ba figure { margin: 0; transition: 0.3s; }
+.how-ba figure:hover { transform: scale(1.1); }
+.how-ba img {
+  object-fit: cover;
+  object-position: center center;
+  border: 3px solid #ffffff;
+  border-radius: 20px;
+  box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.2);
+  display: inline-block;
+}
+.how-ba-before { text-align: end; }
+.how-ba-before img { width: 200px; height: 200px; }
+.how-ba-before figcaption {
+  color: #ffffff;
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.4em;
+}
+.how-ba-after { text-align: start; margin-top: -18%; }
+.how-ba-after img { width: 300px; height: 300px; }
+.how-ba-after figcaption {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.4em;
+  color: #2d2e83;
+}
+@media (max-width: 767px) {
+  .how-ba-before img { width: 150px; height: 150px; }
+  .how-ba-after img { width: 200px; height: 200px; }
+  .how-ba-before figcaption, .how-ba-after figcaption { font-size: 18px; }
+}

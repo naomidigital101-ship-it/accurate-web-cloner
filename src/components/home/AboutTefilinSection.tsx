@@ -1,37 +1,29 @@
-
-
 export function AboutTefilinSection() {
   return (
-    <section className="py-20 px-4 bg-cream relative overflow-hidden">
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
-        <div className="rounded-3xl overflow-hidden shadow-card">
-          <img
-            src="https://tefilin.or-hadash.org.il/wp-content/uploads/2025/08/AdobeStock_229166376-min.webp"
-            alt="תפילין"
-            className="w-full h-full object-cover aspect-[4/3]"
-            loading="lazy"
-          />
-        </div>
-        <div>
-          <h2 className="font-display font-black text-4xl md:text-5xl text-teal-deep">על מצוות תפילין</h2>
-          <div className="mt-5 space-y-4 text-ink leading-relaxed">
-            <p>
-              בפרשיות התפילין כתובים הפסוקים שבהם עיקרי האמונה בה' יתברך ובהם:
-              <span className="font-bold"> "שמע ישראל ה' אלוקינו ה' אחד. ואהבת את ה' אלוקיך בכל לבבך ובכל נפשך ובכל מאדך…"</span>
-            </p>
-            <p>
-              את התפילין ציווה אותנו הבורא להניח על הראש כנגד המח ועל היד כנגד הלב, שהם עיקר חיות הגוף והנפש,
-              כדי שהמח והלב שלנו, יהיו מחוברים וקשורים לאמונה והדבקות בה' ונקבל עול מלכות שמיים.
-            </p>
-            <p>
-              לכן מצוות תפילין היא אחת משלוש המצוות הנקראות 'אות' (בנוסף לשבת וברית מילה), כי היא מחברת את האדם
-              לאמונה בה' לתורה ולמצוות כולם.
-            </p>
+    <section dir="rtl" className="about-e">
+      <div className="about-imgs">
+        <div className="about-photo about-photo-top">
+          <div className="about-photo-inner">
+            <img src="/wp/img/פתח-תקוה.jpg" alt="" loading="lazy" />
           </div>
-          <a href="#request" className="btn-e btn-mint mt-7 inline-flex">
-            לבקשת תפילין
-          </a>
         </div>
+        <div className="about-bigblock" aria-hidden="true">
+          <span className="about-bigblock-overlay" />
+        </div>
+        <div className="about-photo about-photo-bottom">
+          <div className="about-photo-inner2">
+            <img src="/wp/assets/קשת-9-min-e1706093310964.webp" alt="" loading="lazy" />
+          </div>
+        </div>
+      </div>
+      <div className="about-text">
+        <h2 className="e-h2-navy">קשר של תפילין</h2>
+        <p className="e-body-navy">
+          מטרת המיזם <b>'קשר של תפילין'</b> היא לחבר בין יהודי שרוצה להתחיל להניח תפילין ולהיות
+          יותר מחובר לה' יתברך, לבין יהודי שיש ברשותו תפילין שאינם בשימוש. הזכות היא כפולה
+          לשניהם – האחד זוכה לקיים את המצווה החשובה של הנחת תפילין, והשני זוכה שבתפילין שלו
+          יהיה שימוש מדי יום.
+        </p>
       </div>
     </section>
   );
