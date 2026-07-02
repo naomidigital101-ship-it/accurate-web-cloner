@@ -78,10 +78,6 @@ export function HeroSection() {
           מטרתינו לעזור לכל יהודי שרוצה להתחיל להניח תפילין ולהיות יותר מחובר לה' יתברך.
         </p>
 
-        <div className="hero-tabs">
-          <a href="#request" className="hero-tab active">מתעניין בתפילין</a>
-          <a href="#donate" className="hero-tab">לתרומת תפילין</a>
-        </div>
       </div>
 
       {/* קשת תחתונה - SVG מדויק של Elementor curve negative */}

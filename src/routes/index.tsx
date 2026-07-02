@@ -6,10 +6,9 @@ import { HeroSection } from "@/components/home/HeroSection";
 import { FeatureCards } from "@/components/home/FeatureCards";
 import { AboutTefilinSection } from "@/components/home/AboutTefilinSection";
 import { HowItWorksSection } from "@/components/home/HowItWorksSection";
-import { RequestForm } from "@/components/home/RequestForm";
+import { FormTabsSection } from "@/components/home/FormTabsSection";
 import { DonationBanner } from "@/components/home/DonationBanner";
 import { MiKamchaSection } from "@/components/home/MiKamchaSection";
-import { DonateTefilinForm } from "@/components/home/DonateTefilinForm";
 import { StoriesSection } from "@/components/home/StoriesSection";
 import { InterviewSection } from "@/components/home/InterviewSection";
 import { PressSection } from "@/components/home/PressSection";
@@ -43,18 +42,17 @@ function Index() {
       <Header />
       <main>
         <HeroSection />
+        <FormTabsSection />
+        <InterviewSection />
         <FeatureCards />
+        <StoriesSection />
+        <PressSection />
         <AboutTefilinSection />
         <HowItWorksSection />
-        <RequestForm />
-        <DonationBanner />
         <MiKamchaSection />
-        <DonateTefilinForm />
-        <StoriesSection />
-        <InterviewSection />
-        <PressSection />
-        <FaqSection />
+        <DonationBanner />
         <FounderSection />
+        <FaqSection />
       </main>
       <Footer />
     </div>
