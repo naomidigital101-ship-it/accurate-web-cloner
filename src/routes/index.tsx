@@ -56,6 +56,7 @@ function Index() {
         <DonationBanner />
         <FounderSection />
         <FaqSection />
+        <ServicesSection />
       </main>
       <Footer />
     </div>
