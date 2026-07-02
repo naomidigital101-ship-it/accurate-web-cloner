@@ -375,13 +375,13 @@
 
 /* לוגו קליגרפי (d056efd): גובה 25vw דסקטופ / 50vw מובייל, drop-shadow */
 .hero-title-icon {
-  margin: -6% 0 -10% -4%;
+  margin: -2.31vw 0 -3.85vw -1.54vw;
   line-height: 0;
   filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.3));
 }
 .hero-title-icon svg { height: 25vw; width: auto; display: inline-block; }
 @media (max-width: 767px) {
-  .hero-title-icon { margin: -6% 0 -10% 0; }
+  .hero-title-icon { margin: -4.62vw 0 -7.69vw 0; }
   .hero-title-icon svg { height: 50vw; }
 }
 
@@ -393,10 +393,10 @@
   line-height: 0.9em;
   color: #ffffff;
   text-align: center;
-  margin: 0;
+  margin: -1.78vw 0 0 0;
   letter-spacing: 0;
 }
-@media (max-width: 767px) { .hero-subtitle { font-size: 22px; } }
+@media (max-width: 767px) { .hero-subtitle { font-size: 22px; margin-top: 0; } }
 
 /* מונה (0b43995) */
 .hero-counter {
