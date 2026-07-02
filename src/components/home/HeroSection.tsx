@@ -35,7 +35,14 @@ function useCountUp(to: number, duration = 2000) {
 export function HeroSection() {
   const counter = useCountUp(1300, 2000);
   const [videoOn, setVideoOn] = useState(false);
+  const [interacted, setInteracted] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  useEffect(() => {
+    const on = () => setInteracted(true);
+    const evs = ["scroll", "pointerdown", "touchstart", "keydown"] as const;
+    evs.forEach((e) => window.addEventListener(e, on, { once: true, passive: true }));
+    return () => evs.forEach((e) => window.removeEventListener(e, on));
+  }, []);
   useEffect(() => {
     const onMsg = (e: MessageEvent) => {
       if (!String(e.origin).includes("vimeo.com")) return;
@@ -66,15 +73,17 @@ export function HeroSection() {
               "url('/wp/assets/jewish-torah-bar-mitzvah-bar-mitzvah-torah-reading-min.webp') 50% 50% / cover",
           }}
         />
-        <iframe
-          ref={iframeRef}
-          id="herovideo"
-          src="https://player.vimeo.com/video/906687611?background=1&autoplay=1&loop=1&muted=1&autopause=0&controls=0&dnt=1&api=1&player_id=herovideo"
-          title="רקע וידאו"
-          allow="autoplay; fullscreen"
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.78vh] h-[56.25vw] min-w-full min-h-full pointer-events-none border-0"
-          style={{ opacity: videoOn ? 1 : 0, transition: "opacity 0.6s" }}
-        />
+        {interacted && (
+          <iframe
+            ref={iframeRef}
+            id="herovideo"
+            src="https://player.vimeo.com/video/906687611?background=1&autoplay=1&loop=1&muted=1&autopause=0&controls=0&dnt=1&api=1&player_id=herovideo"
+            title="רקע וידאו"
+            allow="autoplay; fullscreen"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.78vh] h-[56.25vw] min-w-full min-h-full pointer-events-none border-0"
+            style={{ opacity: videoOn ? 1 : 0, transition: "opacity 0.6s" }}
+          />
+        )}
         <div
           className="absolute inset-0"
           style={{
