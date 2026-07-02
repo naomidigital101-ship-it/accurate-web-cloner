@@ -18,6 +18,7 @@ import { Route as DonateRouteImport } from './routes/donate'
 import { Route as BrandingRouteImport } from './routes/branding'
 import { Route as AgreementsRouteImport } from './routes/agreements'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TefilinSlugRouteImport } from './routes/tefilin.$slug'
 
 const StoriesRoute = StoriesRouteImport.update({
   id: '/stories',
@@ -64,6 +65,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TefilinSlugRoute = TefilinSlugRouteImport.update({
+  id: '/tefilin/$slug',
+  path: '/tefilin/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -75,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/letters': typeof LettersRoute
   '/request': typeof RequestRoute
   '/stories': typeof StoriesRoute
+  '/tefilin/$slug': typeof TefilinSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -86,6 +93,7 @@ export interface FileRoutesByTo {
   '/letters': typeof LettersRoute
   '/request': typeof RequestRoute
   '/stories': typeof StoriesRoute
+  '/tefilin/$slug': typeof TefilinSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -98,6 +106,7 @@ export interface FileRoutesById {
   '/letters': typeof LettersRoute
   '/request': typeof RequestRoute
   '/stories': typeof StoriesRoute
+  '/tefilin/$slug': typeof TefilinSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,6 +120,7 @@ export interface FileRouteTypes {
     | '/letters'
     | '/request'
     | '/stories'
+    | '/tefilin/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -122,6 +132,7 @@ export interface FileRouteTypes {
     | '/letters'
     | '/request'
     | '/stories'
+    | '/tefilin/$slug'
   id:
     | '__root__'
     | '/'
@@ -133,6 +144,7 @@ export interface FileRouteTypes {
     | '/letters'
     | '/request'
     | '/stories'
+    | '/tefilin/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -145,6 +157,7 @@ export interface RootRouteChildren {
   LettersRoute: typeof LettersRoute
   RequestRoute: typeof RequestRoute
   StoriesRoute: typeof StoriesRoute
+  TefilinSlugRoute: typeof TefilinSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -212,6 +225,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tefilin/$slug': {
+      id: '/tefilin/$slug'
+      path: '/tefilin/$slug'
+      fullPath: '/tefilin/$slug'
+      preLoaderRoute: typeof TefilinSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -225,6 +245,7 @@ const rootRouteChildren: RootRouteChildren = {
   LettersRoute: LettersRoute,
   RequestRoute: RequestRoute,
   StoriesRoute: StoriesRoute,
+  TefilinSlugRoute: TefilinSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
