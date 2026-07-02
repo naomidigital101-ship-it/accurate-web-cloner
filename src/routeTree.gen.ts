@@ -9,12 +9,54 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as StoriesRouteImport } from './routes/stories'
+import { Route as RequestRouteImport } from './routes/request'
+import { Route as LettersRouteImport } from './routes/letters'
+import { Route as InNewsRouteImport } from './routes/in-news'
+import { Route as GiveRouteImport } from './routes/give'
+import { Route as DonateRouteImport } from './routes/donate'
 import { Route as BrandingRouteImport } from './routes/branding'
+import { Route as AgreementsRouteImport } from './routes/agreements'
 import { Route as IndexRouteImport } from './routes/index'
 
+const StoriesRoute = StoriesRouteImport.update({
+  id: '/stories',
+  path: '/stories',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RequestRoute = RequestRouteImport.update({
+  id: '/request',
+  path: '/request',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LettersRoute = LettersRouteImport.update({
+  id: '/letters',
+  path: '/letters',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InNewsRoute = InNewsRouteImport.update({
+  id: '/in-news',
+  path: '/in-news',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GiveRoute = GiveRouteImport.update({
+  id: '/give',
+  path: '/give',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DonateRoute = DonateRouteImport.update({
+  id: '/donate',
+  path: '/donate',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BrandingRoute = BrandingRouteImport.update({
   id: '/branding',
   path: '/branding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AgreementsRoute = AgreementsRouteImport.update({
+  id: '/agreements',
+  path: '/agreements',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -25,37 +67,142 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/agreements': typeof AgreementsRoute
   '/branding': typeof BrandingRoute
+  '/donate': typeof DonateRoute
+  '/give': typeof GiveRoute
+  '/in-news': typeof InNewsRoute
+  '/letters': typeof LettersRoute
+  '/request': typeof RequestRoute
+  '/stories': typeof StoriesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/agreements': typeof AgreementsRoute
   '/branding': typeof BrandingRoute
+  '/donate': typeof DonateRoute
+  '/give': typeof GiveRoute
+  '/in-news': typeof InNewsRoute
+  '/letters': typeof LettersRoute
+  '/request': typeof RequestRoute
+  '/stories': typeof StoriesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/agreements': typeof AgreementsRoute
   '/branding': typeof BrandingRoute
+  '/donate': typeof DonateRoute
+  '/give': typeof GiveRoute
+  '/in-news': typeof InNewsRoute
+  '/letters': typeof LettersRoute
+  '/request': typeof RequestRoute
+  '/stories': typeof StoriesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/branding'
+  fullPaths:
+    | '/'
+    | '/agreements'
+    | '/branding'
+    | '/donate'
+    | '/give'
+    | '/in-news'
+    | '/letters'
+    | '/request'
+    | '/stories'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/branding'
-  id: '__root__' | '/' | '/branding'
+  to:
+    | '/'
+    | '/agreements'
+    | '/branding'
+    | '/donate'
+    | '/give'
+    | '/in-news'
+    | '/letters'
+    | '/request'
+    | '/stories'
+  id:
+    | '__root__'
+    | '/'
+    | '/agreements'
+    | '/branding'
+    | '/donate'
+    | '/give'
+    | '/in-news'
+    | '/letters'
+    | '/request'
+    | '/stories'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AgreementsRoute: typeof AgreementsRoute
   BrandingRoute: typeof BrandingRoute
+  DonateRoute: typeof DonateRoute
+  GiveRoute: typeof GiveRoute
+  InNewsRoute: typeof InNewsRoute
+  LettersRoute: typeof LettersRoute
+  RequestRoute: typeof RequestRoute
+  StoriesRoute: typeof StoriesRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/stories': {
+      id: '/stories'
+      path: '/stories'
+      fullPath: '/stories'
+      preLoaderRoute: typeof StoriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/request': {
+      id: '/request'
+      path: '/request'
+      fullPath: '/request'
+      preLoaderRoute: typeof RequestRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/letters': {
+      id: '/letters'
+      path: '/letters'
+      fullPath: '/letters'
+      preLoaderRoute: typeof LettersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/in-news': {
+      id: '/in-news'
+      path: '/in-news'
+      fullPath: '/in-news'
+      preLoaderRoute: typeof InNewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/give': {
+      id: '/give'
+      path: '/give'
+      fullPath: '/give'
+      preLoaderRoute: typeof GiveRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/donate': {
+      id: '/donate'
+      path: '/donate'
+      fullPath: '/donate'
+      preLoaderRoute: typeof DonateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/branding': {
       id: '/branding'
       path: '/branding'
       fullPath: '/branding'
       preLoaderRoute: typeof BrandingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/agreements': {
+      id: '/agreements'
+      path: '/agreements'
+      fullPath: '/agreements'
+      preLoaderRoute: typeof AgreementsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -70,18 +217,15 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AgreementsRoute: AgreementsRoute,
   BrandingRoute: BrandingRoute,
+  DonateRoute: DonateRoute,
+  GiveRoute: GiveRoute,
+  InNewsRoute: InNewsRoute,
+  LettersRoute: LettersRoute,
+  RequestRoute: RequestRoute,
+  StoriesRoute: StoriesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

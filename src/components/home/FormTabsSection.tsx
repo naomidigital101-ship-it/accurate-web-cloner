@@ -27,7 +27,7 @@ function RadioGroup({ label, col, name, options }: { label: string; col: 100 | 6
 
 const NOTE = "בשליחת הבקשה לא יעשה שום שימוש במידע שהזנתם מלבד לצרכים הטכניים של העמותה.";
 
-function RequestForm() {
+export function RequestForm() {
   const [step, setStep] = useState(1);
   const [sent, setSent] = useState(false);
   if (sent) return <p className="form-card-sub" role="status">הטופס נשלח בהצלחה. תודה רבה!</p>;
@@ -81,7 +81,7 @@ function RequestForm() {
   );
 }
 
-function DonateForm() {
+export function DonateForm() {
   const [step, setStep] = useState(1);
   const [sent, setSent] = useState(false);
   if (sent) return <p className="form-card-sub" role="status">הטופס נשלח בהצלחה. תודה רבה!</p>;
