@@ -44,7 +44,7 @@ function Index() {
         <HeroSection />
         <FormTabsSection />
         <InterviewSection />
-        <FeatureCards />
+
         <StoriesSection />
         <PressSection />
         <AboutTefilinSection />
