@@ -876,3 +876,168 @@
   margin: 0;
 }
 @media (max-width: 767px) { .st-card-title { font-size: 22px; } }
+
+/* ===== Phase 2c: Press column (post-230) + Quotes carousel (post-190) ===== */
+.st-wrap { display: flex; flex-direction: row; gap: 20px; }
+@media (max-width: 1024px) { .st-wrap { flex-direction: column; } }
+.st-main { width: 70%; }
+@media (max-width: 1024px) { .st-main { width: 100%; } }
+.press-col {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  align-self: flex-start;
+}
+@media (max-width: 1024px) { .press-col { width: 100%; } }
+.press-title {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 3vw;
+  font-weight: 500;
+  line-height: 1em;
+  color: #2d2e83;
+  margin: 0;
+}
+@media (max-width: 767px) { .press-title { font-size: 32px; } }
+.press-item {
+  display: flex;
+  flex-direction: row;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  transition: transform 0.3s;
+}
+.press-item:hover { transform: translateY(-5px) scale(1.05); }
+.press-item-logo {
+  width: 35%;
+  min-height: 90px;
+  flex-shrink: 0;
+  background-color: #ffffff;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 90% auto;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+}
+.press-item-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 14px;
+}
+.press-item-title {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 22px;
+  font-weight: bold;
+  line-height: 1em;
+  color: #2d2e83;
+}
+.press-item-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  border-left: 0;
+  border-right: 4px solid #67ffd1;
+  padding: 1px 4px;
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4em;
+  color: #2d2e83;
+}
+.press-item-meta b { font-weight: 700; }
+
+/* Quotes carousel */
+.qc-e {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 3% 20px;
+}
+.qc-arrow {
+  background: transparent;
+  border: 0;
+  color: #000000;
+  cursor: pointer;
+  padding: 4px;
+  flex-shrink: 0;
+}
+.qc-track {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  flex: 1;
+  align-items: start;
+}
+@media (max-width: 767px) { .qc-track { grid-template-columns: 1fr; } .qc-track > :nth-child(n+2) { display: none; } }
+.qc-card { display: flex; flex-direction: row; align-items: flex-start; }
+.qc-img {
+  width: 30%;
+  min-height: 150px;
+  flex-shrink: 0;
+  border: 2px solid #ffffff;
+  border-radius: 20px;
+  box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.2);
+  background-position: center center;
+  background-size: cover;
+}
+@media (max-width: 767px) { .qc-img { width: 100px; min-height: 100px; } }
+.qc-body {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 10px;
+}
+.qc-text {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 1.2em;
+  color: #2d2e83;
+  margin: 0;
+}
+@media (max-width: 767px) { .qc-text { font-size: 18px; line-height: 1.4em; } }
+.qc-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  align-self: flex-start;
+  border-right: 4px solid #67ffd1;
+  padding: 1px 4px;
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4em;
+  color: #2d2e83;
+}
+.qc-more {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 5px;
+  align-self: flex-end;
+  background: transparent;
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1em;
+  color: #2d2e83;
+  fill: #2d2e83;
+  border-bottom: 2px solid #2d2e83;
+  padding: 0 0 3px 0;
+  text-decoration: none;
+  transition: border-color 0.3s;
+}
+.qc-more:hover, .qc-more:focus { border-color: #67ffd1; }
+@media (max-width: 767px) { .qc-more { font-size: 18px; line-height: 1.4em; } }

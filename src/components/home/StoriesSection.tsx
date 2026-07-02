@@ -40,32 +40,89 @@ function ArrowLeftIcon() {
   );
 }
 
+type PressItem = {
+  title?: string;
+  source: string;
+  date: string;
+  img: string;
+  href: string;
+};
+
+const pressItems: PressItem[] = [
+  {
+    title: "ארגון 'קשר של תפילין' – ככה זה עובד בשטח",
+    source: "הידברות",
+    date: "28.9.25",
+    img: "/wp/img/לוגו-הידברות.webp",
+    href: "https://www.hidabroot.org/article/1214439",
+  },
+  {
+    source: "מגזין אתנחתא",
+    date: "ג' תשרי תשפ\"ן 25.09.25",
+    img: "/wp/img/אתנחתא.png",
+    href: "https://tefilin.or-hadash.org.il/wp-content/uploads/2025/10/yedidya_1164-1.pdf",
+  },
+  {
+    title: "כתבה על קשר של תפילין בעיתון של כפר חב\"ד",
+    source: "עיתון כפר חב\"ד",
+    date: "21/05/2025",
+    img: "/wp/img/כפר-חבד.jpg",
+    href: "https://tefilin.or-hadash.org.il/wp-content/uploads/2025/05/%D7%AA%D7%9E%D7%95%D7%A0%D7%94-%D7%A9%D7%9C-WhatsApp%E2%80%8F-2025-05-18-%D7%91%D7%A9%D7%A2%D7%94-15.22.07_3aeb7c27.jpg",
+  },
+  {
+    title: "גם לזוג התפילין הישנות שלכם יש ייעוד חשוב | מיזם 'קשר של תפילין' – כסף אנושי, פרק 5",
+    source: "103FM",
+    date: "21/04/2025",
+    img: "/wp/img/103FM.jpg",
+    href: "https://tefilin.or-hadash.org.il/wp-content/uploads/2025/05/103FM.jpg",
+  },
+];
+
 export function StoriesSection() {
   return (
     <section dir="rtl" className="st-e">
-      <div className="st-head">
-        <h2 className="st-title">הסיפורים</h2>
-        <div className="st-subrow">
-          <h2 className="st-subtitle">שמאחורי התפילין</h2>
-          <a href="https://tefilin.or-hadash.org.il/stories/" className="st-all-btn">
-            <span>לכל הסיפורים</span>
-            <ArrowLeftIcon />
-          </a>
+      <div className="st-wrap">
+        <div className="st-main">
+          <div className="st-head">
+            <h2 className="st-title">הסיפורים</h2>
+            <div className="st-subrow">
+              <h2 className="st-subtitle">שמאחורי התפילין</h2>
+              <a href="https://tefilin.or-hadash.org.il/stories/" className="st-all-btn">
+                <span>לכל הסיפורים</span>
+                <ArrowLeftIcon />
+              </a>
+            </div>
+          </div>
+          <div className="st-grid">
+            {stories.map((s, i) => (
+              <a
+                key={i}
+                href={s.href}
+                className={i === 0 ? "st-card st-card-big" : "st-card"}
+                style={{ backgroundImage: `url('${s.img}')` }}
+              >
+                <span className="st-card-panel">
+                  <h3 className="st-card-title">{s.title}</h3>
+                </span>
+              </a>
+            ))}
+          </div>
         </div>
-      </div>
-      <div className="st-grid">
-        {stories.map((s, i) => (
-          <a
-            key={i}
-            href={s.href}
-            className={i === 0 ? "st-card st-card-big" : "st-card"}
-            style={{ backgroundImage: `url('${s.img}')` }}
-          >
-            <span className="st-card-panel">
-              <h3 className="st-card-title">{s.title}</h3>
-            </span>
-          </a>
-        ))}
+        <aside className="press-col">
+          <h2 className="press-title">כתבות בתקשורת</h2>
+          {pressItems.map((p, i) => (
+            <a key={i} href={p.href} target="_blank" rel="noopener" className="press-item">
+              <span className="press-item-logo" style={{ backgroundImage: `url('${p.img}')` }} />
+              <span className="press-item-body">
+                {p.title && <span className="press-item-title">{p.title}</span>}
+                <span className="press-item-meta">
+                  <b>{p.source}</b>
+                  <span>{p.date}</span>
+                </span>
+              </span>
+            </a>
+          ))}
+        </aside>
       </div>
     </section>
   );
