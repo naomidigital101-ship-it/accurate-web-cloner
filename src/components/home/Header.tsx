@@ -7,19 +7,19 @@ type NavItem = {
 };
 
 const navItems: NavItem[] = [
-  { label: "סיפורים", href: "https://tefilin.or-hadash.org.il/stories/" },
-  { label: "כתבות בתקשורת", href: "https://tefilin.or-hadash.org.il/in-news/" },
+  { label: "סיפורים", href: "/stories" },
+  { label: "כתבות בתקשורת", href: "/in-news" },
   {
     label: "מכתבים",
     href: "#",
     children: [
-      { label: "מכתבי תודה", href: "https://tefilin.or-hadash.org.il/%d7%9e%d7%9b%d7%aa%d7%91%d7%99-%d7%aa%d7%95%d7%93%d7%94/" },
-      { label: "הסכמות הרבנים", href: "https://tefilin.or-hadash.org.il/agreements/" },
+      { label: "מכתבי תודה", href: "/letters" },
+      { label: "הסכמות הרבנים", href: "/agreements" },
     ],
   },
-  { label: "בקשת תפילין", href: "https://tefilin.or-hadash.org.il/request/" },
-  { label: "מסירת/תרומת תפילין", href: "https://tefilin.or-hadash.org.il/give/" },
-  { label: "תרומה", href: "https://tefilin.or-hadash.org.il/donate/" },
+  { label: "בקשת תפילין", href: "/request" },
+  { label: "מסירת/תרומת תפילין", href: "/give" },
+  { label: "תרומה", href: "/donate" },
 ];
 
 function CaretDown() {

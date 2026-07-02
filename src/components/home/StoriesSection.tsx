@@ -7,27 +7,27 @@ type Story = {
 const stories: Story[] = [
   {
     title: "\"וְרָאוּ כָּל עַמֵּי הָאָרֶץ כִּי שֵׁם ה' נִקְרָא עָלֶיךָ, וְיָרְאוּ מִמֶּךָּ\"",
-    href: "https://tefilin.or-hadash.org.il/tefilin/%d7%95%d6%b0%d7%a8%d6%b8%d7%90%d7%95%d6%bc-%d7%9b%d6%b8%d6%bc%d7%9c-%d7%a2%d6%b7%d7%9e%d6%b5%d6%bc%d7%99-%d7%94%d6%b8%d7%90%d6%b8%d7%a8%d6%b6%d7%a5-%d7%9b%d6%b4%d6%bc%d7%99-%d7%a9%d6%b5%d7%81%d7%9d-2/",
+    href: "/tefilin/%d7%95%d6%b0%d7%a8%d6%b8%d7%90%d7%95%d6%bc-%d7%9b%d6%b8%d6%bc%d7%9c-%d7%a2%d6%b7%d7%9e%d6%b5%d6%bc%d7%99-%d7%94%d6%b8%d7%90%d6%b8%d7%a8%d6%b6%d7%a5-%d7%9b%d6%b4%d6%bc%d7%99-%d7%a9%d6%b5%d7%81%d7%9d-2",
     img: "/wp/img/AdobeStock_93382125-min.webp",
   },
   {
     title: "ביקשת סימן? קיבלת",
-    href: "https://tefilin.or-hadash.org.il/tefilin/%d7%91%d7%99%d7%a7%d7%a9%d7%aa-%d7%a1%d7%99%d7%9e%d7%9f-%d7%a7%d7%99%d7%91%d7%9c%d7%aa/",
+    href: "/tefilin/%d7%91%d7%99%d7%a7%d7%a9%d7%aa-%d7%a1%d7%99%d7%9e%d7%9f-%d7%a7%d7%99%d7%91%d7%9c%d7%aa",
     img: "/wp/img/glitter-min.webp",
   },
   {
     title: "שלוחי מצווה",
-    href: "https://tefilin.or-hadash.org.il/tefilin/%d7%a9%d7%9c%d7%95%d7%97%d7%99-%d7%9e%d7%a6%d7%95%d7%95%d7%94/",
+    href: "/tefilin/%d7%a9%d7%9c%d7%95%d7%97%d7%99-%d7%9e%d7%a6%d7%95%d7%95%d7%94",
     img: "/wp/img/6-1.png",
   },
   {
     title: "סוף סוף יש לי תפילין! סוף סוף אני יודע להניח תפילין",
-    href: "https://tefilin.or-hadash.org.il/tefilin/%d7%a1%d7%95%d7%a3-%d7%a1%d7%95%d7%a3-%d7%99%d7%a9-%d7%9c%d7%99-%d7%aa%d7%a4%d7%99%d7%9c%d7%99%d7%9f-%d7%a1%d7%95%d7%a3-%d7%a1%d7%95%d7%a3-%d7%90%d7%a0%d7%99-%d7%99%d7%95%d7%93%d7%a2-%d7%9c%d7%94/",
+    href: "/tefilin/%d7%a1%d7%95%d7%a3-%d7%a1%d7%95%d7%a3-%d7%99%d7%a9-%d7%9c%d7%99-%d7%aa%d7%a4%d7%99%d7%9c%d7%99%d7%9f-%d7%a1%d7%95%d7%a3-%d7%a1%d7%95%d7%a3-%d7%90%d7%a0%d7%99-%d7%99%d7%95%d7%93%d7%a2-%d7%9c%d7%94",
     img: "/wp/img/5.png",
   },
   {
     title: "\"וְרָאוּ כָּל עַמֵּי הָאָרֶץ כִּי שֵׁם ה' נִקְרָא עָלֶיךָ, וְיָרְאוּ מִמֶּךָּ\"",
-    href: "https://tefilin.or-hadash.org.il/tefilin/%d7%95%d6%b0%d7%a8%d6%b8%d7%90%d7%95%d6%bc-%d7%9b%d6%b8%d6%bc%d7%9c-%d7%a2%d6%b7%d7%9e%d6%b5%d6%bc%d7%99-%d7%94%d6%b8%d7%90%d6%b8%d7%a8%d6%b6%d7%a5-%d7%9b%d6%b4%d6%bc%d7%99-%d7%a9%d6%b5%d7%81%d7%9d/",
+    href: "/tefilin/%d7%95%d6%b0%d7%a8%d6%b8%d7%90%d7%95%d6%bc-%d7%9b%d6%b8%d6%bc%d7%9c-%d7%a2%d6%b7%d7%9e%d6%b5%d6%bc%d7%99-%d7%94%d6%b8%d7%90%d6%b8%d7%a8%d6%b6%d7%a5-%d7%9b%d6%b4%d6%bc%d7%99-%d7%a9%d6%b5%d7%81%d7%9d",
     img: "/wp/img/חצי-פנים-6.png",
   },
 ];
@@ -87,7 +87,7 @@ export function StoriesSection() {
             <h2 className="st-title">הסיפורים</h2>
             <div className="st-subrow">
               <h2 className="st-subtitle">שמאחורי התפילין</h2>
-              <a href="https://tefilin.or-hadash.org.il/stories/" className="st-all-btn">
+              <a href="/stories" className="st-all-btn">
                 <span>לכל הסיפורים</span>
                 <ArrowLeftIcon />
               </a>

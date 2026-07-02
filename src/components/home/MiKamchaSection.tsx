@@ -16,7 +16,7 @@ export function MiKamchaSection() {
           <b>כמה גדולה הזכות של מי שתורם תפילין ומזכה יהודי אחר לקיים מצוות תפילין!</b> במעשה
           זה של זיכוי הרבים ואחדות ישראל הוא כביכול כותב את ה'תפילין דמארי עלמא'…
         </p>
-        <a href="https://tefilin.or-hadash.org.il/give/" className="e-btn-white">למסירת/תרומת תפילין</a>
+        <a href="/give" className="e-btn-white">למסירת/תרומת תפילין</a>
       </div>
     </section>
   );

@@ -1614,3 +1614,115 @@
   margin: 0;
 }
 .partners-btns { display: flex; flex-direction: row; gap: 10px; flex-wrap: wrap; justify-content: center; }
+
+/* ===== Phase 6a: Inner pages shell ===== */
+.page-shell {
+  min-height: 100vh;
+  background-image: url("https://vangus-cdn.com/tefilin.or-hadash.org.il/wp-content/uploads/2024/01/תמונת-עמוד-קשר-של-תפילין-min.webp");
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: cover;
+}
+.page-content {
+  width: 76%;
+  min-height: 70vh;
+  margin-right: auto;
+  margin-left: 0;
+  background: #ffffff;
+  padding: 120px 40px 60px 40px;
+}
+@media (max-width: 1024px) { .page-content { width: 100%; padding: 110px 16px 40px 16px; } }
+.page-title { margin: 0 0 30px 0; text-align: right; }
+.page-title span {
+  display: inline-block;
+  background: #2d2e83;
+  color: #ffffff;
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 3vw;
+  font-weight: 900;
+  line-height: 1em;
+  border-radius: 10px;
+  padding: 12px 24px;
+}
+@media (max-width: 767px) { .page-title span { font-size: 32px; } }
+
+/* agreements + letters cards */
+.doc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+@media (max-width: 1024px) { .doc-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .doc-grid { grid-template-columns: 1fr; } }
+.doc-card {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.15);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  transition: transform 0.3s;
+}
+.doc-card:hover { transform: translateY(-5px); }
+.doc-card-letter { width: 100%; }
+.doc-card-letter img { width: 100%; height: 220px; object-fit: contain; display: block; }
+.doc-card-portrait { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; box-shadow: 0 2px 8px rgba(0,0,0,0.25); margin-top: -20px; position: relative; }
+.doc-card-name {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 17px;
+  font-weight: bold;
+  line-height: 1.2em;
+  color: #009fe3;
+  margin: 0;
+}
+.doc-card-role {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2em;
+  color: #2d2e83;
+  margin: 0;
+}
+
+/* stories page grid */
+.stories-page-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+@media (max-width: 1024px) { .stories-page-grid { grid-template-columns: repeat(2, 1fr); } }
+.eng-link {
+  display: inline-block;
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 18px;
+  color: #2d2e83;
+  margin-bottom: 20px;
+  text-decoration: none;
+  border-bottom: 2px solid #67ffd1;
+}
+
+/* in-news list */
+.news-list { display: flex; flex-direction: column; gap: 20px; max-width: 760px; }
+
+/* donate page */
+.donate-cards { display: flex; gap: 20px; flex-wrap: wrap; }
+.donate-card {
+  flex: 1;
+  min-width: 260px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+.donate-card h2 {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 26px;
+  font-weight: bold;
+  color: #2d2e83;
+  margin: 0;
+}
+.donate-card p { font-family: "Maadim", "Maadim OS", sans-serif; font-size: 16px; color: #2d2e83; margin: 0; }
+.donate-intro { font-family: "Maadim", "Maadim OS", sans-serif; font-size: 18px; line-height: 1.4em; color: #2d2e83; max-width: 640px; margin: 0 0 24px 0; }
+
+/* form pages */
+.formpage-wrap { max-width: 600px; }
