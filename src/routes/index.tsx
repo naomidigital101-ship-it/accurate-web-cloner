@@ -15,6 +15,7 @@ import { InterviewSection } from "@/components/home/InterviewSection";
 import { PressSection } from "@/components/home/PressSection";
 import { FaqSection } from "@/components/home/FaqSection";
 import { FounderSection } from "@/components/home/FounderSection";
+import { ServicesSection } from "@/components/home/ServicesSection";
 
 export const Route = createFileRoute("/")({
   head: () => ({
