@@ -42,18 +42,17 @@ function Index() {
       <Header />
       <main>
         <HeroSection />
+        <FormTabsSection />
+        <InterviewSection />
         <FeatureCards />
+        <StoriesSection />
+        <PressSection />
         <AboutTefilinSection />
         <HowItWorksSection />
-        <RequestForm />
-        <DonationBanner />
         <MiKamchaSection />
-        <DonateTefilinForm />
-        <StoriesSection />
-        <InterviewSection />
-        <PressSection />
-        <FaqSection />
+        <DonationBanner />
         <FounderSection />
+        <FaqSection />
       </main>
       <Footer />
     </div>
