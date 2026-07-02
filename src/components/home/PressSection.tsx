@@ -1,60 +1,78 @@
-const articles = [
-  {
-    title: "ארגון 'קשר של תפילין' – ככה זה עובד בשטח",
-    source: "הידברות",
-    date: "28.9.25",
-    logo: "https://tefilin.or-hadash.org.il/wp-content/uploads/2026/06/לוגו-הידברות.webp",
-  },
-  {
-    title: "כתבה במגזין אתנחתא",
-    source: "מגזין אתנחתא",
-    date: 'ג\' תשרי תשפ"ו · 25.09.25',
-    logo: "https://tefilin.or-hadash.org.il/wp-content/uploads/2025/10/אתנחתא.png",
-  },
-  {
-    title: 'כתבה על קשר של תפילין בעיתון של כפר חב"ד',
-    source: 'עיתון כפר חב"ד',
-    date: "21/05/2025",
-    logo: "https://tefilin.or-hadash.org.il/wp-content/uploads/2025/05/כפר-חבד.jpg",
-  },
-  {
-    title: "גם לזוג התפילין הישנות שלכם יש ייעוד חשוב | מיזם 'קשר של תפילין' – כסף אנושי, פרק 5",
-    source: "103FM",
-    date: "21/04/2025",
-    logo: "https://tefilin.or-hadash.org.il/wp-content/uploads/2025/05/103FM.jpg",
-  },
+import { useState } from "react";
+
+type Quote = {
+  text: string;
+  name: string;
+  city?: string;
+  img?: string;
+  href?: string;
+};
+
+const quotes: Quote[] = [
+  { text: "", name: "א'", city: "מפתח תקוה", img: "/wp/img/AdobeStock_229166376-min.webp" },
+  { text: "", name: "ע.", city: "מקריית אונו", img: "/wp/img/AdobeStock_93382125-min.webp", href: "https://tefilin.or-hadash.org.il/tefilin/%d7%95%d6%b0%d7%a8%d6%b8%d7%90%d7%95%d6%bc-%d7%9b%d6%b8%d6%bc%d7%9c-%d7%a2%d6%b7%d7%9e%d6%b5%d6%bc%d7%99-%d7%94%d6%b8%d7%90%d6%b8%d7%a8%d6%b6%d7%a5-%d7%9b%d6%b4%d6%bc%d7%99-%d7%a9%d6%b5%d7%81%d7%9d-2/" },
+  { text: "בע\"ה אני אהיה בעוד כמה שבועות בן 90. היום קיבלתי תפילין, ולא יכולתי לבקש מתנה יותר מיוחדת ומרגשת לכבוד יום ההולדת שלי. בברית מילה שעשו לי כשהייתי בן 8 ימים קיבלתי את השם: מאיר. כל החיים קראו לי בשם הרוסי: מיכאל. אבל מעכשיו – אחרי שהתחלתי להניח תפילין – אני מבקש שתקראו לי בשם היהודי שלי: מאיר!", name: "מאיר", city: "מירושלים", img: "/wp/img/unfocused-people-walking-min.webp" },
+  { text: "אמרתי לעצמי: \"ביקשת סימן? קיבלת! אתה צריך לחזור ולהניח תפילין!\"", name: "א'", city: "ממעלה אדומים", img: "/wp/img/glitter-min.webp", href: "https://tefilin.or-hadash.org.il/tefilin/%d7%91%d7%99%d7%a7%d7%a9%d7%aa-%d7%a1%d7%99%d7%9e%d7%9f-%d7%a7%d7%99%d7%91%d7%9c%d7%aa/" },
+  { text: "…באתי מבית חרדי ועד גיל 20 למדתי בישיבה, אבל אז עזבתי את דרך התורה והמצוות לגמרי. היום אני בן 31, ובחודשים האחרונים התעורר בי רצון אדיר לחזור ולהניח תפילין, ובזכותך אוכל לקיים מצוות תפילין בכל יום. כשאני מדמיין את ההתרגשות של אבא שלי כשהוא ישמע שחזרתי להניח תפילין, אני מתמלא באושר. אשריך ואשרי יולדתך!", name: "ר.", city: "מגבעת שמואל" },
+  { text: "החלטתי להמשיך עם המטען הרוחני שמילא אותי. בבית לא ממש תמכו במהלך הזה – לא קיבלתי מעטפת נוחה כדי לשמור שבת, אבל החלטתי שכאשר אתחתן – אתחזק יותר. מדי פעם אני מניח תפילין עם חברים או בלי חברים. לפני כמה זמן הגעתי להחלטה שאני רוצה להניח תפילין בכל יום.", name: "ג'", city: "מקיבוץ גשר הזיו", img: "/wp/img/6-1.png", href: "https://tefilin.or-hadash.org.il/tefilin/%d7%a9%d7%9c%d7%95%d7%97%d7%99-%d7%9e%d7%a6%d7%95%d7%95%d7%94/" },
+  { text: "סוף סוף יש לי תפילין! סוף סוף אני יודע להניח תפילין!", name: "א'", city: "מרגבה", img: "/wp/img/חצי-פנים-6.png", href: "https://tefilin.or-hadash.org.il/tefilin/%d7%a1%d7%95%d7%a3-%d7%a1%d7%95%d7%a3-%d7%99%d7%a9-%d7%9c%d7%99-%d7%aa%d7%a4%d7%99%d7%9c%d7%99%d7%9f-%d7%a1%d7%95%d7%a3-%d7%a1%d7%95%d7%a3-%d7%90%d7%a0%d7%99-%d7%99%d7%95%d7%93%d7%a2-%d7%9c%d7%94/" },
+  { text: "\"מה זאת אומרת? אנחנו לומדים תורה, לומדים גמרא…\"", name: "ע'", city: "מקרית אונו", img: "/wp/img/5.png", href: "https://tefilin.or-hadash.org.il/tefilin/%d7%95%d6%b0%d7%a8%d6%b8%d7%90%d7%95%d6%bc-%d7%9b%d6%b8%d6%bc%d7%9c-%d7%a2%d6%b7%d7%9e%d6%b5%d6%bc%d7%99-%d7%94%d6%b8%d7%90%d6%b8%d7%a8%d6%b6%d7%a5-%d7%9b%d6%b4%d6%bc%d7%99-%d7%a9%d6%b5%d7%81%d7%9d/" },
+  { text: "\"הרב עמיחי, כבר כמה שבועות שאין לי תפילין וזה מאד חסר לי. לצערי אין יכולת לקנות זוג חדש, אשמח שתעזור לי!\"", name: "י'", city: "מת\"א", img: "/wp/img/י-יותר.png", href: "https://tefilin.or-hadash.org.il/tefilin/%d7%9c%d6%b7%d7%a2%d6%b2%d7%a9%d7%82%d7%95%d6%b9%d7%aa-%d7%90%d6%b6%d7%aa-%d7%94%d6%b7%d7%a9%d6%b7%d6%bc%d7%81%d7%91%d6%b8%d6%bc%d7%aa/" },
+  { text: "\"אני בטוח שאחזור בתשובה. מה שלא יהיה – אשלח את הילדים שלי לחינוך דתי חרדי. העלויות של התפילין גבוהות מדי עבורי. האם תוכל לדאוג לי לזוג תפילין?\".", name: "נ'", city: "משדרות", img: "/wp/img/תמונה-של-WhatsApp_-2025-05-18-בשעה-15.24.png", href: "https://tefilin.or-hadash.org.il/tefilin/%d7%95%d6%b0%d7%90%d6%b5%d7%a8%d6%b7%d7%a9%d6%b0%d7%82%d7%aa%d6%b4%d6%bc%d7%99%d7%9a%d6%b0-%d7%9c%d6%b4%d7%99-%d7%91%d6%b0%d6%bc%d7%a6%d6%b6%d7%93%d6%b6%d7%a7-%d7%95%d6%bc%d7%91%d6%b0%d7%9e%d6%b4/" },
+  { text: "החלטתי שאני רוצה שיהיו לי תפילין משלי, כדי שאניח בכל יום. זה יחבר אותי לעם שלי ולארץ שלי ולעצמי. המחיר של תפילין חדשות יקר עבורי ולא אוכל לרכוש לעצמי.", name: "ב'", city: "מברלין", img: "/wp/img/7-225x300-1.png", href: "https://tefilin.or-hadash.org.il/tefilin/%d7%99%d7%95%d7%aa%d7%a8-%d7%98%d7%95%d7%91-%d7%9e%d7%90%d7%a1%d7%a4%d7%a8%d7%a1%d7%95/" },
+  { text: "\"זה מרגש אותי כל כך שהבן שלי קיבל על עצמו להניח בכל יום, ועכשיו הוא רוצה שיהיה לו זוג תפילין משלו!\"", name: "ע'", city: "מראשון לציון", img: "/wp/img/סיפור-1-תמונה-186x300-1.png", href: "https://tefilin.or-hadash.org.il/tefilin/%d7%94%d7%90%d7%9e%d7%90-%d7%94%d7%99%d7%99%d7%aa%d7%94-%d7%9e%d7%95%d7%a4%d7%aa%d7%a2%d7%aa-%d7%9e%d7%9e%d7%94-%d7%a9%d7%92%d7%99%d7%9c%d7%aa%d7%94-%d7%a2%d7%9c-%d7%94%d7%91%d7%9f-%d7%a9%d7%9c%d7%94/" },
+  { text: "הנחתי היום בפעם הראשונה את התפילין החדשות וזה ממש מדהים, מעולם לא היה לי תפילין משלי ועכשיו יש לי הרגשה בתפילה שונה והרבה יותר גדולה. בנוסף, עכשיו הילדים שלי יגדלו בבית שמניח תפילין וזה חשוב ומאוד משמח אותי.", name: "ע'", city: "מחיפה", img: "/wp/img/AdobeStock_817584046-min.webp", href: "https://tefilin.or-hadash.org.il/tefilin/%d7%94%d7%a1%d7%99%d7%a4%d7%95%d7%a8-%d7%a9%d7%9c-%d7%a2/" },
+  { text: "", name: "ע'", city: "מחדרה", img: "/wp/img/ע-ט-חדרה.png" },
+  { text: "תודה רבה לרב עמיחי שזיכה אותי ‏ ‏בתפילין יפות וחדשות. בזכותו אני אניח תפילין כל בוקר. תודה רבה ‏על המאמץ והדאגה שהתפילין יגיעו עד אלי!", name: "ד'", city: "ממושב חבר", img: "/wp/img/ד.-מושב-חבר.png" },
+  { text: "יומיים אחרי שקיבלתי את התפילין החדשות, בדיוק כשאני מסיים להניח ומגלגל אותן, אני מקבל שיחה מהפרופסור של אמא שלי שמבשר לי את בשורת חיי שאחרי הניתוח שהיא עברה כל הבדיקות חזרו וכל הגוף שלה נקי לגמרי מגידולים והיא ממש לקראת הניצחון של המחלה הארורה הזאת…", name: "מ'", city: "ממעלה אדומים", img: "/wp/img/מושיקו-מעלה-אדומים.jpg", href: "https://tefilin.or-hadash.org.il/tefilin/%d7%9b%d7%9c-%d7%94%d7%91%d7%93%d7%99%d7%a7%d7%95%d7%aa-%d7%97%d7%96%d7%a8%d7%95-%d7%95%d7%9b%d7%9c-%d7%94%d7%92%d7%95%d7%a3-%d7%a9%d7%9c%d7%94-%d7%a0%d7%a7%d7%99-%d7%9c%d7%92%d7%9e%d7%a8%d7%99/" },
+  { text: "אני מתרגש ברמות שקשה לתאר לקבל את התפילין, במיוחד שלא היו לי תפילין מעולם. חשוב לי שהבן שלי יגדל בבית שבו הוא יראה את אבא שלו מניח תפילין. הבן שלי יזכה בבר מצוה שלו להניח תפילין, מה שאני לא זכיתי…", name: "ג'", city: "מקרית גת", img: "/wp/img/גלעד-178x300-1.png", href: "https://tefilin.or-hadash.org.il/tefilin/%d7%94%d7%91%d7%9f-%d7%a9%d7%9c%d7%99-%d7%99%d7%96%d7%9b%d7%94-%d7%91%d7%91%d7%a8-%d7%9e%d7%a6%d7%95%d7%94-%d7%a9%d7%9c%d7%95-%d7%9c%d7%94%d7%a0%d7%99%d7%97-%d7%aa%d7%a4%d7%99%d7%9c%d7%99%d7%9f/" },
+  { text: "\"אינני יודע להסביר למה המחבלים לא נכנסו אלי הביתה, אבל ברור לי שהקב\"ה שמר עלי. כהכרת תודה לקב\"ה על הנס שעשה לי קיבלתי על עצמי להניח תפילין כל יום\"", name: "ק'", city: "מנתיב העשרה", img: "/wp/img/נתיב-העשרה.jpg", href: "https://tefilin.or-hadash.org.il/tefilin/%d7%a0%d7%a1-%d7%94%d7%94%d7%a6%d7%9c%d7%94-%d7%9e%d7%94%d7%9e%d7%97%d7%91%d7%9c%d7%99%d7%9d-%d7%91%d7%a9%d7%9e%d7%97%d7%aa-%d7%aa%d7%95%d7%a8%d7%94/" },
+  { text: "\"חשוב לי שהילדים שלי יראו שאני מניח תפילין כל יום, כי זה מה שיחבר אותם לזהות ולשורשים שלהם. תודה רבה על הכל\"", name: "א'", city: "מאשקלון", img: "/wp/img/אליאור-אשקלון-169x300-1.png", href: "https://tefilin.or-hadash.org.il/tefilin/%d7%90%d7%a0%d7%99-%d7%a8%d7%95%d7%a6%d7%94-%d7%a9%d7%94%d7%99%d7%9c%d7%93%d7%99%d7%9d-%d7%a9%d7%9c%d7%99-%d7%99%d7%a8%d7%90%d7%95-%d7%90%d7%95%d7%aa%d7%99-%d7%9e%d7%a0%d7%99%d7%97-%d7%aa%d7%a4/" },
+  { text: "\"תודה רבה על המצווה הענקית שאתה עושה! חיפשתי תפילין ובאת לי מהשמיים…\"", name: "ד'", city: "מרחובות", img: "/wp/img/cropped-hand-wrapped-tefillin-min.webp", href: "https://tefilin.or-hadash.org.il/tefilin/%d7%97%d7%99%d7%a4%d7%a9%d7%aa%d7%99-%d7%aa%d7%a4%d7%99%d7%9c%d7%99%d7%9f-%d7%95%d7%91%d7%90%d7%aa-%d7%9c%d7%99-%d7%9e%d7%94%d7%a9%d7%9e%d7%99%d7%99%d7%9d/" },
+  { text: "\"רציתי להגיד לך תודה על התפילין. אני מאוד שמח בהם ואשתדל להניח אותם בכל יום\"", name: "יאיר", img: "/wp/img/midsection-woman-with-tape-rolled-hand-holding-book-min.webp", href: "https://tefilin.or-hadash.org.il/tefilin/159/" },
+  { text: "\"לרב עמיחי, תודה רבה. מעריך מאד. ריגשת עם הפתק. הרבה זמן לא הקפדתי להניח תפילין ובזכות התרומה זכיתי להניח. שה' יברך אותך שתזכה למצוות\"", name: "איתיאל", city: "מראש העין", img: "/wp/img/קשת-2-min-225x300-1.png", href: "https://tefilin.or-hadash.org.il/tefilin/%d7%94%d7%a8%d7%91%d7%94-%d7%96%d7%9e%d7%9f-%d7%9c%d7%90-%d7%94%d7%a7%d7%a4%d7%93%d7%aa%d7%99-%d7%9c%d7%94%d7%a0%d7%99%d7%97-%d7%aa%d7%a4%d7%99%d7%9c%d7%99%d7%9f-%d7%95%d7%91%d7%96%d7%9b%d7%95%d7%aa/" },
 ];
 
-export function PressSection() {
+function Chevron({ dir }: { dir: "next" | "prev" }) {
   return (
-    <section id="press" className="py-20 px-4 bg-background">
-      <div className="max-w-3xl mx-auto">
-        <h2 className="font-display font-black text-4xl md:text-5xl text-teal-deep text-center mb-10 leading-tight">
-          כתבות
-          <br />
-          <span className="text-ink">בתקשורת</span>
-        </h2>
+    <svg viewBox="0 0 180 180" width="28" height="28" fill="currentColor" aria-hidden="true" style={{ transform: dir === "next" ? "scaleX(-1)" : undefined }}>
+      <path d="M119 47.3c0 .9-.3 1.6-1 2.3L77.7 90l40.3 40.4c.7.7 1 1.4 1 2.3 0 .9-.3 1.6-1 2.3l-5 5c-.7.7-1.4 1-2.3 1-.9 0-1.6-.3-2.3-1L62 93.3c-.7-.7-1-1.4-1-2.3 0-.9.3-1.6 1-2.3l46.4-46.7c.7-.7 1.4-1 2.3-1 .9 0 1.6.3 2.3 1l5 5c.7.7 1 1.5 1 2.3z" />
+    </svg>
+  );
+}
 
-        <div className="space-y-4">
-          {articles.map((a, i) => (
-            <article
-              key={i}
-              className="bg-card rounded-2xl p-4 shadow-card border border-border flex items-center gap-4 hover:border-teal transition-colors"
-            >
-              <div className="shrink-0 size-20 rounded-xl overflow-hidden bg-white grid place-items-center border border-border">
-                <img src={a.logo} alt={a.source} className="w-full h-full object-contain p-1" loading="lazy" />
+export function PressSection() {
+  const [start, setStart] = useState(0);
+  const n = quotes.length;
+  const visible = [0, 1, 2].map((k) => quotes[(start + k) % n]);
+  return (
+    <section dir="rtl" className="qc-e" aria-label="ציטוטים ממקבלי תפילין">
+      <button type="button" className="qc-arrow" aria-label="הקודם" onClick={() => setStart((start - 1 + n) % n)}>
+        <Chevron dir="prev" />
+      </button>
+      <div className="qc-track">
+        {visible.map((q, i) => (
+          <article key={`${start}-${i}`} className="qc-card">
+            {q.img && <span className="qc-img" style={{ backgroundImage: `url('${q.img}')` }} />}
+            <div className="qc-body">
+              {q.text && <p className="qc-text">{q.text}</p>}
+              <div className="qc-meta">
+                <span>{q.name}</span>
+                {q.city && <span>{q.city}</span>}
               </div>
-              <div className="flex-1 min-w-0">
-                <h3 className="font-display font-bold text-base md:text-lg text-ink leading-snug">{a.title}</h3>
-                <p className="text-xs text-muted-foreground mt-1.5">
-                  <span className="inline-block size-3 rounded-full bg-teal/40 mr-1 align-middle" />
-                  <span className="font-bold">{a.source}</span> · {a.date}
-                </p>
-              </div>
-            </article>
-          ))}
-        </div>
+              {q.href && (
+                <a href={q.href} className="qc-more">
+                  לסיפור המלא
+                  <svg viewBox="0 0 448 512" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z" /></svg>
+                </a>
+              )}
+            </div>
+          </article>
+        ))}
       </div>
+      <button type="button" className="qc-arrow" aria-label="הבא" onClick={() => setStart((start + 1) % n)}>
+        <Chevron dir="next" />
+      </button>
     </section>
   );
 }
