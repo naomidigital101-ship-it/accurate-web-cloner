@@ -1,4 +1,3 @@
-import { ChevronDown, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 type NavItem = {
@@ -14,10 +13,7 @@ const navItems: NavItem[] = [
     label: "מכתבים",
     href: "#",
     children: [
-      {
-        label: "מכתבי תודה",
-        href: "https://tefilin.or-hadash.org.il/%d7%9e%d7%9b%d7%aa%d7%91%d7%99-%d7%aa%d7%95%d7%93%d7%94/",
-      },
+      { label: "מכתבי תודה", href: "https://tefilin.or-hadash.org.il/%d7%9e%d7%9b%d7%aa%d7%91%d7%99-%d7%aa%d7%95%d7%93%d7%94/" },
       { label: "הסכמות הרבנים", href: "https://tefilin.or-hadash.org.il/agreements/" },
     ],
   },
@@ -26,160 +22,108 @@ const navItems: NavItem[] = [
   { label: "תרומה", href: "https://tefilin.or-hadash.org.il/donate/" },
 ];
 
+function CaretDown() {
+  return (
+    <svg viewBox="0 0 320 512" width="10" height="10" fill="currentColor" aria-hidden="true">
+      <path d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z" />
+    </svg>
+  );
+}
+
 export function Header() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [bgT, setBgT] = useState(0);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 30);
+    const onScroll = () => {
+      const doc = document.documentElement;
+      const range = Math.max((doc.scrollHeight - window.innerHeight) * 0.1, 1);
+      setBgT(Math.min(window.scrollY / range, 1));
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <header
-      dir="rtl"
-      role="banner"
-      className={`fixed top-0 inset-x-0 z-50 h-20 transition-colors duration-300 ${
-        scrolled ? "bg-[#2D2E83]/95 backdrop-blur-sm shadow-md" : "bg-transparent"
-      }`}
-    >
-      <div className="mx-auto h-full max-w-[1400px] px-4 lg:px-8 flex flex-row-reverse items-center justify-between gap-4">
-        {/* ===== Left side (visually): logos ===== */}
-        <div className="flex flex-row-reverse items-center gap-4 lg:gap-6 shrink-0 h-full">
-          {/* Tefilin circle logo — hangs below the header line, larger and bolder */}
-          <a
-            href="/"
-            aria-label="קשר של תפילין - דף הבית"
-            className="relative block shrink-0"
-            style={{ width: 140, height: 140, marginTop: 0 }}
-          >
-            <span
-              className="absolute inset-0 bg-white"
-              style={{
-                borderRadius: "0 0 200px 200px",
-                boxShadow: "0 5px 15px rgba(0,0,0,0.2)",
-                padding: 6,
-              }}
-            />
-            <img
-              src="/wp/img/לוגו-קשר-של-תפילין-01.svg"
-              alt="קשר של תפילין"
-              width={128}
-              height={128}
-              className="relative block w-[128px] h-[128px] m-[6px]"
-            />
-          </a>
+    <header dir="rtl" role="banner" className="fixed top-0 inset-x-0 z-[99]" style={{ paddingInline: "5%" }}>
+      {/* רקע motion-fx: ‎#060633 בשקיפות 46% שמופיע בהדרגה על פני 10% הראשונים של הגלילה */}
+      <div className="absolute inset-0 pointer-events-none" style={{ backgroundColor: "#060633", opacity: 0.4588 * bgT }} />
+      {/* overlay קבוע: גרדיאנט כהה מלמעלה בשקיפות 50% */}
+      <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "linear-gradient(180deg, #060633B5 0%, #06063300 100%)", opacity: 0.5 }} />
 
-          {/* Or Hadash wordmark */}
-          <a
-            href="https://or-hadash.org.il/"
-            aria-label="אור חדש"
-            className="hidden md:inline-flex items-center shrink-0"
+      <div className="relative flex flex-row flex-nowrap items-stretch" style={{ minHeight: 80 }}>
+        {/* עמודת תפריט - 70%, מוצמד לימין */}
+        <div className="flex flex-col justify-center items-start" style={{ width: "70%" }}>
+          <nav aria-label="תפריט" className="hidden lg:block">
+            <ul className="flex flex-row items-center m-0 p-0 list-none">
+              {navItems.map((item) => (
+                <li key={item.label} className="relative group">
+                  <a href={item.href} className="e-nav-link">
+                    {item.label}
+                    {item.children && <CaretDown />}
+                  </a>
+                  {item.children && (
+                    <div className="e-dropdown opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200 absolute top-full right-0">
+                      {item.children.map((c) => (
+                        <a key={c.label} href={c.href} className="e-dropdown-item">{c.label}</a>
+                      ))}
+                    </div>
+                  )}
+                </li>
+              ))}
+              <li>
+                <a href="https://tefilin.or-hadash.org.il/en/the-tefillin-tie-initiative/" lang="en-US" className="e-nav-link">English</a>
+              </li>
+            </ul>
+          </nav>
+
+          {/* כפתור המבורגר - מובייל/טאבלט */}
+          <button
+            type="button"
+            onClick={() => setOpen(!open)}
+            className="nav-toggle lg:hidden"
+            aria-label={open ? "כפתור סגירת תפריט" : "כפתור פתיחת תפריט"}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
           >
-            <img
-              src="/wp/img/אור-חדש-לוגו-13.svg"
-              alt="אור חדש"
-              width={117}
-              height={30}
-              className="block h-[30px] w-auto"
-            />
-          </a>
+            {open ? (
+              <svg viewBox="0 0 1000 1000" aria-hidden="true"><path d="M742 167L500 408 258 167C246 154 233 150 217 150 196 150 179 158 167 167 154 179 150 196 150 212 150 229 154 242 171 254L408 500 167 742C138 771 138 800 167 829 196 858 225 858 254 829L496 587 738 829C750 842 767 846 783 846 800 846 817 842 829 829 842 817 846 804 846 783 846 767 842 750 829 737L588 500 833 258C863 229 863 200 833 171 804 137 775 137 742 167Z" /></svg>
+            ) : (
+              <svg viewBox="0 0 1000 1000" aria-hidden="true"><path d="M104 333H896C929 333 958 304 958 271S929 208 896 208H104C71 208 42 237 42 271S71 333 104 333ZM104 583H896C929 583 958 554 958 521S929 458 896 458H104C71 458 42 487 42 521S71 583 104 583ZM104 833H896C929 833 958 804 958 771S929 708 896 708H104C71 708 42 737 42 771S71 833 104 833Z" /></svg>
+            )}
+          </button>
         </div>
 
-        {/* ===== Left: desktop nav ===== */}
-        <nav
-          aria-label="תפריט ראשי"
-          className="hidden lg:flex items-center gap-7 xl:gap-9 h-full"
-        >
+        {/* עמודת לוגואים - 30%, מוצמדת לשמאל */}
+        <div className="flex flex-row justify-end items-start" style={{ width: "30%" }}>
+          <a href="https://or-hadash.org.il/" aria-label="אור חדש" className="logo-or hidden md:block">
+            <img src="/wp/img/אור-חדש-לוגו-13.svg" alt="אור חדש" width={444} height={113} />
+          </a>
+          <a href="/" aria-label="קשר של תפילין - דף הבית" className="logo-badge">
+            <span className="logo-badge-box">
+              <img src="/wp/img/לוגו-קשר-של-תפילין-01.svg" alt="קשר של תפילין" width={100} height={100} />
+            </span>
+          </a>
+        </div>
+      </div>
+
+      {/* תפריט מובייל */}
+      {open && (
+        <nav id="mobile-menu" aria-label="תפריט נייד" className="lg:hidden e-mobile-menu">
           {navItems.map((item) => (
-            <div key={item.label} className="relative group h-full flex items-center">
-              <a
-                href={item.href}
-                className="flex items-center gap-1 text-white text-[16px] font-semibold leading-none hover:text-[#67FFD1] transition-colors"
-              >
-                {item.label}
-                {item.children && <ChevronDown className="size-3.5 mt-0.5" />}
-              </a>
+            <div key={item.label}>
+              <a href={item.href} className="e-dropdown-item">{item.label}</a>
               {item.children && (
-                <div className="absolute top-full right-0 min-w-[200px] bg-white shadow-xl rounded-md overflow-hidden opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200">
+                <div className="pr-4">
                   {item.children.map((c) => (
-                    <a
-                      key={c.label}
-                      href={c.href}
-                      className="block px-5 py-3 text-[#2D2E83] hover:bg-[#67FFD1]/25 text-[15px] font-medium"
-                    >
-                      {c.label}
-                    </a>
+                    <a key={c.label} href={c.href} className="e-dropdown-item">{c.label}</a>
                   ))}
                 </div>
               )}
             </div>
           ))}
-          <a
-            href="https://tefilin.or-hadash.org.il/en/the-tefillin-tie-initiative/"
-            lang="en"
-            dir="ltr"
-            className="text-white text-[16px] font-semibold leading-none hover:text-[#67FFD1] transition-colors"
-          >
-            English
-          </a>
-        </nav>
-
-        {/* ===== Mobile toggle ===== */}
-        <button
-          type="button"
-          onClick={() => setOpen(!open)}
-          className="lg:hidden text-white p-2 -ml-2"
-          aria-label={open ? "סגור תפריט" : "פתח תפריט"}
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-        >
-          {open ? <X className="size-7" /> : <Menu className="size-7" />}
-        </button>
-      </div>
-
-      {/* ===== Mobile menu ===== */}
-      {open && (
-        <nav
-          id="mobile-menu"
-          aria-label="תפריט נייד"
-          className="lg:hidden absolute top-20 inset-x-0 bg-[#2D2E83] border-t border-white/10 shadow-lg max-h-[calc(100vh-5rem)] overflow-y-auto"
-        >
-          <div className="px-6 py-4 space-y-1">
-            {navItems.map((item) => (
-              <div key={item.label} className="border-b border-white/10 last:border-0">
-                <a
-                  href={item.href}
-                  className="block text-white font-semibold py-3 text-base"
-                >
-                  {item.label}
-                </a>
-                {item.children && (
-                  <div className="pb-3 pr-4 space-y-1">
-                    {item.children.map((c) => (
-                      <a
-                        key={c.label}
-                        href={c.href}
-                        className="block text-white/85 py-2 text-sm"
-                      >
-                        {c.label}
-                      </a>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-            <a
-              href="https://tefilin.or-hadash.org.il/en/the-tefillin-tie-initiative/"
-              lang="en"
-              dir="ltr"
-              className="block text-white font-semibold py-3 text-base"
-            >
-              English
-            </a>
-          </div>
+          <a href="https://tefilin.or-hadash.org.il/en/the-tefillin-tie-initiative/" lang="en-US" className="e-dropdown-item">English</a>
         </nav>
       )}
     </header>

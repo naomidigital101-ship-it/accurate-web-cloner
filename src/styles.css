@@ -349,3 +349,232 @@
   position: relative;
   z-index: 99;
 }
+
+/* ===== Phase 1: Hero + Header - ערכים 1:1 מ-Elementor (post-10.css, post-55.css) ===== */
+
+/* Hero container (c24c842) */
+.hero-e {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+.hero-e-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 75vh;
+  padding: 80px 0 140px;
+  gap: 20px;
+}
+@media (max-width: 767px) {
+  .hero-e-inner { min-height: 70vh; padding: 120px 20px 155px; gap: 10px; }
+}
+
+/* לוגו קליגרפי (d056efd): גובה 25vw דסקטופ / 50vw מובייל, drop-shadow */
+.hero-title-icon {
+  margin: -6% 0 -10% -4%;
+  line-height: 0;
+  filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.3));
+}
+.hero-title-icon svg { height: 25vw; width: auto; display: inline-block; }
+@media (max-width: 767px) {
+  .hero-title-icon { margin: -6% 0 -10% 0; }
+  .hero-title-icon svg { height: 50vw; }
+}
+
+/* כותרת משנה (fb23ca4) */
+.hero-subtitle {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 2vw;
+  font-weight: 900;
+  line-height: 0.9em;
+  color: #ffffff;
+  text-align: center;
+  margin: 0;
+  letter-spacing: 0;
+}
+@media (max-width: 767px) { .hero-subtitle { font-size: 22px; } }
+
+/* מונה (0b43995) */
+.hero-counter {
+  background-image: linear-gradient(135deg, #f9b233 0%, #e65a38 100%);
+  border-radius: 1000px;
+  padding: 10px 24px;
+  color: #ffffff;
+  font-size: 18px;
+  line-height: 1.4em;
+  text-align: center;
+}
+.hero-counter .num { font-weight: 900; font-size: 22px; }
+
+/* פסקה (55b7959): רוחב 40% בדסקטופ */
+.hero-par {
+  width: 40%;
+  max-width: 40%;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.4em;
+  text-align: center;
+  margin: 0;
+}
+@media (max-width: 767px) { .hero-par { width: 100%; max-width: 100%; } }
+
+/* טאבים (e63a891): פעיל = מנטה עם זוהר, לא פעיל = מתאר לבן 2px */
+.hero-tabs { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.hero-tab {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.2em;
+  border-radius: 12px;
+  padding: 10px 20px;
+  text-align: center;
+  transition: 0.3s;
+  color: #ffffff;
+  background: transparent;
+  border: 2px solid #ffffff;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+.hero-tab:hover { border-width: 6px; padding: 6px 16px; }
+.hero-tab.active {
+  background: #67ffd1;
+  border: 6px solid #67ffd1;
+  color: #2d2e83;
+  box-shadow: 0px 0px 40px 0px #67ffd1;
+  padding: 6px 16px;
+}
+@media (max-width: 767px) {
+  .hero-tab { padding: 10px 12px; }
+  .hero-tab:hover, .hero-tab.active { padding: 6px 8px; }
+}
+
+/* קשת תחתונה - שכפול מדויק של Elementor shape-bottom */
+.hero-shape {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  direction: ltr;
+  transform: rotate(180deg);
+  z-index: 1;
+  pointer-events: none;
+}
+.hero-shape svg {
+  display: block;
+  width: calc(120% + 1.3px);
+  height: 200px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+@media (max-width: 767px) { .hero-shape svg { width: calc(180% + 1.3px); } }
+.hero-shape path { fill: #ffffff; }
+
+/* ===== Header (elementor-55) ===== */
+/* פריט תפריט (52f64e6): 18px/600 לבן, hover: טקסט נייבי + pill מנטה 50px */
+.e-nav-link {
+  position: relative;
+  z-index: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  margin-inline: 5px;
+  color: #ffffff;
+  fill: #ffffff;
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4em;
+  text-decoration: none;
+  transition: color 0.3s;
+  white-space: nowrap;
+}
+.e-nav-link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 50px;
+  background-color: #67ffd1;
+  opacity: 0;
+  transform: translateX(-14px);
+  transition: 0.3s;
+}
+.e-nav-link:hover, .e-nav-link:focus { color: #2d2e83; fill: #2d2e83; }
+.e-nav-link:hover::before, .e-nav-link:focus::before { opacity: 1; transform: translateX(0); }
+
+/* dropdown (מכתבים): רקע ‎#009FE38C, radius 20px */
+.e-dropdown {
+  min-width: 180px;
+  background-color: #009fe38c;
+  border-radius: 20px;
+  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+  overflow: hidden;
+  z-index: 50;
+}
+.e-dropdown-item {
+  display: block;
+  padding: 8px 20px;
+  color: #ffffff;
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.e-dropdown-item:hover, .e-dropdown-item:focus { background-color: #2d2e83; color: #67ffd1; }
+
+/* כפתור המבורגר: מנטה, radius 20px, אייקון 26px נייבי */
+.nav-toggle {
+  background-color: #67ffd1;
+  border: none;
+  border-radius: 20px;
+  padding: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  line-height: 0;
+}
+.nav-toggle svg { width: 26px; height: 26px; fill: #2d2e83; }
+.nav-toggle:hover, .nav-toggle:focus { background-color: #009fe3; }
+
+/* תפריט מובייל נפתח */
+.e-mobile-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  margin-top: 10px;
+  background-color: #009fe38c;
+  border-radius: 20px;
+  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.1);
+  padding: 8px 0;
+  backdrop-filter: blur(2px);
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+}
+
+/* לוגו אור חדש (fc8122f): 30% מעמודת הלוגואים, ממורכז אנכית */
+.logo-or { width: 30%; max-width: 30%; align-self: center; }
+.logo-or img { width: 100%; height: auto; display: block; }
+
+/* תג קשר של תפילין (56fbe82): לבן, radius תחתון 200px, תלוי מטה, hover מחליק */
+.logo-badge { display: block; margin-bottom: -5vh; }
+.logo-badge-box {
+  display: block;
+  background-color: #ffffff;
+  padding: 6px;
+  border-radius: 0 0 200px 200px;
+  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
+.logo-badge-box img { width: 100px; height: 100px; object-fit: contain; display: block; }
+.logo-badge:hover .logo-badge-box { padding-top: 20px; margin-bottom: -20px; }
