@@ -6,6 +6,7 @@ import { HeroSection } from "@/components/home/HeroSection";
 
 import { AboutTefilinSection } from "@/components/home/AboutTefilinSection";
 import { HowItWorksSection } from "@/components/home/HowItWorksSection";
+import { AboutMitzvaSection } from "@/components/home/AboutMitzvaSection";
 import { FormTabsSection } from "@/components/home/FormTabsSection";
 import { DonationBanner } from "@/components/home/DonationBanner";
 import { MiKamchaSection } from "@/components/home/MiKamchaSection";
