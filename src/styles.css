@@ -402,10 +402,10 @@
 .hero-counter {
   background-image: linear-gradient(135deg, #f9b233 0%, #e65a38 100%);
   border-radius: 1000px;
-  padding: 10px 24px;
+  padding: 10px;
   color: #ffffff;
-  font-size: 18px;
-  line-height: 1.4em;
+  font-size: 16px;
+  line-height: 1em;
   text-align: center;
 }
 .hero-counter .num { font-weight: 900; font-size: 22px; }
@@ -423,11 +423,20 @@
 }
 @media (max-width: 767px) { .hero-par { width: 100%; max-width: 100%; } }
 
-/* טאבים (e63a891): פעיל = מנטה עם זוהר, לא פעיל = מתאר לבן 2px */
-.hero-tabs { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
-.hero-tab {
+/* טאבים - עוברים לסקשן הטפסים עם margin שלילי שמרים אותם מעל הקשת */
+.form-tabs-heading {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: -132px;
+  position: relative;
+  z-index: 3;
+}
+@media (max-width: 767px) { .form-tabs-heading { margin-top: -130px; } }
+.form-tab {
   font-family: "Maadim", "Maadim OS", sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   line-height: 1.2em;
   border-radius: 12px;
@@ -438,20 +447,16 @@
   background: transparent;
   border: 2px solid #ffffff;
   box-sizing: border-box;
-  text-decoration: none;
+  cursor: pointer;
 }
-.hero-tab:hover { border-width: 6px; padding: 6px 16px; }
-.hero-tab.active {
+.form-tab:hover { border-width: 6px; }
+.form-tab[aria-selected="true"] {
   background: #67ffd1;
   border: 6px solid #67ffd1;
   color: #2d2e83;
   box-shadow: 0px 0px 40px 0px #67ffd1;
-  padding: 6px 16px;
 }
-@media (max-width: 767px) {
-  .hero-tab { padding: 10px 12px; }
-  .hero-tab:hover, .hero-tab.active { padding: 6px 8px; }
-}
+@media (max-width: 767px) { .form-tab { font-size: 18px; padding: 10px 12px; } }
 
 /* קשת תחתונה - שכפול מדויק של Elementor shape-bottom */
 .hero-shape {
@@ -462,7 +467,6 @@
   overflow: hidden;
   line-height: 0;
   direction: ltr;
-  transform: rotate(180deg);
   z-index: 1;
   pointer-events: none;
 }
