@@ -50,6 +50,7 @@ function Index() {
         <PressSection />
         <AboutTefilinSection />
         <HowItWorksSection />
+        <AboutMitzvaSection />
         <MiKamchaSection />
         <DonationBanner />
         <FounderSection />

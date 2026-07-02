@@ -1203,3 +1203,159 @@
   .how-ba-after img { width: 200px; height: 200px; }
   .how-ba-before figcaption, .how-ba-after figcaption { font-size: 18px; }
 }
+
+/* ===== Phase 3b: Mitzva (b34d3ba) + MiKamcha (7ecebcf) + Partners (3397069) ===== */
+.e-btn-white {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: center;
+  background-color: #ffffff;
+  color: #009fe3;
+  fill: #009fe3;
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 0.9em;
+  border-radius: 12px;
+  padding: 14px 20px 10px 20px;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.17);
+  text-decoration: none;
+  transition: 0.3s;
+}
+.e-btn-white:hover, .e-btn-white:focus {
+  background-color: #67ffd1;
+  color: #060633;
+  fill: #060633;
+  box-shadow: 0px 20px 50px 0px rgba(103, 255, 209, 0.53);
+}
+@media (max-width: 767px) { .e-btn-white { line-height: 1em; padding: 12px 20px 8px 24px; } }
+
+.mitzva-e {
+  display: flex;
+  flex-direction: row;
+  padding: 2% 10% 6% 10%;
+  background-image: url("/wp/assets/כוכבית-כחולה-16.svg");
+  background-position: -10% 0px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  overflow: hidden;
+}
+@media (max-width: 767px) {
+  .mitzva-e { flex-direction: column-reverse; padding: 16px; background-position: 0 0; }
+}
+.mitzva-text {
+  width: 40%;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 1%;
+}
+@media (max-width: 767px) { .mitzva-text { width: 100%; } }
+.mitzva-img { width: 60%; display: flex; flex-direction: column; justify-content: center; }
+@media (max-width: 767px) { .mitzva-img { width: 100%; } }
+.mitzva-img img {
+  width: 100%;
+  margin: 0 -13% 0 -30%;
+  filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.3));
+}
+@media (max-width: 767px) { .mitzva-img img { margin: -20%; padding: 60px 0 0 0; width: 100%; } }
+
+.mikamcha-e {
+  display: flex;
+  flex-direction: row;
+  margin-top: -10%;
+  padding: 2% 10%;
+  background-image: url("/wp/assets/כוכבית-כחולה-16.svg");
+  background-position: 110% 0px;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+@media (max-width: 1024px) { .mikamcha-e { margin-top: 0; background-position: 0 0; } }
+@media (max-width: 767px) { .mikamcha-e { flex-direction: column; padding: 16px; } }
+.mikamcha-img {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+@media (max-width: 767px) { .mikamcha-img { width: 100%; align-items: center; padding-top: 80px; } }
+.mikamcha-img img {
+  width: 500px;
+  height: 500px;
+  max-width: 100%;
+  object-fit: cover;
+  object-position: center center;
+  border-radius: 600px;
+  filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.3));
+}
+@media (max-width: 1024px) { .mikamcha-img img { width: 250px; height: 250px; } }
+@media (max-width: 767px) { .mikamcha-img img { width: 200px; height: 200px; } }
+.mikamcha-text {
+  width: 40%;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 1%;
+}
+@media (max-width: 767px) { .mikamcha-text { width: 100%; } }
+
+.partners-e {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 75vh;
+  margin: 3% 0;
+  box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.2);
+  background-image: url("/wp/assets/jewish-torah-bar-mitzvah-bar-mitzvah-torah-reading-min.webp");
+  background-position: center center;
+  background-size: cover;
+}
+.partners-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: #009fe3;
+  mix-blend-mode: multiply;
+}
+.partners-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  max-width: 1000px;
+  padding: 20px;
+  text-align: center;
+}
+.partners-title {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 10vw;
+  font-weight: 200;
+  line-height: 0.9em;
+  color: #ffffff;
+  margin: 0;
+}
+@media (max-width: 767px) { .partners-title { font-size: 60px; } }
+.partners-text {
+  width: 60%;
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.4em;
+  color: #ffffff;
+  margin: 0;
+}
+@media (max-width: 767px) { .partners-text { width: 100%; font-size: 18px; } }
+.partners-note {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 18px;
+  color: #ffffff;
+  margin: 0;
+}
+.partners-btns { display: flex; flex-direction: row; gap: 10px; flex-wrap: wrap; justify-content: center; }
