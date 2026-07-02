@@ -35,7 +35,14 @@ function useCountUp(to: number, duration = 2000) {
 export function HeroSection() {
   const counter = useCountUp(1300, 2000);
   const [videoOn, setVideoOn] = useState(false);
+  const [interacted, setInteracted] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  useEffect(() => {
+    const on = () => setInteracted(true);
+    const evs = ["scroll", "pointerdown", "touchstart", "keydown"] as const;
+    evs.forEach((e) => window.addEventListener(e, on, { once: true, passive: true }));
+    return () => evs.forEach((e) => window.removeEventListener(e, on));
+  }, []);
   useEffect(() => {
     const onMsg = (e: MessageEvent) => {
       if (!String(e.origin).includes("vimeo.com")) return;
