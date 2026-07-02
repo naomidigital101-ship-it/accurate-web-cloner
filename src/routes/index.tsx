@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/home/Header";
 import { Footer } from "@/components/home/Footer";
 import { HeroSection } from "@/components/home/HeroSection";
-import { FeatureCards } from "@/components/home/FeatureCards";
+
 import { AboutTefilinSection } from "@/components/home/AboutTefilinSection";
 import { HowItWorksSection } from "@/components/home/HowItWorksSection";
 import { FormTabsSection } from "@/components/home/FormTabsSection";
@@ -44,7 +44,7 @@ function Index() {
         <HeroSection />
         <FormTabsSection />
         <InterviewSection />
-        <FeatureCards />
+
         <StoriesSection />
         <PressSection />
         <AboutTefilinSection />

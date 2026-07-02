@@ -702,3 +702,177 @@
 @media (max-width: 767px) { .e-btn-step { font-size: 18px; } }
 /* טופס התרומה במקור מוגדר עם פונט "Talent BFS" שלא נטען - כלומר sans-serif של המערכת. משכפלים את זה. */
 .donate-form .e-field, .donate-form .e-radio-option, .donate-form .e-btn-step { font-family: sans-serif; }
+
+/* ===== Phase 2b: Interview (119ed9f) + Stories (post-168 loop) ===== */
+.iv-e {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 80%;
+  margin: 0 auto;
+  padding: 2% 0;
+}
+@media (max-width: 1024px) { .iv-e { flex-direction: column; width: 90%; } }
+.iv-video-col { width: 60%; display: flex; flex-direction: column; gap: 20px; }
+@media (max-width: 1024px) { .iv-video-col { width: 100%; } }
+.iv-intro {
+  text-align: center;
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.4em;
+  color: #2d2e83;
+  margin: 0;
+}
+@media (max-width: 767px) { .iv-intro { font-size: 18px; } }
+.iv-video {
+  border-radius: 20px;
+  box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  aspect-ratio: 1.77777;
+}
+.iv-video iframe { width: 100%; height: 100%; border: 0; display: block; }
+.iv-cards-col { width: 40%; display: flex; flex-direction: column; justify-content: center; gap: 40px; }
+@media (max-width: 1024px) { .iv-cards-col { width: 100%; flex-direction: row; gap: 20px; } }
+@media (max-width: 767px) { .iv-cards-col { flex-direction: column; } }
+.iv-card {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  border-radius: 20px;
+  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  text-decoration: none;
+  transition: transform 0.3s;
+  overflow: visible;
+}
+.iv-card:hover { transform: scale(1.1); }
+.iv-card-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  background-image: radial-gradient(at top right, #67ffd1 0%, #ffffff00 100%);
+  opacity: 0.5;
+  pointer-events: none;
+}
+.iv-card-img {
+  width: 20%;
+  margin: -40px -20px 0 0;
+  border-radius: 20px;
+  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.2);
+  transform: perspective(20px) rotateY(-1deg);
+  position: relative;
+  z-index: 1;
+}
+.iv-card-img img { width: 100%; height: auto; border-radius: 10px; display: block; }
+.iv-card-title {
+  width: 65%;
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 2vw;
+  font-weight: 700;
+  line-height: 0.9em;
+  color: #ffffff;
+  margin: 0 10px 0 0;
+  position: relative;
+  z-index: 1;
+}
+@media (max-width: 767px) { .iv-card-title { font-size: 22px; } }
+
+/* Stories */
+.st-e {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 2% 20px;
+}
+.st-head { padding-right: 10px; margin-bottom: 20px; }
+.st-title {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 6vw;
+  font-weight: 900;
+  line-height: 0.9em;
+  color: #009fe3;
+  margin: 0;
+}
+@media (max-width: 767px) { .st-title { font-size: 70px; } }
+.st-subrow { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 20px; }
+.st-subtitle {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 3vw;
+  font-weight: 500;
+  line-height: 1em;
+  color: #2d2e83;
+  margin: 0;
+}
+@media (max-width: 767px) { .st-subtitle { font-size: 32px; } }
+.st-all-btn {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 6px;
+  align-self: center;
+  background-color: #ffffff;
+  color: #009fe3;
+  fill: #009fe3;
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 0.9em;
+  border-radius: 12px;
+  padding: 14px 20px 10px 20px;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.17);
+  text-decoration: none;
+  transition: 0.3s;
+}
+.st-all-btn:hover, .st-all-btn:focus {
+  background-color: #67ffd1;
+  color: #060633;
+  fill: #060633;
+  box-shadow: 0px 20px 50px 0px rgba(103, 255, 209, 0.53);
+}
+@media (max-width: 767px) { .st-all-btn { line-height: 1em; padding: 12px 20px 8px 24px; } }
+.st-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+@media (max-width: 1024px) { .st-grid { grid-template-columns: repeat(2, 1fr); } }
+.st-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 30vh;
+  border-radius: 20px;
+  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.2);
+  background-position: center center;
+  background-size: cover;
+  overflow: hidden;
+  text-decoration: none;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.st-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.2);
+}
+.st-card-big { grid-column: span 2; }
+@media (max-width: 1024px) { .st-card-big { grid-column: span 2; } }
+.st-card-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 15vh;
+  padding: 20px;
+  border-radius: 20px;
+  background-image: linear-gradient(180deg, #009fe300 0%, rgba(45, 46, 131, 0.75) 100%);
+}
+.st-card-title {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 1em;
+  color: #ffffff;
+  text-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
+  margin: 0;
+}
+@media (max-width: 767px) { .st-card-title { font-size: 22px; } }

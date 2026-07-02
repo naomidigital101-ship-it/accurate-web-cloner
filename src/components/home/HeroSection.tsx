@@ -34,6 +34,27 @@ function useCountUp(to: number, duration = 2000) {
 
 export function HeroSection() {
   const counter = useCountUp(1300, 2000);
+  const [videoOn, setVideoOn] = useState(false);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  useEffect(() => {
+    const onMsg = (e: MessageEvent) => {
+      if (!String(e.origin).includes("vimeo.com")) return;
+      try {
+        const d = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
+        if (d.event === "ready") {
+          iframeRef.current?.contentWindow?.postMessage(
+            JSON.stringify({ method: "addEventListener", value: "playProgress" }),
+            "*",
+          );
+        }
+        if (d.event === "playProgress" || d.event === "play") setVideoOn(true);
+      } catch {
+        /* not vimeo json */
+      }
+    };
+    window.addEventListener("message", onMsg);
+    return () => window.removeEventListener("message", onMsg);
+  }, []);
   return (
     <section dir="rtl" className="hero-e text-white">
       {/* שכבות רקע - סדר מדויק מהמקור: תמונת fallback, וידאו, overlay גרדיאנט multiply */}
@@ -46,10 +67,13 @@ export function HeroSection() {
           }}
         />
         <iframe
-          src="https://player.vimeo.com/video/906687611?background=1&autoplay=1&loop=1&muted=1&autopause=0&controls=0&dnt=1"
+          ref={iframeRef}
+          id="herovideo"
+          src="https://player.vimeo.com/video/906687611?background=1&autoplay=1&loop=1&muted=1&autopause=0&controls=0&dnt=1&api=1&player_id=herovideo"
           title="רקע וידאו"
           allow="autoplay; fullscreen"
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.78vh] h-[56.25vw] min-w-full min-h-full pointer-events-none border-0"
+          style={{ opacity: videoOn ? 1 : 0, transition: "opacity 0.6s" }}
         />
         <div
           className="absolute inset-0"
