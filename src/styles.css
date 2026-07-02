@@ -582,3 +582,123 @@
 }
 .logo-badge-box img { width: 100px; height: 100px; object-fit: contain; display: block; }
 .logo-badge:hover .logo-badge-box { padding-top: 20px; margin-bottom: -20px; }
+
+/* ===== Phase 2: Forms section (edc6d86 / 7948de3 / 0c55d5d / d32b220) ===== */
+.forms-e {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0 2% 0;
+}
+@media (max-width: 767px) { .forms-e { padding: 0 2% 3% 2%; } }
+.form-card {
+  width: 600px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background-color: #009fe3ad;
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0px 25px 50px 0px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  margin-top: 20px;
+}
+.form-card-title {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1em;
+  color: #ffffff;
+  text-align: center;
+  margin: 0;
+}
+@media (max-width: 767px) { .form-card-title { font-size: 26px; } }
+.form-card-sub {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.2em;
+  color: #ffffff;
+  text-align: center;
+  margin: 0;
+}
+.e-form-fields {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -5px -10px -5px;
+}
+.e-field-group { padding: 0 5px; margin-bottom: 10px; display: flex; flex-direction: column; }
+.e-field-group.col-100 { width: 100%; }
+.e-field-group.col-60 { width: 60%; }
+.e-field-group.col-50 { width: 50%; }
+.e-field-group.col-40 { width: 40%; }
+@media (max-width: 767px) {
+  .e-field-group.col-60, .e-field-group.col-50, .e-field-group.col-40 { width: 100%; }
+}
+.e-field-label {
+  color: #ffffff;
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2em;
+  padding-bottom: 4px;
+}
+@media (max-width: 767px) { .e-field-label { font-size: 18px; } }
+.e-field {
+  background-color: #ffffff;
+  border: 0;
+  border-radius: 10px;
+  color: #2d2e83;
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.2em;
+  padding: 8px 12px;
+  min-height: 40px;
+  width: 100%;
+}
+.e-field:focus { outline: 2px solid #67ffd1; }
+.e-radio-group { display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: center; }
+.e-radio-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #ffffff;
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.2em;
+  cursor: pointer;
+}
+.e-form-note {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2em;
+  font-family: sans-serif;
+}
+@media (max-width: 767px) { .e-form-note { font-size: 18px; line-height: 1.4em; } }
+.e-form-buttons { display: flex; gap: 10px; width: 100%; }
+.e-btn-step {
+  flex: 1;
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2em;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: 0.3s;
+  background-color: #67ffd1;
+  color: #2d2e83;
+}
+.e-btn-step:hover { background-color: #bdffeb; color: #060633; }
+.e-btn-prev { background-color: transparent; color: #2d2e83; }
+.e-btn-prev:hover { background-color: transparent; color: #ffffff; }
+@media (max-width: 767px) { .e-btn-step { font-size: 18px; } }
+/* טופס התרומה במקור מוגדר עם פונט "Talent BFS" שלא נטען - כלומר sans-serif של המערכת. משכפלים את זה. */
+.donate-form .e-field, .donate-form .e-radio-option, .donate-form .e-btn-step { font-family: sans-serif; }
