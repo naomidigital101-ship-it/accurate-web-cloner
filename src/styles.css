@@ -1201,7 +1201,262 @@
 @media (max-width: 767px) {
   .how-ba-before img { width: 150px; height: 150px; }
   .how-ba-after img { width: 200px; height: 200px; }
-  .how-ba-before figcaption, .how-ba-after figcaption { font-size: 18px; }
+.how-ba-before figcaption, .how-ba-after figcaption { font-size: 18px; }
+}
+
+/* ===== Phase 4: Founder (acb4004) + FAQ (59d7fdb) + Services (74aba8f) + Footer (4288972) ===== */
+.founder-e {
+  display: flex;
+  flex-direction: row;
+  max-width: 800px;
+  margin: 0 auto;
+}
+@media (max-width: 767px) { .founder-e { flex-direction: column; } }
+.founder-photo { width: 40%; text-align: end; margin-top: -10px; }
+@media (max-width: 767px) { .founder-photo { width: 100%; text-align: center; } }
+.founder-photo img {
+  width: 50%;
+  border-radius: 600px;
+  display: inline-block;
+}
+@media (max-width: 767px) { .founder-photo img { width: 30%; } }
+.founder-body {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 20px;
+  padding: 60px 10px 10px 10px;
+  margin-top: -30px;
+  text-align: center;
+}
+@media (max-width: 767px) { .founder-body { width: 100%; margin-top: 0; padding: 16px; } }
+.founder-role {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.4em;
+  color: #009fe3;
+  margin: 0;
+}
+.founder-name {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1em;
+  color: #009fe3;
+  margin: 0 0 4px 0;
+}
+@media (max-width: 767px) { .founder-name { font-size: 32px; } }
+.founder-text {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.4em;
+  color: #060633;
+  margin: 0;
+}
+.founder-body .e-btn-white { align-self: center; }
+
+.faq-e { max-width: 800px; margin: 0 auto; padding: 10px; }
+.faq-title-sm {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 4vw;
+  font-weight: 300;
+  line-height: 1em;
+  color: #060633;
+  margin: 0;
+}
+@media (max-width: 767px) { .faq-title-sm { font-size: 40px; } }
+.faq-title-lg {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 8vw;
+  font-weight: 200;
+  line-height: 0.9em;
+  color: #009fe3;
+  margin: 0;
+}
+@media (max-width: 767px) { .faq-title-lg { font-size: 80px; } }
+.faq-list { display: flex; flex-direction: column; gap: 10px; padding-top: 20px; }
+.faq-item { border: 0; }
+.faq-q {
+  display: block;
+  background-color: #ffffff;
+  border-radius: 100px;
+  box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1em;
+  color: #060633;
+  cursor: pointer;
+  transition: 0.3s;
+  list-style: none;
+}
+.faq-q::-webkit-details-marker { display: none; }
+.faq-q::before { content: "+"; display: inline-block; width: 15px; margin-left: 10px; color: inherit; }
+.faq-item[open] .faq-q::before { content: "−"; }
+.faq-q:hover { color: #67ffd1; }
+.faq-item[open] .faq-q { color: #2d2e83; }
+.faq-a {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 18px;
+  line-height: 1.4em;
+  color: #060633;
+}
+.faq-a p { margin: 0; }
+
+.svc-e { position: relative; z-index: 5; padding: 3% 20px 240px 20px; }
+.svc-title { text-align: center; margin-bottom: 30px; }
+.svc-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+@media (max-width: 767px) { .svc-row { flex-direction: column; } }
+.svc-flip { flex: 1; perspective: 1000px; width: 100%; }
+.svc-flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+.svc-flip:hover .svc-flip-inner { transform: rotateY(180deg); }
+.svc-front, .svc-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 17px;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+.svc-front { background-position: center center; background-size: cover; }
+.svc-front-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: #009fe391;
+  backdrop-filter: blur(0px);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: left;
+  border-radius: 17px;
+}
+.svc-front-title {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 3vw;
+  font-weight: bold;
+  line-height: 1em;
+  color: #ffffff;
+  margin: 0;
+}
+@media (max-width: 767px) { .svc-front-title { font-size: 40px; } }
+.svc-front-more {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4em;
+  color: #ffffff;
+  margin: 0;
+}
+@media (max-width: 767px) { .svc-front-more { font-size: 18px; } }
+.svc-back {
+  transform: rotateY(180deg);
+  background-image: radial-gradient(at top left, #009fe3 0%, #060633 100%);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+.svc-back-title {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 4vw;
+  font-weight: bold;
+  line-height: 1em;
+  color: #ffffff;
+  margin: 0;
+}
+@media (max-width: 767px) { .svc-back-title { font-size: 40px; } }
+.svc-back-text {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4em;
+  letter-spacing: 0.2px;
+  color: #ffffff;
+  margin: 0;
+}
+@media (max-width: 767px) { .svc-back-text { font-size: 18px; } }
+.svc-back-btn {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.4em;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  border-radius: 12px;
+  padding: 8px 20px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+@media (max-width: 767px) { .svc-back-btn { font-size: 18px; } }
+.svc-back-btn:hover {
+  background-color: #67ffd1;
+  color: #060633;
+  border-color: #67ffd1;
+  box-shadow: 0px 10px 30px #67ffd1a1;
+}
+.svc-shape {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  direction: ltr;
+  pointer-events: none;
+}
+.svc-shape svg {
+  display: block;
+  width: calc(120% + 1.3px);
+  height: 240px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+@media (max-width: 767px) { .svc-shape svg { width: calc(180% + 1.3px); } }
+.svc-shape path { fill: #ebebf0; }
+
+.footer-e {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  background-color: #ebebf0;
+  padding: 60px 10px;
+  justify-content: center;
+}
+.footer-logo { width: 220px; height: auto; display: block; }
+.footer-tagline {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 18px;
+  color: #060633;
+  margin: 0;
 }
 
 /* ===== Phase 3b: Mitzva (b34d3ba) + MiKamcha (7ecebcf) + Partners (3397069) ===== */
