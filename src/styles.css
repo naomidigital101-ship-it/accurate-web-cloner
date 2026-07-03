@@ -1759,3 +1759,8 @@
 .story-nav-link span { font-size: 14px; color: #009fe3; }
 .story-nav-link b { font-size: 16px; line-height: 1.2em; }
 .story-nav-next { text-align: left; }
+
+/* ===== /en page (LTR) ===== */
+.en-ltr { direction: ltr; }
+.en-ltr .e-nav-link,
+.en-ltr .qc-meta { font-family: inherit; }
