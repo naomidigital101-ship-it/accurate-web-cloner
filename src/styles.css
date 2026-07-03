@@ -1618,7 +1618,7 @@
 /* ===== Phase 6a: Inner pages shell ===== */
 .page-shell {
   min-height: 100vh;
-  background-image: url("https://vangus-cdn.com/tefilin.or-hadash.org.il/wp-content/uploads/2024/01/תמונת-עמוד-קשר-של-תפילין-min.webp");
+  background-image: url("/wp/uploads/2024/01/תמונת-עמוד-קשר-של-תפילין-min.webp");
   background-attachment: fixed;
   background-position: center center;
   background-size: cover;

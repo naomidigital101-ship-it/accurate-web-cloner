@@ -74,7 +74,7 @@ const pressItems: PressItem[] = [
     source: "103FM",
     date: "21/04/2025",
     img: "/wp/img/103FM.jpg",
-    href: "https://tefilin.or-hadash.org.il/wp-content/uploads/2025/05/103FM.jpg",
+    href: "/wp/uploads/2025/05/103FM.jpg",
   },
 ];
 
