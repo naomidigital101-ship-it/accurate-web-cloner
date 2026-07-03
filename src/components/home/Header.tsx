@@ -73,7 +73,7 @@ export function Header() {
                 </li>
               ))}
               <li>
-                <a href="https://tefilin.or-hadash.org.il/en/the-tefillin-tie-initiative/" lang="en-US" className="e-nav-link">English</a>
+                <a href="/en" lang="en-US" className="e-nav-link">English</a>
               </li>
             </ul>
           </nav>
