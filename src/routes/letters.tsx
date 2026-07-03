@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
 
-const cdn = "https://vangus-cdn.com/tefilin.or-hadash.org.il/wp-content/uploads";
+const cdn = "/wp/uploads";
 
 type Letter = { title: string; sub?: string; img: string };
 

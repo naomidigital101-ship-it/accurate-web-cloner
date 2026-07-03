@@ -4,13 +4,13 @@ const cards = [
   {
     title: "הסכמות רבנים",
     href: "#agreements",
-    img: "https://tefilin.or-hadash.org.il/wp-content/uploads/2024/01/מכתב-הסכמה-מהרב-זילברשטיין-scaled.webp",
+    img: "/wp/uploads/2024/01/מכתב-הסכמה-מהרב-זילברשטיין-scaled.webp",
     gradient: "from-[oklch(0.28_0.08_265)] to-[oklch(0.42_0.12_255)]",
   },
   {
     title: "מכתבי תודה",
     href: "#letters",
-    img: "https://tefilin.or-hadash.org.il/wp-content/uploads/2024/01/-תודה-אמא-לחייל-e1712736869916.webp",
+    img: "/wp/uploads/2024/01/-תודה-אמא-לחייל-e1712736869916.webp",
     gradient: "from-[oklch(0.55_0.15_230)] to-[oklch(0.75_0.13_220)]",
   },
 ];

@@ -1,4 +1,4 @@
-const cdn = "https://vangus-cdn.com/tefilin.or-hadash.org.il/wp-content/uploads";
+const cdn = "/wp/uploads";
 
 export type StoryIndexItem = { title: string; slug: string; img: string };
 

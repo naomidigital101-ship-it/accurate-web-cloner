@@ -8,9 +8,9 @@ const steps = [
 ];
 
 const slides = [
-  "https://tefilin.or-hadash.org.il/wp-content/uploads/2024/01/%D7%AA%D7%9E%D7%95%D7%A0%D7%94-%D7%A9%D7%9C-WhatsApp%E2%80%8F-2024-01-28-%D7%91%D7%A9%D7%A2%D7%94-13.38.37_c078ad2d.jpg",
-  "https://tefilin.or-hadash.org.il/wp-content/uploads/2024/01/%D7%A7%D7%A9%D7%AA-1-min.webp",
-  "https://tefilin.or-hadash.org.il/wp-content/uploads/2024/01/%D7%AA%D7%9E%D7%95%D7%A0%D7%94-%D7%A9%D7%9C-WhatsApp%E2%80%8F-2024-01-22-%D7%91%D7%A9%D7%A2%D7%94-17.46.08_77e1df03.jpg",
+  "/wp/uploads/2024/01/%D7%AA%D7%9E%D7%95%D7%A0%D7%94-%D7%A9%D7%9C-WhatsApp%E2%80%8F-2024-01-28-%D7%91%D7%A9%D7%A2%D7%94-13.38.37_c078ad2d.jpg",
+  "/wp/uploads/2024/01/%D7%A7%D7%A9%D7%AA-1-min.webp",
+  "/wp/uploads/2024/01/%D7%AA%D7%9E%D7%95%D7%A0%D7%94-%D7%A9%D7%9C-WhatsApp%E2%80%8F-2024-01-22-%D7%91%D7%A9%D7%A2%D7%94-17.46.08_77e1df03.jpg",
 ];
 
 export function HowItWorksSection() {
