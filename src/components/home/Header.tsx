@@ -123,7 +123,7 @@ export function Header() {
               )}
             </div>
           ))}
-          <a href="https://tefilin.or-hadash.org.il/en/the-tefillin-tie-initiative/" lang="en-US" className="e-dropdown-item">English</a>
+          <a href="/en" lang="en-US" className="e-dropdown-item">English</a>
         </nav>
       )}
     </header>
