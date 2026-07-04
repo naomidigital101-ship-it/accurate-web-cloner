@@ -1012,8 +1012,9 @@
 @media (max-width: 767px) { .qc-text { font-size: 18px; line-height: 1.4em; } }
 .qc-meta {
   display: flex;
-  flex-direction: column;
-  gap: 3px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 3px 6px;
   align-self: flex-start;
   border-right: 4px solid #67ffd1;
   padding: 1px 4px;
