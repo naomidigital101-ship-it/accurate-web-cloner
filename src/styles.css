@@ -981,7 +981,9 @@
 @media (max-width: 767px) { .qc-track { grid-template-columns: 1fr; } .qc-track > :nth-child(n+2) { display: none; } }
 .qc-card { display: flex; flex-direction: row; align-items: flex-start; }
 .qc-img {
-  width: 30%;
+  width: 132px;
+  min-width: 132px;
+  height: 150px;
   min-height: 150px;
   flex-shrink: 0;
   border: 2px solid #ffffff;
