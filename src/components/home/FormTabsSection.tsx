@@ -39,9 +39,10 @@ export function RequestForm() {
     >
       {step === 1 && (
         <div className="e-form-fields">
-          <RadioGroup label="למי מיועדות התפילין" col={50} name="target" options={["חייל", "בר מצוה", "מתחזק", "אחר"]} />
-          <RadioGroup label="כותב ביד" col={50} name="hand" options={["ימין", "שמאל"]} />
-          <RadioGroup label="שיטת אספקה" col={100} name="delivery" options={["אוכל להגיע לאסוף את התפילין", "מבקש משלוח (בתוספת תשלום)"]} />
+          <SelectField label="למי מיועדות התפילין" col={50} name="target" options={["חייל", "בר מצוה", "מתחזק", "אחר"]} />
+          <SelectField label="כותב ביד" col={50} name="hand" options={["ימין", "שמאל"]} />
+          <SelectField label="שיטת אספקה" col={100} name="delivery" options={["אוכל להגיע לאסוף את התפילין", "מבקש משלוח (בתוספת תשלום)"]} />
+
           <div className="e-field-group col-100">
             <div className="e-form-buttons">
               <button type="button" className="e-btn-step" onClick={() => setStep(2)}>הבא</button>
