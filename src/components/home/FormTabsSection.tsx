@@ -97,7 +97,7 @@ export function DonateForm() {
         <div className="e-form-fields">
           <Field label="שם מלא" col={100} name="name" />
           <Field label="כתובת לאיסוף" col={60} name="pickup" />
-          <RadioGroup label="מצב התפילין" col={40} name="condition" options={["חדש", "משומש", "פגום/ישן מאוד"]} />
+          <SelectField label="מצב התפילין" col={40} name="condition" options={["חדש", "משומש", "פגום/ישן מאוד"]} />
           <div className="e-field-group col-100">
             <div className="e-form-buttons">
               <button type="button" className="e-btn-step" onClick={() => setStep(2)}>הבא</button>
