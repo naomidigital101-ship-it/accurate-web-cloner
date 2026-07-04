@@ -1070,10 +1070,10 @@
 .about-imgs { width: 60%; display: flex; flex-direction: column; padding: 3% 0; }
 @media (max-width: 767px) { .about-imgs { width: 100%; } }
 .about-photo { position: relative; z-index: 5; }
-.about-photo-top { width: 70%; max-width: 70%; align-self: flex-end; }
-.about-photo-top .about-photo-inner { margin: 0 0 -35% 10%; }
-.about-photo-bottom { width: 70%; max-width: 70%; align-self: flex-start; }
-.about-photo-bottom .about-photo-inner2 { margin: -35% 10% 0 0; }
+.about-photo-top { width: 42.5%; max-width: 42.5%; margin-left: 7.5%; margin-right: auto; margin-bottom: -68px; }
+.about-photo-top .about-photo-inner { margin: 0; }
+.about-photo-bottom { width: 42.5%; max-width: 42.5%; margin-right: 7.5%; margin-left: auto; margin-top: -68px; }
+.about-photo-bottom .about-photo-inner2 { margin: 0; }
 .about-photo img {
   width: 100%;
   height: 200px;
