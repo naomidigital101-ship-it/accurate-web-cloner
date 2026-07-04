@@ -12,7 +12,7 @@ export function AboutTefilinSection() {
         </div>
         <div className="about-photo about-photo-bottom">
           <div className="about-photo-inner2">
-            <img src="/wp/assets/קשת-9-min-e1706093310964.webp" alt="" loading="lazy" />
+            <img src="/wp/img/קשת-9-min-e1706093310964.webp" alt="" loading="lazy" />
           </div>
         </div>
       </div>
