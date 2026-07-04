@@ -9,17 +9,16 @@ function Field({ label, col, type = "text", name, required = false }: { label: s
   );
 }
 
-function RadioGroup({ label, col, name, options }: { label: string; col: 100 | 60 | 50 | 40; name: string; options: string[] }) {
+function SelectField({ label, col, name, options }: { label: string; col: 100 | 60 | 50 | 40; name: string; options: string[] }) {
   return (
     <div className={`e-field-group col-${col}`}>
-      <span className="e-field-label">{label}</span>
-      <div className="e-radio-group">
-        {options.map((o) => (
-          <label key={o} className="e-radio-option">
-            <input type="radio" name={name} value={o} />
-            {o}
-          </label>
-        ))}
+      <label className="e-field-label" htmlFor={name}>{label}</label>
+      <div className="e-select-wrap">
+        <select className="e-field e-select" id={name} name={name}>
+          {options.map((o) => (
+            <option key={o} value={o}>{o}</option>
+          ))}
+        </select>
       </div>
     </div>
   );
@@ -40,9 +39,10 @@ export function RequestForm() {
     >
       {step === 1 && (
         <div className="e-form-fields">
-          <RadioGroup label="למי מיועדות התפילין" col={50} name="target" options={["חייל", "בר מצוה", "מתחזק", "אחר"]} />
-          <RadioGroup label="כותב ביד" col={50} name="hand" options={["ימין", "שמאל"]} />
-          <RadioGroup label="שיטת אספקה" col={100} name="delivery" options={["אוכל להגיע לאסוף את התפילין", "מבקש משלוח (בתוספת תשלום)"]} />
+          <SelectField label="למי מיועדות התפילין" col={50} name="target" options={["חייל", "בר מצוה", "מתחזק", "אחר"]} />
+          <SelectField label="כותב ביד" col={50} name="hand" options={["ימין", "שמאל"]} />
+          <SelectField label="שיטת אספקה" col={100} name="delivery" options={["אוכל להגיע לאסוף את התפילין", "מבקש משלוח (בתוספת תשלום)"]} />
+
           <div className="e-field-group col-100">
             <div className="e-form-buttons">
               <button type="button" className="e-btn-step" onClick={() => setStep(2)}>הבא</button>
@@ -97,7 +97,7 @@ export function DonateForm() {
         <div className="e-form-fields">
           <Field label="שם מלא" col={100} name="name" />
           <Field label="כתובת לאיסוף" col={60} name="pickup" />
-          <RadioGroup label="מצב התפילין" col={40} name="condition" options={["חדש", "משומש", "פגום/ישן מאוד"]} />
+          <SelectField label="מצב התפילין" col={40} name="condition" options={["חדש", "משומש", "פגום/ישן מאוד"]} />
           <div className="e-field-group col-100">
             <div className="e-form-buttons">
               <button type="button" className="e-btn-step" onClick={() => setStep(2)}>הבא</button>
