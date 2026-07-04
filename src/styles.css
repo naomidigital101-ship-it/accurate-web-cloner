@@ -1444,23 +1444,32 @@
 @media (max-width: 767px) { .svc-shape svg { width: calc(180% + 1.3px); } }
 .svc-shape path { fill: #ebebf0; }
 
-.footer-e {
+.footer-e { background-color: #ebebf0; }
+.footer-gallery { column-count: 5; column-gap: 10px; padding: 10px; }
+@media (max-width: 1024px) { .footer-gallery { column-count: 3; } }
+@media (max-width: 767px) { .footer-gallery { column-count: 2; } }
+.footer-gallery-img {
+  width: 100%;
+  display: block;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  break-inside: avoid;
+}
+.footer-strip {
+  background: #ffffff;
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   gap: 20px;
   flex-wrap: wrap;
-  background-color: #ebebf0;
-  padding: 60px 10px;
-  justify-content: center;
+  padding: 40px 8%;
 }
-.footer-logo { width: 220px; height: auto; display: block; }
-.footer-tagline {
-  font-family: "Maadim", "Maadim OS", sans-serif;
-  font-size: 18px;
-  color: #060633;
-  margin: 0;
-}
+.footer-rights { font-family: "Maadim", "Maadim OS", sans-serif; font-size: 16px; color: #060633; margin: 0; order: 2; }
+.footer-brand { display: flex; flex-direction: column; align-items: center; gap: 6px; order: 1; margin-right: auto; }
+.footer-logo { width: 280px; height: auto; display: block; }
+.footer-sub { font-family: "Maadim", "Maadim OS", sans-serif; font-size: 14px; color: #2d2e83; margin: 0; text-align: center; }
+.footer-tagline { font-family: "Maadim", "Maadim OS", sans-serif; font-size: 18px; color: #060633; margin: 10px 0 0 0; text-align: center; }
 
 /* ===== Phase 3b: Mitzva (b34d3ba) + MiKamcha (7ecebcf) + Partners (3397069) ===== */
 .e-btn-white {
