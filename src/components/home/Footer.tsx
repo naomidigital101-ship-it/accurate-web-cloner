@@ -15,7 +15,6 @@ export function Footer() {
           <a href="/" aria-label="אור חדש - דף הבית">
             <img src="/wp/img/אור-חדש-לוגו-01.svg" alt="אור חדש" className="footer-logo" />
           </a>
-          <p className="footer-sub">לקידום והעצמה של בעלי תשובה ומתקרבים ליהדות ע"ר</p>
           <p className="footer-tagline">פרויקט תרומה והנגשת תפילין מהודרות לכל יהודי שמבקש</p>
         </div>
       </div>
