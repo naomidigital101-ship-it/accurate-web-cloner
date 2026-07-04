@@ -1776,3 +1776,22 @@
 .en-ltr { direction: ltr; }
 .en-ltr .e-nav-link,
 .en-ltr .qc-meta { font-family: inherit; }
+
+.e-select-wrap { position: relative; }
+.e-select {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  padding-left: 32px;
+}
+.e-select-wrap::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-30%);
+  border: 6px solid transparent;
+  border-top-color: #2d2e83;
+  pointer-events: none;
+}
+.how-arrow { position: absolute; top: 50px; right: 70px; z-index: 2; }
