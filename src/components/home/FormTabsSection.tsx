@@ -9,17 +9,16 @@ function Field({ label, col, type = "text", name, required = false }: { label: s
   );
 }
 
-function RadioGroup({ label, col, name, options }: { label: string; col: 100 | 60 | 50 | 40; name: string; options: string[] }) {
+function SelectField({ label, col, name, options }: { label: string; col: 100 | 60 | 50 | 40; name: string; options: string[] }) {
   return (
     <div className={`e-field-group col-${col}`}>
-      <span className="e-field-label">{label}</span>
-      <div className="e-radio-group">
-        {options.map((o) => (
-          <label key={o} className="e-radio-option">
-            <input type="radio" name={name} value={o} />
-            {o}
-          </label>
-        ))}
+      <label className="e-field-label" htmlFor={name}>{label}</label>
+      <div className="e-select-wrap">
+        <select className="e-field e-select" id={name} name={name}>
+          {options.map((o) => (
+            <option key={o} value={o}>{o}</option>
+          ))}
+        </select>
       </div>
     </div>
   );
