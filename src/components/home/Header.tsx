@@ -30,9 +30,26 @@ function CaretDown() {
   );
 }
 
-export function Header() {
+export function Header({ en = false }: { en?: boolean } = {}) {
   const [open, setOpen] = useState(false);
   const [bgT, setBgT] = useState(0);
+
+  const heNav: NavItem[] = navItems;
+  const enNav: NavItem[] = [
+    { label: "The Tefillin Tie Initiative", href: "/en" },
+    { label: "Rabbis agreements", href: "/en/rabbis-agreements" },
+    { label: "Thank you letters", href: "/en/thank-you-letters" },
+    { label: "Stories", href: "/stories" },
+    { label: "In the Media", href: "/en/media" },
+    { label: "Request for Tefillin", href: "/request" },
+    { label: "Request to Donate Tefillin", href: "/give" },
+    { label: "Contact Us", href: "https://api.whatsapp.com/send?phone=972546713966" },
+  ];
+  const items = en ? enNav : heNav;
+  const switcherLabel = en ? "עברית" : "English";
+  const switcherHref = en ? "/" : "/en";
+  const homeHref = en ? "/en" : "/";
+  const dir = en ? "ltr" : "rtl";
 
   useEffect(() => {
     const onScroll = () => {
