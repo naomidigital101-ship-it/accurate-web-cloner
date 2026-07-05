@@ -22,6 +22,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as TefilinSlugRouteImport } from './routes/tefilin.$slug'
 import { Route as EnThankYouLettersRouteImport } from './routes/en.thank-you-letters'
 import { Route as EnRabbisAgreementsRouteImport } from './routes/en.rabbis-agreements'
+import { Route as EnMediaRouteImport } from './routes/en.media'
 
 const StoriesRoute = StoriesRouteImport.update({
   id: '/stories',
@@ -88,6 +89,11 @@ const EnRabbisAgreementsRoute = EnRabbisAgreementsRouteImport.update({
   path: '/rabbis-agreements',
   getParentRoute: () => EnRoute,
 } as any)
+const EnMediaRoute = EnMediaRouteImport.update({
+  id: '/media',
+  path: '/media',
+  getParentRoute: () => EnRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -100,6 +106,7 @@ export interface FileRoutesByFullPath {
   '/letters': typeof LettersRoute
   '/request': typeof RequestRoute
   '/stories': typeof StoriesRoute
+  '/en/media': typeof EnMediaRoute
   '/en/rabbis-agreements': typeof EnRabbisAgreementsRoute
   '/en/thank-you-letters': typeof EnThankYouLettersRoute
   '/tefilin/$slug': typeof TefilinSlugRoute
@@ -115,6 +122,7 @@ export interface FileRoutesByTo {
   '/letters': typeof LettersRoute
   '/request': typeof RequestRoute
   '/stories': typeof StoriesRoute
+  '/en/media': typeof EnMediaRoute
   '/en/rabbis-agreements': typeof EnRabbisAgreementsRoute
   '/en/thank-you-letters': typeof EnThankYouLettersRoute
   '/tefilin/$slug': typeof TefilinSlugRoute
@@ -131,6 +139,7 @@ export interface FileRoutesById {
   '/letters': typeof LettersRoute
   '/request': typeof RequestRoute
   '/stories': typeof StoriesRoute
+  '/en/media': typeof EnMediaRoute
   '/en/rabbis-agreements': typeof EnRabbisAgreementsRoute
   '/en/thank-you-letters': typeof EnThankYouLettersRoute
   '/tefilin/$slug': typeof TefilinSlugRoute
@@ -148,6 +157,7 @@ export interface FileRouteTypes {
     | '/letters'
     | '/request'
     | '/stories'
+    | '/en/media'
     | '/en/rabbis-agreements'
     | '/en/thank-you-letters'
     | '/tefilin/$slug'
@@ -163,6 +173,7 @@ export interface FileRouteTypes {
     | '/letters'
     | '/request'
     | '/stories'
+    | '/en/media'
     | '/en/rabbis-agreements'
     | '/en/thank-you-letters'
     | '/tefilin/$slug'
@@ -178,6 +189,7 @@ export interface FileRouteTypes {
     | '/letters'
     | '/request'
     | '/stories'
+    | '/en/media'
     | '/en/rabbis-agreements'
     | '/en/thank-you-letters'
     | '/tefilin/$slug'
@@ -290,15 +302,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnRabbisAgreementsRouteImport
       parentRoute: typeof EnRoute
     }
+    '/en/media': {
+      id: '/en/media'
+      path: '/media'
+      fullPath: '/en/media'
+      preLoaderRoute: typeof EnMediaRouteImport
+      parentRoute: typeof EnRoute
+    }
   }
 }
 
 interface EnRouteChildren {
+  EnMediaRoute: typeof EnMediaRoute
   EnRabbisAgreementsRoute: typeof EnRabbisAgreementsRoute
   EnThankYouLettersRoute: typeof EnThankYouLettersRoute
 }
 
 const EnRouteChildren: EnRouteChildren = {
+  EnMediaRoute: EnMediaRoute,
   EnRabbisAgreementsRoute: EnRabbisAgreementsRoute,
   EnThankYouLettersRoute: EnThankYouLettersRoute,
 }
