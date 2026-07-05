@@ -80,19 +80,19 @@ const TefilinSlugRoute = TefilinSlugRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const EnThankYouLettersRoute = EnThankYouLettersRouteImport.update({
-  id: '/en/thank-you-letters',
-  path: '/en/thank-you-letters',
-  getParentRoute: () => rootRouteImport,
+  id: '/thank-you-letters',
+  path: '/thank-you-letters',
+  getParentRoute: () => EnRoute,
 } as any)
 const EnRabbisAgreementsRoute = EnRabbisAgreementsRouteImport.update({
-  id: '/en/rabbis-agreements',
-  path: '/en/rabbis-agreements',
-  getParentRoute: () => rootRouteImport,
+  id: '/rabbis-agreements',
+  path: '/rabbis-agreements',
+  getParentRoute: () => EnRoute,
 } as any)
 const EnMediaRoute = EnMediaRouteImport.update({
-  id: '/en/media',
-  path: '/en/media',
-  getParentRoute: () => rootRouteImport,
+  id: '/media',
+  path: '/media',
+  getParentRoute: () => EnRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -205,9 +205,6 @@ export interface RootRouteChildren {
   LettersRoute: typeof LettersRoute
   RequestRoute: typeof RequestRoute
   StoriesRoute: typeof StoriesRoute
-  EnMediaRoute: typeof EnMediaRoute
-  EnRabbisAgreementsRoute: typeof EnRabbisAgreementsRoute
-  EnThankYouLettersRoute: typeof EnThankYouLettersRoute
   TefilinSlugRoute: typeof TefilinSlugRoute
   EnIndexRoute: typeof EnIndexRoute
 }
@@ -293,24 +290,24 @@ declare module '@tanstack/react-router' {
     }
     '/en/thank-you-letters': {
       id: '/en/thank-you-letters'
-      path: '/en/thank-you-letters'
+      path: '/thank-you-letters'
       fullPath: '/en/thank-you-letters'
       preLoaderRoute: typeof EnThankYouLettersRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof EnRoute
     }
     '/en/rabbis-agreements': {
       id: '/en/rabbis-agreements'
-      path: '/en/rabbis-agreements'
+      path: '/rabbis-agreements'
       fullPath: '/en/rabbis-agreements'
       preLoaderRoute: typeof EnRabbisAgreementsRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof EnRoute
     }
     '/en/media': {
       id: '/en/media'
-      path: '/en/media'
+      path: '/media'
       fullPath: '/en/media'
       preLoaderRoute: typeof EnMediaRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof EnRoute
     }
   }
 }
@@ -325,9 +322,6 @@ const rootRouteChildren: RootRouteChildren = {
   LettersRoute: LettersRoute,
   RequestRoute: RequestRoute,
   StoriesRoute: StoriesRoute,
-  EnMediaRoute: EnMediaRoute,
-  EnRabbisAgreementsRoute: EnRabbisAgreementsRoute,
-  EnThankYouLettersRoute: EnThankYouLettersRoute,
   TefilinSlugRoute: TefilinSlugRoute,
   EnIndexRoute: EnIndexRoute,
 }
