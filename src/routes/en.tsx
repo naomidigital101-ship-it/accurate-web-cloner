@@ -366,7 +366,7 @@ function EnInterview() {
         </div>
       </div>
       <div className="iv-cards-col">
-        <a href="/agreements" className="iv-card" style={{ backgroundColor: "#2D2E83" }}>
+        <a href="/en/rabbis-agreements" className="iv-card" style={{ backgroundColor: "#2D2E83" }}>
           <span className="iv-card-overlay" aria-hidden="true" />
           <span className="iv-card-img">
             <img
@@ -377,7 +377,7 @@ function EnInterview() {
           </span>
           <h2 className="iv-card-title">Rabbis agreements</h2>
         </a>
-        <a href="/letters" className="iv-card" style={{ backgroundColor: "#009FE3" }}>
+        <a href="/en/thank-you-letters" className="iv-card" style={{ backgroundColor: "#009FE3" }}>
           <span className="iv-card-overlay" aria-hidden="true" />
           <span className="iv-card-img">
             <img
