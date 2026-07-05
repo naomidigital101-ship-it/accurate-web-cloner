@@ -30,9 +30,26 @@ function CaretDown() {
   );
 }
 
-export function Header() {
+export function Header({ en = false }: { en?: boolean } = {}) {
   const [open, setOpen] = useState(false);
   const [bgT, setBgT] = useState(0);
+
+  const heNav: NavItem[] = navItems;
+  const enNav: NavItem[] = [
+    { label: "The Tefillin Tie Initiative", href: "/en" },
+    { label: "Rabbis agreements", href: "/en/rabbis-agreements" },
+    { label: "Thank you letters", href: "/en/thank-you-letters" },
+    { label: "Stories", href: "/stories" },
+    { label: "In the Media", href: "/en/media" },
+    { label: "Request for Tefillin", href: "/request" },
+    { label: "Request to Donate Tefillin", href: "/give" },
+    { label: "Contact Us", href: "https://api.whatsapp.com/send?phone=972546713966" },
+  ];
+  const items = en ? enNav : heNav;
+  const switcherLabel = en ? "עברית" : "English";
+  const switcherHref = en ? "/" : "/en";
+  const homeHref = en ? "/en" : "/";
+  const dir = en ? "ltr" : "rtl";
 
   useEffect(() => {
     const onScroll = () => {
@@ -46,7 +63,7 @@ export function Header() {
   }, []);
 
   return (
-    <header dir="rtl" role="banner" className="fixed top-0 inset-x-0 z-[99]" style={{ paddingInline: "5%" }}>
+    <header dir={dir} role="banner" className="fixed top-0 inset-x-0 z-[99]" style={{ paddingInline: "5%" }}>
       {/* רקע motion-fx: ‎#060633 בשקיפות 46% שמופיע בהדרגה על פני 10% הראשונים של הגלילה */}
       <div className="absolute inset-0 pointer-events-none" style={{ backgroundColor: "#060633", opacity: 0.4588 * bgT }} />
       {/* overlay קבוע: גרדיאנט כהה מלמעלה בשקיפות 50% */}
@@ -57,7 +74,7 @@ export function Header() {
         <div className="flex flex-col justify-center items-start" style={{ width: "70%" }}>
           <nav aria-label="תפריט" className="hidden lg:block">
             <ul className="flex flex-row items-center m-0 p-0 list-none">
-              {navItems.map((item) => (
+              {items.map((item) => (
                 <li key={item.label} className="relative group">
                   <a href={item.href} className="e-nav-link">
                     {item.label}
@@ -73,7 +90,7 @@ export function Header() {
                 </li>
               ))}
               <li>
-                <a href="/en" lang="en-US" className="e-nav-link">English</a>
+                <a href={switcherHref} lang={en ? undefined : "en-US"} className="e-nav-link">{switcherLabel}</a>
               </li>
             </ul>
           </nav>
@@ -100,7 +117,7 @@ export function Header() {
           <a href="https://or-hadash.org.il/" aria-label="אור חדש" className="logo-or hidden md:block">
             <img src="/wp/img/אור-חדש-לוגו-13.svg" alt="אור חדש" width={444} height={113} />
           </a>
-          <a href="/" aria-label="קשר של תפילין - דף הבית" className="logo-badge">
+          <a href={homeHref} aria-label={en ? "The Tefillin Tie Initiative - Home" : "קשר של תפילין - דף הבית"} className="logo-badge">
             <span className="logo-badge-box">
               <img src="/wp/img/לוגו-קשר-של-תפילין-01.svg" alt="קשר של תפילין" width={100} height={100} />
             </span>
@@ -111,7 +128,7 @@ export function Header() {
       {/* תפריט מובייל */}
       {open && (
         <nav id="mobile-menu" aria-label="תפריט נייד" className="lg:hidden e-mobile-menu">
-          {navItems.map((item) => (
+          {items.map((item) => (
             <div key={item.label}>
               <a href={item.href} className="e-dropdown-item">{item.label}</a>
               {item.children && (
@@ -123,7 +140,7 @@ export function Header() {
               )}
             </div>
           ))}
-          <a href="/en" lang="en-US" className="e-dropdown-item">English</a>
+          <a href={switcherHref} className="e-dropdown-item">{switcherLabel}</a>
         </nav>
       )}
     </header>
