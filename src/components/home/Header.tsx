@@ -74,7 +74,7 @@ export function Header({ en = false }: { en?: boolean } = {}) {
         <div className="flex flex-col justify-center items-start" style={{ width: "70%" }}>
           <nav aria-label="תפריט" className="hidden lg:block">
             <ul className="flex flex-row items-center m-0 p-0 list-none">
-              {navItems.map((item) => (
+              {items.map((item) => (
                 <li key={item.label} className="relative group">
                   <a href={item.href} className="e-nav-link">
                     {item.label}
@@ -90,7 +90,7 @@ export function Header({ en = false }: { en?: boolean } = {}) {
                 </li>
               ))}
               <li>
-                <a href="/en" lang="en-US" className="e-nav-link">English</a>
+                <a href={switcherHref} lang={en ? undefined : "en-US"} className="e-nav-link">{switcherLabel}</a>
               </li>
             </ul>
           </nav>
