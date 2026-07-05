@@ -128,7 +128,7 @@ export function Header({ en = false }: { en?: boolean } = {}) {
       {/* תפריט מובייל */}
       {open && (
         <nav id="mobile-menu" aria-label="תפריט נייד" className="lg:hidden e-mobile-menu">
-          {navItems.map((item) => (
+          {items.map((item) => (
             <div key={item.label}>
               <a href={item.href} className="e-dropdown-item">{item.label}</a>
               {item.children && (
@@ -140,7 +140,7 @@ export function Header({ en = false }: { en?: boolean } = {}) {
               )}
             </div>
           ))}
-          <a href="/en" lang="en-US" className="e-dropdown-item">English</a>
+          <a href={switcherHref} className="e-dropdown-item">{switcherLabel}</a>
         </nav>
       )}
     </header>
