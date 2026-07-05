@@ -117,7 +117,7 @@ export function Header({ en = false }: { en?: boolean } = {}) {
           <a href="https://or-hadash.org.il/" aria-label="אור חדש" className="logo-or hidden md:block">
             <img src="/wp/img/אור-חדש-לוגו-13.svg" alt="אור חדש" width={444} height={113} />
           </a>
-          <a href="/" aria-label="קשר של תפילין - דף הבית" className="logo-badge">
+          <a href={homeHref} aria-label={en ? "The Tefillin Tie Initiative - Home" : "קשר של תפילין - דף הבית"} className="logo-badge">
             <span className="logo-badge-box">
               <img src="/wp/img/לוגו-קשר-של-תפילין-01.svg" alt="קשר של תפילין" width={100} height={100} />
             </span>
