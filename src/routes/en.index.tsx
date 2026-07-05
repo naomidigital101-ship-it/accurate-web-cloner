@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Header } from "@/components/home/Header";
 import { Footer } from "@/components/home/Footer";
 
-export const Route = createFileRoute("/en")({
+export const Route = createFileRoute("/en/")({
   head: () => ({
     meta: [
       { title: "The Tefillin Tie Initiative | Ohr Chadash" },
