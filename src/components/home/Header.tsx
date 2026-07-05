@@ -63,7 +63,7 @@ export function Header({ en = false }: { en?: boolean } = {}) {
   }, []);
 
   return (
-    <header dir="rtl" role="banner" className="fixed top-0 inset-x-0 z-[99]" style={{ paddingInline: "5%" }}>
+    <header dir={dir} role="banner" className="fixed top-0 inset-x-0 z-[99]" style={{ paddingInline: "5%" }}>
       {/* רקע motion-fx: ‎#060633 בשקיפות 46% שמופיע בהדרגה על פני 10% הראשונים של הגלילה */}
       <div className="absolute inset-0 pointer-events-none" style={{ backgroundColor: "#060633", opacity: 0.4588 * bgT }} />
       {/* overlay קבוע: גרדיאנט כהה מלמעלה בשקיפות 50% */}
