@@ -1795,3 +1795,5 @@
   pointer-events: none;
 }
 .how-arrow { position: absolute; top: 50px; right: 70px; z-index: 2; }
+
+.page-title-ltr { text-align: left; }
