@@ -20,6 +20,7 @@ import { Route as BrandingRouteImport } from './routes/branding'
 import { Route as AgreementsRouteImport } from './routes/agreements'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TefilinSlugRouteImport } from './routes/tefilin.$slug'
+import { Route as EnRabbisAgreementsRouteImport } from './routes/en.rabbis-agreements'
 
 const StoriesRoute = StoriesRouteImport.update({
   id: '/stories',
@@ -76,18 +77,24 @@ const TefilinSlugRoute = TefilinSlugRouteImport.update({
   path: '/tefilin/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EnRabbisAgreementsRoute = EnRabbisAgreementsRouteImport.update({
+  id: '/rabbis-agreements',
+  path: '/rabbis-agreements',
+  getParentRoute: () => EnRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/agreements': typeof AgreementsRoute
   '/branding': typeof BrandingRoute
   '/donate': typeof DonateRoute
-  '/en': typeof EnRoute
+  '/en': typeof EnRouteWithChildren
   '/give': typeof GiveRoute
   '/in-news': typeof InNewsRoute
   '/letters': typeof LettersRoute
   '/request': typeof RequestRoute
   '/stories': typeof StoriesRoute
+  '/en/rabbis-agreements': typeof EnRabbisAgreementsRoute
   '/tefilin/$slug': typeof TefilinSlugRoute
 }
 export interface FileRoutesByTo {
@@ -95,12 +102,13 @@ export interface FileRoutesByTo {
   '/agreements': typeof AgreementsRoute
   '/branding': typeof BrandingRoute
   '/donate': typeof DonateRoute
-  '/en': typeof EnRoute
+  '/en': typeof EnRouteWithChildren
   '/give': typeof GiveRoute
   '/in-news': typeof InNewsRoute
   '/letters': typeof LettersRoute
   '/request': typeof RequestRoute
   '/stories': typeof StoriesRoute
+  '/en/rabbis-agreements': typeof EnRabbisAgreementsRoute
   '/tefilin/$slug': typeof TefilinSlugRoute
 }
 export interface FileRoutesById {
@@ -109,12 +117,13 @@ export interface FileRoutesById {
   '/agreements': typeof AgreementsRoute
   '/branding': typeof BrandingRoute
   '/donate': typeof DonateRoute
-  '/en': typeof EnRoute
+  '/en': typeof EnRouteWithChildren
   '/give': typeof GiveRoute
   '/in-news': typeof InNewsRoute
   '/letters': typeof LettersRoute
   '/request': typeof RequestRoute
   '/stories': typeof StoriesRoute
+  '/en/rabbis-agreements': typeof EnRabbisAgreementsRoute
   '/tefilin/$slug': typeof TefilinSlugRoute
 }
 export interface FileRouteTypes {
@@ -130,6 +139,7 @@ export interface FileRouteTypes {
     | '/letters'
     | '/request'
     | '/stories'
+    | '/en/rabbis-agreements'
     | '/tefilin/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -143,6 +153,7 @@ export interface FileRouteTypes {
     | '/letters'
     | '/request'
     | '/stories'
+    | '/en/rabbis-agreements'
     | '/tefilin/$slug'
   id:
     | '__root__'
@@ -156,6 +167,7 @@ export interface FileRouteTypes {
     | '/letters'
     | '/request'
     | '/stories'
+    | '/en/rabbis-agreements'
     | '/tefilin/$slug'
   fileRoutesById: FileRoutesById
 }
@@ -164,7 +176,7 @@ export interface RootRouteChildren {
   AgreementsRoute: typeof AgreementsRoute
   BrandingRoute: typeof BrandingRoute
   DonateRoute: typeof DonateRoute
-  EnRoute: typeof EnRoute
+  EnRoute: typeof EnRouteWithChildren
   GiveRoute: typeof GiveRoute
   InNewsRoute: typeof InNewsRoute
   LettersRoute: typeof LettersRoute
@@ -252,15 +264,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TefilinSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/en/rabbis-agreements': {
+      id: '/en/rabbis-agreements'
+      path: '/rabbis-agreements'
+      fullPath: '/en/rabbis-agreements'
+      preLoaderRoute: typeof EnRabbisAgreementsRouteImport
+      parentRoute: typeof EnRoute
+    }
   }
 }
+
+interface EnRouteChildren {
+  EnRabbisAgreementsRoute: typeof EnRabbisAgreementsRoute
+}
+
+const EnRouteChildren: EnRouteChildren = {
+  EnRabbisAgreementsRoute: EnRabbisAgreementsRoute,
+}
+
+const EnRouteWithChildren = EnRoute._addFileChildren(EnRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AgreementsRoute: AgreementsRoute,
   BrandingRoute: BrandingRoute,
   DonateRoute: DonateRoute,
-  EnRoute: EnRoute,
+  EnRoute: EnRouteWithChildren,
   GiveRoute: GiveRoute,
   InNewsRoute: InNewsRoute,
   LettersRoute: LettersRoute,
