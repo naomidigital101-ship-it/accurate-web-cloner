@@ -935,7 +935,7 @@ function EnServices() {
 function EnPage() {
   return (
     <div dir="ltr" lang="en" className="min-h-screen bg-background en-ltr">
-      <Header />
+      <Header en />
       <main>
         <EnHero />
         <EnFormTabs />
