@@ -86,7 +86,7 @@ export function Header({ en = false }: { en?: boolean } = {}) {
                     {item.children && <CaretDown />}
                   </a>
                   {item.children && (
-                    <div className="e-dropdown opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200 absolute top-full right-0">
+                    <div className={`e-dropdown opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200 absolute top-full ${en ? "left-0" : "right-0"}`}>
                       {item.children.map((c) => (
                         <a key={c.label} href={c.href} className="e-dropdown-item">{c.label}</a>
                       ))}
