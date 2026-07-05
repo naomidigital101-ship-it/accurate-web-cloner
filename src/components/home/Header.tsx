@@ -36,14 +36,19 @@ export function Header({ en = false }: { en?: boolean } = {}) {
 
   const heNav: NavItem[] = navItems;
   const enNav: NavItem[] = [
-    { label: "The Tefillin Tie Initiative", href: "/en" },
-    { label: "Rabbis agreements", href: "/en/rabbis-agreements" },
-    { label: "Thank you letters", href: "/en/thank-you-letters" },
-    { label: "Stories", href: "/stories" },
-    { label: "In the Media", href: "/en/media" },
+    { label: "stories", href: "/stories" },
+    { label: "media", href: "/en/media" },
+    {
+      label: "letters",
+      href: "#",
+      children: [
+        { label: "Thank you letters", href: "/en/thank-you-letters" },
+        { label: "Rabbis agreements", href: "/en/rabbis-agreements" },
+      ],
+    },
     { label: "Request for Tefillin", href: "/request" },
-    { label: "Request to Donate Tefillin", href: "/give" },
-    { label: "Contact Us", href: "https://api.whatsapp.com/send?phone=972546713966" },
+    { label: "Donate Tefillin", href: "/give" },
+    { label: "support and donation", href: "/donate" },
   ];
   const items = en ? enNav : heNav;
   const switcherLabel = en ? "עברית" : "English";
@@ -81,7 +86,7 @@ export function Header({ en = false }: { en?: boolean } = {}) {
                     {item.children && <CaretDown />}
                   </a>
                   {item.children && (
-                    <div className="e-dropdown opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200 absolute top-full right-0">
+                    <div className={`e-dropdown opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200 absolute top-full ${en ? "left-0" : "right-0"}`}>
                       {item.children.map((c) => (
                         <a key={c.label} href={c.href} className="e-dropdown-item">{c.label}</a>
                       ))}
