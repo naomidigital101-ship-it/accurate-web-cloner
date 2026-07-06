@@ -77,15 +77,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "קשר של תפילין | מיזם אור חדש - ערבות הדדית וזיכוי הרבים" },
-      { name: "description", content: "מיזם 'קשר של תפילין' של עמותת אור חדש - מחלקים תפילין לכל יהודי שרוצה להניח ולהתחבר. למעלה מ-1,000 זוגות חולקו." },
-      { property: "og:title", content: "קשר של תפילין | מיזם אור חדש - ערבות הדדית וזיכוי הרבים" },
-      { property: "og:description", content: "מיזם 'קשר של תפילין' של עמותת אור חדש - מחלקים תפילין לכל יהודי שרוצה להניח ולהתחבר. למעלה מ-1,000 זוגות חולקו." },
+      { title: "קשר של תפילין | עמותת אור חדש" },
+      { name: "description", content: "מיזם 'קשר של תפילין' של עמותת אור חדש - מחלקים תפילין לכל יהודי שרוצה להניח. מעל 1,300 זוגות חולקו." },
+      { property: "og:title", content: "קשר של תפילין | עמותת אור חדש" },
+      { property: "og:description", content: "מיזם 'קשר של תפילין' של עמותת אור חדש - מחלקים תפילין לכל יהודי שרוצה להניח. מעל 1,300 זוגות חולקו." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/" },
+      { property: "og:site_name", content: "קשר של תפילין" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "קשר של תפילין | מיזם אור חדש - ערבות הדדית וזיכוי הרבים" },
-      { name: "twitter:description", content: "מיזם 'קשר של תפילין' של עמותת אור חדש - מחלקים תפילין לכל יהודי שרוצה להניח ולהתחבר. למעלה מ-1,000 זוגות חולקו." },
+      { name: "twitter:title", content: "קשר של תפילין | עמותת אור חדש" },
+      { name: "twitter:description", content: "מיזם 'קשר של תפילין' של עמותת אור חדש - מחלקים תפילין לכל יהודי שרוצה להניח. מעל 1,300 זוגות חולקו." },
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/4d2288ef-5f55-4c3e-9e96-a5f39ffa8803/id-preview-120691d0--167f27e2-2714-4390-92ec-a8678508fc95.lovable.app-1782589019117.png" },
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/4d2288ef-5f55-4c3e-9e96-a5f39ffa8803/id-preview-120691d0--167f27e2-2714-4390-92ec-a8678508fc95.lovable.app-1782589019117.png" },
     ],
@@ -94,7 +94,29 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&family=Frank+Ruhl+Libre:wght@400;500;700;800;900&display=swap" },
-      { rel: "canonical", href: "/" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Organization",
+              name: "עמותת אור חדש",
+              alternateName: "קשר של תפילין",
+              url: "https://accurate-web-cloner.lovable.app/",
+              logo: "https://accurate-web-cloner.lovable.app/wp/img/אור-חדש-לוגו-01.svg",
+            },
+            {
+              "@type": "WebSite",
+              name: "קשר של תפילין",
+              url: "https://accurate-web-cloner.lovable.app/",
+              inLanguage: "he",
+            },
+          ],
+        }),
+      },
     ],
   }),
   shellComponent: RootShell,
@@ -102,6 +124,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
+
 
 function RootShell({ children }: { children: ReactNode }) {
   return (

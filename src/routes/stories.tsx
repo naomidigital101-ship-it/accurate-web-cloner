@@ -3,9 +3,19 @@ import { PageShell } from "@/components/PageShell";
 import { storyIndex } from "@/data/stories-index";
 
 export const Route = createFileRoute("/stories")({
-  head: () => ({ meta: [{ title: "סיפורים - קשר של תפילין" }] }),
+  head: () => ({
+    meta: [
+      { title: "סיפורים | קשר של תפילין" },
+      { name: "description", content: "סיפורים אמיתיים ומרגשים של יהודים שקיבלו תפילין ממיזם 'קשר של תפילין' של עמותת אור חדש." },
+      { property: "og:title", content: "סיפורים | קשר של תפילין" },
+      { property: "og:description", content: "סיפורים אמיתיים ומרגשים של יהודים שקיבלו תפילין ממיזם 'קשר של תפילין'." },
+      { property: "og:url", content: "https://accurate-web-cloner.lovable.app/stories" },
+    ],
+    links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/stories" }],
+  }),
   component: StoriesPage,
 });
+
 
 function StoriesPage() {
   return (

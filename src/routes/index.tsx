@@ -17,23 +17,42 @@ import { FaqSection } from "@/components/home/FaqSection";
 import { FounderSection } from "@/components/home/FounderSection";
 import { ServicesSection } from "@/components/home/ServicesSection";
 
+const HOME_TITLE = "קשר של תפילין | עמותת אור חדש";
+const HOME_DESC = "מיזם של ערבות הדדית וזיכוי הרבים - מחלקים תפילין מהודרות מחודשות לכל יהודי שרוצה להניח. מעל 1,300 זוגות חולקו.";
+const HOME_URL = "https://accurate-web-cloner.lovable.app/";
+
+const faqs: { q: string; a: string }[] = [
+  { q: "מה בדיוק אתם עושים ומה המטרה של הפרויקט ?", a: "מיזם 'קשר של תפילין' של עמותת אור חדש מקבל תפילין משומשות, מחדש אותן על ידי סופרי סת\"ם מומחים, ומוסר אותן ליהודים שרוצים להניח תפילין ואין להם משלהם." },
+  { q: "זה בתשלום? כמה?", a: "מקבל התפילין מתבקש לשלם רק את עלויות העבודה - כרבע ממחיר השוק. מי שאינו יכול לשלם - מקבל בכל מקרה." },
+  { q: "יש לי תפילין בבית, אבל אני לא יודע אם הן כשרות, זה יכול לעזור?", a: "בהחלט. כל התפילין שמגיעות אלינו עוברות בדיקה מקצועית של סופר סת\"ם, ובמרבית המקרים ניתן לתקן ולחדש אותן." },
+  { q: "אין לי זוג תפילין לתת אבל אני רוצה להשתתף במצווה.", a: "אפשר להשתתף בזיכוי הרבים בתרומה כספית למיזם דרך עמוד התרומות באתר." },
+];
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "קשר של תפילין | מיזם אור חדש - ערבות הדדית וזיכוי הרבים" },
-      {
-        name: "description",
-        content:
-          "מיזם 'קשר של תפילין' של עמותת אור חדש - מחלקים תפילין מהודרות לכל יהודי שמבקש. מעל 1,300 זוגות חולקו.",
-      },
-      { property: "og:title", content: "קשר של תפילין | מיזם אור חדש" },
-      {
-        property: "og:description",
-        content: "מיזם של ערבות הדדית וזיכוי הרבים. חילקנו מעל 1,300 זוגות תפילין.",
-      },
+      { title: HOME_TITLE },
+      { name: "description", content: HOME_DESC },
+      { property: "og:title", content: HOME_TITLE },
+      { property: "og:description", content: HOME_DESC },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: HOME_URL },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: HOME_URL }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqs.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }),
+      },
+    ],
   }),
   component: Index,
 });
@@ -42,6 +61,7 @@ function Index() {
   return (
     <div dir="rtl" lang="he" className="min-h-screen bg-background">
       <Header />
+      <h1 className="sr-only">קשר של תפילין - מיזם עמותת אור חדש לחיבור וחלוקת תפילין</h1>
       <main>
         <HeroSection />
         <FormTabsSection />
@@ -62,3 +82,4 @@ function Index() {
     </div>
   );
 }
+
