@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://accurate-web-cloner.lovable.app/sitemap.xml
