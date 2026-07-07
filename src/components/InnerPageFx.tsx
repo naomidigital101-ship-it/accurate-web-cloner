@@ -36,14 +36,16 @@ export function InnerPageFx() {
   }, [open, close, next, prev]);
 
   useEffect(() => {
-    const strip = document.querySelector(".page-bg-strip") as HTMLElement | null;
-    if (!strip) return;
     let raf = 0;
     const onScroll = () => {
       cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => { strip.style.transform = `translateY(${-window.scrollY * 0.06}px)`; });
+      raf = requestAnimationFrame(() => {
+        const strip = document.querySelector(".page-bg-strip") as HTMLElement | null;
+        if (strip) strip.style.transform = `translateY(${-window.scrollY * 0.06}px)`;
+      });
     };
     window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
     return () => { window.removeEventListener("scroll", onScroll); cancelAnimationFrame(raf); };
   }, []);
 
