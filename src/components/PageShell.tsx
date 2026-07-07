@@ -1,5 +1,6 @@
 import { Header } from "@/components/home/Header";
 import { PageFooter } from "@/components/PageFooter";
+import { InnerPageFx } from "@/components/InnerPageFx";
 
 export function PageShell({ title, en = false, children }: { title: string; en?: boolean; children: React.ReactNode }) {
   return (
@@ -11,6 +12,7 @@ export function PageShell({ title, en = false, children }: { title: string; en?:
         {children}
       </main>
       <PageFooter />
+      <InnerPageFx />
     </div>
   );
 }
