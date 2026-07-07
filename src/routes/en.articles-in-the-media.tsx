@@ -41,7 +41,7 @@ const press: PressItem[] = [
   },
 ];
 
-export const Route = createFileRoute("/en/media")({
+export const Route = createFileRoute("/en/articles-in-the-media")({
   head: () => ({ meta: [{ title: "In the Media | The Tefillin Tie Initiative" }] }),
   component: Page,
 });

@@ -23,7 +23,7 @@ import { Route as EnIndexRouteImport } from './routes/en.index'
 import { Route as TefilinSlugRouteImport } from './routes/tefilin.$slug'
 import { Route as EnThankYouLettersRouteImport } from './routes/en.thank-you-letters'
 import { Route as EnRabbisAgreementsRouteImport } from './routes/en.rabbis-agreements'
-import { Route as EnMediaRouteImport } from './routes/en.media'
+import { Route as EnArticlesInTheMediaRouteImport } from './routes/en.articles-in-the-media'
 
 const StoriesRoute = StoriesRouteImport.update({
   id: '/stories',
@@ -95,9 +95,9 @@ const EnRabbisAgreementsRoute = EnRabbisAgreementsRouteImport.update({
   path: '/rabbis-agreements',
   getParentRoute: () => EnRoute,
 } as any)
-const EnMediaRoute = EnMediaRouteImport.update({
-  id: '/media',
-  path: '/media',
+const EnArticlesInTheMediaRoute = EnArticlesInTheMediaRouteImport.update({
+  id: '/articles-in-the-media',
+  path: '/articles-in-the-media',
   getParentRoute: () => EnRoute,
 } as any)
 
@@ -112,7 +112,7 @@ export interface FileRoutesByFullPath {
   '/letters': typeof LettersRoute
   '/request': typeof RequestRoute
   '/stories': typeof StoriesRoute
-  '/en/media': typeof EnMediaRoute
+  '/en/articles-in-the-media': typeof EnArticlesInTheMediaRoute
   '/en/rabbis-agreements': typeof EnRabbisAgreementsRoute
   '/en/thank-you-letters': typeof EnThankYouLettersRoute
   '/tefilin/$slug': typeof TefilinSlugRoute
@@ -128,7 +128,7 @@ export interface FileRoutesByTo {
   '/letters': typeof LettersRoute
   '/request': typeof RequestRoute
   '/stories': typeof StoriesRoute
-  '/en/media': typeof EnMediaRoute
+  '/en/articles-in-the-media': typeof EnArticlesInTheMediaRoute
   '/en/rabbis-agreements': typeof EnRabbisAgreementsRoute
   '/en/thank-you-letters': typeof EnThankYouLettersRoute
   '/tefilin/$slug': typeof TefilinSlugRoute
@@ -146,7 +146,7 @@ export interface FileRoutesById {
   '/letters': typeof LettersRoute
   '/request': typeof RequestRoute
   '/stories': typeof StoriesRoute
-  '/en/media': typeof EnMediaRoute
+  '/en/articles-in-the-media': typeof EnArticlesInTheMediaRoute
   '/en/rabbis-agreements': typeof EnRabbisAgreementsRoute
   '/en/thank-you-letters': typeof EnThankYouLettersRoute
   '/tefilin/$slug': typeof TefilinSlugRoute
@@ -165,7 +165,7 @@ export interface FileRouteTypes {
     | '/letters'
     | '/request'
     | '/stories'
-    | '/en/media'
+    | '/en/articles-in-the-media'
     | '/en/rabbis-agreements'
     | '/en/thank-you-letters'
     | '/tefilin/$slug'
@@ -181,7 +181,7 @@ export interface FileRouteTypes {
     | '/letters'
     | '/request'
     | '/stories'
-    | '/en/media'
+    | '/en/articles-in-the-media'
     | '/en/rabbis-agreements'
     | '/en/thank-you-letters'
     | '/tefilin/$slug'
@@ -198,7 +198,7 @@ export interface FileRouteTypes {
     | '/letters'
     | '/request'
     | '/stories'
-    | '/en/media'
+    | '/en/articles-in-the-media'
     | '/en/rabbis-agreements'
     | '/en/thank-you-letters'
     | '/tefilin/$slug'
@@ -319,25 +319,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnRabbisAgreementsRouteImport
       parentRoute: typeof EnRoute
     }
-    '/en/media': {
-      id: '/en/media'
-      path: '/media'
-      fullPath: '/en/media'
-      preLoaderRoute: typeof EnMediaRouteImport
+    '/en/articles-in-the-media': {
+      id: '/en/articles-in-the-media'
+      path: '/articles-in-the-media'
+      fullPath: '/en/articles-in-the-media'
+      preLoaderRoute: typeof EnArticlesInTheMediaRouteImport
       parentRoute: typeof EnRoute
     }
   }
 }
 
 interface EnRouteChildren {
-  EnMediaRoute: typeof EnMediaRoute
+  EnArticlesInTheMediaRoute: typeof EnArticlesInTheMediaRoute
   EnRabbisAgreementsRoute: typeof EnRabbisAgreementsRoute
   EnThankYouLettersRoute: typeof EnThankYouLettersRoute
   EnIndexRoute: typeof EnIndexRoute
 }
 
 const EnRouteChildren: EnRouteChildren = {
-  EnMediaRoute: EnMediaRoute,
+  EnArticlesInTheMediaRoute: EnArticlesInTheMediaRoute,
   EnRabbisAgreementsRoute: EnRabbisAgreementsRoute,
   EnThankYouLettersRoute: EnThankYouLettersRoute,
   EnIndexRoute: EnIndexRoute,
