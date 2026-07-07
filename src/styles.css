@@ -1632,7 +1632,7 @@
 
 /* רצועת רקע כחולה קבועה בצד המוביל - צילום התפילין */
 .page-bg-strip {
-  position: absolute; top: 0; bottom: 0; right: 0; width: 25%; z-index: 0;
+  position: fixed; top: -10vh; bottom: -10vh; right: 0; width: 25%; z-index: 0; will-change: transform;
   background-image: url("/wp/uploads/2024/01/midsection-woman-with-tape-rolled-hand-holding-book-min.webp");
   background-size: cover; background-position: center center; background-repeat: no-repeat;
 }
@@ -1679,17 +1679,18 @@
 @media (max-width: 1024px) { .doc-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 640px) { .doc-grid { grid-template-columns: 1fr; } }
 .doc-card {
-  background: #ffffff; border-radius: 10px;
-  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.15);
-  padding: 12px;
   display: grid; grid-template-columns: auto 1fr;
   column-gap: 10px; row-gap: 2px;
   text-align: start;
-  transition: transform 0.3s;
 }
-.doc-card:hover { transform: translateY(-5px); }
-.doc-card-letter { grid-column: 1 / 3; display: block; }
-.doc-card-letter img { width: 100%; aspect-ratio: 251 / 355; height: auto; object-fit: fill; display: block; }
+.doc-card-letter { grid-column: 1 / 3; display: block; cursor: pointer; }
+.doc-card-letter img {
+  width: 100%; aspect-ratio: 251 / 355; height: auto; object-fit: fill; display: block;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  transition: box-shadow 0.3s;
+}
+.doc-card-letter:hover img { box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
 .doc-card-portrait {
   grid-column: 1; grid-row: 2 / 4; align-self: start;
   width: 75px; height: 80px; border-radius: 100px; object-fit: cover;
