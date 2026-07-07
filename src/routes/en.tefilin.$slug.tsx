@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { StoryShell } from "@/components/StoryShell";
 import { PageShell } from "@/components/PageShell";
 import { enStories } from "@/data/en-stories";
 
@@ -13,8 +14,22 @@ export const Route = createFileRoute("/en/tefilin/$slug")({
         ],
       };
     }
+    const url = `https://accurate-web-cloner.lovable.app/en/tefilin/${params.slug}`;
+    const desc = (story.paragraphs?.[0] ?? story.title).replace(/\s+/g, " ").slice(0, 155);
+    const title = `${story.title} | The Tefillin Tie Initiative`;
+    const image = story.img.startsWith("http") ? story.img : `https://accurate-web-cloner.lovable.app${story.img}`;
     return {
-      meta: [{ title: `${story.title} | The Tefillin Tie Initiative` }],
+      meta: [
+        { title },
+        { name: "description", content: desc },
+        { property: "og:title", content: title },
+        { property: "og:description", content: desc },
+        { property: "og:type", content: "article" },
+        { property: "og:url", content: url },
+        { property: "og:image", content: image },
+        { name: "twitter:image", content: image },
+      ],
+      links: [{ rel: "canonical", href: url }],
     };
   },
   component: StoryPage,
@@ -35,31 +50,16 @@ function StoryPage() {
   const prev = enStories[idx + 1];
   const next = enStories[idx - 1];
   return (
-    <PageShell title={story.title} en>
-      <article className="story-e">
-        {story.subtitle && <h2 className="story-subtitle">{story.subtitle}</h2>}
-        <div className="qc-meta story-meta">
-          {story.name && <span>{story.name}</span>}
-          {story.place && <span>{story.place}</span>}
-        </div>
-        {story.paragraphs.map((p, i) => (
-          <p key={i} className="story-par">{p}</p>
-        ))}
-        <nav className="story-nav" aria-label="Story navigation">
-          {prev ? (
-            <Link to="/en/tefilin/$slug" params={{ slug: prev.slug }} className="story-nav-link">
-              <span>Prev סיפור קודם</span>
-              <b>{prev.title}</b>
-            </Link>
-          ) : <span />}
-          {next ? (
-            <Link to="/en/tefilin/$slug" params={{ slug: next.slug }} className="story-nav-link story-nav-next">
-              <span>הבא Next</span>
-              <b>{next.title}</b>
-            </Link>
-          ) : <span />}
-        </nav>
-      </article>
-    </PageShell>
+    <StoryShell
+      en
+      title={story.title}
+      subtitle={story.subtitle}
+      name={story.name || undefined}
+      place={story.place || undefined}
+      img={story.img}
+      paragraphs={story.paragraphs}
+      prev={prev ? { slug: prev.slug, title: prev.title } : undefined}
+      next={next ? { slug: next.slug, title: next.title } : undefined}
+    />
   );
 }
