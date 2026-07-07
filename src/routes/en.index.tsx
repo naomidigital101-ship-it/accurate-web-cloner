@@ -140,7 +140,7 @@ function EnField({
   );
 }
 
-function EnRadio({
+function EnSelectField({
   label,
   col,
   name,
@@ -153,14 +153,17 @@ function EnRadio({
 }) {
   return (
     <div className={`e-field-group col-${col}`}>
-      <span className="e-field-label">{label}</span>
-      <div className="e-radio-group">
-        {options.map((o) => (
-          <label key={o} className="e-radio-option">
-            <input type="radio" name={name} value={o} />
-            {o}
-          </label>
-        ))}
+      <label className="e-field-label" htmlFor={name}>
+        {label}
+      </label>
+      <div className="e-select-wrap">
+        <select className="e-field e-select" id={name} name={name}>
+          {options.map((o) => (
+            <option key={o} value={o}>
+              {o}
+            </option>
+          ))}
+        </select>
       </div>
     </div>
   );
@@ -184,14 +187,14 @@ function EnRequestForm() {
     >
       {step === 1 && (
         <div className="e-form-fields">
-          <EnRadio
+          <EnSelectField
             label="Who are the tefillin for?"
             col={50}
             name="target"
             options={["a soldier", "Bar Mitzvah", "getting stronger", "Other"]}
           />
-          <EnRadio label="writing by hand" col={50} name="hand" options={["right", "left"]} />
-          <EnRadio
+          <EnSelectField label="writing by hand" col={50} name="hand" options={["right", "left"]} />
+          <EnSelectField
             label="Delivery method"
             col={100}
             name="delivery"
@@ -268,7 +271,7 @@ function EnDonateForm() {
         <div className="e-form-fields">
           <EnField label="full name" col={100} name="name" />
           <EnField label="address for pick up" col={60} name="pickup" />
-          <EnRadio
+          <EnSelectField
             label="condition of the tefillin"
             col={40}
             name="condition"
