@@ -1993,3 +1993,7 @@
 .lb-prev { left: 20px; } .lb-next { right: 20px; }
 .lb-nav:hover { background: rgba(255,255,255,0.3); }
 
+
+/* Story pages: dark header on light hero band */
+.story-shell .e-nav-link { color: #2d2e83; }
+.story-shell .e-nav-link svg { fill: #2d2e83; }
