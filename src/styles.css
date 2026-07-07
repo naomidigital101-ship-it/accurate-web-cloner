@@ -1727,16 +1727,19 @@
 
 /* stories page grid */
 .stories-page-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.stories-page-grid > *:nth-child(6n+1) { grid-column: span 2; }
 @media (max-width: 1024px) { .stories-page-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .stories-page-grid > *:nth-child(6n+1) { grid-column: auto; } }
 .eng-link {
-  display: inline-block;
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #67ffd1; color: #2d2e83;
   font-family: "Maadim", "Maadim OS", sans-serif;
-  font-size: 18px;
-  color: #2d2e83;
-  margin-bottom: 20px;
-  text-decoration: none;
-  border-bottom: 2px solid #67ffd1;
+  font-size: 16px; font-weight: bold;
+  border-radius: 100px; padding: 8px 18px;
+  text-decoration: none; margin-bottom: 24px;
 }
+.e-nav-link.e-nav-active { color: #2d2e83; fill: #2d2e83; }
+.e-nav-link.e-nav-active::before { opacity: 1; transform: translateX(0); }
 
 /* in-news list */
 .news-list { display: flex; flex-direction: column; gap: 20px; max-width: 760px; }

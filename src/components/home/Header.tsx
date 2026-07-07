@@ -95,9 +95,11 @@ export function Header({ en = false }: { en?: boolean } = {}) {
         <div className="flex flex-col justify-center items-start" style={{ width: "70%" }}>
           <nav aria-label="תפריט" className="hidden lg:block">
             <ul className="flex flex-row items-center m-0 p-0 list-none">
-              {items.map((item) => (
+              {items.map((item) => {
+                const isActive = item.href !== "#" && (item.href.replace(/\/+$/, "") || "/") === pathname;
+                return (
                 <li key={item.label} className="relative group">
-                  <a href={item.href} className="e-nav-link">
+                  <a href={item.href} className={`e-nav-link${isActive ? " e-nav-active" : ""}`}>
                     {item.label}
                     {item.children && <CaretDown />}
                   </a>
@@ -109,7 +111,8 @@ export function Header({ en = false }: { en?: boolean } = {}) {
                     </div>
                   )}
                 </li>
-              ))}
+                );
+              })}
               <li>
                 <a href={switcherHref} lang={en ? undefined : "en-US"} className="e-nav-link">{switcherLabel}</a>
               </li>
