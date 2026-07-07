@@ -187,14 +187,14 @@ function EnRequestForm() {
     >
       {step === 1 && (
         <div className="e-form-fields">
-          <EnRadio
+          <EnSelectField
             label="Who are the tefillin for?"
             col={50}
             name="target"
             options={["a soldier", "Bar Mitzvah", "getting stronger", "Other"]}
           />
-          <EnRadio label="writing by hand" col={50} name="hand" options={["right", "left"]} />
-          <EnRadio
+          <EnSelectField label="writing by hand" col={50} name="hand" options={["right", "left"]} />
+          <EnSelectField
             label="Delivery method"
             col={100}
             name="delivery"
