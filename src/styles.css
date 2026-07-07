@@ -1886,7 +1886,7 @@
   font-size: 16px; font-weight: 600; color: #009fe3;
 }
 .story-meta-arrow { color: #009fe3; font-size: 18px; line-height: 1; }
-.story-meta-text { display: inline-flex; flex-direction: column; gap: 2px; }
+.story-meta-text { display: inline-flex; flex-direction: row; gap: 6px; align-items: baseline; flex-wrap: wrap; }
 .story-meta-text b { color: #2d2e83; font-weight: 700; }
 .story-meta-text span { color: #009fe3; font-weight: 600; }
 .story-text-col { max-width: 740px; }
