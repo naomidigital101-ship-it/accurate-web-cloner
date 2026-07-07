@@ -31,7 +31,7 @@ function CaretDown() {
   );
 }
 
-export function Header({ en = false }: { en?: boolean } = {}) {
+export function Header({ en = false, dark = false }: { en?: boolean; dark?: boolean } = {}) {
   const [open, setOpen] = useState(false);
   const [bgT, setBgT] = useState(0);
 
