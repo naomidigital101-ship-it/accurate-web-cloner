@@ -1827,6 +1827,8 @@
   border-top-color: #2d2e83;
   pointer-events: none;
 }
+[dir="ltr"] .e-select-wrap::after { right: 12px; left: auto; }
+[dir="ltr"] .e-select { padding-right: 32px; padding-left: 14px; }
 .how-arrow { position: absolute; top: 50px; right: 70px; z-index: 2; }
 
 /* Lightbox לפתיחת מכתבים */
