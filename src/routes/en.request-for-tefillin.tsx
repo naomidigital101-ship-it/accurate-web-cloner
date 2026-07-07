@@ -85,8 +85,6 @@ function Page() {
     <PageShell title="Request for Tefillin" en>
       <div className="formpage-wrap">
         <div className="form-card">
-          <h2 className="form-card-title">Want to lay your own tefillin?</h2>
-          <p className="form-card-sub">Please fill out the attached form so we can help you get your own tefillin!</p>
           <EnRequestForm />
         </div>
       </div>
