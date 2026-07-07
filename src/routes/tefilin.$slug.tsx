@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
+import { StoryShell } from "@/components/StoryShell";
 import { stories } from "@/data/stories";
+
 
 export const Route = createFileRoute("/tefilin/$slug")({
   head: ({ params }) => {
