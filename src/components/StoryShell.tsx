@@ -61,7 +61,7 @@ export function StoryShell({
           <aside className="story-meta-col" aria-label={en ? "story info" : "פרטי הסיפור"}>
             {(name || place) && (
               <div className="story-meta-row">
-                <span className="story-meta-arrow" aria-hidden="true">{en ? "◂" : "▸"}</span>
+                <span className="story-meta-arrow" aria-hidden="true">◂</span>
                 <span className="story-meta-text">
                   {name && <b>{name}</b>}
                   {place && <span>{place}</span>}
