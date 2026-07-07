@@ -37,8 +37,8 @@ export function Header({ en = false }: { en?: boolean } = {}) {
 
   const heNav: NavItem[] = navItems;
   const enNav: NavItem[] = [
-    { label: "stories", href: "/stories" },
-    { label: "media", href: "/en/media" },
+    { label: "stories", href: "/en/stories-2" },
+    { label: "media", href: "/en/articles-in-the-media" },
     {
       label: "letters",
       href: "#",
@@ -47,13 +47,28 @@ export function Header({ en = false }: { en?: boolean } = {}) {
         { label: "Rabbis agreements", href: "/en/rabbis-agreements" },
       ],
     },
-    { label: "Request for Tefillin", href: "/request" },
-    { label: "Donate Tefillin", href: "/give" },
-    { label: "support and donation", href: "/donate" },
+    { label: "Request for Tefillin", href: "/en/request-for-tefillin" },
+    { label: "Donate Tefillin", href: "/en/request-to-donate-tefillin" },
+    { label: "support and donation", href: "/en/support-and-donation" },
   ];
   const items = en ? enNav : heNav;
+
+  // Per-page language switcher (WPML-style mapping)
+  const location = useLocation();
+  const pathname = location.pathname.replace(/\/+$/, "") || "/";
+  const heToEn: Record<string, string> = {
+    "/": "/en",
+    "/stories": "/en/stories-2",
+    "/in-news": "/en/articles-in-the-media",
+    "/letters": "/en/thank-you-letters",
+    "/agreements": "/en/rabbis-agreements",
+    "/request": "/en/request-for-tefillin",
+    "/give": "/en/request-to-donate-tefillin",
+    "/donate": "/en/support-and-donation",
+  };
+  const enToHe: Record<string, string> = Object.fromEntries(Object.entries(heToEn).map(([h, e]) => [e, h]));
   const switcherLabel = en ? "עברית" : "English";
-  const switcherHref = en ? "/" : "/en";
+  const switcherHref = en ? (enToHe[pathname] ?? "/") : (heToEn[pathname] ?? "/en");
   const homeHref = en ? "/en" : "/";
   const dir = en ? "ltr" : "rtl";
 
