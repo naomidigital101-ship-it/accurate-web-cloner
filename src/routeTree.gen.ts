@@ -22,6 +22,10 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as EnIndexRouteImport } from './routes/en.index'
 import { Route as TefilinSlugRouteImport } from './routes/tefilin.$slug'
 import { Route as EnThankYouLettersRouteImport } from './routes/en.thank-you-letters'
+import { Route as EnSupportAndDonationRouteImport } from './routes/en.support-and-donation'
+import { Route as EnStories2RouteImport } from './routes/en.stories-2'
+import { Route as EnRequestToDonateTefillinRouteImport } from './routes/en.request-to-donate-tefillin'
+import { Route as EnRequestForTefillinRouteImport } from './routes/en.request-for-tefillin'
 import { Route as EnRabbisAgreementsRouteImport } from './routes/en.rabbis-agreements'
 import { Route as EnArticlesInTheMediaRouteImport } from './routes/en.articles-in-the-media'
 
@@ -90,6 +94,27 @@ const EnThankYouLettersRoute = EnThankYouLettersRouteImport.update({
   path: '/thank-you-letters',
   getParentRoute: () => EnRoute,
 } as any)
+const EnSupportAndDonationRoute = EnSupportAndDonationRouteImport.update({
+  id: '/support-and-donation',
+  path: '/support-and-donation',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnStories2Route = EnStories2RouteImport.update({
+  id: '/stories-2',
+  path: '/stories-2',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnRequestToDonateTefillinRoute =
+  EnRequestToDonateTefillinRouteImport.update({
+    id: '/request-to-donate-tefillin',
+    path: '/request-to-donate-tefillin',
+    getParentRoute: () => EnRoute,
+  } as any)
+const EnRequestForTefillinRoute = EnRequestForTefillinRouteImport.update({
+  id: '/request-for-tefillin',
+  path: '/request-for-tefillin',
+  getParentRoute: () => EnRoute,
+} as any)
 const EnRabbisAgreementsRoute = EnRabbisAgreementsRouteImport.update({
   id: '/rabbis-agreements',
   path: '/rabbis-agreements',
@@ -114,6 +139,10 @@ export interface FileRoutesByFullPath {
   '/stories': typeof StoriesRoute
   '/en/articles-in-the-media': typeof EnArticlesInTheMediaRoute
   '/en/rabbis-agreements': typeof EnRabbisAgreementsRoute
+  '/en/request-for-tefillin': typeof EnRequestForTefillinRoute
+  '/en/request-to-donate-tefillin': typeof EnRequestToDonateTefillinRoute
+  '/en/stories-2': typeof EnStories2Route
+  '/en/support-and-donation': typeof EnSupportAndDonationRoute
   '/en/thank-you-letters': typeof EnThankYouLettersRoute
   '/tefilin/$slug': typeof TefilinSlugRoute
   '/en/': typeof EnIndexRoute
@@ -130,6 +159,10 @@ export interface FileRoutesByTo {
   '/stories': typeof StoriesRoute
   '/en/articles-in-the-media': typeof EnArticlesInTheMediaRoute
   '/en/rabbis-agreements': typeof EnRabbisAgreementsRoute
+  '/en/request-for-tefillin': typeof EnRequestForTefillinRoute
+  '/en/request-to-donate-tefillin': typeof EnRequestToDonateTefillinRoute
+  '/en/stories-2': typeof EnStories2Route
+  '/en/support-and-donation': typeof EnSupportAndDonationRoute
   '/en/thank-you-letters': typeof EnThankYouLettersRoute
   '/tefilin/$slug': typeof TefilinSlugRoute
   '/en': typeof EnIndexRoute
@@ -148,6 +181,10 @@ export interface FileRoutesById {
   '/stories': typeof StoriesRoute
   '/en/articles-in-the-media': typeof EnArticlesInTheMediaRoute
   '/en/rabbis-agreements': typeof EnRabbisAgreementsRoute
+  '/en/request-for-tefillin': typeof EnRequestForTefillinRoute
+  '/en/request-to-donate-tefillin': typeof EnRequestToDonateTefillinRoute
+  '/en/stories-2': typeof EnStories2Route
+  '/en/support-and-donation': typeof EnSupportAndDonationRoute
   '/en/thank-you-letters': typeof EnThankYouLettersRoute
   '/tefilin/$slug': typeof TefilinSlugRoute
   '/en/': typeof EnIndexRoute
@@ -167,6 +204,10 @@ export interface FileRouteTypes {
     | '/stories'
     | '/en/articles-in-the-media'
     | '/en/rabbis-agreements'
+    | '/en/request-for-tefillin'
+    | '/en/request-to-donate-tefillin'
+    | '/en/stories-2'
+    | '/en/support-and-donation'
     | '/en/thank-you-letters'
     | '/tefilin/$slug'
     | '/en/'
@@ -183,6 +224,10 @@ export interface FileRouteTypes {
     | '/stories'
     | '/en/articles-in-the-media'
     | '/en/rabbis-agreements'
+    | '/en/request-for-tefillin'
+    | '/en/request-to-donate-tefillin'
+    | '/en/stories-2'
+    | '/en/support-and-donation'
     | '/en/thank-you-letters'
     | '/tefilin/$slug'
     | '/en'
@@ -200,6 +245,10 @@ export interface FileRouteTypes {
     | '/stories'
     | '/en/articles-in-the-media'
     | '/en/rabbis-agreements'
+    | '/en/request-for-tefillin'
+    | '/en/request-to-donate-tefillin'
+    | '/en/stories-2'
+    | '/en/support-and-donation'
     | '/en/thank-you-letters'
     | '/tefilin/$slug'
     | '/en/'
@@ -312,6 +361,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnThankYouLettersRouteImport
       parentRoute: typeof EnRoute
     }
+    '/en/support-and-donation': {
+      id: '/en/support-and-donation'
+      path: '/support-and-donation'
+      fullPath: '/en/support-and-donation'
+      preLoaderRoute: typeof EnSupportAndDonationRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/stories-2': {
+      id: '/en/stories-2'
+      path: '/stories-2'
+      fullPath: '/en/stories-2'
+      preLoaderRoute: typeof EnStories2RouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/request-to-donate-tefillin': {
+      id: '/en/request-to-donate-tefillin'
+      path: '/request-to-donate-tefillin'
+      fullPath: '/en/request-to-donate-tefillin'
+      preLoaderRoute: typeof EnRequestToDonateTefillinRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/request-for-tefillin': {
+      id: '/en/request-for-tefillin'
+      path: '/request-for-tefillin'
+      fullPath: '/en/request-for-tefillin'
+      preLoaderRoute: typeof EnRequestForTefillinRouteImport
+      parentRoute: typeof EnRoute
+    }
     '/en/rabbis-agreements': {
       id: '/en/rabbis-agreements'
       path: '/rabbis-agreements'
@@ -332,6 +409,10 @@ declare module '@tanstack/react-router' {
 interface EnRouteChildren {
   EnArticlesInTheMediaRoute: typeof EnArticlesInTheMediaRoute
   EnRabbisAgreementsRoute: typeof EnRabbisAgreementsRoute
+  EnRequestForTefillinRoute: typeof EnRequestForTefillinRoute
+  EnRequestToDonateTefillinRoute: typeof EnRequestToDonateTefillinRoute
+  EnStories2Route: typeof EnStories2Route
+  EnSupportAndDonationRoute: typeof EnSupportAndDonationRoute
   EnThankYouLettersRoute: typeof EnThankYouLettersRoute
   EnIndexRoute: typeof EnIndexRoute
 }
@@ -339,6 +420,10 @@ interface EnRouteChildren {
 const EnRouteChildren: EnRouteChildren = {
   EnArticlesInTheMediaRoute: EnArticlesInTheMediaRoute,
   EnRabbisAgreementsRoute: EnRabbisAgreementsRoute,
+  EnRequestForTefillinRoute: EnRequestForTefillinRoute,
+  EnRequestToDonateTefillinRoute: EnRequestToDonateTefillinRoute,
+  EnStories2Route: EnStories2Route,
+  EnSupportAndDonationRoute: EnSupportAndDonationRoute,
   EnThankYouLettersRoute: EnThankYouLettersRoute,
   EnIndexRoute: EnIndexRoute,
 }
