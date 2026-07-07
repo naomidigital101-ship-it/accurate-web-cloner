@@ -111,7 +111,8 @@ export function Header({ en = false }: { en?: boolean } = {}) {
                     </div>
                   )}
                 </li>
-              ))}
+                );
+              })}
               <li>
                 <a href={switcherHref} lang={en ? undefined : "en-US"} className="e-nav-link">{switcherLabel}</a>
               </li>
