@@ -42,13 +42,13 @@ const press: PressItem[] = [
 ];
 
 export const Route = createFileRoute("/en/articles-in-the-media")({
-  head: () => ({ meta: [{ title: "In the Media | The Tefillin Tie Initiative" }] }),
+  head: () => ({ meta: [{ title: "articles in the media | The Tefillin Tie Initiative" }] }),
   component: Page,
 });
 
 function Page() {
   return (
-    <PageShell title="In the Media" en>
+    <PageShell title="articles in the media" en>
       <div className="news-list">
         {press.map((p, i) => (
           <a key={i} href={p.href} target="_blank" rel="noopener" className="press-item">
