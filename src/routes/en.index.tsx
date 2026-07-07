@@ -271,7 +271,7 @@ function EnDonateForm() {
         <div className="e-form-fields">
           <EnField label="full name" col={100} name="name" />
           <EnField label="address for pick up" col={60} name="pickup" />
-          <EnRadio
+          <EnSelectField
             label="condition of the tefillin"
             col={40}
             name="condition"
