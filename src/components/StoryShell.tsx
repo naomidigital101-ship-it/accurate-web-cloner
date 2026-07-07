@@ -33,7 +33,7 @@ export function StoryShell({
   const linkTo = en ? "/en/tefilin/$slug" : "/tefilin/$slug";
   return (
     <div dir={en ? "ltr" : "rtl"} lang={en ? "en" : "he"} className={en ? "story-shell story-shell-en" : "story-shell"}>
-      <Header en={en} />
+      <Header en={en} dark />
 
       <section className="story-hero" aria-hidden={false}>
         <div className="story-hero-bg" style={{ backgroundImage: `url('${img}')` }} />
@@ -61,7 +61,7 @@ export function StoryShell({
           <aside className="story-meta-col" aria-label={en ? "story info" : "פרטי הסיפור"}>
             {(name || place) && (
               <div className="story-meta-row">
-                <span className="story-meta-arrow" aria-hidden="true">{en ? "◂" : "▸"}</span>
+                <span className="story-meta-arrow" aria-hidden="true">◂</span>
                 <span className="story-meta-text">
                   {name && <b>{name}</b>}
                   {place && <span>{place}</span>}

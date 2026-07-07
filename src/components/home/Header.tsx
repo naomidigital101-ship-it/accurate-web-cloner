@@ -31,7 +31,7 @@ function CaretDown() {
   );
 }
 
-export function Header({ en = false }: { en?: boolean } = {}) {
+export function Header({ en = false, dark = false }: { en?: boolean; dark?: boolean } = {}) {
   const [open, setOpen] = useState(false);
   const [bgT, setBgT] = useState(0);
 
@@ -139,7 +139,7 @@ export function Header({ en = false }: { en?: boolean } = {}) {
         {/* עמודת לוגואים - 30%, מוצמדת לשמאל */}
         <div className="flex flex-row justify-end items-start" style={{ width: "30%" }}>
           <a href="https://or-hadash.org.il/" aria-label="אור חדש" className="logo-or hidden md:block">
-            <img src="/wp/img/אור-חדש-לוגו-13.svg" alt="אור חדש" width={444} height={113} />
+            <img src={dark ? "/wp/img/אור-חדש-לוגו-01.svg" : "/wp/img/אור-חדש-לוגו-13.svg"} alt="אור חדש" width={444} height={113} />
           </a>
           <a href={homeHref} aria-label={en ? "The Tefillin Tie Initiative - Home" : "קשר של תפילין - דף הבית"} className="logo-badge">
             <span className="logo-badge-box">
