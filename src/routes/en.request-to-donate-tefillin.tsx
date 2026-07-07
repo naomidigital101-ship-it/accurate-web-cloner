@@ -72,8 +72,6 @@ function Page() {
     <PageShell title="Request to Donate Tefillin" en>
       <div className="formpage-wrap">
         <div className="form-card">
-          <h2 className="form-card-title">Do you have extra tefillin?</h2>
-          <p className="form-card-sub">Please fill out the form so you can fulfill an important mitzvah!</p>
           <EnDonateForm />
         </div>
       </div>
