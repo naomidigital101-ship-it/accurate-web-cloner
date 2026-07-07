@@ -28,6 +28,7 @@ import { Route as EnRequestToDonateTefillinRouteImport } from './routes/en.reque
 import { Route as EnRequestForTefillinRouteImport } from './routes/en.request-for-tefillin'
 import { Route as EnRabbisAgreementsRouteImport } from './routes/en.rabbis-agreements'
 import { Route as EnArticlesInTheMediaRouteImport } from './routes/en.articles-in-the-media'
+import { Route as EnTefilinSlugRouteImport } from './routes/en.tefilin.$slug'
 
 const StoriesRoute = StoriesRouteImport.update({
   id: '/stories',
@@ -125,6 +126,11 @@ const EnArticlesInTheMediaRoute = EnArticlesInTheMediaRouteImport.update({
   path: '/articles-in-the-media',
   getParentRoute: () => EnRoute,
 } as any)
+const EnTefilinSlugRoute = EnTefilinSlugRouteImport.update({
+  id: '/tefilin/$slug',
+  path: '/tefilin/$slug',
+  getParentRoute: () => EnRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -146,6 +152,7 @@ export interface FileRoutesByFullPath {
   '/en/thank-you-letters': typeof EnThankYouLettersRoute
   '/tefilin/$slug': typeof TefilinSlugRoute
   '/en/': typeof EnIndexRoute
+  '/en/tefilin/$slug': typeof EnTefilinSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -166,6 +173,7 @@ export interface FileRoutesByTo {
   '/en/thank-you-letters': typeof EnThankYouLettersRoute
   '/tefilin/$slug': typeof TefilinSlugRoute
   '/en': typeof EnIndexRoute
+  '/en/tefilin/$slug': typeof EnTefilinSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -188,6 +196,7 @@ export interface FileRoutesById {
   '/en/thank-you-letters': typeof EnThankYouLettersRoute
   '/tefilin/$slug': typeof TefilinSlugRoute
   '/en/': typeof EnIndexRoute
+  '/en/tefilin/$slug': typeof EnTefilinSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -211,6 +220,7 @@ export interface FileRouteTypes {
     | '/en/thank-you-letters'
     | '/tefilin/$slug'
     | '/en/'
+    | '/en/tefilin/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -231,6 +241,7 @@ export interface FileRouteTypes {
     | '/en/thank-you-letters'
     | '/tefilin/$slug'
     | '/en'
+    | '/en/tefilin/$slug'
   id:
     | '__root__'
     | '/'
@@ -252,6 +263,7 @@ export interface FileRouteTypes {
     | '/en/thank-you-letters'
     | '/tefilin/$slug'
     | '/en/'
+    | '/en/tefilin/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -403,6 +415,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnArticlesInTheMediaRouteImport
       parentRoute: typeof EnRoute
     }
+    '/en/tefilin/$slug': {
+      id: '/en/tefilin/$slug'
+      path: '/tefilin/$slug'
+      fullPath: '/en/tefilin/$slug'
+      preLoaderRoute: typeof EnTefilinSlugRouteImport
+      parentRoute: typeof EnRoute
+    }
   }
 }
 
@@ -415,6 +434,7 @@ interface EnRouteChildren {
   EnSupportAndDonationRoute: typeof EnSupportAndDonationRoute
   EnThankYouLettersRoute: typeof EnThankYouLettersRoute
   EnIndexRoute: typeof EnIndexRoute
+  EnTefilinSlugRoute: typeof EnTefilinSlugRoute
 }
 
 const EnRouteChildren: EnRouteChildren = {
@@ -426,6 +446,7 @@ const EnRouteChildren: EnRouteChildren = {
   EnSupportAndDonationRoute: EnSupportAndDonationRoute,
   EnThankYouLettersRoute: EnThankYouLettersRoute,
   EnIndexRoute: EnIndexRoute,
+  EnTefilinSlugRoute: EnTefilinSlugRoute,
 }
 
 const EnRouteWithChildren = EnRoute._addFileChildren(EnRouteChildren)
@@ -446,13 +467,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
