@@ -33,7 +33,7 @@ export function StoryShell({
   const linkTo = en ? "/en/tefilin/$slug" : "/tefilin/$slug";
   return (
     <div dir={en ? "ltr" : "rtl"} lang={en ? "en" : "he"} className={en ? "story-shell story-shell-en" : "story-shell"}>
-      <Header en={en} />
+      <Header en={en} dark />
 
       <section className="story-hero" aria-hidden={false}>
         <div className="story-hero-bg" style={{ backgroundImage: `url('${img}')` }} />
