@@ -140,7 +140,7 @@ function EnField({
   );
 }
 
-function EnRadio({
+function EnSelectField({
   label,
   col,
   name,
@@ -153,14 +153,17 @@ function EnRadio({
 }) {
   return (
     <div className={`e-field-group col-${col}`}>
-      <span className="e-field-label">{label}</span>
-      <div className="e-radio-group">
-        {options.map((o) => (
-          <label key={o} className="e-radio-option">
-            <input type="radio" name={name} value={o} />
-            {o}
-          </label>
-        ))}
+      <label className="e-field-label" htmlFor={name}>
+        {label}
+      </label>
+      <div className="e-select-wrap">
+        <select className="e-field e-select" id={name} name={name}>
+          {options.map((o) => (
+            <option key={o} value={o}>
+              {o}
+            </option>
+          ))}
+        </select>
       </div>
     </div>
   );
