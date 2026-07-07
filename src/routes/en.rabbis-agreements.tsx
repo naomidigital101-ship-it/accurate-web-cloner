@@ -22,7 +22,7 @@ export const Route = createFileRoute("/en/rabbis-agreements")({
 
 function Page() {
   return (
-    <PageShell title="Rabbis agreements" en>
+    <PageShell title="RABBIS AGREEMENTS" en>
       <div className="doc-grid">
         {rabbis.map((r) => (
           <div key={r.name} className="doc-card">
