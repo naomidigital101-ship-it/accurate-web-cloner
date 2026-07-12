@@ -1799,11 +1799,15 @@
 .story-e { max-width: 760px; }
 .story-subtitle {
   font-family: "Maadim", "Maadim OS", sans-serif;
-  font-size: 22px;
-  font-weight: 300;
-  line-height: 1.3em;
-  color: #2d2e83;
-  margin: 0 0 14px 0;
+  font-size: 3vw;
+  font-weight: 600;
+  line-height: 1em;
+  color: #67ffd1;
+  margin: 12px 0 0 0;
+  text-align: start;
+}
+@media (max-width: 767px) {
+  .story-subtitle { font-size: 28px; }
 }
 .story-meta { margin-bottom: 20px; }
 .story-par {
@@ -1898,7 +1902,7 @@
   margin: 0 auto;
   padding: 0 40px;
   display: grid;
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 380px 1fr;
   gap: 60px;
   align-items: start;
 }
@@ -1957,7 +1961,7 @@
 @media (max-width: 1024px) {
   .story-hero-inner { grid-template-columns: 360px 1fr; gap: 30px; padding: 0 20px; }
   .story-hero-dome { width: 360px; height: 380px; }
-  .story-body-inner { grid-template-columns: 160px 1fr; gap: 30px; padding: 0 20px; }
+  .story-body-inner { grid-template-columns: 300px 1fr; gap: 30px; padding: 0 20px; }
   .story-nav-title { max-width: 220px; }
 }
 @media (max-width: 767px) {

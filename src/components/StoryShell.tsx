@@ -68,9 +68,9 @@ export function StoryShell({
                 </span>
               </div>
             )}
+            {subtitle && <h2 className="story-subtitle">{subtitle}</h2>}
           </aside>
           <article className="story-text-col">
-            {subtitle && <h2 className="story-subtitle">{subtitle}</h2>}
             {paragraphs.map((p, i) => (
               <p
                 key={i}
