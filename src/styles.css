@@ -1640,7 +1640,7 @@
 
 .page-content {
   position: relative; z-index: 1;
-  width: 76%; min-height: 70vh;
+  width: 76%; min-height: 98vh;
   margin-right: auto; margin-left: 0;
   background: #ffffff;
   padding: 120px 40px 60px 40px;
@@ -1745,29 +1745,52 @@
 .news-list { display: flex; flex-direction: column; gap: 20px; max-width: 760px; }
 
 /* donate page */
-.donate-cards { display: flex; gap: 20px; flex-wrap: wrap; }
+.donate-cards { display: flex; gap: 20px; flex-wrap: wrap; width: 100%; }
 .donate-card {
-  flex: 1;
-  min-width: 260px;
-  background: #ffffff;
+  flex: 1 1 0;
+  min-width: 280px;
+  max-width: 510px;
+  min-height: 300px;
   border-radius: 20px;
-  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
   padding: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
+  gap: 14px;
   text-align: center;
 }
+.donate-card-onetime { background: radial-gradient(at 0% 0%, #009fe3 0%, #060633 100%); }
+.donate-card-recurring { background: radial-gradient(at 0% 0%, #67ffd1 0%, #060633 100%); }
+.donate-card-icon {
+  width: 59px; height: 59px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: transparent;
+}
+.donate-card-onetime .donate-card-icon { border: 2.4px solid #009fe3; color: #009fe3; }
+.donate-card-recurring .donate-card-icon { border: 2.4px solid #67ffd1; color: #67ffd1; }
 .donate-card h2 {
   font-family: "Maadim", "Maadim OS", sans-serif;
-  font-size: 26px;
-  font-weight: bold;
-  color: #2d2e83;
+  font-size: 38px;
+  font-weight: 900;
+  color: #ffffff;
   margin: 0;
+  line-height: 1.1em;
 }
-.donate-card p { font-family: "Maadim", "Maadim OS", sans-serif; font-size: 16px; color: #2d2e83; margin: 0; }
-.donate-intro { font-family: "Maadim", "Maadim OS", sans-serif; font-size: 18px; line-height: 1.4em; color: #2d2e83; max-width: 640px; margin: 0 0 24px 0; }
+.donate-card p { font-family: "Maadim", "Maadim OS", sans-serif; font-size: 18px; color: #ffffff; margin: 0; }
+.donate-card .btn-donate {
+  display: inline-block;
+  background: #67ffd1;
+  color: #060633;
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 18px; font-weight: 700;
+  padding: 12px 24px;
+  border-radius: 20px;
+  text-decoration: none;
+  margin-top: 6px;
+}
+.donate-card .btn-donate:hover { opacity: 0.9; }
+.donate-intro { font-family: "Maadim", "Maadim OS", sans-serif; font-size: 18px; line-height: 1.4em; color: #060633; max-width: 640px; margin: 0 0 24px 0; text-align: start; }
 
 /* form pages */
 .formpage-wrap { max-width: 600px; }
