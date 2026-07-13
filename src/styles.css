@@ -1068,9 +1068,9 @@
 }
 @media (max-width: 767px) { .e-body-navy { line-height: 1.2em; } }
 
-.about-e { display: flex; flex-direction: row; }
-@media (max-width: 767px) { .about-e { flex-direction: column-reverse; } }
-.about-imgs { width: 60%; display: flex; flex-direction: column; padding: 3% 0; }
+.about-e { display: flex; flex-direction: row; min-height: 100vh; align-items: center; }
+@media (max-width: 767px) { .about-e { flex-direction: column-reverse; min-height: auto; } }
+.about-imgs { width: 60%; display: flex; flex-direction: column; padding: 0; }
 @media (max-width: 767px) { .about-imgs { width: 100%; } }
 .about-photo { position: relative; z-index: 5; }
 .about-photo-top { width: 42.5%; max-width: 42.5%; margin-left: 7.5%; margin-right: auto; margin-bottom: -68px; }
@@ -1089,7 +1089,7 @@
 }
 .about-bigblock {
   position: relative;
-  min-height: 70vh;
+  min-height: 62vh;
   background-image: url("/wp/assets/קשת-3-min.webp");
   background-position: top center;
   background-size: cover;
@@ -1106,7 +1106,7 @@
   flex-direction: column;
   justify-content: center;
   gap: 20px;
-  padding: 2% 2% 2% 10%;
+  padding: 2% 4%;
 }
 @media (max-width: 767px) { .about-text { width: 100%; padding: 16px; } }
 
