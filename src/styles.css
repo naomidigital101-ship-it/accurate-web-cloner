@@ -1008,6 +1008,9 @@
   line-height: 1.2em;
   color: #2d2e83;
   margin: 0;
+  white-space: pre-line;
+  max-height: none;
+  overflow: visible;
 }
 @media (max-width: 767px) { .qc-text { font-size: 18px; line-height: 1.4em; } }
 .qc-meta {
@@ -1501,6 +1504,8 @@
 .mitzva-e {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  min-height: 100vh;
   padding: 2% 10% 6% 10%;
   background-image: url("/wp/assets/כוכבית-כחולה-16.svg");
   background-position: -10% 0px;
@@ -1532,6 +1537,8 @@
 .mikamcha-e {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  min-height: 100vh;
   margin-top: -10%;
   padding: 2% 10%;
   background-image: url("/wp/assets/כוכבית-כחולה-16.svg");
