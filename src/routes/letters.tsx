@@ -43,9 +43,9 @@ export const Route = createFileRoute("/letters")({
 function LettersPage() {
   return (
     <PageShell title="מכתבי תודה">
-      <div className="doc-grid">
+      <div className="doc-grid doc-grid-letters">
         {letters.map((l, i) => (
-          <div key={i} className="doc-card">
+          <div key={i} className="doc-card doc-card-natural">
             <a href={l.img} target="_blank" rel="noopener" className="doc-card-letter">
               <img src={l.img} alt={l.title} loading="lazy" />
             </a>
@@ -54,6 +54,7 @@ function LettersPage() {
           </div>
         ))}
       </div>
+
     </PageShell>
   );
 }
