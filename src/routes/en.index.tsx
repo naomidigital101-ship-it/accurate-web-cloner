@@ -439,7 +439,7 @@ function EnStories() {
   return (
     <section dir="ltr" className="st-e">
       <div className="st-wrap">
-        <div className="st-main" style={{ width: "100%" }}>
+        <div className="st-main">
           <div className="st-head">
             <h2 className="st-title">The Stories</h2>
             <div className="st-subrow">
@@ -465,10 +465,48 @@ function EnStories() {
             ))}
           </div>
         </div>
+        <aside className="press-col">
+          <h2 className="press-title">In the Media</h2>
+          {enPress.map((p, i) => (
+            <a key={i} href={p.href} target="_blank" rel="noopener" className="press-item">
+              {p.img ? (
+                <span
+                  className="press-item-logo"
+                  style={{ backgroundImage: `url('${p.img}')` }}
+                />
+              ) : (
+                <span
+                  className="press-item-logo"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    backgroundColor: "#060633",
+                    color: "#fff",
+                    fontFamily: "\"Maadim\", \"Maadim OS\", sans-serif",
+                    fontWeight: 700,
+                    fontSize: 14,
+                    letterSpacing: 1,
+                  }}
+                >
+                  {p.logoText}
+                </span>
+              )}
+              <span className="press-item-body">
+                <span className="press-item-title">{p.title}</span>
+                <span className="press-item-meta">
+                  <b>{p.source}</b>
+                  <span>{p.date}</span>
+                </span>
+              </span>
+            </a>
+          ))}
+        </aside>
       </div>
     </section>
   );
 }
+
 
 /* ============================================================
  * In the Media (LTR)
@@ -513,51 +551,8 @@ const enPress: EnPressItem[] = [
   },
 ];
 
-function EnInTheMedia() {
-  return (
-    <section dir="ltr" className="st-e">
-      <div className="st-wrap">
-        <aside className="press-col" style={{ width: "100%" }}>
-          <h2 className="press-title">In the Media</h2>
-          {enPress.map((p, i) => (
-            <a key={i} href={p.href} target="_blank" rel="noopener" className="press-item">
-              {p.img ? (
-                <span
-                  className="press-item-logo"
-                  style={{ backgroundImage: `url('${p.img}')` }}
-                />
-              ) : (
-                <span
-                  className="press-item-logo"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    backgroundColor: "#060633",
-                    color: "#fff",
-                    fontFamily: "\"Maadim\", \"Maadim OS\", sans-serif",
-                    fontWeight: 700,
-                    fontSize: 14,
-                    letterSpacing: 1,
-                  }}
-                >
-                  {p.logoText}
-                </span>
-              )}
-              <span className="press-item-body">
-                <span className="press-item-title">{p.title}</span>
-                <span className="press-item-meta">
-                  <b>{p.source}</b>
-                  <span>{p.date}</span>
-                </span>
-              </span>
-            </a>
-          ))}
-        </aside>
-      </div>
-    </section>
-  );
-}
+
+
 
 /* ============================================================
  * About (LTR)
@@ -944,7 +939,7 @@ function EnPage() {
         <EnFormTabs />
         <EnInterview />
         <EnStories />
-        <EnInTheMedia />
+
         <EnAbout />
         <EnHowItWorks />
         <EnAboutMitzva />

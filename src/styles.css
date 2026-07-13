@@ -1834,7 +1834,17 @@
   color: #060633;
   margin: 0 0 14px 0;
 }
-.story-extra-img { max-width: 360px; width: 100%; border-radius: 10px; margin: 10px 0; display: block; }
+.story-extra-img { width: 100%; max-width: 723px; height: auto; border-radius: 10px; margin: 10px 0; display: block; }
+
+/* Letters pages: masonry with natural image heights */
+.doc-grid-letters { display: block; column-count: 4; column-gap: 20px; }
+@media (max-width: 1024px) { .doc-grid-letters { column-count: 2; } }
+@media (max-width: 640px) { .doc-grid-letters { column-count: 1; } }
+.doc-grid-letters .doc-card-natural { display: block; break-inside: avoid; margin: 0 0 24px 0; }
+.doc-grid-letters .doc-card-natural .doc-card-letter img {
+  aspect-ratio: auto; height: auto; object-fit: contain;
+}
+
 .story-nav {
   display: flex;
   justify-content: space-between;
