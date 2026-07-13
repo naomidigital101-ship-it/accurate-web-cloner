@@ -982,7 +982,7 @@ function EnPage() {
         <EnFormTabs />
         <EnInterview />
         <EnStories />
-        <EnInTheMedia />
+
         <EnAbout />
         <EnHowItWorks />
         <EnAboutMitzva />
