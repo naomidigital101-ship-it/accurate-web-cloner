@@ -1156,7 +1156,7 @@
   align-items: center;
 }
 @media (max-width: 767px) { .how-visual { width: 100%; min-height: auto; } }
-.how-slideshow { position: relative; width: 100%; min-height: 55vh; overflow: hidden; }
+.how-slideshow { position: relative; width: 100%; min-height: 50vh; overflow: hidden; }
 .how-slide {
   position: absolute;
   inset: 0;
