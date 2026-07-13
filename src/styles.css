@@ -1326,13 +1326,13 @@
 }
 .faq-a p { margin: 0; }
 
-.svc-e { position: relative; z-index: 5; padding: 3% 20px 240px 20px; }
-.svc-title { text-align: center; margin-bottom: 30px; }
+.svc-e { position: relative; z-index: 5; padding: 2% 20px 40px 20px; }
+.svc-title { text-align: center; margin-bottom: 10px; }
 .svc-row {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
   max-width: 1000px;
   margin: 0 auto;
 }
@@ -1514,7 +1514,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  min-height: 100vh;
+  min-height: 113vh;
   padding: 2% 10% 6% 10%;
   background-image: url("/wp/assets/כוכבית-כחולה-16.svg");
   background-position: -10% 0px;
@@ -1547,7 +1547,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  min-height: 100vh;
+  min-height: 106vh;
   margin-top: -10%;
   padding: 2% 10%;
   background-image: url("/wp/assets/כוכבית-כחולה-16.svg");
