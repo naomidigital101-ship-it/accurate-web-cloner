@@ -1836,14 +1836,12 @@
 }
 .story-extra-img { width: 100%; max-width: 723px; height: auto; border-radius: 10px; margin: 10px 0; display: block; }
 
-/* Letters pages: masonry with natural image heights */
-.doc-grid-letters { display: block; column-count: 4; column-gap: 20px; }
-@media (max-width: 1024px) { .doc-grid-letters { column-count: 2; } }
-@media (max-width: 640px) { .doc-grid-letters { column-count: 1; } }
-.doc-grid-letters .doc-card-natural { display: block; break-inside: avoid; margin: 0 0 24px 0; }
-.doc-grid-letters .doc-card-natural .doc-card-letter img {
-  aspect-ratio: auto; height: auto; object-fit: contain;
-}
+/* Letters pages: regular 4-col grid with natural image heights */
+.doc-grid-letters { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 1024px) { .doc-grid-letters { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .doc-grid-letters { grid-template-columns: 1fr; } }
+.doc-grid-letters .doc-card-natural { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.doc-grid-letters .doc-card-natural .doc-card-letter img { width: 100%; height: auto; aspect-ratio: auto; object-fit: contain; }
 
 .story-nav {
   display: flex;

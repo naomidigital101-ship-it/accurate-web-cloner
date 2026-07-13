@@ -68,7 +68,6 @@ function Index() {
         <InterviewSection />
 
         <StoriesSection />
-        <PressSection />
         <AboutTefilinSection />
         <HowItWorksSection />
         <AboutMitzvaSection />
