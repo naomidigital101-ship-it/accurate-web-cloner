@@ -7,10 +7,10 @@ type HoverCardProps = {
 
 function HoverCard({ title, href, img, bg }: HoverCardProps) {
   return (
-    <a href={href} className="iv-card" style={{ backgroundColor: bg }}>
+    <a href={href} className="iv-card" style={{ backgroundColor: bg }} aria-label={title}>
       <span className="iv-card-overlay" aria-hidden="true" />
       <span className="iv-card-img">
-        <img src={img} alt={title} loading="lazy" />
+        <img src={img} alt="" loading="lazy" aria-hidden="true" />
       </span>
       <h2 className="iv-card-title">{title}</h2>
     </a>
