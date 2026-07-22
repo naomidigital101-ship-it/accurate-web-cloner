@@ -2048,3 +2048,61 @@
 /* Story pages: dark header on light hero band */
 .story-shell .e-nav-link { color: #2d2e83; }
 .story-shell .e-nav-link svg { fill: #2d2e83; }
+
+/* ===== Phase 8: 1:1 precision — dual forms, footer, FAQ subtitle ===== */
+.forms-e-dual {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 20px 4% 4% 4%;
+}
+.forms-e-dual .form-card { width: 600px; max-width: 100%; margin-top: 0; }
+@media (max-width: 1023px) { .forms-e-dual { flex-direction: column; align-items: center; } }
+
+.faq-a-subtitle {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #009fe3;
+  margin: 0 0 8px 0;
+}
+
+/* Restored footer (brand-only, centered) */
+.footer-brand-only {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  padding: 60px 20px 30px 20px;
+  background-color: #060633;
+  color: #ffffff;
+}
+.footer-brand-only .footer-brand-logo img { width: 180px; height: auto; }
+.footer-brand-only .footer-tagline {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 16px;
+  line-height: 1.5em;
+  color: #ffffff;
+  margin: 0;
+}
+.footer-contact-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 16px;
+}
+.footer-contact-row a { color: #ffffff; text-decoration: none; }
+.footer-contact-row a:hover { color: #bdffeb; }
+.footer-credit-link { display: inline-block; margin-top: 8px; }
+.footer-credit-link img { height: 20px; width: auto; opacity: 0.85; }
+.footer-brand-only .footer-rights {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  margin: 0;
+}

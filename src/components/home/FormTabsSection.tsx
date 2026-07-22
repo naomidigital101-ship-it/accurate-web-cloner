@@ -27,7 +27,6 @@ function SelectField({ label, col, name, options }: { label: string; col: 100 | 
 const NOTE = "בשליחת הבקשה לא יעשה שום שימוש במידע שהזנתם מלבד לצרכים הטכניים של העמותה.";
 
 export function RequestForm() {
-  const [step, setStep] = useState(1);
   const [sent, setSent] = useState(false);
   if (sent) return <p className="form-card-sub" role="status">הטופס נשלח בהצלחה. תודה רבה!</p>;
   return (
@@ -37,52 +36,28 @@ export function RequestForm() {
         setSent(true);
       }}
     >
-      {step === 1 && (
-        <div className="e-form-fields">
-          <SelectField label="למי מיועדות התפילין" col={50} name="target" options={["חייל", "בר מצוה", "מתחזק", "אחר"]} />
-          <SelectField label="כותב ביד" col={50} name="hand" options={["ימין", "שמאל"]} />
-          <SelectField label="שיטת אספקה" col={100} name="delivery" options={["אוכל להגיע לאסוף את התפילין", "מבקש משלוח (בתוספת תשלום)"]} />
-
-          <div className="e-field-group col-100">
-            <div className="e-form-buttons">
-              <button type="button" className="e-btn-step" onClick={() => setStep(2)}>הבא</button>
-            </div>
+      <div className="e-form-fields">
+        <SelectField label="למי מיועדות התפילין" col={50} name="target" options={["חייל", "בר מצוה", "מתחזק", "אחר"]} />
+        <SelectField label="כותב ביד" col={50} name="hand" options={["ימין", "שמאל"]} />
+        <SelectField label="שיטת אספקה" col={100} name="delivery" options={["אוכל להגיע לאסוף את התפילין", "מבקש משלוח (בתוספת תשלום)"]} />
+        <Field label="שם פרטי" col={50} name="first" required />
+        <Field label="שם משפחה" col={50} name="last" required />
+        <Field label="כתובת למסירה" col={60} name="address" />
+        <Field label="עיר/ישוב" col={40} name="city" />
+        <Field label="טלפון" col={40} type="tel" name="phone" required />
+        <Field label="אימייל" col={60} type="email" name="email" required />
+        <div className="e-field-group col-100"><p className="e-form-note">{NOTE}</p></div>
+        <div className="e-field-group col-100">
+          <div className="e-form-buttons">
+            <button type="submit" className="e-btn-step">שליחת בקשה</button>
           </div>
         </div>
-      )}
-      {step === 2 && (
-        <div className="e-form-fields">
-          <Field label="שם פרטי" col={50} name="first" />
-          <Field label="שם משפחה" col={50} name="last" />
-          <Field label="כתובת למסירה" col={60} name="address" />
-          <Field label="עיר/ישוב" col={40} name="city" />
-          <div className="e-field-group col-100">
-            <div className="e-form-buttons">
-              <button type="button" className="e-btn-step e-btn-prev" onClick={() => setStep(1)}>הקודם</button>
-              <button type="button" className="e-btn-step" onClick={() => setStep(3)}>הבא</button>
-            </div>
-          </div>
-        </div>
-      )}
-      {step === 3 && (
-        <div className="e-form-fields">
-          <Field label="טלפון" col={40} type="tel" name="phone" required />
-          <Field label="אימייל" col={60} type="email" name="email" required />
-          <div className="e-field-group col-100"><p className="e-form-note">{NOTE}</p></div>
-          <div className="e-field-group col-100">
-            <div className="e-form-buttons">
-              <button type="button" className="e-btn-step e-btn-prev" onClick={() => setStep(2)}>הקודם</button>
-              <button type="submit" className="e-btn-step">שליחת בקשה</button>
-            </div>
-          </div>
-        </div>
-      )}
+      </div>
     </form>
   );
 }
 
 export function DonateForm() {
-  const [step, setStep] = useState(1);
   const [sent, setSent] = useState(false);
   if (sent) return <p className="form-card-sub" role="status">הטופס נשלח בהצלחה. תודה רבה!</p>;
   return (
@@ -93,79 +68,37 @@ export function DonateForm() {
         setSent(true);
       }}
     >
-      {step === 1 && (
-        <div className="e-form-fields">
-          <Field label="שם מלא" col={100} name="name" />
-          <Field label="כתובת לאיסוף" col={60} name="pickup" />
-          <SelectField label="מצב התפילין" col={40} name="condition" options={["חדש", "משומש", "פגום/ישן מאוד"]} />
-          <div className="e-field-group col-100">
-            <div className="e-form-buttons">
-              <button type="button" className="e-btn-step" onClick={() => setStep(2)}>הבא</button>
-            </div>
+      <div className="e-form-fields">
+        <Field label="שם מלא" col={100} name="name" required />
+        <Field label="כתובת לאיסוף" col={60} name="pickup" />
+        <SelectField label="מצב התפילין" col={40} name="condition" options={["חדש", "משומש", "פגום/ישן מאוד"]} />
+        <Field label="אימייל" col={60} type="email" name="email" required />
+        <Field label="טלפון" col={40} type="tel" name="phone" required />
+        <Field label="רוצים להוסיף הקדשה?" col={100} name="dedication" />
+        <div className="e-field-group col-100"><p className="e-form-note">{NOTE}</p></div>
+        <div className="e-field-group col-100">
+          <div className="e-form-buttons">
+            <button type="submit" className="e-btn-step">שליחה</button>
           </div>
         </div>
-      )}
-      {step === 2 && (
-        <div className="e-form-fields">
-          <Field label="אימייל" col={60} type="email" name="email" required />
-          <Field label="טלפון" col={40} type="tel" name="phone" required />
-          <Field label="רוצים להוסיף הקדשה?" col={100} name="dedication" />
-          <div className="e-field-group col-100"><p className="e-form-note">{NOTE}</p></div>
-          <div className="e-field-group col-100">
-            <div className="e-form-buttons">
-              <button type="button" className="e-btn-step e-btn-prev" onClick={() => setStep(1)}>הקודם</button>
-              <button type="submit" className="e-btn-step">שליחה</button>
-            </div>
-          </div>
-        </div>
-      )}
+      </div>
     </form>
   );
 }
 
 export function FormTabsSection() {
-  const [tab, setTab] = useState<"request" | "donate">("request");
   return (
-    <section id="form" dir="rtl" className="forms-e">
-      <div className="form-tabs-heading" role="tablist" aria-label="טפסים">
-        <button
-          type="button"
-          role="tab"
-          id="tab-request"
-          aria-selected={tab === "request"}
-          aria-controls="panel-request"
-          className="form-tab"
-          onClick={() => setTab("request")}
-        >
-          מתעניין בתפילין
-        </button>
-        <button
-          type="button"
-          role="tab"
-          id="tab-donate"
-          aria-selected={tab === "donate"}
-          aria-controls="panel-donate"
-          className="form-tab"
-          onClick={() => setTab("donate")}
-        >
-          לתרומת תפילין
-        </button>
+    <section id="form" dir="rtl" className="forms-e forms-e-dual">
+      <div className="form-card">
+        <h2 className="form-card-title">רוצה להניח תפילין משלך?</h2>
+        <p className="form-card-sub">אנא מלא את הטופס המצורף כדי שנוכל לעזור לך לקבל תפילין משלך!</p>
+        <RequestForm />
       </div>
-
-      {tab === "request" && (
-        <div id="panel-request" role="tabpanel" aria-labelledby="tab-request" className="form-card">
-          <h2 className="form-card-title">רוצה להניח תפילין משלך?</h2>
-          <p className="form-card-sub">אנא מלא את הטופס המצורף כדי שנוכל לעזור לך לקבל תפילין משלך!</p>
-          <RequestForm />
-        </div>
-      )}
-      {tab === "donate" && (
-        <div id="panel-donate" role="tabpanel" aria-labelledby="tab-donate" className="form-card">
-          <h2 className="form-card-title">יש לך תפילין מיותרות?</h2>
-          <p className="form-card-sub">אנא מלא את הטופס כדי שתוכל לקיים בהם מצוה חשובה וזיכוי הרבים!</p>
-          <DonateForm />
-        </div>
-      )}
+      <div className="form-card">
+        <h2 className="form-card-title">יש לך תפילין מיותרות?</h2>
+        <p className="form-card-sub">אנא מלא את הטופס כדי שתוכל לקיים בהם מצוה חשובה וזיכוי הרבים!</p>
+        <DonateForm />
+      </div>
     </section>
   );
 }

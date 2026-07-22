@@ -1,23 +1,24 @@
-const galleryImages = Array.from({ length: 28 }, (_, i) => `/wp/uploads/gallery/g${i + 1}`);
-const exts = ["webp","webp","jpg","jpg","webp","jpg","jpg","jpg","jpg","jpg","png","jpg","jpg","jpg","webp","webp","jpg","webp","webp","jpg","jpg","webp","jpg","webp","jpg","webp","jpg","jpg"];
-
 export function Footer() {
   return (
-    <footer dir="rtl" className="footer-e">
-      <div className="footer-gallery">
-        {galleryImages.map((src, i) => (
-          <img key={i} src={`${src}.${exts[i]}`} alt="" loading="lazy" className="footer-gallery-img" />
-        ))}
+    <footer dir="rtl" className="footer-e footer-brand-only">
+      <a href="/" aria-label="אור חדש - דף הבית" className="footer-brand-logo">
+        <img src="/wp/img/אור-חדש-לוגו-01.svg" alt="אור חדש" />
+      </a>
+      <p className="footer-tagline">
+        לקידום והעצמה של בעלי תשובה ומתקרבים ליהדות
+        <br />
+        ע"ר: 580703965
+      </p>
+      <div className="footer-contact-row">
+        <a href="https://waze.com/ul?q=בית אל, ארץ חמדה 33" target="_blank" rel="noopener">
+          בית אל, ארץ חמדה 33
+        </a>
+        <a href="tel:0546713966">054-6713966</a>
       </div>
-      <div className="footer-strip">
-        <p className="footer-rights">כל הזכויות שמורות</p>
-        <div className="footer-brand">
-          <a href="/" aria-label="אור חדש - דף הבית">
-            <img src="/wp/img/אור-חדש-לוגו-01.svg" alt="אור חדש" className="footer-logo" />
-          </a>
-          <p className="footer-tagline">פרויקט תרומה והנגשת תפילין מהודרות לכל יהודי שמבקש</p>
-        </div>
-      </div>
+      <a href="https://kavnekuda.com" target="_blank" rel="noopener" aria-label="אפיון, בניה ופיתוח: KAV" className="footer-credit-link">
+        <img src="/wp/img/קרדיט-45.svg" alt="אפיון, בניה ופיתוח: KAV" />
+      </a>
+      <p className="footer-rights">כל הזכויות שמורות</p>
     </footer>
   );
 }

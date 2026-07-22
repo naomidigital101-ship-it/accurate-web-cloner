@@ -18,8 +18,8 @@ import { FaqSection } from "@/components/home/FaqSection";
 import { FounderSection } from "@/components/home/FounderSection";
 import { ServicesSection } from "@/components/home/ServicesSection";
 
-const HOME_TITLE = "קשר של תפילין | עמותת אור חדש";
-const HOME_DESC = "מיזם של ערבות הדדית וזיכוי הרבים - מחלקים תפילין מהודרות מחודשות לכל יהודי שרוצה להניח. מעל 1,300 זוגות חולקו.";
+const HOME_TITLE = "קשר של תפילין - עמותת אור חדש מחברת בין יהודים שרוצים להניח תפילין";
+const HOME_DESC = "ערבות הדדית וזיכוי הרבים, מטרתינו לחבר בין יהודי שרוצה להתחיל להניח תפילין ולהיות יותר מחובר לה' יתברך, לבין יהודי שיש לו תפילין לא בשימוש";
 const HOME_URL = "https://accurate-web-cloner.lovable.app/";
 
 const faqs: { q: string; a: string }[] = [

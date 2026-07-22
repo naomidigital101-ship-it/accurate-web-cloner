@@ -6,6 +6,11 @@ type Story = {
 
 const stories: Story[] = [
   {
+    title: "\"וְהִיא שֶׁעָמְדָה לַאֲבוֹתֵינוּ וְלָנוּ\"",
+    href: "/tefilin/%d7%95%d7%94%d7%99%d7%90-%d7%a9%d7%a2%d7%9e%d7%93%d7%94",
+    img: "/wp/img/AdobeStock_817584046-min.webp",
+  },
+  {
     title: "\"וְרָאוּ כָּל עַמֵּי הָאָרֶץ כִּי שֵׁם ה' נִקְרָא עָלֶיךָ, וְיָרְאוּ מִמֶּךָּ\"",
     href: "/tefilin/%d7%95%d6%b0%d7%a8%d6%b8%d7%90%d7%95%d6%bc-%d7%9b%d6%b8%d6%bc%d7%9c-%d7%a2%d6%b7%d7%9e%d6%b5%d6%bc%d7%99-%d7%94%d6%b8%d7%90%d6%b8%d7%a8%d6%b6%d7%a5-%d7%9b%d6%b4%d6%bc%d7%99-%d7%a9%d6%b5%d7%81%d7%9d-2",
     img: "/wp/img/AdobeStock_93382125-min.webp",
@@ -26,8 +31,8 @@ const stories: Story[] = [
     img: "/wp/img/5.png",
   },
   {
-    title: "\"וְרָאוּ כָּל עַמֵּי הָאָרֶץ כִּי שֵׁם ה' נִקְרָא עָלֶיךָ, וְיָרְאוּ מִמֶּךָּ\"",
-    href: "/tefilin/%d7%95%d6%b0%d7%a8%d6%b8%d7%90%d7%95%d6%bc-%d7%9b%d6%b8%d6%bc%d7%9c-%d7%a2%d6%b7%d7%9e%d6%b5%d6%bc%d7%99-%d7%94%d6%b8%d7%90%d6%b8%d7%a8%d6%b6%d7%a5-%d7%9b%d6%b4%d6%bc%d7%99-%d7%a9%d6%b5%d7%81%d7%9d-2",
+    title: "לַעֲשׂוֹת אֶת הַשַּׁבָּת",
+    href: "/tefilin/%d7%9c%d7%a2%d7%a9%d7%95%d7%aa-%d7%90%d7%aa-%d7%94%d7%a9%d7%91%d7%aa",
     img: "/wp/img/חצי-פנים-6.png",
   },
 ];
@@ -60,21 +65,21 @@ const pressItems: PressItem[] = [
     source: "מגזין אתנחתא",
     date: "ג' תשרי תשפ\"ן 25.09.25",
     img: "/wp/img/אתנחתא.png",
-    href: "https://tefilin.or-hadash.org.il/wp-content/uploads/2025/10/yedidya_1164-1.pdf",
+    href: "/wp/uploads/2025/10/yedidya_1164-1.pdf",
   },
   {
     title: "כתבה על קשר של תפילין בעיתון של כפר חב\"ד",
     source: "עיתון כפר חב\"ד",
     date: "21/05/2025",
     img: "/wp/img/כפר-חבד.jpg",
-    href: "https://tefilin.or-hadash.org.il/wp-content/uploads/2025/05/%D7%AA%D7%9E%D7%95%D7%A0%D7%94-%D7%A9%D7%9C-WhatsApp%E2%80%8F-2025-05-18-%D7%91%D7%A9%D7%A2%D7%94-15.22.07_3aeb7c27.jpg",
+    href: "/wp/uploads/2025/05/kfar-chabad-2025-05-18.jpg",
   },
   {
     title: "גם לזוג התפילין הישנות שלכם יש ייעוד חשוב | מיזם 'קשר של תפילין' – כסף אנושי, פרק 5",
     source: "103FM",
     date: "21/04/2025",
     img: "/wp/img/103FM.jpg",
-    href: "/wp/uploads/2025/05/103FM.jpg",
+    href: "https://www.youtube.com/watch?v=Tmb7WBKtvsw",
   },
 ];
 
