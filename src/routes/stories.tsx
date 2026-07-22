@@ -20,7 +20,7 @@ export const Route = createFileRoute("/stories")({
 function StoriesPage() {
   return (
     <PageShell title="סיפורים">
-      <a href="/en" className="eng-link">For the stories <b>In English</b></a>
+      <a href="/en/the-tefillin-tie-initiative/" className="eng-link">For the stories <b>In English</b></a>
       <div className="stories-page-grid">
         {storyIndex.map((s) => (
           <a key={s.slug} href={`/tefilin/${s.slug}`} className="st-card" style={{ backgroundImage: `url('${s.img}')` }}>
