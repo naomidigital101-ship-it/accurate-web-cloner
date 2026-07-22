@@ -24,9 +24,9 @@ export const Route = createFileRoute("/agreements")({
       { name: "description", content: "מכתבי הסכמה וברכה מגדולי הרבנים למיזם 'קשר של תפילין' של עמותת אור חדש." },
       { property: "og:title", content: "הסכמות הרבנים | קשר של תפילין" },
       { property: "og:description", content: "מכתבי הסכמה וברכה מגדולי הרבנים למיזם 'קשר של תפילין' של עמותת אור חדש." },
-      { property: "og:url", content: "https://accurate-web-cloner.lovable.app/agreements" },
+      { property: "og:url", content: "https://accurate-web-cloner.lovable.app/agreements/" },
     ],
-    links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/agreements" }],
+    links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/agreements/" }],
   }),
   component: AgreementsPage,
 });

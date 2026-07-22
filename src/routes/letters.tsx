@@ -32,9 +32,9 @@ export const Route = createFileRoute("/letters")({
       { name: "description", content: "מכתבי תודה מקהילות, מוסדות ויחידים שקיבלו תפילין ממיזם 'קשר של תפילין' של עמותת אור חדש." },
       { property: "og:title", content: "מכתבי תודה | קשר של תפילין" },
       { property: "og:description", content: "מכתבי תודה מקהילות ויחידים שקיבלו תפילין ממיזם 'קשר של תפילין'." },
-      { property: "og:url", content: "https://accurate-web-cloner.lovable.app/letters" },
+      { property: "og:url", content: "https://accurate-web-cloner.lovable.app/letters/" },
     ],
-    links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/letters" }],
+    links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/letters/" }],
   }),
 
   component: LettersPage,

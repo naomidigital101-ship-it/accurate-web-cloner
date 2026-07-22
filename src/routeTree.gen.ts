@@ -21,6 +21,7 @@ import { Route as AgreementsRouteImport } from './routes/agreements'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EnIndexRouteImport } from './routes/en.index'
 import { Route as TefilinSlugRouteImport } from './routes/tefilin.$slug'
+import { Route as EnTheTefillinTieInitiativeRouteImport } from './routes/en.the-tefillin-tie-initiative'
 import { Route as EnThankYouLettersRouteImport } from './routes/en.thank-you-letters'
 import { Route as EnSupportAndDonationRouteImport } from './routes/en.support-and-donation'
 import { Route as EnStories2RouteImport } from './routes/en.stories-2'
@@ -90,6 +91,12 @@ const TefilinSlugRoute = TefilinSlugRouteImport.update({
   path: '/tefilin/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EnTheTefillinTieInitiativeRoute =
+  EnTheTefillinTieInitiativeRouteImport.update({
+    id: '/the-tefillin-tie-initiative',
+    path: '/the-tefillin-tie-initiative',
+    getParentRoute: () => EnRoute,
+  } as any)
 const EnThankYouLettersRoute = EnThankYouLettersRouteImport.update({
   id: '/thank-you-letters',
   path: '/thank-you-letters',
@@ -150,6 +157,7 @@ export interface FileRoutesByFullPath {
   '/en/stories-2': typeof EnStories2Route
   '/en/support-and-donation': typeof EnSupportAndDonationRoute
   '/en/thank-you-letters': typeof EnThankYouLettersRoute
+  '/en/the-tefillin-tie-initiative': typeof EnTheTefillinTieInitiativeRoute
   '/tefilin/$slug': typeof TefilinSlugRoute
   '/en/': typeof EnIndexRoute
   '/en/tefilin/$slug': typeof EnTefilinSlugRoute
@@ -171,6 +179,7 @@ export interface FileRoutesByTo {
   '/en/stories-2': typeof EnStories2Route
   '/en/support-and-donation': typeof EnSupportAndDonationRoute
   '/en/thank-you-letters': typeof EnThankYouLettersRoute
+  '/en/the-tefillin-tie-initiative': typeof EnTheTefillinTieInitiativeRoute
   '/tefilin/$slug': typeof TefilinSlugRoute
   '/en': typeof EnIndexRoute
   '/en/tefilin/$slug': typeof EnTefilinSlugRoute
@@ -194,6 +203,7 @@ export interface FileRoutesById {
   '/en/stories-2': typeof EnStories2Route
   '/en/support-and-donation': typeof EnSupportAndDonationRoute
   '/en/thank-you-letters': typeof EnThankYouLettersRoute
+  '/en/the-tefillin-tie-initiative': typeof EnTheTefillinTieInitiativeRoute
   '/tefilin/$slug': typeof TefilinSlugRoute
   '/en/': typeof EnIndexRoute
   '/en/tefilin/$slug': typeof EnTefilinSlugRoute
@@ -218,6 +228,7 @@ export interface FileRouteTypes {
     | '/en/stories-2'
     | '/en/support-and-donation'
     | '/en/thank-you-letters'
+    | '/en/the-tefillin-tie-initiative'
     | '/tefilin/$slug'
     | '/en/'
     | '/en/tefilin/$slug'
@@ -239,6 +250,7 @@ export interface FileRouteTypes {
     | '/en/stories-2'
     | '/en/support-and-donation'
     | '/en/thank-you-letters'
+    | '/en/the-tefillin-tie-initiative'
     | '/tefilin/$slug'
     | '/en'
     | '/en/tefilin/$slug'
@@ -261,6 +273,7 @@ export interface FileRouteTypes {
     | '/en/stories-2'
     | '/en/support-and-donation'
     | '/en/thank-you-letters'
+    | '/en/the-tefillin-tie-initiative'
     | '/tefilin/$slug'
     | '/en/'
     | '/en/tefilin/$slug'
@@ -366,6 +379,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TefilinSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/en/the-tefillin-tie-initiative': {
+      id: '/en/the-tefillin-tie-initiative'
+      path: '/the-tefillin-tie-initiative'
+      fullPath: '/en/the-tefillin-tie-initiative'
+      preLoaderRoute: typeof EnTheTefillinTieInitiativeRouteImport
+      parentRoute: typeof EnRoute
+    }
     '/en/thank-you-letters': {
       id: '/en/thank-you-letters'
       path: '/thank-you-letters'
@@ -433,6 +453,7 @@ interface EnRouteChildren {
   EnStories2Route: typeof EnStories2Route
   EnSupportAndDonationRoute: typeof EnSupportAndDonationRoute
   EnThankYouLettersRoute: typeof EnThankYouLettersRoute
+  EnTheTefillinTieInitiativeRoute: typeof EnTheTefillinTieInitiativeRoute
   EnIndexRoute: typeof EnIndexRoute
   EnTefilinSlugRoute: typeof EnTefilinSlugRoute
 }
@@ -445,6 +466,7 @@ const EnRouteChildren: EnRouteChildren = {
   EnStories2Route: EnStories2Route,
   EnSupportAndDonationRoute: EnSupportAndDonationRoute,
   EnThankYouLettersRoute: EnThankYouLettersRoute,
+  EnTheTefillinTieInitiativeRoute: EnTheTefillinTieInitiativeRoute,
   EnIndexRoute: EnIndexRoute,
   EnTefilinSlugRoute: EnTefilinSlugRoute,
 }
