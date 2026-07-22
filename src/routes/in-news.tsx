@@ -24,9 +24,9 @@ export const Route = createFileRoute("/in-news")({
       { name: "description", content: "כתבות ופרסומים על מיזם 'קשר של תפילין' של עמותת אור חדש בכלי התקשורת בישראל." },
       { property: "og:title", content: "בתקשורת | קשר של תפילין" },
       { property: "og:description", content: "כתבות ופרסומים על מיזם 'קשר של תפילין' בכלי התקשורת בישראל." },
-      { property: "og:url", content: "https://accurate-web-cloner.lovable.app/in-news" },
+      { property: "og:url", content: "https://accurate-web-cloner.lovable.app/in-news/" },
     ],
-    links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/in-news" }],
+    links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/in-news/" }],
   }),
 
   component: InNewsPage,

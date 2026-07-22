@@ -19,8 +19,9 @@ export const Route = createFileRoute("/en/")({
           "Mutual responsibility and collective benefit — connecting one Jew who wants to begin wearing Tefillin with another whose Tefillin are unused.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://accurate-web-cloner.lovable.app/en/the-tefillin-tie-initiative/" },
     ],
-    links: [{ rel: "canonical", href: "/en" }],
+    links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/en/the-tefillin-tie-initiative/" }],
   }),
   component: EnPage,
 });
@@ -930,7 +931,7 @@ function EnServices() {
 /* ============================================================
  * PAGE
  * ============================================================ */
-function EnPage() {
+export function EnPage() {
   return (
     <div dir="ltr" lang="en" className="min-h-screen bg-background en-ltr">
       <Header en />

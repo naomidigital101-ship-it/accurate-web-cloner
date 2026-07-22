@@ -8,19 +8,19 @@ type NavItem = {
 };
 
 const navItems: NavItem[] = [
-  { label: "סיפורים", href: "/stories" },
-  { label: "כתבות בתקשורת", href: "/in-news" },
+  { label: "סיפורים", href: "/stories/" },
+  { label: "כתבות בתקשורת", href: "/in-news/" },
   {
     label: "מכתבים",
     href: "#",
     children: [
-      { label: "מכתבי תודה", href: "/letters" },
-      { label: "הסכמות הרבנים", href: "/agreements" },
+      { label: "מכתבי תודה", href: "/letters/" },
+      { label: "הסכמות הרבנים", href: "/agreements/" },
     ],
   },
-  { label: "בקשת תפילין", href: "/request" },
-  { label: "מסירת/תרומת תפילין", href: "/give" },
-  { label: "תרומה", href: "/donate" },
+  { label: "בקשת תפילין", href: "/request/" },
+  { label: "מסירת/תרומת תפילין", href: "/give/" },
+  { label: "תרומה", href: "/donate/" },
 ];
 
 function CaretDown() {
@@ -37,19 +37,19 @@ export function Header({ en = false, dark = false }: { en?: boolean; dark?: bool
 
   const heNav: NavItem[] = navItems;
   const enNav: NavItem[] = [
-    { label: "stories", href: "/en/stories-2" },
-    { label: "media", href: "/en/articles-in-the-media" },
+    { label: "stories", href: "/en/stories-2/" },
+    { label: "media", href: "/en/articles-in-the-media/" },
     {
       label: "letters",
       href: "#",
       children: [
-        { label: "Thank you letters", href: "/en/thank-you-letters" },
-        { label: "Rabbis agreements", href: "/en/rabbis-agreements" },
+        { label: "Thank you letters", href: "/en/thank-you-letters/" },
+        { label: "Rabbis agreements", href: "/en/rabbis-agreements/" },
       ],
     },
-    { label: "Request for Tefillin", href: "/en/request-for-tefillin" },
-    { label: "Donate Tefillin", href: "/en/request-to-donate-tefillin" },
-    { label: "support and donation", href: "/en/support-and-donation" },
+    { label: "Request for Tefillin", href: "/en/request-for-tefillin/" },
+    { label: "Donate Tefillin", href: "/en/request-to-donate-tefillin/" },
+    { label: "support and donation", href: "/en/support-and-donation/" },
   ];
   const items = en ? enNav : heNav;
 
@@ -57,19 +57,29 @@ export function Header({ en = false, dark = false }: { en?: boolean; dark?: bool
   const location = useLocation();
   const pathname = location.pathname.replace(/\/+$/, "") || "/";
   const heToEn: Record<string, string> = {
-    "/": "/en",
-    "/stories": "/en/stories-2",
-    "/in-news": "/en/articles-in-the-media",
-    "/letters": "/en/thank-you-letters",
-    "/agreements": "/en/rabbis-agreements",
-    "/request": "/en/request-for-tefillin",
-    "/give": "/en/request-to-donate-tefillin",
-    "/donate": "/en/support-and-donation",
+    "/": "/en/the-tefillin-tie-initiative/",
+    "/stories": "/en/stories-2/",
+    "/in-news": "/en/articles-in-the-media/",
+    "/letters": "/en/thank-you-letters/",
+    "/agreements": "/en/rabbis-agreements/",
+    "/request": "/en/request-for-tefillin/",
+    "/give": "/en/request-to-donate-tefillin/",
+    "/donate": "/en/support-and-donation/",
   };
-  const enToHe: Record<string, string> = Object.fromEntries(Object.entries(heToEn).map(([h, e]) => [e, h]));
+  const enToHe: Record<string, string> = {
+    "/en": "/",
+    "/en/the-tefillin-tie-initiative": "/",
+    "/en/stories-2": "/stories/",
+    "/en/articles-in-the-media": "/in-news/",
+    "/en/thank-you-letters": "/letters/",
+    "/en/rabbis-agreements": "/agreements/",
+    "/en/request-for-tefillin": "/request/",
+    "/en/request-to-donate-tefillin": "/give/",
+    "/en/support-and-donation": "/donate/",
+  };
   const switcherLabel = en ? "עברית" : "English";
-  const switcherHref = en ? (enToHe[pathname] ?? "/") : (heToEn[pathname] ?? "/en");
-  const homeHref = en ? "/en" : "/";
+  const switcherHref = en ? (enToHe[pathname] ?? "/") : (heToEn[pathname] ?? "/en/the-tefillin-tie-initiative/");
+  const homeHref = en ? "/en/the-tefillin-tie-initiative/" : "/";
   const dir = en ? "ltr" : "rtl";
 
   useEffect(() => {

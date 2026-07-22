@@ -8,9 +8,9 @@ export const Route = createFileRoute("/donate")({
       { name: "description", content: "תמכו במיזם 'קשר של תפילין' של עמותת אור חדש - תרומה חד פעמית או הוראת קבע, מוכר לצרכי מס." },
       { property: "og:title", content: "תרומה | קשר של תפילין" },
       { property: "og:description", content: "תמכו במיזם 'קשר של תפילין' - חד פעמית או הוראת קבע, מוכר לצרכי מס." },
-      { property: "og:url", content: "https://accurate-web-cloner.lovable.app/donate" },
+      { property: "og:url", content: "https://accurate-web-cloner.lovable.app/donate/" },
     ],
-    links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/donate" }],
+    links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/donate/" }],
   }),
   component: DonatePage,
 });

@@ -9,9 +9,9 @@ export const Route = createFileRoute("/stories")({
       { name: "description", content: "סיפורים אמיתיים ומרגשים של יהודים שקיבלו תפילין ממיזם 'קשר של תפילין' של עמותת אור חדש." },
       { property: "og:title", content: "סיפורים | קשר של תפילין" },
       { property: "og:description", content: "סיפורים אמיתיים ומרגשים של יהודים שקיבלו תפילין ממיזם 'קשר של תפילין'." },
-      { property: "og:url", content: "https://accurate-web-cloner.lovable.app/stories" },
+      { property: "og:url", content: "https://accurate-web-cloner.lovable.app/stories/" },
     ],
-    links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/stories" }],
+    links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/stories/" }],
   }),
   component: StoriesPage,
 });
@@ -20,7 +20,7 @@ export const Route = createFileRoute("/stories")({
 function StoriesPage() {
   return (
     <PageShell title="סיפורים">
-      <a href="/en" className="eng-link">For the stories <b>In English</b></a>
+      <a href="/en/the-tefillin-tie-initiative/" className="eng-link">For the stories <b>In English</b></a>
       <div className="stories-page-grid">
         {storyIndex.map((s) => (
           <a key={s.slug} href={`/tefilin/${s.slug}`} className="st-card" style={{ backgroundImage: `url('${s.img}')` }}>

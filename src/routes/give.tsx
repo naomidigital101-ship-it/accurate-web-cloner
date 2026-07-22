@@ -9,9 +9,9 @@ export const Route = createFileRoute("/give")({
       { name: "description", content: "יש לך תפילין שאינם בשימוש? מלא את הטופס ותרום אותן ליהודי שרוצה להניח." },
       { property: "og:title", content: "מסירת תפילין | קשר של תפילין" },
       { property: "og:description", content: "יש לך תפילין שאינם בשימוש? תרום אותן ליהודי שרוצה להניח." },
-      { property: "og:url", content: "https://accurate-web-cloner.lovable.app/give" },
+      { property: "og:url", content: "https://accurate-web-cloner.lovable.app/give/" },
     ],
-    links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/give" }],
+    links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/give/" }],
   }),
   component: GivePage,
 });
