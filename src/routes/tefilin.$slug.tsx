@@ -16,7 +16,7 @@ export const Route = createFileRoute("/tefilin/$slug")({
         ],
       };
     }
-    const url = `https://accurate-web-cloner.lovable.app/tefilin/${slug}`;
+    const url = `https://accurate-web-cloner.lovable.app/tefilin/${slug}/`;
     const desc = (story.paragraphs?.[0] ?? story.title).replace(/\s+/g, " ").slice(0, 155);
     const title = `${story.title.slice(0, 55)} | קשר של תפילין`;
     const image = story.img?.startsWith("http") ? story.img : `https://accurate-web-cloner.lovable.app${story.img}`;
