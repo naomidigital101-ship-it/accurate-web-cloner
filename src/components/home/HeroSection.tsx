@@ -112,8 +112,8 @@ export function HeroSection() {
         </p>
 
         <div className="hero-cta-row">
-          <a href="#request-form" className="hero-cta hero-cta-primary">מתעניין בתפילין</a>
-          <a href="#donate-form" className="hero-cta hero-cta-secondary">לתרומת תפילין</a>
+          <a href="#form" className="hero-cta hero-cta-primary">מתעניין בתפילין</a>
+          <a href="#form" className="hero-cta hero-cta-secondary">לתרומת תפילין</a>
         </div>
 
       </div>
