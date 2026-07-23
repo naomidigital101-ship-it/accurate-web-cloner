@@ -40,7 +40,7 @@ export function InterviewSection() {
         />
         <HoverCard
           title="מכתבי תודה"
-          href="/letters"
+          href="/מכתבי-תודה/"
           img="/wp/img/-תודה-אמא-לחייל-e1712736869916-218x300.webp"
           bg="#009FE3"
         />

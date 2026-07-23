@@ -12,6 +12,7 @@ import { DonationBanner } from "@/components/home/DonationBanner";
 import { MiKamchaSection } from "@/components/home/MiKamchaSection";
 import { StoriesSection } from "@/components/home/StoriesSection";
 import { PressSection } from "@/components/home/PressSection";
+import { PressStoriesSection } from "@/components/home/PressStoriesSection";
 import { InterviewSection } from "@/components/home/InterviewSection";
 
 import { FaqSection } from "@/components/home/FaqSection";
@@ -68,6 +69,7 @@ function Index() {
         <FormTabsSection />
         <InterviewSection />
         <PressSection />
+        <PressStoriesSection />
         <StoriesSection />
         <AboutTefilinSection />
         <HowItWorksSection />

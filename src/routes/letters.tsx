@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
 
 const cdn = "/wp/uploads";
@@ -28,17 +28,12 @@ const letters: Letter[] = [
 const LETTERS_CANONICAL = "https://accurate-web-cloner.lovable.app/%D7%9E%D7%9B%D7%AA%D7%91%D7%99-%D7%AA%D7%95%D7%93%D7%94/";
 
 export const Route = createFileRoute("/letters")({
+  beforeLoad: () => {
+    throw redirect({ to: "/מכתבי-תודה" as unknown as "/", replace: true });
+  },
   head: () => ({
-    meta: [
-      { title: "מכתבי תודה | קשר של תפילין" },
-      { name: "description", content: "מכתבי תודה מקהילות, מוסדות ויחידים שקיבלו תפילין ממיזם 'קשר של תפילין' של עמותת אור חדש." },
-      { property: "og:title", content: "מכתבי תודה | קשר של תפילין" },
-      { property: "og:description", content: "מכתבי תודה מקהילות ויחידים שקיבלו תפילין ממיזם 'קשר של תפילין'." },
-      { property: "og:url", content: LETTERS_CANONICAL },
-    ],
     links: [{ rel: "canonical", href: LETTERS_CANONICAL }],
   }),
-
   component: LettersPage,
 });
 
