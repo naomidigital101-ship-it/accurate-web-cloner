@@ -25,6 +25,8 @@ const letters: Letter[] = [
   { title: "מכתב מרב בסיס חיל האויר", img: `${cdn}/2024/04/מכתב-תודה-רב-בסיס-חיל-האוויר-scaled.webp` },
 ];
 
+const LETTERS_CANONICAL = "https://accurate-web-cloner.lovable.app/%D7%9E%D7%9B%D7%AA%D7%91%D7%99-%D7%AA%D7%95%D7%93%D7%94/";
+
 export const Route = createFileRoute("/letters")({
   head: () => ({
     meta: [
@@ -32,15 +34,15 @@ export const Route = createFileRoute("/letters")({
       { name: "description", content: "מכתבי תודה מקהילות, מוסדות ויחידים שקיבלו תפילין ממיזם 'קשר של תפילין' של עמותת אור חדש." },
       { property: "og:title", content: "מכתבי תודה | קשר של תפילין" },
       { property: "og:description", content: "מכתבי תודה מקהילות ויחידים שקיבלו תפילין ממיזם 'קשר של תפילין'." },
-      { property: "og:url", content: "https://accurate-web-cloner.lovable.app/letters/" },
+      { property: "og:url", content: LETTERS_CANONICAL },
     ],
-    links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/letters/" }],
+    links: [{ rel: "canonical", href: LETTERS_CANONICAL }],
   }),
 
   component: LettersPage,
 });
 
-function LettersPage() {
+export function LettersPage() {
   return (
     <PageShell title="מכתבי תודה">
       <div className="doc-grid doc-grid-letters">

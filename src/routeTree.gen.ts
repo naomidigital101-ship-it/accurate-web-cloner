@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492RouteImport } from './routes/מכתבי-תודה'
 import { Route as StoriesRouteImport } from './routes/stories'
 import { Route as RequestRouteImport } from './routes/request'
 import { Route as LettersRouteImport } from './routes/letters'
@@ -31,6 +32,14 @@ import { Route as EnRabbisAgreementsRouteImport } from './routes/en.rabbis-agree
 import { Route as EnArticlesInTheMediaRouteImport } from './routes/en.articles-in-the-media'
 import { Route as EnTefilinSlugRouteImport } from './routes/en.tefilin.$slug'
 
+const Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route =
+  Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492RouteImport.update(
+    {
+      id: '/מכתבי-תודה',
+      path: '/מכתבי-תודה',
+      getParentRoute: () => rootRouteImport,
+    } as any,
+  )
 const StoriesRoute = StoriesRouteImport.update({
   id: '/stories',
   path: '/stories',
@@ -150,6 +159,7 @@ export interface FileRoutesByFullPath {
   '/letters': typeof LettersRoute
   '/request': typeof RequestRoute
   '/stories': typeof StoriesRoute
+  '/מכתבי-תודה': typeof Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route
   '/en/articles-in-the-media': typeof EnArticlesInTheMediaRoute
   '/en/rabbis-agreements': typeof EnRabbisAgreementsRoute
   '/en/request-for-tefillin': typeof EnRequestForTefillinRoute
@@ -172,6 +182,7 @@ export interface FileRoutesByTo {
   '/letters': typeof LettersRoute
   '/request': typeof RequestRoute
   '/stories': typeof StoriesRoute
+  '/מכתבי-תודה': typeof Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route
   '/en/articles-in-the-media': typeof EnArticlesInTheMediaRoute
   '/en/rabbis-agreements': typeof EnRabbisAgreementsRoute
   '/en/request-for-tefillin': typeof EnRequestForTefillinRoute
@@ -196,6 +207,7 @@ export interface FileRoutesById {
   '/letters': typeof LettersRoute
   '/request': typeof RequestRoute
   '/stories': typeof StoriesRoute
+  '/מכתבי-תודה': typeof Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route
   '/en/articles-in-the-media': typeof EnArticlesInTheMediaRoute
   '/en/rabbis-agreements': typeof EnRabbisAgreementsRoute
   '/en/request-for-tefillin': typeof EnRequestForTefillinRoute
@@ -221,6 +233,7 @@ export interface FileRouteTypes {
     | '/letters'
     | '/request'
     | '/stories'
+    | '/מכתבי-תודה'
     | '/en/articles-in-the-media'
     | '/en/rabbis-agreements'
     | '/en/request-for-tefillin'
@@ -243,6 +256,7 @@ export interface FileRouteTypes {
     | '/letters'
     | '/request'
     | '/stories'
+    | '/מכתבי-תודה'
     | '/en/articles-in-the-media'
     | '/en/rabbis-agreements'
     | '/en/request-for-tefillin'
@@ -266,6 +280,7 @@ export interface FileRouteTypes {
     | '/letters'
     | '/request'
     | '/stories'
+    | '/מכתבי-תודה'
     | '/en/articles-in-the-media'
     | '/en/rabbis-agreements'
     | '/en/request-for-tefillin'
@@ -290,11 +305,19 @@ export interface RootRouteChildren {
   LettersRoute: typeof LettersRoute
   RequestRoute: typeof RequestRoute
   StoriesRoute: typeof StoriesRoute
+  Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route: typeof Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route
   TefilinSlugRoute: typeof TefilinSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/מכתבי-תודה': {
+      id: '/מכתבי-תודה'
+      path: '/מכתבי-תודה'
+      fullPath: '/מכתבי-תודה'
+      preLoaderRoute: typeof Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492RouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/stories': {
       id: '/stories'
       path: '/stories'
@@ -484,6 +507,8 @@ const rootRouteChildren: RootRouteChildren = {
   LettersRoute: LettersRoute,
   RequestRoute: RequestRoute,
   StoriesRoute: StoriesRoute,
+  Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route:
+    Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route,
   TefilinSlugRoute: TefilinSlugRoute,
 }
 export const routeTree = rootRouteImport
