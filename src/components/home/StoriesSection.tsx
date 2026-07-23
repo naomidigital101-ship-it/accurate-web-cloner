@@ -7,33 +7,28 @@ type Story = {
 const stories: Story[] = [
   {
     title: "\"וְהִיא שֶׁעָמְדָה לַאֲבוֹתֵינוּ וְלָנוּ\"",
-    href: "/tefilin/%d7%95%d7%94%d7%99%d7%90-%d7%a9%d7%a2%d7%9e%d7%93%d7%94",
+    href: "/tefilin/%d7%95%d6%b0%d7%94%d6%b4%d7%99%d7%90-%d7%a9%d6%b6%d7%81%d7%a2%d6%b8%d7%9e%d6%b0%d7%93%d6%b8%d7%94-%d7%9c%d6%b7%d7%90%d6%b2%d7%91%d7%95%d6%b9%d7%aa%d6%b5%d7%99%d7%a0%d7%95%d6%bc-%d7%95%d6%b0%d7%9c/",
     img: "/wp/img/AdobeStock_817584046-min.webp",
   },
   {
     title: "\"וְרָאוּ כָּל עַמֵּי הָאָרֶץ כִּי שֵׁם ה' נִקְרָא עָלֶיךָ, וְיָרְאוּ מִמֶּךָּ\"",
-    href: "/tefilin/%d7%95%d6%b0%d7%a8%d6%b8%d7%90%d7%95%d6%bc-%d7%9b%d6%b8%d6%bc%d7%9c-%d7%a2%d6%b7%d7%9e%d6%b5%d6%bc%d7%99-%d7%94%d6%b8%d7%90%d6%b8%d7%a8%d6%b6%d7%a5-%d7%9b%d6%b4%d6%bc%d7%99-%d7%a9%d6%b5%d7%81%d7%9d-2",
+    href: "/tefilin/%d7%95%d6%b0%d7%a8%d6%b8%d7%90%d7%95%d6%bc-%d7%9b%d6%b8%d6%bc%d7%9c-%d7%a2%d6%b7%d7%9e%d6%b5%d6%bc%d7%99-%d7%94%d6%b8%d7%90%d6%b8%d7%a8%d6%b6%d7%a5-%d7%9b%d6%b4%d6%bc%d7%99-%d7%a9%d6%b5%d7%81%d7%9d-2/",
     img: "/wp/img/AdobeStock_93382125-min.webp",
   },
   {
     title: "ביקשת סימן? קיבלת",
-    href: "/tefilin/%d7%91%d7%99%d7%a7%d7%a9%d7%aa-%d7%a1%d7%99%d7%9e%d7%9f-%d7%a7%d7%99%d7%91%d7%9c%d7%aa",
+    href: "/tefilin/%d7%91%d7%99%d7%a7%d7%a9%d7%aa-%d7%a1%d7%99%d7%9e%d7%9f-%d7%a7%d7%99%d7%91%d7%9c%d7%aa/",
     img: "/wp/img/glitter-min.webp",
   },
   {
     title: "שלוחי מצווה",
-    href: "/tefilin/%d7%a9%d7%9c%d7%95%d7%97%d7%99-%d7%9e%d7%a6%d7%95%d7%95%d7%94",
+    href: "/tefilin/%d7%a9%d7%9c%d7%95%d7%97%d7%99-%d7%9e%d7%a6%d7%95%d7%95%d7%94/",
     img: "/wp/img/6-1.png",
   },
   {
     title: "סוף סוף יש לי תפילין! סוף סוף אני יודע להניח תפילין",
-    href: "/tefilin/%d7%a1%d7%95%d7%a3-%d7%a1%d7%95%d7%a3-%d7%99%d7%a9-%d7%9c%d7%99-%d7%aa%d7%a4%d7%99%d7%9c%d7%99%d7%9f-%d7%a1%d7%95%d7%a3-%d7%a1%d7%95%d7%a3-%d7%90%d7%a0%d7%99-%d7%99%d7%95%d7%93%d7%a2-%d7%9c%d7%94",
+    href: "/tefilin/%d7%a1%d7%95%d7%a3-%d7%a1%d7%95%d7%a3-%d7%99%d7%a9-%d7%9c%d7%99-%d7%aa%d7%a4%d7%99%d7%9c%d7%99%d7%9f-%d7%a1%d7%95%d7%a3-%d7%a1%d7%95%d7%a3-%d7%90%d7%a0%d7%99-%d7%99%d7%95%d7%93%d7%a2-%d7%9c%d7%94/",
     img: "/wp/img/5.png",
-  },
-  {
-    title: "לַעֲשׂוֹת אֶת הַשַּׁבָּת",
-    href: "/tefilin/%d7%9c%d7%a2%d7%a9%d7%95%d7%aa-%d7%90%d7%aa-%d7%94%d7%a9%d7%91%d7%aa",
-    img: "/wp/img/חצי-פנים-6.png",
   },
 ];
 
