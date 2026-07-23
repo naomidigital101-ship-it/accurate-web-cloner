@@ -67,9 +67,8 @@ function Index() {
         <HeroSection />
         <FormTabsSection />
         <InterviewSection />
-
-        <StoriesSection />
         <PressSection />
+        <StoriesSection />
         <AboutTefilinSection />
         <HowItWorksSection />
         <AboutMitzvaSection />
