@@ -42,7 +42,7 @@ export const Route = createFileRoute("/letters")({
   component: LettersPage,
 });
 
-function LettersPage() {
+export function LettersPage() {
   return (
     <PageShell title="מכתבי תודה">
       <div className="doc-grid doc-grid-letters">
