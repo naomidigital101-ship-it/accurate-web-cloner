@@ -10,15 +10,14 @@ export function Footer() {
         ע"ר: 580703965
       </p>
       <div className="footer-contact-row">
+        <a href="tel:0546713966">054-6713966</a>
         <a href="https://waze.com/ul?q=בית אל, ארץ חמדה 33" target="_blank" rel="noopener">
           בית אל, ארץ חמדה 33
         </a>
-        <a href="tel:0546713966">054-6713966</a>
       </div>
       <a href="https://kavnekuda.com" target="_blank" rel="noopener" aria-label="אפיון, בניה ופיתוח: KAV" className="footer-credit-link">
         <img src="/wp/img/קרדיט-45.svg" alt="אפיון, בניה ופיתוח: KAV" />
       </a>
-      <p className="footer-rights">כל הזכויות שמורות</p>
     </footer>
   );
 }

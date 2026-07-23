@@ -2106,3 +2106,35 @@
   color: rgba(255,255,255,0.6);
   margin: 0;
 }
+
+/* Hero CTA buttons (task: two buttons below hero paragraph) */
+.hero-cta-row {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 14px 34px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+  min-width: 190px;
+  border: 2px solid #fff;
+}
+.hero-cta-primary { background: #fff; color: #060633; }
+.hero-cta-primary:hover { background: #bdffeb; color: #060633; transform: translateY(-1px); }
+.hero-cta-secondary { background: transparent; color: #fff; }
+.hero-cta-secondary:hover { background: #fff; color: #060633; transform: translateY(-1px); }
+@media (max-width: 767px) {
+  .hero-cta { font-size: 16px; padding: 12px 24px; min-width: 160px; }
+}
