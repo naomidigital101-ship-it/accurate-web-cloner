@@ -6,7 +6,9 @@ type Service = {
   back: string;
   backTitle?: string;
   href?: string;
+  solid?: boolean;
 };
+
 
 const services: Service[] = [
   {
@@ -22,8 +24,10 @@ const services: Service[] = [
     more: "לפרטים נוספים >>",
     img: "/wp/assets/הרצאה.jpg",
     height: 300,
+    solid: true,
     back: "רוצים לשמוע הרצאה מרתקת בנושא התפילין בליווי פריטי תפילין אותנטיים, לקראת בר מצווה או לשם היכרות ראשונית עם התפילין ? רוצים לקבל דגשים חשובים לקראת רכישת תפילין וללמוד איך לקנות תפילין בצורה מושכלת ?",
     href: "https://wa.me/972546713966?text=%D7%A9%D7%9C%D7%95%D7%9D%20%D7%A2%D7%9E%D7%99%D7%97%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%9E%D7%A2%D7%95%D7%A0%D7%99%D7%99%D7%9F%20%D7%91%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%90%D7%95%D7%93%D7%95%D7%AA%20%D7%94%D7%A8%D7%A6%D7%90%D7%94%20%D7%A9%D7%9C%D7%9A%20%D7%91%D7%A0%D7%95%D7%A9%D7%90%20%D7%AA%D7%A4%D7%99%D7%9C%D7%99%D7%9F",
+
   },
   {
     title: "שו\"ת תפילין",
@@ -43,7 +47,11 @@ export function ServicesSection() {
         {services.map((s) => (
           <div key={s.title} className="svc-flip" style={{ height: s.height }}>
             <div className="svc-flip-inner">
-              <div className="svc-front" style={{ backgroundImage: `url('${s.img}')` }}>
+              <div
+                className={`svc-front ${s.solid ? "svc-front-solid" : ""}`}
+                style={s.solid ? undefined : { backgroundImage: `url('${s.img}')` }}
+              >
+
                 <div className="svc-front-overlay">
                   <h3 className="svc-front-title">{s.title}</h3>
                   <p className="svc-front-more">{s.more}</p>
