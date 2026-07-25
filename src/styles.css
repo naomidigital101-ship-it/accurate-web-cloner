@@ -1147,21 +1147,30 @@
 }
 @media (max-width: 767px) { .about-text { width: 100%; padding: 16px; } }
 
-.how-e { display: flex; flex-direction: column; gap: 24px; }
-@media (max-width: 767px) { .how-e { flex-direction: column; gap: 24px; } }
+.how-e { display: flex; flex-direction: row; align-items: stretch; gap: 0; }
+@media (max-width: 900px) { .how-e { flex-direction: column; gap: 24px; } }
 .how-steps {
-  width: 100%;
+  width: 40%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 8px;
-  padding: 1% 8%;
+  padding: 6% 4%;
 }
-@media (max-width: 767px) { .how-steps { width: 100%; min-height: auto; padding: 16px; } }
+@media (max-width: 900px) { .how-steps { width: 100%; min-height: auto; padding: 16px; } }
 .how-center { text-align: center; }
-.how-step { display: flex; flex-direction: column; gap: 6px; align-items: center; }
+.how-step {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  opacity: 0.45;
+  transition: opacity 0.4s ease;
+}
+.how-step.on { opacity: 1; }
+
 .how-step-title {
   font-family: "Maadim", "Maadim OS", sans-serif;
   font-size: 2.5vw;
