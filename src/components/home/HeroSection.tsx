@@ -89,8 +89,9 @@ export function HeroSection() {
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: "radial-gradient(at top left, #67FFD1 0%, #009FE3 100%)",
-            mixBlendMode: "multiply",
+            background: "radial-gradient(at 0% 0%, #67FFD1 0%, #009FE3 100%)",
+            mixBlendMode: "normal",
+            opacity: 1,
           }}
         />
       </div>
