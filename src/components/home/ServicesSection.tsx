@@ -6,7 +6,9 @@ type Service = {
   back: string;
   backTitle?: string;
   href?: string;
+  solid?: boolean;
 };
+
 
 const services: Service[] = [
   {
