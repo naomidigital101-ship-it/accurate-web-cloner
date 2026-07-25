@@ -89,12 +89,12 @@ export function DonateForm() {
 export function FormTabsSection() {
   return (
     <section id="form" dir="rtl" className="forms-e forms-e-dual">
-      <div className="form-card">
+      <div className="form-card" id="form-request">
         <h2 className="form-card-title">רוצה להניח תפילין משלך?</h2>
         <p className="form-card-sub">אנא מלא את הטופס המצורף כדי שנוכל לעזור לך לקבל תפילין משלך!</p>
         <RequestForm />
       </div>
-      <div className="form-card">
+      <div className="form-card" id="form-donate">
         <h2 className="form-card-title">יש לך תפילין מיותרות?</h2>
         <p className="form-card-sub">אנא מלא את הטופס כדי שתוכל לקיים בהם מצוה חשובה וזיכוי הרבים!</p>
         <DonateForm />

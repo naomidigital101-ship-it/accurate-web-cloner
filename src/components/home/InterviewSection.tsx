@@ -24,7 +24,7 @@ export function InterviewSection() {
         <p className="iv-intro">צפו בראיון של הרב עמיחי איל שמציג את המיזם "קשר של תפילין":</p>
         <div className="iv-video">
           <iframe
-            src="https://www.youtube.com/embed/aQYiyBfycrc"
+            src="https://www.youtube.com/embed/Tmb7WBKtvsw"
             title='הרב עמיחי אייל מציג את המיזם "קשר של תפילין" - ערוץ 7'
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
