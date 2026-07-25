@@ -86,9 +86,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:title", content: "קשר של תפילין - עמותת אור חדש מחברת בין יהודים שרוצים להניח תפילין" },
       { property: "og:description", content: "ערבות הדדית וזיכוי הרבים, מטרתינו לחבר בין יהודי שרוצה להתחיל להניח תפילין ולהיות יותר מחובר לה' יתברך, לבין יהודי שיש לו תפילין לא בשימוש" },
       { property: "og:image", content: "https://accurate-web-cloner.lovable.app/wp/uploads/2024/01/תמונת-עמוד-קשר-של-תפילין-min.webp" },
+      { property: "og:image:width", content: "1400" },
+      { property: "og:image:height", content: "1400" },
+      { property: "og:image:type", content: "image/webp" },
+      { property: "og:locale:alternate", content: "en_US" },
+      { property: "article:publisher", content: "https://www.facebook.com/keshersheltfilin" },
+      { name: "msapplication-TileImage", content: "https://accurate-web-cloner.lovable.app/wp/img/כוכבית-כחולה-16.svg" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "קשר של תפילין - עמותת אור חדש" },
-      { name: "twitter:description", content: "ערבות הדדית וזיכוי הרבים - מחברים יהודי שרוצה להניח תפילין ליהודי שיש לו תפילין לא בשימוש." },
       { name: "twitter:image", content: "https://accurate-web-cloner.lovable.app/wp/uploads/2024/01/תמונת-עמוד-קשר-של-תפילין-min.webp" },
     ],
     links: [
@@ -136,6 +140,7 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
+        <a href="#content" className="skip-link">דלג לתוכן</a>
         {children}
         <Scripts />
       </body>

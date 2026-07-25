@@ -63,8 +63,7 @@ function Index() {
   return (
     <div dir="rtl" lang="he" className="min-h-screen bg-background">
       <Header />
-      <h1 className="sr-only">קשר של תפילין - מיזם עמותת אור חדש לחיבור וחלוקת תפילין</h1>
-      <main>
+      <main id="content">
         <HeroSection />
         <InterviewSection />
         <StoriesSection />

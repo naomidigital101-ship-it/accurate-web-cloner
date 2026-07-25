@@ -61,7 +61,7 @@ export function FaqSection() {
           <details key={f.q} className="faq-item">
             <summary className="faq-q">{f.q}</summary>
             <div className="faq-a">
-              {f.subtitle && <h3 className="faq-a-subtitle">{f.subtitle}</h3>}
+              {f.subtitle && <h2 className="faq-a-subtitle">{f.subtitle}</h2>}
               {f.a.split("\n").map((line, i) => renderLine(line, i))}
             </div>
           </details>

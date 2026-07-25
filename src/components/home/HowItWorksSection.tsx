@@ -25,7 +25,7 @@ export function HowItWorksSection() {
         <h2 className="e-h2-navy how-center">איך זה מתבצע?</h2>
         {steps.map((s, i) => (
           <div key={s.title} className="how-step">
-            <h3 className="how-step-title">{s.title}</h3>
+            <h2 className="how-step-title">{s.title}</h2>
             <p className="how-step-text">{s.text}</p>
             {i < steps.length - 1 && (
               <img src="/wp/img/חוצץ-משולש.png" alt="" className="how-divider" loading="lazy" />
