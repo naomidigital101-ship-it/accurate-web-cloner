@@ -656,7 +656,7 @@
   font-size: 18px;
   font-weight: 600;
   line-height: 1.2em;
-  padding: 8px 12px;
+  padding: 8px 16px;
   min-height: 40px;
   width: 100%;
 }
@@ -678,7 +678,10 @@
   font-size: 16px;
   font-weight: 600;
   line-height: 1.2em;
-  font-family: sans-serif;
+  font-family: "Talent BFS", "Maadim", "Maadim OS", sans-serif;
+  text-align: start;
+  padding: 0 5px 4px;
+  margin: 0;
 }
 @media (max-width: 767px) { .e-form-note { font-size: 18px; line-height: 1.4em; } }
 .e-form-buttons { display: flex; gap: 10px; width: 100%; }
@@ -701,7 +704,7 @@
 .e-btn-prev:hover { background-color: transparent; color: #ffffff; }
 @media (max-width: 767px) { .e-btn-step { font-size: 18px; } }
 /* טופס התרומה במקור מוגדר עם פונט "Talent BFS" שלא נטען - כלומר sans-serif של המערכת. משכפלים את זה. */
-.donate-form .e-field, .donate-form .e-radio-option, .donate-form .e-btn-step { font-family: sans-serif; }
+
 
 /* ===== Phase 2b: Interview (119ed9f) + Stories (post-168 loop) ===== */
 .iv-e {
@@ -2166,3 +2169,64 @@
   font-family: "Heebo", sans-serif;
 }
 .skip-link:focus { right: 0; }
+
+
+/* ===== Design parity #1: tabbed forms block under the hero ===== */
+.forms-tabbed {
+  position: relative;
+  z-index: 5;
+  margin-top: -130px;
+  padding: 0 4% 4% 4%;
+}
+.form-tabs {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+.form-tab {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  padding: 10px 20px;
+  height: 58px;
+  border-radius: 12px;
+  cursor: pointer;
+  background: transparent;
+  color: #ffffff;
+  border: 1.6px solid #ffffff;
+  transition: 0.25s;
+}
+.form-tab.is-active {
+  background: #67ffd1;
+  color: #2d2e83;
+  border: 5.6px solid #67ffd1;
+  box-shadow: 0 0 40px #67ffd1;
+}
+.form-card-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+.forms-tabbed .form-card { width: 580px; max-width: 100%; margin-top: 0; }
+.e-btn-step {
+  font-size: 20px;
+  line-height: 28px;
+  height: 40px;
+  padding: 0 24px;
+  border: 0;
+}
+.e-btn-prev { border: 1.6px solid #2d2e83; }
+.e-textarea {
+  height: 75px;
+  min-height: 75px;
+  padding: 5px 14px;
+  resize: vertical;
+}
+@media (max-width: 767px) {
+  .forms-tabbed { margin-top: -90px; padding: 0 4% 8% 4%; }
+  .forms-tabbed .form-card { width: 100%; }
+  .form-tab { font-size: 15px; padding: 10px 14px; }
+}
