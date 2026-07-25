@@ -414,6 +414,7 @@
   justify-content: center;
   text-align: center;
 }
+.hero-counter span { white-space: pre; }
 .hero-counter .num { font-weight: 900; font-size: 22px; line-height: 16px; }
 
 /* פסקה (55b7959): רוחב 40% בדסקטופ */
