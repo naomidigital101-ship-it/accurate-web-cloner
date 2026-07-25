@@ -82,11 +82,11 @@ export function HowItWorksSection() {
           </div>
           <div className="how-ba">
             <figure className="how-ba-before">
-              <img src="/wp/img/לפני-1-min.webp" alt="תפילין לפני חידוש" loading="lazy" />
+              <img src={encodeURI("/wp/img/לפני-1-min-225x300.webp")} alt="תפילין לפני חידוש" loading="lazy" />
               <figcaption>לפני</figcaption>
             </figure>
             <figure className="how-ba-after">
-              <img src="/wp/img/אחרי-1-min.webp" alt="תפילין אחרי חידוש" loading="lazy" />
+              <img src={encodeURI("/wp/img/אחרי-1-min-225x300.webp")} alt="תפילין אחרי חידוש" loading="lazy" />
               <figcaption>אחרי</figcaption>
             </figure>
           </div>

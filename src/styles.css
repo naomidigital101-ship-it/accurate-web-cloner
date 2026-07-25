@@ -428,7 +428,7 @@
   text-align: center;
   margin: 0;
 }
-@media (max-width: 767px) { .hero-par { width: 100%; max-width: 100%; } }
+@media (max-width: 767px) { .hero-par { width: 40%; max-width: 40%; margin-inline: auto; } }
 
 /* טאבים - עוברים לסקשן הטפסים עם margin שלילי שמרים אותם מעל הקשת */
 .form-tabs-heading {
@@ -857,6 +857,10 @@
   gap: 20px;
 }
 @media (max-width: 1024px) { .st-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 767px) {
+  .st-grid { grid-template-columns: 1fr; }
+  .st-grid .st-card, .st-grid .st-card-big { grid-column: auto; grid-row: auto; min-height: 330px; }
+}
 .st-card {
   display: flex;
   flex-direction: column;
@@ -1229,13 +1233,15 @@
   inset: 0;
   background-color: #009fe3;
   mix-blend-mode: multiply;
+  opacity: 0.45;
   z-index: 1;
 }
 .how-ba {
   width: 320px;
   align-self: center;
   margin-top: -340px;
-  margin-bottom: 60px;
+  margin-bottom: 100px;
+  padding-bottom: 40px;
   position: relative;
   z-index: 5;
   display: flex;
@@ -1273,6 +1279,9 @@
   color: #ffffff;
 }
 
+@media (max-width: 900px) {
+  .how-panel .how-slideshow { min-height: 70vh; }
+}
 @media (max-width: 767px) {
   .how-ba-before img { width: 150px; height: 150px; }
   .how-ba-after img { width: 200px; height: 200px; }
