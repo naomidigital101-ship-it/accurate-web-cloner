@@ -2139,9 +2139,11 @@
   gap: 14px;
   padding: 60px 20px 30px 20px;
   background-color: #060633;
+  background-image: linear-gradient(180deg, #060633 0%, #2d2e83 100%);
   color: #ffffff;
 }
-.footer-brand-only .footer-brand-logo img { width: 180px; height: auto; }
+.footer-brand-only .footer-brand-logo img { width: 342px; height: 88px; max-width: 100%; object-fit: contain; }
+@media (max-width: 480px) { .footer-brand-only .footer-brand-logo img { width: 100%; height: auto; } }
 .footer-brand-only .footer-tagline {
   font-family: "Maadim", "Maadim OS", sans-serif;
   font-size: 16px;
@@ -2157,8 +2159,9 @@
   font-family: "Maadim", "Maadim OS", sans-serif;
   font-size: 16px;
 }
-.footer-contact-row a { color: #ffffff; text-decoration: none; }
+.footer-contact-row a { display: inline-flex; align-items: center; gap: 8px; color: #ffffff; text-decoration: none; }
 .footer-contact-row a:hover { color: #bdffeb; }
+
 .footer-credit-link { display: inline-block; margin-top: 8px; }
 .footer-credit-link img { height: 20px; width: auto; opacity: 0.85; }
 .footer-brand-only .footer-rights {
