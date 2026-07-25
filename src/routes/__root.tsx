@@ -140,6 +140,7 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
+        <a href="#content" className="skip-link">דלג לתוכן</a>
         {children}
         <Scripts />
       </body>
