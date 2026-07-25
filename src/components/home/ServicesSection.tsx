@@ -47,7 +47,11 @@ export function ServicesSection() {
         {services.map((s) => (
           <div key={s.title} className="svc-flip" style={{ height: s.height }}>
             <div className="svc-flip-inner">
-              <div className="svc-front" style={{ backgroundImage: `url('${s.img}')` }}>
+              <div
+                className={`svc-front ${s.solid ? "svc-front-solid" : ""}`}
+                style={s.solid ? undefined : { backgroundImage: `url('${s.img}')` }}
+              >
+
                 <div className="svc-front-overlay">
                   <h3 className="svc-front-title">{s.title}</h3>
                   <p className="svc-front-more">{s.more}</p>
