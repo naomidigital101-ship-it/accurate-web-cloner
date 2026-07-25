@@ -1194,15 +1194,22 @@
 @media (max-width: 767px) { .how-step-text { line-height: 1.1em; } }
 .how-divider { width: 60%; display: block; margin: 0 auto; }
 .how-visual {
-  width: 100%;
-  min-height: 75vh;
+  width: 60%;
+  display: block;
+}
+@media (max-width: 900px) { .how-visual { width: 100%; } }
+.how-panel {
+  position: sticky;
+  top: 80px;
+  height: calc(100vh - 80px);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  overflow: hidden;
 }
-@media (max-width: 767px) { .how-visual { width: 100%; min-height: auto; } }
-.how-slideshow { position: relative; width: 100%; min-height: 50vh; overflow: hidden; }
+@media (max-width: 900px) { .how-panel { position: static; height: auto; } }
+.how-slideshow { position: relative; width: 100%; flex: 1; min-height: 60vh; overflow: hidden; }
+
 .how-slide {
   position: absolute;
   inset: 0;
