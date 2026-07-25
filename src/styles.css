@@ -1667,14 +1667,14 @@
 .partners-overlay {
   position: absolute;
   inset: 0;
-  background-color: #0a1a63;
+  background-color: #1a2f96;
   mix-blend-mode: multiply;
 }
 .partners-overlay::after {
   content: "";
   position: absolute;
   inset: 0;
-  background-color: rgba(6, 6, 51, 0.45);
+  background-color: rgba(10, 26, 99, 0.25);
 }
 .partners-inner {
   position: relative;
