@@ -125,15 +125,18 @@ function Chevron({ dir }: { dir: "next" | "prev" }) {
 export function PressStoriesSection() {
   const [start, setStart] = useState(0);
   const n = quotes.length;
-  const visible = [0, 1, 2].map((k) => quotes[(start + k) % n]);
+  const perView = 3;
+  const maxStart = Math.max(0, n - perView);
+  const go = (d: number) => setStart((s) => Math.min(maxStart, Math.max(0, s + d)));
   return (
     <section dir="rtl" className="qc-e" aria-label="ציטוטים מסיפורים">
-      <button type="button" className="qc-arrow" aria-label="הקודם" onClick={() => setStart((start - 1 + n) % n)}>
+      <button type="button" className="qc-arrow" aria-label="הקודם" onClick={() => go(-1)} disabled={start === 0}>
         <Chevron dir="prev" />
       </button>
       <div className="qc-track">
-        {visible.map((q, i) => (
-          <article key={`${start}-${i}`} className="qc-card">
+        <div className="qc-strip" style={{ ["--qc-i" as string]: String(start) }}>
+        {quotes.map((q, i) => (
+          <article key={i} className="qc-card">
             <div className="qc-body">
               {q.text && <p className="qc-text">{q.text}</p>}
               <div className="qc-meta">
@@ -149,8 +152,9 @@ export function PressStoriesSection() {
             </div>
           </article>
         ))}
+        </div>
       </div>
-      <button type="button" className="qc-arrow" aria-label="הבא" onClick={() => setStart((start + 1) % n)}>
+      <button type="button" className="qc-arrow" aria-label="הבא" onClick={() => go(1)} disabled={start >= maxStart}>
         <Chevron dir="next" />
       </button>
     </section>
