@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 function useCountUp(to: number, duration = 2000) {
-  const [val, setVal] = useState(0);
+  const [val, setVal] = useState(to);
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const el = ref.current;
@@ -12,6 +12,7 @@ function useCountUp(to: number, duration = 2000) {
       (entries) => {
         if (!entries[0].isIntersecting || started) return;
         started = true;
+        setVal(0);
         const t0 = performance.now();
         const tick = (t: number) => {
           const p = Math.min((t - t0) / duration, 1);
