@@ -1046,8 +1046,11 @@
   color: #2d2e83;
   margin: 0;
   white-space: pre-line;
-  max-height: none;
-  overflow: visible;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 12;
+  max-height: 316.8px;
+  overflow: hidden;
 }
 @media (max-width: 767px) { .qc-text { font-size: 18px; line-height: 1.4em; } }
 .qc-meta {
