@@ -1239,33 +1239,36 @@
 }
 @media (max-width: 767px) { .how-ba { width: 300px; margin-top: -160px; } }
 .how-ba figure { margin: 0; transition: 0.3s; }
-.how-ba figure:hover { transform: scale(1.1); }
+.how-ba figure:hover { transform: scale(1.05) rotate(0deg); }
 .how-ba img {
   object-fit: cover;
   object-position: center center;
-  border: 3px solid #ffffff;
-  border-radius: 20px;
+  border: 6px solid #ffffff;
+  border-radius: 8px;
   box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.2);
   display: inline-block;
 }
-.how-ba-before { text-align: end; }
+.how-ba-before { text-align: end; transform: rotate(-4deg); }
 .how-ba-before img { width: 160px; height: 160px; }
 .how-ba-before figcaption {
   color: #ffffff;
   font-family: "Maadim", "Maadim OS", sans-serif;
   font-size: 20px;
+  font-style: italic;
   font-weight: 600;
   line-height: 1.4em;
 }
-.how-ba-after { text-align: start; margin-top: -18%; }
+.how-ba-after { text-align: start; margin-top: -18%; transform: rotate(3deg); }
 .how-ba-after img { width: 240px; height: 240px; }
 .how-ba-after figcaption {
   font-family: "Maadim", "Maadim OS", sans-serif;
   font-size: 20px;
+  font-style: italic;
   font-weight: 600;
   line-height: 1.4em;
-  color: #2d2e83;
+  color: #ffffff;
 }
+
 @media (max-width: 767px) {
   .how-ba-before img { width: 150px; height: 150px; }
   .how-ba-after img { width: 200px; height: 200px; }
