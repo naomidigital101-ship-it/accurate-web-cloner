@@ -20,6 +20,7 @@ function useCountUp(to: number, duration = 2000) {
           if (p < 1) raf = requestAnimationFrame(tick);
         };
         raf = requestAnimationFrame(tick);
+        window.setTimeout(() => setVal(to), duration + 300);
         io.disconnect();
       },
       { threshold: 0.3 },
@@ -111,11 +112,6 @@ export function HeroSection() {
         <p className="hero-par">
           מטרתינו לעזור לכל יהודי שרוצה להתחיל להניח תפילין ולהיות יותר מחובר לה' יתברך.
         </p>
-
-        <div className="hero-cta-row">
-          <a href="#form-request" className="hero-cta hero-cta-primary">מתעניין בתפילין</a>
-          <a href="#form-donate" className="hero-cta hero-cta-secondary">לתרומת תפילין</a>
-        </div>
 
       </div>
 

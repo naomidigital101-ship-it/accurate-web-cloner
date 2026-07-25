@@ -65,12 +65,12 @@ function Index() {
       <Header />
       <main id="content">
         <HeroSection />
+        <FormTabsSection />
         <InterviewSection />
         <StoriesSection />
         <PressSection />
         <PressStoriesSection />
         <AboutTefilinSection />
-        <FormTabsSection />
         <HowItWorksSection />
         <AboutMitzvaSection />
         <MiKamchaSection />
