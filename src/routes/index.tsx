@@ -66,12 +66,12 @@ function Index() {
       <h1 className="sr-only">קשר של תפילין - מיזם עמותת אור חדש לחיבור וחלוקת תפילין</h1>
       <main>
         <HeroSection />
-        <FormTabsSection />
         <InterviewSection />
+        <StoriesSection />
         <PressSection />
         <PressStoriesSection />
-        <StoriesSection />
         <AboutTefilinSection />
+        <FormTabsSection />
         <HowItWorksSection />
         <AboutMitzvaSection />
         <MiKamchaSection />
