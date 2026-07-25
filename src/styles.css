@@ -1582,9 +1582,9 @@
   min-height: 113vh;
   padding: 2% 10% 6% 10%;
   background-image: url("/wp/assets/כוכבית-כחולה-16.svg");
-  background-position: -10% 0px;
+  background-position: -8% 55%;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 52% auto;
   overflow: hidden;
 }
 @media (max-width: 767px) {
