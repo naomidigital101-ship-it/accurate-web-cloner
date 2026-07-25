@@ -87,7 +87,7 @@ export function StoriesSection() {
             <h2 className="st-title">הסיפורים</h2>
             <div className="st-subrow">
               <h2 className="st-subtitle">שמאחורי התפילין</h2>
-              <a href="/stories" className="st-all-btn">
+              <a href="/stories/" className="st-all-btn">
                 <span>לכל הסיפורים</span>
                 <ArrowLeftIcon />
               </a>

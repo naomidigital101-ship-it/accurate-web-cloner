@@ -445,7 +445,7 @@ function EnStories() {
             <h2 className="st-title">The Stories</h2>
             <div className="st-subrow">
               <h2 className="st-subtitle">Behind the Tefillin</h2>
-              <a href="/stories" className="st-all-btn">
+              <a href="/stories/" className="st-all-btn">
                 <span>For all the stories</span>
                 <ArrowRightIcon />
               </a>
@@ -688,7 +688,7 @@ function EnAboutMitzva() {
           "sign" – the other two are Shabbat and circumcision – because it connects a Jew to his
           faith in G-d as well as to the Torah and all its mitzvot.
         </p>
-        <a href="/request" className="e-btn-white">
+        <a href="/request/" className="e-btn-white">
           Request for Tefillin
         </a>
       </div>
@@ -722,7 +722,7 @@ function EnMiKamcha() {
           this mitzvah! By bringing benefit and merit to another Jew, he is helping to manifest
           Jewish unity, and thus "writing," so to speak, the Tefillin of the Master of the World.
         </p>
-        <a href="/give" className="e-btn-white">
+        <a href="/give/" className="e-btn-white">
           Request to Donate Tefillin
         </a>
       </div>

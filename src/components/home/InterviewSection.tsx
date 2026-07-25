@@ -34,7 +34,7 @@ export function InterviewSection() {
       <div className="iv-cards-col">
         <HoverCard
           title="הסכמות רבנים"
-          href="/agreements"
+          href="/agreements/"
           img="/wp/img/מכתב-הסכמה-מהרב-זילברשטיין-212x300.webp"
           bg="#2D2E83"
         />
