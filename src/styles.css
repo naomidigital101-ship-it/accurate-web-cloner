@@ -365,7 +365,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 75vh;
+  min-height: 0;
   padding: 80px 0 140px;
   gap: 20px;
 }
@@ -404,11 +404,17 @@
   border-radius: 1000px;
   padding: 10px;
   color: #ffffff;
+  font-family: "Maadim", "Maadim OS", sans-serif;
   font-size: 16px;
-  line-height: 1em;
+  font-weight: 400;
+  line-height: 16px;
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
 }
-.hero-counter .num { font-weight: 900; font-size: 22px; }
+.hero-counter .num { font-weight: 900; font-size: 22px; line-height: 16px; }
 
 /* פסקה (55b7959): רוחב 40% בדסקטופ */
 .hero-par {
@@ -494,7 +500,7 @@
   color: #ffffff;
   fill: #ffffff;
   font-family: "Maadim", "Maadim OS", sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   line-height: 1.4em;
   text-decoration: none;
@@ -527,10 +533,11 @@
 }
 .e-dropdown-item {
   display: block;
-  padding: 8px 20px;
+  padding: 13px 20px;
   color: #ffffff;
   font-family: "Maadim", "Maadim OS", sans-serif;
   font-size: 18px;
+  line-height: 20px;
   font-weight: 500;
   text-decoration: none;
   transition: 0.3s;
