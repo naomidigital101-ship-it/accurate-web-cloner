@@ -1516,9 +1516,11 @@
 .svc-shape path { fill: #ebebf0; }
 
 .footer-e { background-color: #ebebf0; }
-.footer-gallery { column-count: 5; column-gap: 10px; padding: 10px; }
+.footer-gallery-section { background-color: #ebebf0; padding: 10px; }
+.footer-gallery { column-count: 4; column-gap: 10px; }
 @media (max-width: 1024px) { .footer-gallery { column-count: 3; } }
 @media (max-width: 767px) { .footer-gallery { column-count: 2; } }
+
 .footer-gallery-img {
   width: 100%;
   display: block;
