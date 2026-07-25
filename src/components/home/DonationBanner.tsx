@@ -11,7 +11,6 @@ export function DonationBanner() {
         <p className="partners-note">התרומה מוכרת לצרכי מס</p>
         <div className="partners-btns">
           <a href="https://bit.ly/tfil" target="_blank" rel="noopener" className="btn-e btn-outline-light">לתרומה</a>
-          <a href="https://bit.ly/tfil" target="_blank" rel="noopener" className="btn-e btn-mint-solid">לתרומה</a>
         </div>
       </div>
     </section>

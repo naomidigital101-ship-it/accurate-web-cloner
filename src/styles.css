@@ -247,11 +247,11 @@
     color: #FFFFFF;
     font-size: 22px;
     font-weight: bold;
-    line-height: 1.4em;
+    line-height: 30.8px;
     letter-spacing: 1px;
-    border: 2px solid #FFFFFF;
+    border: 1.6px solid #FFFFFF;
     border-radius: 12px;
-    padding: 10px 28px;
+    padding: 12px 24px;
   }
   .btn-outline-light:hover,
   .btn-outline-light:focus {
@@ -1582,9 +1582,9 @@
   min-height: 113vh;
   padding: 2% 10% 6% 10%;
   background-image: url("/wp/assets/כוכבית-כחולה-16.svg");
-  background-position: -10% 0px;
+  background-position: -8% 55%;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 52% auto;
   overflow: hidden;
 }
 @media (max-width: 767px) {
@@ -1599,7 +1599,7 @@
   padding: 1%;
 }
 @media (max-width: 767px) { .mitzva-text { width: 100%; } }
-.mitzva-img { width: 60%; display: flex; flex-direction: column; justify-content: center; }
+.mitzva-img { width: 60%; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 1; }
 @media (max-width: 767px) { .mitzva-img { width: 100%; } }
 .mitzva-img img {
   width: 100%;
@@ -1667,8 +1667,14 @@
 .partners-overlay {
   position: absolute;
   inset: 0;
-  background-color: #009fe3;
+  background-color: #1a2f96;
   mix-blend-mode: multiply;
+}
+.partners-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(10, 26, 99, 0.25);
 }
 .partners-inner {
   position: relative;
