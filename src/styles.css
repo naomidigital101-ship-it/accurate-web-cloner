@@ -1214,10 +1214,7 @@
   justify-content: center;
   overflow: hidden;
 }
-@media (max-width: 900px) {
-  .how-panel { position: static; height: auto; }
-  .how-slideshow { min-height: 70vh; }
-}
+@media (max-width: 900px) { .how-panel { position: static; height: auto; } }
 .how-slideshow { position: relative; width: 100%; flex: 1 1 auto; min-height: 0; overflow: hidden; }
 
 .how-slide {
@@ -1282,6 +1279,9 @@
   color: #ffffff;
 }
 
+@media (max-width: 900px) {
+  .how-panel .how-slideshow { min-height: 70vh; }
+}
 @media (max-width: 767px) {
   .how-ba-before img { width: 150px; height: 150px; }
   .how-ba-after img { width: 200px; height: 200px; }
