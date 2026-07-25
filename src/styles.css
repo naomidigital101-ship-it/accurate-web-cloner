@@ -1521,9 +1521,9 @@
 
 .footer-e { background-color: #ebebf0; }
 .footer-gallery-section { background-color: #ebebf0; padding: 10px; }
-.footer-gallery { column-count: 4; column-gap: 10px; }
-@media (max-width: 1024px) { .footer-gallery { column-count: 3; } }
-@media (max-width: 767px) { .footer-gallery { column-count: 2; } }
+.footer-gallery { column-count: 7; column-gap: 10px; max-height: 620px; overflow: hidden; }
+@media (max-width: 1024px) { .footer-gallery { column-count: 4; max-height: 480px; } }
+@media (max-width: 767px) { .footer-gallery { column-count: 3; max-height: 360px; } }
 
 .footer-gallery-img {
   width: 100%;
