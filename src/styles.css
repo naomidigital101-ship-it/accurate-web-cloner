@@ -1208,7 +1208,7 @@
   overflow: hidden;
 }
 @media (max-width: 900px) { .how-panel { position: static; height: auto; } }
-.how-slideshow { position: relative; width: 100%; flex: 1; min-height: 60vh; overflow: hidden; }
+.how-slideshow { position: relative; width: 100%; flex: 1 1 auto; min-height: 0; overflow: hidden; }
 
 .how-slide {
   position: absolute;
@@ -1231,7 +1231,8 @@
 .how-ba {
   width: 320px;
   align-self: center;
-  margin-top: -180px;
+  margin-top: -300px;
+  margin-bottom: 30px;
   position: relative;
   z-index: 5;
   display: flex;
