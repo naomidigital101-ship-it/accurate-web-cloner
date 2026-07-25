@@ -1521,16 +1521,16 @@
 
 .footer-e { background-color: #ebebf0; }
 .footer-gallery-section { background-color: #ebebf0; padding: 10px; }
-.footer-gallery { column-count: 7; column-gap: 10px; max-height: 620px; overflow: hidden; }
-@media (max-width: 1024px) { .footer-gallery { column-count: 4; max-height: 480px; } }
-@media (max-width: 767px) { .footer-gallery { column-count: 3; max-height: 360px; } }
+.footer-gallery { display: grid; grid-template-columns: repeat(7, 1fr); grid-auto-rows: 150px; gap: 10px; }
+@media (max-width: 1024px) { .footer-gallery { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 130px; } }
+@media (max-width: 767px) { .footer-gallery { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 110px; } }
 
 .footer-gallery-img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
   display: block;
   border-radius: 10px;
-  margin-bottom: 10px;
-  break-inside: avoid;
 }
 .footer-strip {
   background: #ffffff;
