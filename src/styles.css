@@ -1411,6 +1411,9 @@
   overflow: hidden;
 }
 .svc-front { background-position: center center; background-size: cover; }
+.svc-front-solid { background-color: #009fe3; background-image: none; }
+.svc-front-solid .svc-front-overlay { background-color: transparent; }
+
 .svc-front-overlay {
   position: absolute;
   inset: 0;
