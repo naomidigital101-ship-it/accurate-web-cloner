@@ -78,7 +78,7 @@ export function PressSection() {
   const maxStart = Math.max(0, n - perView);
   const go = (d: number) => setStart((s) => Math.min(maxStart, Math.max(0, s + d)));
   return (
-    <section dir="rtl" className="qc-e" aria-label="ציטוטים ממקבלי תפילין">
+    <section dir="rtl" className="qc-e qc-e-wa" aria-label="ציטוטים ממקבלי תפילין">
       <button type="button" className="qc-arrow" aria-label="הקודם" onClick={() => go(-1)} disabled={start === 0}>
         <Chevron dir="prev" />
       </button>
@@ -87,6 +87,7 @@ export function PressSection() {
         {quotes.map((q, i) => (
           <article key={i} className="qc-card">
             {q.img && <span className="qc-img" style={{ backgroundImage: `url('${q.img}')` }} />}
+            <span className="qc-letter" aria-hidden="true" />
             <div className="qc-body">
               {q.text && <p className="qc-text">{q.text}</p>}
               <div className="qc-meta">

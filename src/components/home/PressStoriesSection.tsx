@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { stories } from "@/data/stories";
+import { storyIndex } from "@/data/stories-index";
 
 type Quote = {
   text: string;
@@ -114,6 +116,7 @@ const quotes: Quote[] = [
   {
     text: "רציתי להגיד לך תודה על התפילין. אני מאוד שמח בהם ואשתדל להניח אותם בכל יום",
     name: "יאיר",
+    img: "/wp/img/AdobeStock_817584046-min.webp",
     href: "/tefilin/159/",
   },
   {
@@ -132,6 +135,23 @@ function Chevron({ dir }: { dir: "next" | "prev" }) {
   );
 }
 
+const slugImages = new Map<string, string>();
+for (const s of stories) slugImages.set(s.slug, s.img);
+for (const s of storyIndex) if (!slugImages.has(s.slug)) slugImages.set(s.slug, s.img);
+
+function imageFor(q: Quote): string | undefined {
+  if (q.img) return q.img;
+  if (!q.href) return undefined;
+  const raw = q.href.replace(/^\/tefilin\//, "").replace(/\/$/, "");
+  let slug = raw;
+  try {
+    slug = decodeURIComponent(raw);
+  } catch {
+    slug = raw;
+  }
+  return slugImages.get(slug) ?? slugImages.get(raw);
+}
+
 export function PressStoriesSection() {
   const [start, setStart] = useState(0);
   const n = quotes.length;
@@ -139,15 +159,17 @@ export function PressStoriesSection() {
   const maxStart = Math.max(0, n - perView);
   const go = (d: number) => setStart((s) => Math.min(maxStart, Math.max(0, s + d)));
   return (
-    <section dir="rtl" className="qc-e" aria-label="ציטוטים מסיפורים">
+    <section dir="rtl" className="qc-e qc-e-stories" aria-label="ציטוטים מסיפורים">
       <button type="button" className="qc-arrow" aria-label="הקודם" onClick={() => go(-1)} disabled={start === 0}>
         <Chevron dir="prev" />
       </button>
       <div className="qc-track">
         <div className="qc-strip" style={{ ["--qc-i" as string]: String(start) }}>
-        {quotes.map((q, i) => (
+        {quotes.map((q, i) => {
+          const img = imageFor(q);
+          return (
           <article key={i} className="qc-card">
-            {q.img && <span className="qc-img" style={{ backgroundImage: `url('${q.img}')` }} />}
+            {img && <span className="qc-img" style={{ backgroundImage: `url('${encodeURI(img)}')` }} role="img" aria-label={`תמונת הסיפור של ${q.name}`} />}
             <div className="qc-body">
               {q.text && <p className="qc-text">{q.text}</p>}
               <div className="qc-meta">
@@ -162,7 +184,8 @@ export function PressStoriesSection() {
               )}
             </div>
           </article>
-        ))}
+          );
+        })}
         </div>
       </div>
       <button type="button" className="qc-arrow" aria-label="הבא" onClick={() => go(1)} disabled={start >= maxStart}>
