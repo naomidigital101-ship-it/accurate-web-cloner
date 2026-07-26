@@ -181,7 +181,8 @@ export function PressStoriesSection() {
               )}
             </div>
           </article>
-        ))}
+          );
+        })}
         </div>
       </div>
       <button type="button" className="qc-arrow" aria-label="הבא" onClick={() => go(1)} disabled={start >= maxStart}>
