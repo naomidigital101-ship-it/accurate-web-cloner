@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { stories } from "@/data/stories";
+import { storyIndex } from "@/data/stories-index";
 
 type Quote = {
   text: string;
