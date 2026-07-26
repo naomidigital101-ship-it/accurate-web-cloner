@@ -20,7 +20,13 @@ export const Route = createFileRoute("/stories")({
 function StoriesPage() {
   return (
     <PageShell title="סיפורים">
-      <a href="/en/the-tefillin-tie-initiative/" className="eng-link">For the stories <b>In English</b></a>
+      <a href="/en/the-tefillin-tie-initiative/" className="eng-link" aria-label="לסיפורים באנגלית">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20a15.3 15.3 0 0 1 0-20" />
+        </svg>
+        For the stories <b>In English</b>
+      </a>
       <div className="stories-page-grid">
         {storyIndex.map((s) => (
           <a key={s.slug} href={`/tefilin/${s.slug}`} className="st-card" style={{ backgroundImage: `url('${s.img}')` }}>
