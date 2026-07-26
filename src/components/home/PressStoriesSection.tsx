@@ -116,6 +116,7 @@ const quotes: Quote[] = [
   {
     text: "רציתי להגיד לך תודה על התפילין. אני מאוד שמח בהם ואשתדל להניח אותם בכל יום",
     name: "יאיר",
+    img: "/wp/img/AdobeStock_817584046-min.webp",
     href: "/tefilin/159/",
   },
   {
