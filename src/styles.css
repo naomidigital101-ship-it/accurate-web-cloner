@@ -1728,8 +1728,8 @@
 
 /* רצועת רקע כחולה קבועה בצד המוביל - צילום התפילין */
 .page-bg-strip {
-  position: fixed; top: -10vh; bottom: -10vh; right: 0; width: 25%; z-index: 0; will-change: transform;
-  background-image: url("/wp/uploads/2024/01/midsection-woman-with-tape-rolled-hand-holding-book-min.webp");
+  position: fixed; top: -10vh; bottom: -10vh; right: 0; width: 380px; max-width: 30%; z-index: 0; will-change: transform;
+  background-image: linear-gradient(rgba(0,159,227,0.35), rgba(0,159,227,0.35)), url("/wp/img/midsection-woman-with-tape-rolled-hand-holding-book-min.webp");
   background-size: cover; background-position: center center; background-repeat: no-repeat;
 }
 .page-shell-en .page-bg-strip { right: auto; left: 0; }
@@ -1746,10 +1746,11 @@
 
 .page-title {
   position: relative; z-index: 1;
-  margin: 0 -14% 40px 0;
+  width: fit-content; max-width: 100%;
+  margin: 0 -14% 40px auto;
   background: #ffffff;
   box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-  padding: 10px 24px;
+  padding: 10px;
   text-align: right;
   border-right: 10px solid #67ffd1;
 }
@@ -1759,13 +1760,13 @@
   font-size: 6vw; font-weight: 900; line-height: 0.95em; color: #2d2e83;
 }
 .page-title-ltr {
-  margin: 0 0 40px -14%;
+  margin: 0 auto 40px -14%;
   text-align: left;
   border-right: none; border-left: 10px solid #67ffd1;
 }
 @media (max-width: 1024px) {
   .page-title { margin-right: 0; }
-  .page-title-ltr { margin-left: 0; }
+  .page-title-ltr { margin-left: 0; margin-right: auto; }
   .page-bg-strip { display: none; }
 }
 @media (max-width: 767px) { .page-title span { font-size: 40px; } }
@@ -1830,15 +1831,18 @@
   display: inline-flex; align-items: center; gap: 8px;
   background: #67ffd1; color: #2d2e83;
   font-family: "Maadim", "Maadim OS", sans-serif;
-  font-size: 16px; font-weight: bold;
-  border-radius: 100px; padding: 8px 18px;
-  text-decoration: none; margin-bottom: 24px;
+  border-radius: 8px; padding: 6px 22px;
+  font-size: 18px; font-weight: 400;
+  text-decoration: none; margin: 0 auto 24px 0; width: fit-content;
 }
 .e-nav-link.e-nav-active { color: #2d2e83; fill: #2d2e83; }
 .e-nav-link.e-nav-active::before { opacity: 1; transform: translateX(0); }
 
 /* in-news list */
-.news-list { display: flex; flex-direction: column; gap: 20px; max-width: 760px; }
+.news-list { display: grid; grid-template-columns: repeat(3, minmax(0, 340px)); gap: 20px; justify-content: start; }
+@media (max-width: 1200px) { .news-list { grid-template-columns: repeat(2, minmax(0, 340px)); } }
+@media (max-width: 767px) { .news-list { grid-template-columns: 1fr; } }
+.news-list .press-item-title { font-size: 18px; }
 
 /* donate page */
 .donate-cards { display: flex; gap: 20px; flex-wrap: wrap; width: 100%; }
@@ -1885,6 +1889,7 @@
   text-decoration: none;
   margin-top: 6px;
 }
+.donate-card-onetime .btn-donate { background: #009fe3; color: #ffffff; }
 .donate-card .btn-donate:hover { opacity: 0.9; }
 .donate-intro { font-family: "Maadim", "Maadim OS", sans-serif; font-size: 18px; line-height: 1.4em; color: #060633; max-width: 640px; margin: 0 0 24px 0; text-align: start; }
 
