@@ -1828,7 +1828,7 @@
 @media (max-width: 1024px) { .stories-page-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 640px) { .stories-page-grid > *:nth-child(6n+1) { grid-column: auto; } }
 .eng-link {
-  display: inline-flex; align-items: center; gap: 8px;
+  display: flex; align-items: center; gap: 8px;
   background: #67ffd1; color: #2d2e83;
   font-family: "Maadim", "Maadim OS", sans-serif;
   border-radius: 8px; padding: 6px 22px;
