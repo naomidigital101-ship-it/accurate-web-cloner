@@ -63,6 +63,29 @@ const quotes: Quote[] = [
   }
 ];
 
+const letterImages: Record<string, string> = {
+  "א.|מחריש": "/wp/img/glitter-min.webp",
+  "ג.|מבאר שבע": "/wp/img/midsection-woman-with-tape-rolled-hand-holding-book-min.webp",
+  "ת.|מבית שמש": "/wp/img/לפני-1-min.webp",
+  "ע.|מירושלים": "/wp/img/cropped-hand-wrapped-tefillin-min.webp",
+  "א.|מפרדסיה": "/wp/img/AdobeStock_229166376-min.webp",
+  "ב.|מתל אביב": "/wp/uploads/2024/01/tallit-tefillin-white-background-min.webp",
+  "י.|מחדרה": "/wp/uploads/2024/01/תפילין-1-חתוך-min-1.webp",
+  "ע.ק.|מאשדוד": "/wp/img/AdobeStock_817584046-min.webp",
+  "מיכאל|מירושלים": "/wp/img/unfocused-people-walking-min.webp",
+};
+
+const fallbackLetterImages = [
+  "/wp/img/glitter-min.webp",
+  "/wp/img/cropped-hand-wrapped-tefillin-min.webp",
+  "/wp/uploads/2024/01/tallit-tefillin-white-background-min.webp",
+  "/wp/img/unfocused-people-walking-min.webp",
+];
+
+function letterImageFor(q: Quote, i: number): string {
+  return encodeURI(letterImages[`${q.name}|${q.city ?? ""}`] ?? fallbackLetterImages[i % fallbackLetterImages.length]);
+}
+
 function Chevron({ dir }: { dir: "next" | "prev" }) {
   return (
     <svg viewBox="0 0 180 180" width="28" height="28" fill="currentColor" aria-hidden="true" style={{ transform: dir === "next" ? "scaleX(-1)" : undefined }}>
@@ -87,7 +110,7 @@ export function PressSection() {
         {quotes.map((q, i) => (
           <article key={i} className="qc-card">
             {q.img && <span className="qc-img" style={{ backgroundImage: `url('${q.img}')` }} />}
-            <span className="qc-letter" aria-hidden="true" />
+            <span className="qc-letter" role="img" aria-label={`תמונה מלווה לציטוט של ${q.name}`} style={{ backgroundImage: `url("${letterImageFor(q, i)}")` }} />
             <div className="qc-body">
               {q.text && <p className="qc-text">{q.text}</p>}
               <div className="qc-meta">
