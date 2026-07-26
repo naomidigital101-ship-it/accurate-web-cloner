@@ -69,7 +69,7 @@ const letterImages: Record<string, string> = {
   "ת.|מבית שמש": "/wp/img/לפני-1-min.webp",
   "ע.|מירושלים": "/wp/img/cropped-hand-wrapped-tefillin-min.webp",
   "א.|מפרדסיה": "/wp/img/AdobeStock_229166376-min.webp",
-  "ב.|מתל אביב": "/wp/img/tallit-tefillin-white-background-min.webp",
+  "ב.|מתל אביב": "/wp/uploads/2024/01/tallit-tefillin-white-background-min.webp",
   "י.|מחדרה": "/wp/uploads/2024/01/תפילין-1-חתוך-min-1.webp",
   "ע.ק.|מאשדוד": "/wp/img/AdobeStock_817584046-min.webp",
   "מיכאל|מירושלים": "/wp/img/unfocused-people-walking-min.webp",
@@ -78,7 +78,7 @@ const letterImages: Record<string, string> = {
 const fallbackLetterImages = [
   "/wp/img/glitter-min.webp",
   "/wp/img/cropped-hand-wrapped-tefillin-min.webp",
-  "/wp/img/tallit-tefillin-white-background-min.webp",
+  "/wp/uploads/2024/01/tallit-tefillin-white-background-min.webp",
   "/wp/img/unfocused-people-walking-min.webp",
 ];
 
