@@ -63,6 +63,29 @@ const quotes: Quote[] = [
   }
 ];
 
+const letterImages: Record<string, string> = {
+  "א.|מחריש": "/wp/img/glitter-min.webp",
+  "ג.|מבאר שבע": "/wp/img/midsection-woman-with-tape-rolled-hand-holding-book-min.webp",
+  "ת.|מבית שמש": "/wp/img/לפני-1-min.webp",
+  "ע.|מירושלים": "/wp/img/cropped-hand-wrapped-tefillin-min.webp",
+  "א.|מפרדסיה": "/wp/img/AdobeStock_229166376-min.webp",
+  "ב.|מתל אביב": "/wp/img/tallit-tefillin-white-background-min.webp",
+  "י.|מחדרה": "/wp/img/תפילין-1-חתוך-min-1.webp",
+  "ע.ק.|מאשדוד": "/wp/img/AdobeStock_817584046-min.webp",
+  "מיכאל|מירושלים": "/wp/img/unfocused-people-walking-min.webp",
+};
+
+const fallbackLetterImages = [
+  "/wp/img/glitter-min.webp",
+  "/wp/img/cropped-hand-wrapped-tefillin-min.webp",
+  "/wp/img/tallit-tefillin-white-background-min.webp",
+  "/wp/img/unfocused-people-walking-min.webp",
+];
+
+function letterImageFor(q: Quote, i: number): string {
+  return encodeURI(letterImages[`${q.name}|${q.city ?? ""}`] ?? fallbackLetterImages[i % fallbackLetterImages.length]);
+}
+
 function Chevron({ dir }: { dir: "next" | "prev" }) {
   return (
     <svg viewBox="0 0 180 180" width="28" height="28" fill="currentColor" aria-hidden="true" style={{ transform: dir === "next" ? "scaleX(-1)" : undefined }}>
