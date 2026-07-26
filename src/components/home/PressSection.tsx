@@ -110,7 +110,7 @@ export function PressSection() {
         {quotes.map((q, i) => (
           <article key={i} className="qc-card">
             {q.img && <span className="qc-img" style={{ backgroundImage: `url('${q.img}')` }} />}
-            <span className="qc-letter" aria-hidden="true" />
+            <span className="qc-letter" role="img" aria-label={`תמונה מלווה לציטוט של ${q.name}`} style={{ backgroundImage: `url("${letterImageFor(q, i)}")` }} />
             <div className="qc-body">
               {q.text && <p className="qc-text">{q.text}</p>}
               <div className="qc-meta">
