@@ -1044,7 +1044,7 @@
   height: 150px;
   margin-inline-start: -14px;
   margin-top: 18px;
-  background: #ffffff;
+  background: #ffffff center / cover no-repeat;
   border: 1.6px solid #ffffff;
   border-radius: 20px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
