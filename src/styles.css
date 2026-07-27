@@ -2135,6 +2135,9 @@
 @media (max-width: 767px) {
   .en-ltr .about-e { padding: 40px 0; gap: 32px; }
   .en-ltr .about-photo img { height: 300px; }
+  .en-ltr .about-photo-top { margin-bottom: -90px; }
+  .en-ltr .about-photo-bottom { margin-top: -90px; }
+  .en-ltr .about-imgs { min-height: 0; }
   .en-ltr .about-bigblock { min-height: 1400px; }
   .en-ltr .about-text { padding: 24px 16px; gap: 24px; }
 }
