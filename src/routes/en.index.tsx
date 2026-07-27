@@ -880,16 +880,6 @@ const enServices = [
     href: WA_LINK,
     btn: "contact us",
   },
-  {
-    title: "שו\"ת תפילין",
-    more: "קרא עוד >>",
-    img: "/wp/assets/tallit-tefillin-white-background-min.webp",
-    height: 250,
-    back: "",
-    backTitle: "בקרוב",
-    href: "",
-    btn: "",
-  },
 ];
 
 function EnServices() {
