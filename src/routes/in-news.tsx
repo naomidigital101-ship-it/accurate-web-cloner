@@ -20,10 +20,10 @@ const newsItems: NewsItem[] = [
 export const Route = createFileRoute("/in-news")({
   head: () => ({
     meta: [
-      { title: "בתקשורת | קשר של תפילין" },
-      { name: "description", content: "כתבות ופרסומים על מיזם 'קשר של תפילין' של עמותת אור חדש בכלי התקשורת בישראל." },
-      { property: "og:title", content: "בתקשורת | קשר של תפילין" },
-      { property: "og:description", content: "כתבות ופרסומים על מיזם 'קשר של תפילין' בכלי התקשורת בישראל." },
+      { title: "כתבות בתקשורת על המיזם | קשר של תפילין" },
+      { name: "description", content: "סיקור תקשורתי של מיזם קשר של תפילין: כתבות בערוץ 7, מגזין משפחה, HAMODIA, בשבע ועוד על חלוקת תפילין לאלפי יהודים." },
+      { property: "og:title", content: "כתבות בתקשורת על המיזם | קשר של תפילין" },
+      { property: "og:description", content: "סיקור תקשורתי של מיזם קשר של תפילין: כתבות בערוץ 7, מגזין משפחה, HAMODIA, בשבע ועוד על חלוקת תפילין לאלפי יהודים." },
       { property: "og:url", content: "https://accurate-web-cloner.lovable.app/in-news/" },
     ],
     links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/in-news/" }],
