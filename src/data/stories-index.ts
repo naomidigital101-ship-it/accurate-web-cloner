@@ -3,7 +3,7 @@ const cdn = "/wp/uploads";
 export type StoryIndexItem = { title: string; slug: string; img: string };
 
 export const storyIndex: StoryIndexItem[] = [
-  { title: "\"וְהִיא שֶׁעָמְדָה לַאֲבוֹתֵינוּ וְלָנוּ\"", slug: "וְהִיא-שֶׁעָמְדָה-לַאֲבוֹתֵינוּ-וְל", img: "/wp/img/AdobeStock_817584046-min.webp" },
+  { title: "\"וְהִיא שֶׁעָמְדָה לַאֲבוֹתֵינוּ וְלָנוּ\"", slug: "וְהִיא-שֶׁעָמְדָה-לַאֲבוֹתֵינוּ-וְל", img: `${cdn}/2025/08/AdobeStock_229166376-min.webp` },
   { title: "\"וְרָאוּ כָּל עַמֵּי הָאָרֶץ כִּי שֵׁם ה' נִקְרָא עָלֶיךָ, וְיָרְאוּ מִמֶּךָּ\"", slug: "וְרָאוּ-כָּל-עַמֵּי-הָאָרֶץ-כִּי-שֵׁם-2", img: "/wp/img/AdobeStock_93382125-min.webp" },
   { title: "ביקשת סימן? קיבלת", slug: "ביקשת-סימן-קיבלת", img: "/wp/img/glitter-min.webp" },
   { title: "שלוחי מצווה", slug: "שלוחי-מצווה", img: "/wp/img/6-1.png" },
