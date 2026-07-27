@@ -10,13 +10,13 @@ export const Route = createFileRoute("/en/the-tefillin-tie-initiative")({
       {
         name: "description",
         content:
-          "Kesher Shel Tefillin — Ohr Chadash's initiative connecting Jews who wish to begin wearing Tefillin with donors of unused Tefillin.",
+          "Connecting Jews who wish to begin wearing tefillin with donors of unused pairs. Over 1,300 sets of tefillin delivered across Israel - request or donate tefillin today.",
       },
       { property: "og:title", content: "The Tefillin Tie Initiative | Ohr Chadash" },
       {
         property: "og:description",
         content:
-          "Mutual responsibility and collective benefit — connecting one Jew who wants to begin wearing Tefillin with another whose Tefillin are unused.",
+          "Connecting Jews who wish to begin wearing tefillin with donors of unused pairs. Over 1,300 sets of tefillin delivered across Israel - request or donate tefillin today.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
