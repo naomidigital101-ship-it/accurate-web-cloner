@@ -32,6 +32,13 @@ export const Route = createFileRoute("/letters")({
     throw redirect({ to: "/מכתבי-תודה" as unknown as "/", replace: true });
   },
   head: () => ({
+    meta: [
+      { title: "מכתבי תודה ממקבלי תפילין | קשר של תפילין" },
+      { name: "description", content: "מכתבי תודה מרגשים מחיילים, מפקדים, רבנים וקהילות שקיבלו תפילין מעמותת אור חדש במסגרת מיזם קשר של תפילין." },
+      { property: "og:title", content: "מכתבי תודה ממקבלי תפילין | קשר של תפילין" },
+      { property: "og:description", content: "מכתבי תודה מרגשים מחיילים, מפקדים, רבנים וקהילות שקיבלו תפילין מעמותת אור חדש במסגרת מיזם קשר של תפילין." },
+      { property: "og:url", content: LETTERS_CANONICAL },
+    ],
     links: [{ rel: "canonical", href: LETTERS_CANONICAL }],
   }),
   component: LettersPage,
