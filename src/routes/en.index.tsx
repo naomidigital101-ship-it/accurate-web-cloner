@@ -897,7 +897,7 @@ function EnServices() {
                 </div>
               </div>
               <div className="svc-back">
-                {s.backTitle && <h3 className="svc-back-title">{s.backTitle}</h3>}
+                {"backTitle" in s && s.backTitle ? <h3 className="svc-back-title">{String(s.backTitle)}</h3> : null}
                 {s.back && <p className="svc-back-text">{s.back}</p>}
                 {s.href && (
                   <a href={s.href} target="_blank" rel="noopener" className="svc-back-btn">
