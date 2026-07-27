@@ -8,7 +8,7 @@ const stories: Story[] = [
   {
     title: "\"וְהִיא שֶׁעָמְדָה לַאֲבוֹתֵינוּ וְלָנוּ\"",
     href: "/tefilin/%d7%95%d6%b0%d7%94%d6%b4%d7%99%d7%90-%d7%a9%d6%b6%d7%81%d7%a2%d6%b8%d7%9e%d6%b0%d7%93%d6%b8%d7%94-%d7%9c%d6%b7%d7%90%d6%b2%d7%91%d7%95%d6%b9%d7%aa%d6%b5%d7%99%d7%a0%d7%95%d6%bc-%d7%95%d6%b0%d7%9c/",
-    img: "/wp/img/AdobeStock_817584046-min.webp",
+    img: "/wp/uploads/2025/08/AdobeStock_229166376-min.webp",
   },
   {
     title: "\"וְרָאוּ כָּל עַמֵּי הָאָרֶץ כִּי שֵׁם ה' נִקְרָא עָלֶיךָ, וְיָרְאוּ מִמֶּךָּ\"",

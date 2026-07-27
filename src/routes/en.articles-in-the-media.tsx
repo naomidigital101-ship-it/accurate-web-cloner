@@ -15,7 +15,7 @@ const press: PressItem[] = [
     title: "How Hamas Brought Jews Back to Judaism",
     source: "HAMODIA",
     date: "27/10/2024",
-    href: "https://tefilin.or-hadash.org.il/wp-content/uploads/2024/10/DOC-20241014-WA0012..pdf",
+    href: "/wp/uploads/2024/10/DOC-20241014-WA0015.pdf",
     logoText: "HAMODIA",
   },
   {
@@ -42,7 +42,18 @@ const press: PressItem[] = [
 ];
 
 export const Route = createFileRoute("/en/articles-in-the-media")({
-  head: () => ({ meta: [{ title: "articles in the media | The Tefillin Tie Initiative" }] }),
+  head: () => ({
+    meta: [
+      { title: "In the Media | The Tefillin Tie Initiative" },
+      { name: "description", content: "Media coverage of the Tefillin Tie Initiative: Hamodia, Mishpacha Magazine, Israel National News and more." },
+      { property: "og:title", content: "In the Media | The Tefillin Tie Initiative" },
+      { property: "og:description", content: "Media coverage of the Tefillin Tie Initiative: Hamodia, Mishpacha Magazine, Israel National News and more." },
+      { property: "og:type", content: "website" },
+      { property: "og:locale", content: "en_US" },
+      { property: "og:url", content: "https://accurate-web-cloner.lovable.app/en/articles-in-the-media/" },
+    ],
+    links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/en/articles-in-the-media/" }],
+  }),
   component: Page,
 });
 

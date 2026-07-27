@@ -3,7 +3,18 @@ import { useState } from "react";
 import { PageShell } from "@/components/PageShell";
 
 export const Route = createFileRoute("/en/request-to-donate-tefillin")({
-  head: () => ({ meta: [{ title: "Request to Donate Tefillin | The Tefillin Tie Initiative" }] }),
+  head: () => ({
+    meta: [
+      { title: "Donate Tefillin | The Tefillin Tie Initiative" },
+      { name: "description", content: "Have unused tefillin? Donate them to Ohr Chadash - we inspect, renew and deliver them to a Jew who will wear them every day." },
+      { property: "og:title", content: "Donate Tefillin | The Tefillin Tie Initiative" },
+      { property: "og:description", content: "Have unused tefillin? Donate them to Ohr Chadash - we inspect, renew and deliver them to a Jew who will wear them every day." },
+      { property: "og:type", content: "website" },
+      { property: "og:locale", content: "en_US" },
+      { property: "og:url", content: "https://accurate-web-cloner.lovable.app/en/request-to-donate-tefillin/" },
+    ],
+    links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/en/request-to-donate-tefillin/" }],
+  }),
   component: Page,
 });
 

@@ -5,10 +5,10 @@ import { RequestForm } from "@/components/home/FormTabsSection";
 export const Route = createFileRoute("/request")({
   head: () => ({
     meta: [
-      { title: "בקשת תפילין | קשר של תפילין" },
-      { name: "description", content: "רוצה להניח תפילין משלך? מלא את הטופס ונדאג לך לזוג תפילין מהודר ומחודש." },
-      { property: "og:title", content: "בקשת תפילין | קשר של תפילין" },
-      { property: "og:description", content: "רוצה להניח תפילין משלך? מלא את הטופס ונדאג לך לזוג תפילין מהודר." },
+      { title: "בקשת תפילין - טופס פנייה | קשר של תפילין" },
+      { name: "description", content: "רוצים להתחיל להניח תפילין? מלאו טופס קצר ונדאג לכם לזוג תפילין מהודר וכשר - לחיילים, נערי בר מצווה, מתחזקים וכל יהודי." },
+      { property: "og:title", content: "בקשת תפילין - טופס פנייה | קשר של תפילין" },
+      { property: "og:description", content: "רוצים להתחיל להניח תפילין? מלאו טופס קצר ונדאג לכם לזוג תפילין מהודר וכשר - לחיילים, נערי בר מצווה, מתחזקים וכל יהודי." },
       { property: "og:url", content: "https://accurate-web-cloner.lovable.app/request/" },
     ],
     links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/request/" }],

@@ -22,7 +22,18 @@ const stories: EnStory[] = [
 ];
 
 export const Route = createFileRoute("/en/stories-2")({
-  head: () => ({ meta: [{ title: "stories | The Tefillin Tie Initiative" }] }),
+  head: () => ({
+    meta: [
+      { title: "Tefillin Stories - Real Lives Changed | The Tefillin Tie Initiative" },
+      { name: "description", content: "True stories of soldiers, Bar Mitzvah boys and returnees who received tefillin through the initiative - read how one pair changes a life." },
+      { property: "og:title", content: "Tefillin Stories - Real Lives Changed | The Tefillin Tie Initiative" },
+      { property: "og:description", content: "True stories of soldiers, Bar Mitzvah boys and returnees who received tefillin through the initiative - read how one pair changes a life." },
+      { property: "og:type", content: "website" },
+      { property: "og:locale", content: "en_US" },
+      { property: "og:url", content: "https://accurate-web-cloner.lovable.app/en/stories-2/" },
+    ],
+    links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/en/stories-2/" }],
+  }),
   component: Page,
 });
 

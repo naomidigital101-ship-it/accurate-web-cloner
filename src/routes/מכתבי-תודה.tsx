@@ -6,10 +6,10 @@ const CANONICAL = "https://accurate-web-cloner.lovable.app/%D7%9E%D7%9B%D7%AA%D7
 export const Route = createFileRoute("/מכתבי-תודה")({
   head: () => ({
     meta: [
-      { title: "מכתבי תודה | קשר של תפילין" },
-      { name: "description", content: "מכתבי תודה מקהילות, מוסדות ויחידים שקיבלו תפילין ממיזם 'קשר של תפילין' של עמותת אור חדש." },
-      { property: "og:title", content: "מכתבי תודה | קשר של תפילין" },
-      { property: "og:description", content: "מכתבי תודה מקהילות ויחידים שקיבלו תפילין ממיזם 'קשר של תפילין'." },
+      { title: "מכתבי תודה ממקבלי תפילין | קשר של תפילין" },
+      { name: "description", content: "מכתבי תודה מרגשים מחיילים, מפקדים, רבנים וקהילות שקיבלו תפילין מעמותת אור חדש במסגרת מיזם קשר של תפילין." },
+      { property: "og:title", content: "מכתבי תודה ממקבלי תפילין | קשר של תפילין" },
+      { property: "og:description", content: "מכתבי תודה מרגשים מחיילים, מפקדים, רבנים וקהילות שקיבלו תפילין מעמותת אור חדש במסגרת מיזם קשר של תפילין." },
       { property: "og:url", content: CANONICAL },
     ],
     links: [{ rel: "canonical", href: CANONICAL }],

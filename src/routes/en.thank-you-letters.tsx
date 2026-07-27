@@ -23,7 +23,18 @@ const letters: Letter[] = [
 ];
 
 export const Route = createFileRoute("/en/thank-you-letters")({
-  head: () => ({ meta: [{ title: "Thank you letters | The Tefillin Tie Initiative" }] }),
+  head: () => ({
+    meta: [
+      { title: "Thank You Letters | The Tefillin Tie Initiative" },
+      { name: "description", content: "Moving thank-you letters from soldiers, commanders, communities and families who received tefillin from Ohr Chadash." },
+      { property: "og:title", content: "Thank You Letters | The Tefillin Tie Initiative" },
+      { property: "og:description", content: "Moving thank-you letters from soldiers, commanders, communities and families who received tefillin from Ohr Chadash." },
+      { property: "og:type", content: "website" },
+      { property: "og:locale", content: "en_US" },
+      { property: "og:url", content: "https://accurate-web-cloner.lovable.app/en/thank-you-letters/" },
+    ],
+    links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/en/thank-you-letters/" }],
+  }),
   component: Page,
 });
 
