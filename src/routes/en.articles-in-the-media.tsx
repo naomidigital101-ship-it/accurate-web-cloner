@@ -15,7 +15,7 @@ const press: PressItem[] = [
     title: "How Hamas Brought Jews Back to Judaism",
     source: "HAMODIA",
     date: "27/10/2024",
-    href: "https://tefilin.or-hadash.org.il/wp-content/uploads/2024/10/DOC-20241014-WA0012..pdf",
+    href: "/wp/uploads/2024/10/DOC-20241014-WA0015.pdf",
     logoText: "HAMODIA",
   },
   {

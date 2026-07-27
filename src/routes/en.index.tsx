@@ -403,27 +403,27 @@ function EnInterview() {
 const enStories = [
   {
     title: "DIVINE PROVIDENCE IN KIBBUTZ NIR OZ",
-    href: "https://tefilin.or-hadash.org.il/en/tefilin/divine-providence-in-kibbutz-nir-oz/",
+    href: "/en/tefilin/divine-providence-in-kibbutz-nir-oz",
     img: "/wp/uploads/2024/05/Nir_Oz_-_01.jpg",
   },
   {
     title: "AFTER FOUR MIRACLES, G-D LEFT HIM NO CHOICE",
-    href: "https://tefilin.or-hadash.org.il/en/tefilin/after-four-miracles-g-d-left-him-no-choice/",
+    href: "/en/tefilin/after-four-miracles-g-d-left-him-no-choice",
     img: "/wp/uploads/2024/04/נובה.jpg",
   },
   {
     title: "PARENTS TO THE RESCUE",
-    href: "https://tefilin.or-hadash.org.il/en/tefilin/parents-to-the-rescue/",
+    href: "/en/tefilin/parents-to-the-rescue",
     img: "/wp/uploads/2024/01/תפילין-1-חתוך-min-1.webp",
   },
   {
     title: "THE COOPERATIVE FATHER – TO A POINT",
-    href: "https://tefilin.or-hadash.org.il/en/tefilin/the-cooperative-father-to-a-point/",
+    href: "/en/tefilin/the-cooperative-father-to-a-point",
     img: "/wp/img/7-225x300-1.png",
   },
   {
     title: "THE WHISPERED REQUEST",
-    href: "https://tefilin.or-hadash.org.il/en/tefilin/the-whispered-request/",
+    href: "/en/tefilin/the-whispered-request",
     img: "/wp/assets/tallit-tefillin-white-background-min.webp",
   },
 ];
@@ -526,7 +526,7 @@ const enPress: EnPressItem[] = [
     title: "How Hamas Brought Jews Back to Judaism",
     source: "HAMODIA",
     date: "27/10/2024",
-    href: "https://tefilin.or-hadash.org.il/wp-content/uploads/2024/10/DOC-20241014-WA0012..pdf",
+    href: "/wp/uploads/2024/10/DOC-20241014-WA0015.pdf",
     logoText: "HAMODIA",
   },
   {
@@ -572,7 +572,7 @@ function EnAbout() {
         </div>
         <div className="about-photo about-photo-bottom">
           <div className="about-photo-inner2">
-            <img src="/wp/assets/קשת-9-min-e1706093310964.webp" alt="" loading="lazy" />
+            <img src="/wp/img/קשת-9-min-e1706093310964.webp" alt="" loading="lazy" />
           </div>
         </div>
       </div>
