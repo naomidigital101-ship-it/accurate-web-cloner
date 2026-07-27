@@ -7,6 +7,7 @@ export function PageShell({ title, en = false, children }: { title: string; en?:
     <div dir={en ? "ltr" : "rtl"} lang={en ? "en" : "he"} className={en ? "page-shell page-shell-en" : "page-shell"}>
       <div className="page-bg-strip" aria-hidden="true" />
       <Header en={en} />
+      <div className="page-band-mobile" aria-hidden="true" />
       <main className={en ? "page-content page-content-en" : "page-content"}>
         <h1 className={en ? "page-title page-title-ltr" : "page-title"}><span>{title}</span></h1>
         {children}
