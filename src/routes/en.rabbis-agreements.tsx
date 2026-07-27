@@ -16,7 +16,18 @@ const rabbis: Rabbi[] = [
 ];
 
 export const Route = createFileRoute("/en/rabbis-agreements")({
-  head: () => ({ meta: [{ title: "Rabbis agreements | The Tefillin Tie Initiative" }] }),
+  head: () => ({
+    meta: [
+      { title: "Rabbis' Letters of Approval | The Tefillin Tie Initiative" },
+      { name: "description", content: "Letters of endorsement from leading rabbis - Rav Zilberstein, Rav Amar, Rav Asher Weiss, Rav David Yosef and more - for the Tefillin Tie Initiative." },
+      { property: "og:title", content: "Rabbis' Letters of Approval | The Tefillin Tie Initiative" },
+      { property: "og:description", content: "Letters of endorsement from leading rabbis - Rav Zilberstein, Rav Amar, Rav Asher Weiss, Rav David Yosef and more - for the Tefillin Tie Initiative." },
+      { property: "og:type", content: "website" },
+      { property: "og:locale", content: "en_US" },
+      { property: "og:url", content: "https://accurate-web-cloner.lovable.app/en/rabbis-agreements/" },
+    ],
+    links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/en/rabbis-agreements/" }],
+  }),
   component: Page,
 });
 
