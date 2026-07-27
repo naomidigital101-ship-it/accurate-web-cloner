@@ -20,10 +20,10 @@ const rabbis: Rabbi[] = [
 export const Route = createFileRoute("/agreements")({
   head: () => ({
     meta: [
-      { title: "הסכמות הרבנים | קשר של תפילין" },
-      { name: "description", content: "מכתבי הסכמה וברכה מגדולי הרבנים למיזם 'קשר של תפילין' של עמותת אור חדש." },
-      { property: "og:title", content: "הסכמות הרבנים | קשר של תפילין" },
-      { property: "og:description", content: "מכתבי הסכמה וברכה מגדולי הרבנים למיזם 'קשר של תפילין' של עמותת אור חדש." },
+      { title: "הסכמות רבנים למיזם | קשר של תפילין" },
+      { name: "description", content: "מכתבי הסכמה וברכה מגדולי הרבנים - הרב זילברשטיין, הרב עמאר, הרב אשר וייס, הרב דוד יוסף ועוד - למיזם קשר של תפילין של עמותת אור חדש." },
+      { property: "og:title", content: "הסכמות רבנים למיזם | קשר של תפילין" },
+      { property: "og:description", content: "מכתבי הסכמה וברכה מגדולי הרבנים - הרב זילברשטיין, הרב עמאר, הרב אשר וייס, הרב דוד יוסף ועוד - למיזם קשר של תפילין של עמותת אור חדש." },
       { property: "og:url", content: "https://accurate-web-cloner.lovable.app/agreements/" },
     ],
     links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/agreements/" }],
