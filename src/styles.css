@@ -2125,15 +2125,19 @@
 .en-ltr .qc-meta { font-family: inherit; }
 
 /* EN home: "The Tefillin Tie Initiative" section vertical scale (matches source) */
-.en-ltr .about-e { padding: 60px 0; align-items: center; }
-.en-ltr .about-photo img { height: 300px; }
-.en-ltr .about-photo-top { margin-bottom: -90px; }
-.en-ltr .about-photo-bottom { margin-top: -90px; }
-.en-ltr .about-bigblock { min-height: 1010px; }
+.en-ltr .about-e { padding: 140px 0 300px; align-items: center; }
+.en-ltr .about-photo img { height: 360px; }
+.en-ltr .about-photo-top { margin-bottom: -110px; }
+.en-ltr .about-photo-bottom { margin-top: -110px; }
+.en-ltr .about-bigblock { min-height: 1010px; flex: 1 0 auto; }
+.en-ltr .about-imgs { min-height: 1250px; justify-content: center; }
 .en-ltr .about-text { gap: 28px; padding: 4% 5%; }
 @media (max-width: 767px) {
   .en-ltr .about-e { padding: 40px 0; gap: 32px; }
   .en-ltr .about-photo img { height: 300px; }
+  .en-ltr .about-photo-top { margin-bottom: -90px; }
+  .en-ltr .about-photo-bottom { margin-top: -90px; }
+  .en-ltr .about-imgs { min-height: 0; }
   .en-ltr .about-bigblock { min-height: 1400px; }
   .en-ltr .about-text { padding: 24px 16px; gap: 24px; }
 }
