@@ -7,8 +7,8 @@ type NewsItem = { title?: string; source: string; date: string; img: string; hre
 
 const newsItems: NewsItem[] = [
   { title: "ארגון 'קשר של תפילין' – ככה זה עובד בשטח", source: "הידברות", date: "28.9.25", img: `${cdn}/2026/06/לוגו-הידברות.webp`, href: "https://www.hidabroot.org/article/1214439" },
-  { source: "מגזין אתנחתא", date: "ג' תשרי תשפ\"ן 25.09.25", img: `${cdn}/2025/10/אתנחתא.png`, href: "https://tefilin.or-hadash.org.il/wp-content/uploads/2025/10/yedidya_1164-1.pdf" },
-  { title: "כתבה על קשר של תפילין בעיתון של כפר חב\"ד", source: "עיתון כפר חב\"ד", date: "21/05/2025", img: `${cdn}/2025/05/כפר-חבד.jpg`, href: "https://tefilin.or-hadash.org.il/wp-content/uploads/2025/05/%D7%AA%D7%9E%D7%95%D7%A0%D7%94-%D7%A9%D7%9C-WhatsApp%E2%80%8F-2025-05-18-%D7%91%D7%A9%D7%A2%D7%94-15.22.07_3aeb7c27.jpg" },
+  { source: "מגזין אתנחתא", date: "ג' תשרי תשפ\"ן 25.09.25", img: `${cdn}/2025/10/אתנחתא.png`, href: `${cdn}/2025/10/yedidya_1164-1.pdf` },
+  { title: "כתבה על קשר של תפילין בעיתון של כפר חב\"ד", source: "עיתון כפר חב\"ד", date: "21/05/2025", img: `${cdn}/2025/05/כפר-חבד.jpg`, href: `${cdn}/2025/05/kfar-chabad-whatsapp-15.22.07.jpg` },
   { title: "גם לזוג התפילין הישנות שלכם יש ייעוד חשוב | מיזם 'קשר של תפילין' – כסף אנושי, פרק 5", source: "103FM", date: "21/04/2025", img: `${cdn}/2025/05/103FM.jpg`, href: "https://www.youtube.com/watch?v=Tmb7WBKtvsw" },
   { title: "\"מהדקין את הקשר\" כתבה בעיתון ב7", source: "עיתון ב7", date: "28/08/2024", img: `${cdn}/2024/09/ערוץ-7-1.jpg`, href: "https://www.inn.co.il/news/646944" },
   { title: "STRAPPED TOGETHER – כתבה במגזין \"משפחה\"", source: "MISHPACHA", date: "05.03.2024", img: `${cdn}/2024/05/לוגו-עיתון-משפחה-עברית.webp`, href: "https://mishpacha.com/strapped-together/" },
