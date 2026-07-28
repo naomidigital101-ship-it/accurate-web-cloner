@@ -6,8 +6,9 @@ const cdn = "/wp/uploads";
 type Letter = { title: string; sub?: string; img: string };
 
 const letters: Letter[] = [
-  { title: "Thank you letter from Ramat Tamir sheltered housing", img: `${cdn}/2026/05/מכתב-תודה-דיור-מוגן.jpg` },
-  { title: "Letter of thanks from the Jewish community in Romania", sub: "From the president of the Jewish community in Romania", img: `${cdn}/2026/05/הקהילה-היהודית-ברומניה-min.webp` },
+  { title: "Thank you letter from Ramat Tamir sheltered housing", sub: "Heftzi Leibovitz", img: `${cdn}/2026/05/מכתב-תודה-דיור-מוגן.jpg` },
+  { title: "Letter of thanks from the Jewish community in Romania", sub: "מנשיא הקהילה הודית ברומניה", img: `${cdn}/2026/05/הקהילה-היהודית-ברומניה-min.webp` },
+
   { title: "Letter of thanks from Rabbi Eitan Eckstein", sub: "Manager of Retorno", img: `${cdn}/2026/05/איתן-אקשטיין-רטורנו.png` },
   { title: "A letter from the air force base chief", img: `${cdn}/2024/04/מכתב-תודה-רב-בסיס-חיל-האוויר-scaled.webp` },
   { title: "A letter from the day center to the elderly", img: `${cdn}/2024/04/-תודה-מרכז-יום-לקשיש-e1712736849999.webp` },
