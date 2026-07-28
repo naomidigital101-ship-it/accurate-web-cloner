@@ -2368,9 +2368,12 @@
   .iv-card:hover { transform: none; }
 
   .partners-inner { max-width: 100%; box-sizing: border-box; }
+  .partners-e { overflow-x: clip; }
 
   .how-ba { width: 100%; max-width: 300px; }
   .how-ba-before, .how-ba-after { position: relative; left: 0 !important; right: 0 !important; max-width: 100%; }
   .how-ba-before img, .how-ba-after img { max-width: 100%; height: auto; }
+  .how-e, .how-visual, .how-panel { overflow-x: clip; }
 }
+
 
