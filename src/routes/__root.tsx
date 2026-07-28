@@ -143,7 +143,7 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        <a href="#content" className="skip-link">דלג לתוכן</a>
+        <a href="#content" className="skip-link">{isEn ? "Skip to content" : "דלג לתוכן"}</a>
         {children}
         <Scripts />
       </body>
