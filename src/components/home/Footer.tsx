@@ -1,4 +1,7 @@
+import { InnerPageFx } from "@/components/InnerPageFx";
+
 const gallery = [
+
   "g1.webp", "g2.webp", "g3.jpg", "g4.jpg", "g5.webp", "g6.jpg", "g7.jpg",
   "g8.jpg", "g9.jpg", "g10.jpg", "g11.png", "g12.jpg", "g13.jpg", "g14.jpg",
   "g15.webp", "g16.webp", "g17.jpg", "g18.webp", "g19.webp", "g20.jpg",
@@ -25,6 +28,7 @@ function HouseIcon() {
 export function Footer() {
   return (
     <>
+      <InnerPageFx />
       <section dir="rtl" className="footer-gallery-section" aria-label="גלריית תמונות">
         <div className="footer-gallery">
           {gallery.map((g) => (
@@ -34,10 +38,14 @@ export function Footer() {
               alt="רגעים ממיזם קשר של תפילין"
               className="footer-gallery-img"
               loading="lazy"
+              role="button"
+              tabIndex={0}
+              style={{ cursor: "zoom-in" }}
             />
           ))}
         </div>
       </section>
+
       <footer dir="rtl" className="footer-e footer-brand-only">
         <a href="/" aria-label="אור חדש - דף הבית" className="footer-brand-logo">
           <img src="/wp/img/אור-חדש-לוגו-13.svg" alt="אור חדש" />
