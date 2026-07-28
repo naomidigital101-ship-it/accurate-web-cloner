@@ -25,6 +25,7 @@ function HouseIcon() {
 export function Footer() {
   return (
     <>
+      <InnerPageFx />
       <section dir="rtl" className="footer-gallery-section" aria-label="גלריית תמונות">
         <div className="footer-gallery">
           {gallery.map((g) => (
@@ -34,10 +35,14 @@ export function Footer() {
               alt="רגעים ממיזם קשר של תפילין"
               className="footer-gallery-img"
               loading="lazy"
+              role="button"
+              tabIndex={0}
+              style={{ cursor: "zoom-in" }}
             />
           ))}
         </div>
       </section>
+
       <footer dir="rtl" className="footer-e footer-brand-only">
         <a href="/" aria-label="אור חדש - דף הבית" className="footer-brand-logo">
           <img src="/wp/img/אור-חדש-לוגו-13.svg" alt="אור חדש" />
