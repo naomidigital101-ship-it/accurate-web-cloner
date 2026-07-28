@@ -2377,3 +2377,9 @@
 }
 
 
+
+/* MOVE site credit */
+.move-credit { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; font-size: 12px; font-weight: 300; opacity: 0.85; text-decoration: none; color: inherit; }
+.move-credit img { height: 22px; width: auto; display: block; }
+.move-credit-chip { display: inline-flex; align-items: center; background: #2d2e83; padding: 2px 8px; border-radius: 999px; }
+.move-credit-onlight { color: #2d2e83; }

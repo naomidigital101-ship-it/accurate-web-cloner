@@ -35,6 +35,17 @@ export function PageFooter() {
         </a>
       </div>
       <img src="/wp/img/קרדיט-45.svg" alt="אפיון, בניה ופיתוח: KAV" className="page-footer-credit" />
+      <a
+        href="https://move-geo.ai/"
+        target="_blank"
+        rel="noopener"
+        dir="ltr"
+        className="move-credit"
+        aria-label="Built for AI Search — by MOVE"
+      >
+        <span>Built for AI Search — by </span>
+        <img src="/branding/move-logo.png" alt="MOVE" />
+      </a>
     </footer>
   );
 }
