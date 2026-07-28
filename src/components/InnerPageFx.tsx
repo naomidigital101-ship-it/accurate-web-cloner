@@ -7,17 +7,27 @@ export function InnerPageFx() {
 
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
-      const a = (e.target as HTMLElement).closest("a.doc-card-letter") as HTMLAnchorElement | null;
-      if (!a) return;
+      const target = e.target as HTMLElement;
+      const a = target.closest("a.doc-card-letter") as HTMLAnchorElement | null;
+      if (a) {
+        e.preventDefault();
+        const links = Array.from(document.querySelectorAll("a.doc-card-letter")) as HTMLAnchorElement[];
+        const items = links.map((l) => ({ src: l.getAttribute("href") || "", title: l.querySelector("img")?.getAttribute("alt") || "" }));
+        setGallery(items);
+        setIndex(links.indexOf(a));
+        return;
+      }
+      const g = target.closest("img.footer-gallery-img") as HTMLImageElement | null;
+      if (!g) return;
       e.preventDefault();
-      const links = Array.from(document.querySelectorAll("a.doc-card-letter")) as HTMLAnchorElement[];
-      const items = links.map((l) => ({ src: l.getAttribute("href") || "", title: l.querySelector("img")?.getAttribute("alt") || "" }));
-      setGallery(items);
-      setIndex(links.indexOf(a));
+      const imgs = Array.from(document.querySelectorAll("img.footer-gallery-img")) as HTMLImageElement[];
+      setGallery(imgs.map((i) => ({ src: i.currentSrc || i.src, title: i.alt })));
+      setIndex(imgs.indexOf(g));
     };
     document.addEventListener("click", onClick);
     return () => document.removeEventListener("click", onClick);
   }, []);
+
 
   const close = useCallback(() => setIndex(-1), []);
   const prev = useCallback(() => setIndex((i) => (i - 1 + gallery.length) % gallery.length), [gallery.length]);
