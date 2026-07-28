@@ -73,6 +73,19 @@ export function Footer() {
         <a href="https://kavnekuda.com" target="_blank" rel="noopener" aria-label="אפיון, בניה ופיתוח: KAV" className="footer-credit-link">
           <img src="/wp/img/קרדיט-45.svg" alt="אפיון, בניה ופיתוח: KAV" />
         </a>
+        <a
+          href="https://move-geo.ai/"
+          target="_blank"
+          rel="noopener"
+          dir="ltr"
+          className="move-credit move-credit-onlight"
+          aria-label="Built for AI Search — by MOVE"
+        >
+          <span>Built for AI Search — by </span>
+          <span className="move-credit-chip">
+            <img src="/branding/move-logo.png" alt="MOVE" />
+          </span>
+        </a>
       </footer>
     </>
   );
