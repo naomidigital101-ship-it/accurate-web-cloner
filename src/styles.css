@@ -858,8 +858,10 @@
 }
 @media (max-width: 1024px) { .st-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 767px) {
-  .st-grid { grid-template-columns: 1fr; }
-  .st-grid .st-card, .st-grid .st-card-big { grid-column: auto; grid-row: auto; min-height: 330px; }
+  .st-grid { grid-template-columns: repeat(2, 1fr); }
+  .st-grid .st-card { grid-column: auto; grid-row: auto; min-height: 220px; }
+  .st-grid .st-card-big { grid-column: span 2; min-height: 220px; }
+  .st-card-title { font-size: 16px; }
 }
 .st-card {
   display: flex;
