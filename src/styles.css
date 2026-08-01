@@ -2426,10 +2426,11 @@
     white-space: normal;
     margin-inline: auto;
   }
-  .en-ltr .hero-e-inner { padding: 84px 16px 110px; gap: 8px; min-height: 0; }
+  .en-ltr .hero-e-inner { padding: 84px 16px 190px; gap: 8px; min-height: 0; }
   .en-ltr .hero-subtitle { font-size: 20px; }
   .en-ltr .hero-cta-row { margin-top: 6px; }
-  /* the tab buttons sit under the hero: keep them clear of the paragraph */
-  .en-ltr .form-tabs-heading { margin-top: -70px; }
+  /* the tab buttons sit under the hero: keep them clear of the paragraph
+     and fully inside the dark hero area (above the white arc) */
+  .en-ltr .form-tabs-heading { margin-top: -150px; }
 }
 
