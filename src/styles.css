@@ -2430,6 +2430,6 @@
   .en-ltr .hero-subtitle { font-size: 20px; }
   .en-ltr .hero-cta-row { margin-top: 6px; }
   /* the tab buttons sit under the hero: keep them clear of the paragraph */
-  .en-ltr .form-tabs-heading { margin-top: -120px; }
+  .en-ltr .form-tabs-heading { margin-top: -85px; }
 }
 
