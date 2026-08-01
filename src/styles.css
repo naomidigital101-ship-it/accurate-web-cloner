@@ -2385,3 +2385,32 @@
 .move-credit img { height: 22px; width: auto; display: block; }
 .move-credit-chip { display: inline-flex; align-items: center; background: #2d2e83; padding: 2px 8px; border-radius: 999px; }
 .move-credit-onlight { color: #2d2e83; }
+
+/* ===== English homepage mobile parity (390px) ===== */
+@media (max-width: 767px) {
+  .en-ltr .st-grid { grid-template-columns: 1fr; }
+  .en-ltr .st-grid .st-card,
+  .en-ltr .st-grid .st-card-big { grid-column: auto; grid-row: auto; min-height: 260px; }
+  .en-ltr .st-card-title { font-size: 22px; line-height: 1.1; overflow-wrap: break-word; }
+
+  .en-ltr .iv-card { overflow: visible; padding: 10px; align-items: center; }
+  .en-ltr .iv-card-title {
+    font-size: 15px;
+    line-height: 1.15;
+    overflow-wrap: break-word;
+    white-space: normal;
+    overflow: visible;
+  }
+
+  .en-ltr .how-ba { margin-top: 24px; }
+  .en-ltr .how-ba-after { margin-top: 8px; }
+
+  .en-ltr .partners-title { font-size: 36px; }
+  .en-ltr .partners-btns .btn-outline-light { display: none; }
+
+  .en-ltr .faq-title-sm { font-size: 32px; }
+  .en-ltr .faq-title-lg { font-size: 64px; }
+
+  .en-ltr .founder-photo { display: block; }
+  .en-ltr .founder-photo img { width: 55%; display: inline-block; }
+}
