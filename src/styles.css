@@ -2395,11 +2395,14 @@
 
   .en-ltr .iv-card { overflow: visible; padding: 10px; align-items: center; }
   .en-ltr .iv-card-title {
-    font-size: 15px;
+    flex: 1 1 auto;
+    min-width: 0;
+    margin-inline-start: 12px;
+    font-size: 13px;
     line-height: 1.15;
-    overflow-wrap: break-word;
     white-space: normal;
     overflow: visible;
+    hyphens: none;
   }
 
   .en-ltr .how-ba { margin-top: 24px; }
