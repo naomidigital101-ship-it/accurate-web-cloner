@@ -2416,4 +2416,18 @@
 
   .en-ltr .founder-photo { display: block; }
   .en-ltr .founder-photo img { width: 55%; display: inline-block; }
+
+  /* HERO (EN mobile): natural wrapping, compact height */
+  .en-ltr .hero-par {
+    width: 88%;
+    max-width: 88%;
+    font-size: 15px;
+    line-height: 1.4;
+    white-space: normal;
+    margin-inline: auto;
+  }
+  .en-ltr .hero-e-inner { padding: 84px 16px 110px; gap: 8px; min-height: 0; }
+  .en-ltr .hero-subtitle { font-size: 20px; }
+  .en-ltr .hero-cta-row { margin-top: 6px; }
 }
+
