@@ -1232,14 +1232,18 @@
 .how-panel {
   position: sticky;
   top: 80px;
-  height: calc(100vh - 80px);
+  /* min-height ולא height קבוע: בגובה מסך נמוך הפאנל חייב לגדול,
+     אחרת רצועת התמונה מתכווצת בעוד ש-‎.how-ba נמשך מעלה ב-340px קבועים
+     והכרטיס "לפני" נחתך מעל הרצועה. */
+  min-height: calc(100vh - 80px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   overflow: hidden;
 }
 @media (max-width: 900px) { .how-panel { position: static; height: auto; } }
-.how-slideshow { position: relative; width: 100%; flex: 1 1 auto; min-height: 0; overflow: hidden; }
+/* 460px = 340 (ההיסט של ‎.how-ba) + מרווח עליון כמו בדסקטופ. מתחת לזה הכרטיס "לפני" נחתך. */
+.how-slideshow { position: relative; width: 100%; flex: 1 1 auto; min-height: 460px; overflow: hidden; }
 
 .how-slide {
   position: absolute;
@@ -1306,12 +1310,16 @@
 }
 
 @media (max-width: 900px) {
-  .how-panel .how-slideshow { min-height: 70vh; }
+  .how-panel .how-slideshow { min-height: max(70vh, 460px); }
 }
 @media (max-width: 767px) {
+  /* במובייל ההיסט של ‎.how-ba הוא ‎-160px, לכן די ברצועה נמוכה יותר */
+  .how-panel .how-slideshow { min-height: max(70vh, 260px); }
   .how-ba-before img { width: 150px; height: 150px; }
   .how-ba-after img { width: 200px; height: 200px; }
 .how-ba-before figcaption, .how-ba-after figcaption { font-size: 18px; }
+  /* במובייל הכרטיס יורד אל מתחת לרצועת התמונה, ולכן גם "לפני" יושב על רקע לבן */
+  .how-ba-before figcaption { color: #060633; }
 }
 
 /* ===== Phase 4: Founder (acb4004) + FAQ (59d7fdb) + Services (74aba8f) + Footer (4288972) ===== */
