@@ -1284,8 +1284,9 @@
 }
 .how-ba-before { text-align: end; transform: rotate(-4deg); }
 .how-ba-before img { width: 200px; height: 200px; }
+/* "לפני" יושב על תמונת הרקע הכהה (‎.how-ba נמשך מעלה ב-margin שלילי) - לכן לבן */
 .how-ba-before figcaption {
-  color: #2d2e83;
+  color: #ffffff;
   font-family: "Maadim", "Maadim OS", sans-serif;
   font-size: 20px;
   font-style: italic;
@@ -1294,13 +1295,14 @@
 }
 .how-ba-after { text-align: start; margin-top: -18%; transform: rotate(3deg); }
 .how-ba-after img { width: 300px; height: 300px; }
+/* "אחרי" יורד מתחת לתמונה על הרקע הלבן - נייבי עמוק, כמו במקור */
 .how-ba-after figcaption {
   font-family: "Maadim", "Maadim OS", sans-serif;
   font-size: 20px;
   font-style: italic;
   font-weight: 600;
   line-height: 1.4em;
-  color: #2d2e83;
+  color: #060633;
 }
 
 @media (max-width: 900px) {
