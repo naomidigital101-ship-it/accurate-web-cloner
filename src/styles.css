@@ -1285,7 +1285,7 @@
 .how-ba-before { text-align: end; transform: rotate(-4deg); }
 .how-ba-before img { width: 200px; height: 200px; }
 .how-ba-before figcaption {
-  color: #ffffff;
+  color: #2d2e83;
   font-family: "Maadim", "Maadim OS", sans-serif;
   font-size: 20px;
   font-style: italic;
@@ -1300,7 +1300,7 @@
   font-style: italic;
   font-weight: 600;
   line-height: 1.4em;
-  color: #ffffff;
+  color: #2d2e83;
 }
 
 @media (max-width: 900px) {
@@ -2434,3 +2434,70 @@
   .en-ltr .form-tabs-heading { margin-top: -150px; }
 }
 
+
+/* ===== כפתור תרומה צף - מובייל בלבד, עמוד הבית בלבד ===== */
+.fab-donate { display: none; }
+
+@media (max-width: 767px) {
+  .fab-donate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    position: fixed;
+    inset-inline: 0;
+    bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+    z-index: 98; /* מתחת להדר (99) */
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.28s ease, transform 0.28s ease;
+  }
+  .fab-donate.on {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .fab-donate-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #67ffd1;
+    color: #2d2e83;
+    font-family: "Maadim", "Maadim OS", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1;
+    padding: 13px 26px;
+    border-radius: 12px;
+    box-shadow: 0px 10px 30px 0px rgba(103, 255, 209, 0.82);
+    text-decoration: none;
+    transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .fab-donate-btn:active,
+  .fab-donate-btn:hover {
+    background: #bdffeb;
+    color: #060633;
+    box-shadow: 0px 20px 50px 0px rgba(103, 255, 209, 0.53);
+  }
+
+  .fab-donate-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(6, 6, 51, 0.55);
+    color: #ffffff;
+    cursor: pointer;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fab-donate { transition: opacity 0.01s linear; transform: none; }
+  .fab-donate.on { transform: none; }
+}

@@ -773,7 +773,7 @@ function EnFounder() {
         <h3 className="founder-role">The Founder and Chairman of the "Ohr Chadash" Organization</h3>
         <h2 className="founder-name">Rabbi Amichai Eyal</h2>
         <p className="founder-text">
-          Rabbi Eyal is a resident of Beit El, aged 48, married and the father of eight children.
+          Rabbi Eyal is a resident of Beit El, aged 50, married and the father of eight children.
           He served as a Ra"m [rabbi/teacher] in Yeshivat Bnei Tzvi and in other yeshivot, and
           has an M.A. degree in Educational Systems Administration. In addition to studying
           Torah, Rabbi Eyal directed the Nehora returnee organization and has been involved in

@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { hreflangPair } from "../lib/hreflang";
 
 function NotFoundComponent() {
   return (
@@ -137,10 +138,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 function RootShell({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const isEn = pathname === "/en" || pathname.startsWith("/en/");
+  const alt = hreflangPair(pathname);
   return (
     <html lang={isEn ? "en-US" : "he"} dir={isEn ? "ltr" : "rtl"}>
       <head>
         <HeadContent />
+        {alt && (
+          <>
+            {/* מאולץ ל-hreflang באותיות קטנות - React מרנדר hrefLang כפי שהוא */}
+            <link rel="alternate" {...{ hreflang: "he" }} href={alt.he} />
+            <link rel="alternate" {...{ hreflang: "en" }} href={alt.en} />
+            <link rel="alternate" {...{ hreflang: "x-default" }} href={alt.he} />
+          </>
+        )}
       </head>
       <body>
         <a href="#content" className="skip-link">{isEn ? "Skip to content" : "דלג לתוכן"}</a>

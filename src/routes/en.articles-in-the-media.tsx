@@ -16,7 +16,7 @@ const press: PressItem[] = [
     source: "HAMODIA",
     date: "27/10/2024",
     href: "/wp/uploads/2024/10/DOC-20241014-WA0015.pdf",
-    logoText: "HAMODIA",
+    img: "/wp/uploads/2024/10/לוגו-המודיע.jpg",
   },
   {
     title: "“כתבה בעיתון בשבע “מהדקים את הקשר",
@@ -37,7 +37,7 @@ const press: PressItem[] = [
     source: "7Israel National News",
     date: "Jun 17, 2024, 12:00",
     href: "https://www.israelnationalnews.com/news/388053",
-    img: "/wp/uploads/2024/09/ערוץ-7-1.jpg",
+    img: "/wp/uploads/2024/07/ערוץ-7-באנגלית-2.jpg",
   },
 ];
 
