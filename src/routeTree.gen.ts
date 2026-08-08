@@ -10,8 +10,10 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492RouteImport } from './routes/מכתבי-תודה'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as StoriesRouteImport } from './routes/stories'
 import { Route as RequestRouteImport } from './routes/request'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as LettersRouteImport } from './routes/letters'
 import { Route as InNewsRouteImport } from './routes/in-news'
 import { Route as GiveRouteImport } from './routes/give'
@@ -25,11 +27,13 @@ import { Route as EnIndexRouteImport } from './routes/en.index'
 import { Route as TefilinSlugRouteImport } from './routes/tefilin.$slug'
 import { Route as EnTheTefillinTieInitiativeRouteImport } from './routes/en.the-tefillin-tie-initiative'
 import { Route as EnThankYouLettersRouteImport } from './routes/en.thank-you-letters'
+import { Route as EnTermsRouteImport } from './routes/en.terms'
 import { Route as EnSupportAndDonationRouteImport } from './routes/en.support-and-donation'
 import { Route as EnStories2RouteImport } from './routes/en.stories-2'
 import { Route as EnRequestToDonateTefillinRouteImport } from './routes/en.request-to-donate-tefillin'
 import { Route as EnRequestForTefillinRouteImport } from './routes/en.request-for-tefillin'
 import { Route as EnRabbisAgreementsRouteImport } from './routes/en.rabbis-agreements'
+import { Route as EnPrivacyRouteImport } from './routes/en.privacy'
 import { Route as EnArticlesInTheMediaRouteImport } from './routes/en.articles-in-the-media'
 import { Route as EnAccessibilityRouteImport } from './routes/en.accessibility'
 import { Route as EnTefilinSlugRouteImport } from './routes/en.tefilin.$slug'
@@ -42,6 +46,11 @@ const Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Ro
       getParentRoute: () => rootRouteImport,
     } as any,
   )
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StoriesRoute = StoriesRouteImport.update({
   id: '/stories',
   path: '/stories',
@@ -50,6 +59,11 @@ const StoriesRoute = StoriesRouteImport.update({
 const RequestRoute = RequestRouteImport.update({
   id: '/request',
   path: '/request',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LettersRoute = LettersRouteImport.update({
@@ -118,6 +132,11 @@ const EnThankYouLettersRoute = EnThankYouLettersRouteImport.update({
   path: '/thank-you-letters',
   getParentRoute: () => EnRoute,
 } as any)
+const EnTermsRoute = EnTermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => EnRoute,
+} as any)
 const EnSupportAndDonationRoute = EnSupportAndDonationRouteImport.update({
   id: '/support-and-donation',
   path: '/support-and-donation',
@@ -142,6 +161,11 @@ const EnRequestForTefillinRoute = EnRequestForTefillinRouteImport.update({
 const EnRabbisAgreementsRoute = EnRabbisAgreementsRouteImport.update({
   id: '/rabbis-agreements',
   path: '/rabbis-agreements',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnPrivacyRoute = EnPrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => EnRoute,
 } as any)
 const EnArticlesInTheMediaRoute = EnArticlesInTheMediaRouteImport.update({
@@ -170,16 +194,20 @@ export interface FileRoutesByFullPath {
   '/give': typeof GiveRoute
   '/in-news': typeof InNewsRoute
   '/letters': typeof LettersRoute
+  '/privacy': typeof PrivacyRoute
   '/request': typeof RequestRoute
   '/stories': typeof StoriesRoute
+  '/terms': typeof TermsRoute
   '/מכתבי-תודה': typeof Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route
   '/en/accessibility': typeof EnAccessibilityRoute
   '/en/articles-in-the-media': typeof EnArticlesInTheMediaRoute
+  '/en/privacy': typeof EnPrivacyRoute
   '/en/rabbis-agreements': typeof EnRabbisAgreementsRoute
   '/en/request-for-tefillin': typeof EnRequestForTefillinRoute
   '/en/request-to-donate-tefillin': typeof EnRequestToDonateTefillinRoute
   '/en/stories-2': typeof EnStories2Route
   '/en/support-and-donation': typeof EnSupportAndDonationRoute
+  '/en/terms': typeof EnTermsRoute
   '/en/thank-you-letters': typeof EnThankYouLettersRoute
   '/en/the-tefillin-tie-initiative': typeof EnTheTefillinTieInitiativeRoute
   '/tefilin/$slug': typeof TefilinSlugRoute
@@ -195,16 +223,20 @@ export interface FileRoutesByTo {
   '/give': typeof GiveRoute
   '/in-news': typeof InNewsRoute
   '/letters': typeof LettersRoute
+  '/privacy': typeof PrivacyRoute
   '/request': typeof RequestRoute
   '/stories': typeof StoriesRoute
+  '/terms': typeof TermsRoute
   '/מכתבי-תודה': typeof Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route
   '/en/accessibility': typeof EnAccessibilityRoute
   '/en/articles-in-the-media': typeof EnArticlesInTheMediaRoute
+  '/en/privacy': typeof EnPrivacyRoute
   '/en/rabbis-agreements': typeof EnRabbisAgreementsRoute
   '/en/request-for-tefillin': typeof EnRequestForTefillinRoute
   '/en/request-to-donate-tefillin': typeof EnRequestToDonateTefillinRoute
   '/en/stories-2': typeof EnStories2Route
   '/en/support-and-donation': typeof EnSupportAndDonationRoute
+  '/en/terms': typeof EnTermsRoute
   '/en/thank-you-letters': typeof EnThankYouLettersRoute
   '/en/the-tefillin-tie-initiative': typeof EnTheTefillinTieInitiativeRoute
   '/tefilin/$slug': typeof TefilinSlugRoute
@@ -222,16 +254,20 @@ export interface FileRoutesById {
   '/give': typeof GiveRoute
   '/in-news': typeof InNewsRoute
   '/letters': typeof LettersRoute
+  '/privacy': typeof PrivacyRoute
   '/request': typeof RequestRoute
   '/stories': typeof StoriesRoute
+  '/terms': typeof TermsRoute
   '/מכתבי-תודה': typeof Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route
   '/en/accessibility': typeof EnAccessibilityRoute
   '/en/articles-in-the-media': typeof EnArticlesInTheMediaRoute
+  '/en/privacy': typeof EnPrivacyRoute
   '/en/rabbis-agreements': typeof EnRabbisAgreementsRoute
   '/en/request-for-tefillin': typeof EnRequestForTefillinRoute
   '/en/request-to-donate-tefillin': typeof EnRequestToDonateTefillinRoute
   '/en/stories-2': typeof EnStories2Route
   '/en/support-and-donation': typeof EnSupportAndDonationRoute
+  '/en/terms': typeof EnTermsRoute
   '/en/thank-you-letters': typeof EnThankYouLettersRoute
   '/en/the-tefillin-tie-initiative': typeof EnTheTefillinTieInitiativeRoute
   '/tefilin/$slug': typeof TefilinSlugRoute
@@ -250,16 +286,20 @@ export interface FileRouteTypes {
     | '/give'
     | '/in-news'
     | '/letters'
+    | '/privacy'
     | '/request'
     | '/stories'
+    | '/terms'
     | '/מכתבי-תודה'
     | '/en/accessibility'
     | '/en/articles-in-the-media'
+    | '/en/privacy'
     | '/en/rabbis-agreements'
     | '/en/request-for-tefillin'
     | '/en/request-to-donate-tefillin'
     | '/en/stories-2'
     | '/en/support-and-donation'
+    | '/en/terms'
     | '/en/thank-you-letters'
     | '/en/the-tefillin-tie-initiative'
     | '/tefilin/$slug'
@@ -275,16 +315,20 @@ export interface FileRouteTypes {
     | '/give'
     | '/in-news'
     | '/letters'
+    | '/privacy'
     | '/request'
     | '/stories'
+    | '/terms'
     | '/מכתבי-תודה'
     | '/en/accessibility'
     | '/en/articles-in-the-media'
+    | '/en/privacy'
     | '/en/rabbis-agreements'
     | '/en/request-for-tefillin'
     | '/en/request-to-donate-tefillin'
     | '/en/stories-2'
     | '/en/support-and-donation'
+    | '/en/terms'
     | '/en/thank-you-letters'
     | '/en/the-tefillin-tie-initiative'
     | '/tefilin/$slug'
@@ -301,16 +345,20 @@ export interface FileRouteTypes {
     | '/give'
     | '/in-news'
     | '/letters'
+    | '/privacy'
     | '/request'
     | '/stories'
+    | '/terms'
     | '/מכתבי-תודה'
     | '/en/accessibility'
     | '/en/articles-in-the-media'
+    | '/en/privacy'
     | '/en/rabbis-agreements'
     | '/en/request-for-tefillin'
     | '/en/request-to-donate-tefillin'
     | '/en/stories-2'
     | '/en/support-and-donation'
+    | '/en/terms'
     | '/en/thank-you-letters'
     | '/en/the-tefillin-tie-initiative'
     | '/tefilin/$slug'
@@ -328,8 +376,10 @@ export interface RootRouteChildren {
   GiveRoute: typeof GiveRoute
   InNewsRoute: typeof InNewsRoute
   LettersRoute: typeof LettersRoute
+  PrivacyRoute: typeof PrivacyRoute
   RequestRoute: typeof RequestRoute
   StoriesRoute: typeof StoriesRoute
+  TermsRoute: typeof TermsRoute
   Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route: typeof Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route
   TefilinSlugRoute: typeof TefilinSlugRoute
 }
@@ -341,6 +391,13 @@ declare module '@tanstack/react-router' {
       path: '/מכתבי-תודה'
       fullPath: '/מכתבי-תודה'
       preLoaderRoute: typeof Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/stories': {
@@ -355,6 +412,13 @@ declare module '@tanstack/react-router' {
       path: '/request'
       fullPath: '/request'
       preLoaderRoute: typeof RequestRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/letters': {
@@ -448,6 +512,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnThankYouLettersRouteImport
       parentRoute: typeof EnRoute
     }
+    '/en/terms': {
+      id: '/en/terms'
+      path: '/terms'
+      fullPath: '/en/terms'
+      preLoaderRoute: typeof EnTermsRouteImport
+      parentRoute: typeof EnRoute
+    }
     '/en/support-and-donation': {
       id: '/en/support-and-donation'
       path: '/support-and-donation'
@@ -483,6 +554,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnRabbisAgreementsRouteImport
       parentRoute: typeof EnRoute
     }
+    '/en/privacy': {
+      id: '/en/privacy'
+      path: '/privacy'
+      fullPath: '/en/privacy'
+      preLoaderRoute: typeof EnPrivacyRouteImport
+      parentRoute: typeof EnRoute
+    }
     '/en/articles-in-the-media': {
       id: '/en/articles-in-the-media'
       path: '/articles-in-the-media'
@@ -510,11 +588,13 @@ declare module '@tanstack/react-router' {
 interface EnRouteChildren {
   EnAccessibilityRoute: typeof EnAccessibilityRoute
   EnArticlesInTheMediaRoute: typeof EnArticlesInTheMediaRoute
+  EnPrivacyRoute: typeof EnPrivacyRoute
   EnRabbisAgreementsRoute: typeof EnRabbisAgreementsRoute
   EnRequestForTefillinRoute: typeof EnRequestForTefillinRoute
   EnRequestToDonateTefillinRoute: typeof EnRequestToDonateTefillinRoute
   EnStories2Route: typeof EnStories2Route
   EnSupportAndDonationRoute: typeof EnSupportAndDonationRoute
+  EnTermsRoute: typeof EnTermsRoute
   EnThankYouLettersRoute: typeof EnThankYouLettersRoute
   EnTheTefillinTieInitiativeRoute: typeof EnTheTefillinTieInitiativeRoute
   EnIndexRoute: typeof EnIndexRoute
@@ -524,11 +604,13 @@ interface EnRouteChildren {
 const EnRouteChildren: EnRouteChildren = {
   EnAccessibilityRoute: EnAccessibilityRoute,
   EnArticlesInTheMediaRoute: EnArticlesInTheMediaRoute,
+  EnPrivacyRoute: EnPrivacyRoute,
   EnRabbisAgreementsRoute: EnRabbisAgreementsRoute,
   EnRequestForTefillinRoute: EnRequestForTefillinRoute,
   EnRequestToDonateTefillinRoute: EnRequestToDonateTefillinRoute,
   EnStories2Route: EnStories2Route,
   EnSupportAndDonationRoute: EnSupportAndDonationRoute,
+  EnTermsRoute: EnTermsRoute,
   EnThankYouLettersRoute: EnThankYouLettersRoute,
   EnTheTefillinTieInitiativeRoute: EnTheTefillinTieInitiativeRoute,
   EnIndexRoute: EnIndexRoute,
@@ -547,8 +629,10 @@ const rootRouteChildren: RootRouteChildren = {
   GiveRoute: GiveRoute,
   InNewsRoute: InNewsRoute,
   LettersRoute: LettersRoute,
+  PrivacyRoute: PrivacyRoute,
   RequestRoute: RequestRoute,
   StoriesRoute: StoriesRoute,
+  TermsRoute: TermsRoute,
   Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route:
     Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route,
   TefilinSlugRoute: TefilinSlugRoute,

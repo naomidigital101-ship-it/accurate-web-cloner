@@ -1,4 +1,5 @@
 import { InnerPageFx } from "@/components/InnerPageFx";
+import { CookieSettingsLink } from "@/components/CookieConsent";
 
 const gallery = [
 
@@ -77,7 +78,12 @@ export function Footer() {
             בית אל, ארץ חמדה 33
           </a>
         </div>
-        <a href="/accessibility/" className="footer-a11y-link">הצהרת נגישות</a>
+        <nav className="footer-legal" aria-label="קישורים משפטיים">
+          <a href="/accessibility/">הצהרת נגישות</a>
+          <a href="/privacy/">מדיניות פרטיות</a>
+          <a href="/terms/">תקנון</a>
+          <CookieSettingsLink />
+        </nav>
         <a href="https://kavnekuda.com" target="_blank" rel="noopener" aria-label="אפיון, בניה ופיתוח: KAV" className="footer-credit-link">
           <img src="/wp/img/קרדיט-45.svg" alt="אפיון, בניה ופיתוח: KAV" />
         </a>

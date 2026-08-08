@@ -1,3 +1,5 @@
+import { CookieSettingsLink } from "@/components/CookieConsent";
+
 function PhoneIcon() {
   return (
     <svg viewBox="0 0 512 512" width="16" height="16" fill="#67ffd1" aria-hidden="true">
@@ -34,9 +36,12 @@ export function PageFooter({ en = false }: { en?: boolean } = {}) {
           054-6713966
         </a>
       </div>
-      <a href={en ? "/en/accessibility/" : "/accessibility/"} className="footer-a11y-link">
-        {en ? "Accessibility statement" : "הצהרת נגישות"}
-      </a>
+      <nav className="footer-legal" aria-label={en ? "Legal links" : "קישורים משפטיים"}>
+        <a href={en ? "/en/accessibility/" : "/accessibility/"}>{en ? "Accessibility" : "הצהרת נגישות"}</a>
+        <a href={en ? "/en/privacy/" : "/privacy/"}>{en ? "Privacy policy" : "מדיניות פרטיות"}</a>
+        <a href={en ? "/en/terms/" : "/terms/"}>{en ? "Terms of use" : "תקנון"}</a>
+        <CookieSettingsLink en={en} />
+      </nav>
       <img src="/wp/img/קרדיט-45.svg" alt="אפיון, בניה ופיתוח: KAV" className="page-footer-credit" />
       <a
         href="https://move-geo.ai/"

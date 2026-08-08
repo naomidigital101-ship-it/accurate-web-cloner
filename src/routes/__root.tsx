@@ -14,6 +14,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { hreflangPair } from "../lib/hreflang";
 import { AccessibilityBar } from "../components/AccessibilityBar";
+import { CookieConsent } from "../components/CookieConsent";
 
 function NotFoundComponent() {
   return (
@@ -157,6 +158,7 @@ function RootShell({ children }: { children: ReactNode }) {
         <a href="#content" className="skip-link">{isEn ? "Skip to content" : "דלג לתוכן"}</a>
         {children}
         <AccessibilityBar en={isEn} />
+        <CookieConsent en={isEn} />
         <Scripts />
       </body>
     </html>

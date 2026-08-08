@@ -1,3 +1,37 @@
+import { useConsent } from "@/components/CookieConsent";
+
+/** נטען רק לאחר הסכמה מפורשת לתוכן מוטמע - אחרת לא נשלחת שום בקשה ל-YouTube */
+function ConsentedYouTube({ src, title, en = false }: { src: string; title: string; en?: boolean }) {
+  const consent = useConsent();
+  if (consent?.embeds) {
+    return (
+      <iframe
+        src={src}
+        title={title}
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowFullScreen
+      />
+    );
+  }
+  return (
+    <div className="embed-blocked">
+      <p>
+        {en
+          ? "This video is hosted on YouTube. To watch it here, allow embedded content."
+          : "הסרטון מתארח ב-YouTube. כדי לצפות בו כאן יש לאשר תוכן מוטמע מצד שלישי."}
+      </p>
+      <div className="embed-blocked-btns">
+        <button type="button" onClick={() => window.dispatchEvent(new Event("cookie-consent-reopen"))}>
+          {en ? "Cookie settings" : "הגדרות עוגיות"}
+        </button>
+        <a href={src.replace("/embed/", "/watch?v=")} target="_blank" rel="noopener noreferrer">
+          {en ? "Watch on YouTube" : "צפייה ב-YouTube"}
+        </a>
+      </div>
+    </div>
+  );
+}
+
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { Header } from "@/components/home/Header";
@@ -361,12 +395,7 @@ function EnInterview() {
           Watch the interview of Rabbi Amichai Eyal presenting the "Kesher Shel Tefillin" (Tefillin Tie Initiatve) project:
         </p>
         <div className="iv-video">
-          <iframe
-            src="https://www.youtube.com/embed/qZQoZjFso2I"
-            title="Rabbi Amichai Eyal presenting the Kesher Shel Tefillin project"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-          />
+          <ConsentedYouTube src="https://www.youtube.com/embed/qZQoZjFso2I" title="Rabbi Amichai Eyal presenting the Kesher Shel Tefillin project" en />
         </div>
       </div>
       <div className="iv-cards-col">

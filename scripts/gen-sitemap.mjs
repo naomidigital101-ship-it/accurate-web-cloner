@@ -26,6 +26,10 @@ const STATIC = [
   ["/en/support-and-donation/", "monthly", "0.5"],
   ["/accessibility/", "yearly", "0.3"],
   ["/en/accessibility/", "yearly", "0.3"],
+  ["/privacy/", "yearly", "0.3"],
+  ["/en/privacy/", "yearly", "0.3"],
+  ["/terms/", "yearly", "0.3"],
+  ["/en/terms/", "yearly", "0.3"],
 ];
 
 function slugsOf(file) {
