@@ -1265,7 +1265,9 @@
   z-index: 1;
 }
 .how-ba {
-  width: 320px;
+  /* 380px כמו במקור. במיכל צר יותר כרטיס "אחרי" כמעט לא מוסט הצידה
+     ונוחת על הכיתוב "לפני". */
+  width: 380px;
   align-self: center;
   margin-top: -340px;
   margin-bottom: 100px;
@@ -1279,6 +1281,8 @@
 .how-ba figure { margin: 0; transition: 0.3s; }
 .how-ba figure:hover { transform: scale(1.05) rotate(0deg); }
 .how-ba img {
+  /* במקור המידה כוללת את המסגרת הלבנה - בלי זה כל תמונה גדולה ב-12px */
+  box-sizing: border-box;
   object-fit: cover;
   object-position: center center;
   border: 6px solid #ffffff;
@@ -1297,7 +1301,8 @@
   font-weight: 600;
   line-height: 1.4em;
 }
-.how-ba-after { text-align: start; margin-top: -18%; transform: rotate(3deg); }
+/* ‎.how-ba figure { margin: 0 } גובר בספציפיות, לכן הכלל חייב מחלקה נוספת - אחרת ההיסט לא פועל */
+.how-ba .how-ba-after { text-align: start; margin-top: -18%; transform: rotate(3deg); }
 .how-ba-after img { width: 300px; height: 300px; }
 /* "אחרי" יורד מתחת לתמונה על הרקע הלבן - נייבי עמוק, כמו במקור */
 .how-ba-after figcaption {
