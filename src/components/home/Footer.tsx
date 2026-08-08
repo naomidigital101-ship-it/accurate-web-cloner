@@ -139,7 +139,7 @@ export function Footer() {
           target="_blank"
           rel="noopener"
           dir="ltr"
-          className="move-credit move-credit-onlight"
+          className="move-credit"
           aria-label="Built for AI Search — by MOVE"
         >
           <span>Built for AI Search — by </span>
