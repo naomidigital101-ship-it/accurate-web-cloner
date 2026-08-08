@@ -19,6 +19,7 @@ import { Route as EnRouteImport } from './routes/en'
 import { Route as DonateRouteImport } from './routes/donate'
 import { Route as BrandingRouteImport } from './routes/branding'
 import { Route as AgreementsRouteImport } from './routes/agreements'
+import { Route as AccessibilityRouteImport } from './routes/accessibility'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EnIndexRouteImport } from './routes/en.index'
 import { Route as TefilinSlugRouteImport } from './routes/tefilin.$slug'
@@ -30,6 +31,7 @@ import { Route as EnRequestToDonateTefillinRouteImport } from './routes/en.reque
 import { Route as EnRequestForTefillinRouteImport } from './routes/en.request-for-tefillin'
 import { Route as EnRabbisAgreementsRouteImport } from './routes/en.rabbis-agreements'
 import { Route as EnArticlesInTheMediaRouteImport } from './routes/en.articles-in-the-media'
+import { Route as EnAccessibilityRouteImport } from './routes/en.accessibility'
 import { Route as EnTefilinSlugRouteImport } from './routes/en.tefilin.$slug'
 
 const Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route =
@@ -83,6 +85,11 @@ const BrandingRoute = BrandingRouteImport.update({
 const AgreementsRoute = AgreementsRouteImport.update({
   id: '/agreements',
   path: '/agreements',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccessibilityRoute = AccessibilityRouteImport.update({
+  id: '/accessibility',
+  path: '/accessibility',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -142,6 +149,11 @@ const EnArticlesInTheMediaRoute = EnArticlesInTheMediaRouteImport.update({
   path: '/articles-in-the-media',
   getParentRoute: () => EnRoute,
 } as any)
+const EnAccessibilityRoute = EnAccessibilityRouteImport.update({
+  id: '/accessibility',
+  path: '/accessibility',
+  getParentRoute: () => EnRoute,
+} as any)
 const EnTefilinSlugRoute = EnTefilinSlugRouteImport.update({
   id: '/tefilin/$slug',
   path: '/tefilin/$slug',
@@ -150,6 +162,7 @@ const EnTefilinSlugRoute = EnTefilinSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/accessibility': typeof AccessibilityRoute
   '/agreements': typeof AgreementsRoute
   '/branding': typeof BrandingRoute
   '/donate': typeof DonateRoute
@@ -160,6 +173,7 @@ export interface FileRoutesByFullPath {
   '/request': typeof RequestRoute
   '/stories': typeof StoriesRoute
   '/מכתבי-תודה': typeof Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route
+  '/en/accessibility': typeof EnAccessibilityRoute
   '/en/articles-in-the-media': typeof EnArticlesInTheMediaRoute
   '/en/rabbis-agreements': typeof EnRabbisAgreementsRoute
   '/en/request-for-tefillin': typeof EnRequestForTefillinRoute
@@ -174,6 +188,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/accessibility': typeof AccessibilityRoute
   '/agreements': typeof AgreementsRoute
   '/branding': typeof BrandingRoute
   '/donate': typeof DonateRoute
@@ -183,6 +198,7 @@ export interface FileRoutesByTo {
   '/request': typeof RequestRoute
   '/stories': typeof StoriesRoute
   '/מכתבי-תודה': typeof Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route
+  '/en/accessibility': typeof EnAccessibilityRoute
   '/en/articles-in-the-media': typeof EnArticlesInTheMediaRoute
   '/en/rabbis-agreements': typeof EnRabbisAgreementsRoute
   '/en/request-for-tefillin': typeof EnRequestForTefillinRoute
@@ -198,6 +214,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/accessibility': typeof AccessibilityRoute
   '/agreements': typeof AgreementsRoute
   '/branding': typeof BrandingRoute
   '/donate': typeof DonateRoute
@@ -208,6 +225,7 @@ export interface FileRoutesById {
   '/request': typeof RequestRoute
   '/stories': typeof StoriesRoute
   '/מכתבי-תודה': typeof Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route
+  '/en/accessibility': typeof EnAccessibilityRoute
   '/en/articles-in-the-media': typeof EnArticlesInTheMediaRoute
   '/en/rabbis-agreements': typeof EnRabbisAgreementsRoute
   '/en/request-for-tefillin': typeof EnRequestForTefillinRoute
@@ -224,6 +242,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/accessibility'
     | '/agreements'
     | '/branding'
     | '/donate'
@@ -234,6 +253,7 @@ export interface FileRouteTypes {
     | '/request'
     | '/stories'
     | '/מכתבי-תודה'
+    | '/en/accessibility'
     | '/en/articles-in-the-media'
     | '/en/rabbis-agreements'
     | '/en/request-for-tefillin'
@@ -248,6 +268,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/accessibility'
     | '/agreements'
     | '/branding'
     | '/donate'
@@ -257,6 +278,7 @@ export interface FileRouteTypes {
     | '/request'
     | '/stories'
     | '/מכתבי-תודה'
+    | '/en/accessibility'
     | '/en/articles-in-the-media'
     | '/en/rabbis-agreements'
     | '/en/request-for-tefillin'
@@ -271,6 +293,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/accessibility'
     | '/agreements'
     | '/branding'
     | '/donate'
@@ -281,6 +304,7 @@ export interface FileRouteTypes {
     | '/request'
     | '/stories'
     | '/מכתבי-תודה'
+    | '/en/accessibility'
     | '/en/articles-in-the-media'
     | '/en/rabbis-agreements'
     | '/en/request-for-tefillin'
@@ -296,6 +320,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AccessibilityRoute: typeof AccessibilityRoute
   AgreementsRoute: typeof AgreementsRoute
   BrandingRoute: typeof BrandingRoute
   DonateRoute: typeof DonateRoute
@@ -381,6 +406,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AgreementsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/accessibility': {
+      id: '/accessibility'
+      path: '/accessibility'
+      fullPath: '/accessibility'
+      preLoaderRoute: typeof AccessibilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -458,6 +490,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnArticlesInTheMediaRouteImport
       parentRoute: typeof EnRoute
     }
+    '/en/accessibility': {
+      id: '/en/accessibility'
+      path: '/accessibility'
+      fullPath: '/en/accessibility'
+      preLoaderRoute: typeof EnAccessibilityRouteImport
+      parentRoute: typeof EnRoute
+    }
     '/en/tefilin/$slug': {
       id: '/en/tefilin/$slug'
       path: '/tefilin/$slug'
@@ -469,6 +508,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface EnRouteChildren {
+  EnAccessibilityRoute: typeof EnAccessibilityRoute
   EnArticlesInTheMediaRoute: typeof EnArticlesInTheMediaRoute
   EnRabbisAgreementsRoute: typeof EnRabbisAgreementsRoute
   EnRequestForTefillinRoute: typeof EnRequestForTefillinRoute
@@ -482,6 +522,7 @@ interface EnRouteChildren {
 }
 
 const EnRouteChildren: EnRouteChildren = {
+  EnAccessibilityRoute: EnAccessibilityRoute,
   EnArticlesInTheMediaRoute: EnArticlesInTheMediaRoute,
   EnRabbisAgreementsRoute: EnRabbisAgreementsRoute,
   EnRequestForTefillinRoute: EnRequestForTefillinRoute,
@@ -498,6 +539,7 @@ const EnRouteWithChildren = EnRoute._addFileChildren(EnRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AccessibilityRoute: AccessibilityRoute,
   AgreementsRoute: AgreementsRoute,
   BrandingRoute: BrandingRoute,
   DonateRoute: DonateRoute,

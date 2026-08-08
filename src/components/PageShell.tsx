@@ -12,7 +12,7 @@ export function PageShell({ title, en = false, children }: { title: string; en?:
         <h1 className={en ? "page-title page-title-ltr" : "page-title"}><span>{title}</span></h1>
         {children}
       </main>
-      <PageFooter />
+      <PageFooter en={en} />
       <InnerPageFx />
     </div>
   );

@@ -40,6 +40,13 @@ export function Footer() {
               loading="lazy"
               role="button"
               tabIndex={0}
+              onKeyDown={(e) => {
+                // הלייטבוקס נפתח ב-click בלבד; בלי זה 28 התמונות ממוקדות אך לא נפתחות במקלדת
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  e.currentTarget.click();
+                }
+              }}
               style={{ cursor: "zoom-in" }}
             />
           ))}
@@ -70,6 +77,7 @@ export function Footer() {
             בית אל, ארץ חמדה 33
           </a>
         </div>
+        <a href="/accessibility/" className="footer-a11y-link">הצהרת נגישות</a>
         <a href="https://kavnekuda.com" target="_blank" rel="noopener" aria-label="אפיון, בניה ופיתוח: KAV" className="footer-credit-link">
           <img src="/wp/img/קרדיט-45.svg" alt="אפיון, בניה ופיתוח: KAV" />
         </a>

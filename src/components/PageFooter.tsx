@@ -14,7 +14,7 @@ function HouseIcon() {
   );
 }
 
-export function PageFooter() {
+export function PageFooter({ en = false }: { en?: boolean } = {}) {
   return (
     <footer dir="rtl" className="page-footer">
       <a href="/" aria-label="אור חדש">
@@ -34,6 +34,9 @@ export function PageFooter() {
           054-6713966
         </a>
       </div>
+      <a href={en ? "/en/accessibility/" : "/accessibility/"} className="footer-a11y-link">
+        {en ? "Accessibility statement" : "הצהרת נגישות"}
+      </a>
       <img src="/wp/img/קרדיט-45.svg" alt="אפיון, בניה ופיתוח: KAV" className="page-footer-credit" />
       <a
         href="https://move-geo.ai/"

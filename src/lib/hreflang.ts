@@ -17,6 +17,7 @@ const PAIRS: [string, string][] = [
   ["/request/", "/en/request-for-tefillin/"],
   ["/give/", "/en/request-to-donate-tefillin/"],
   ["/donate/", "/en/support-and-donation/"],
+  ["/accessibility/", "/en/accessibility/"],
 ];
 
 const strip = (p: string) => p.replace(/\/+$/, "") || "/";

@@ -24,6 +24,8 @@ const STATIC = [
   ["/en/request-for-tefillin/", "monthly", "0.5"],
   ["/en/request-to-donate-tefillin/", "monthly", "0.5"],
   ["/en/support-and-donation/", "monthly", "0.5"],
+  ["/accessibility/", "yearly", "0.3"],
+  ["/en/accessibility/", "yearly", "0.3"],
 ];
 
 function slugsOf(file) {

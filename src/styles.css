@@ -2516,3 +2516,28 @@
   .fab-donate { transition: opacity 0.01s linear; transform: none; }
   .fab-donate.on { transform: none; }
 }
+
+/* ===== הצהרת נגישות ===== */
+.footer-a11y-link {
+  display: inline-block;
+  margin-top: 10px;
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 14px;
+  color: inherit;
+  text-decoration: underline;
+  opacity: 0.9;
+}
+.footer-a11y-link:hover { opacity: 1; }
+
+.a11y-doc { max-width: 820px; margin: 0 auto; color: #060633; font-family: "Maadim", "Maadim OS", sans-serif; }
+.a11y-doc p { font-size: 18px; line-height: 1.6em; margin: 0 0 16px; }
+.a11y-doc h2 { font-size: 26px; font-weight: 700; color: #2d2e83; margin: 28px 0 12px; }
+.a11y-doc ul { margin: 0 0 16px; padding-inline-start: 22px; }
+.a11y-doc li { font-size: 17px; line-height: 1.6em; margin-bottom: 8px; }
+.a11y-doc a { color: #009fe3; text-decoration: underline; }
+.a11y-doc .a11y-contact { list-style: none; padding-inline-start: 0; }
+.a11y-doc .a11y-updated { margin-top: 28px; font-size: 15px; opacity: 0.75; }
+@media (max-width: 767px) {
+  .a11y-doc p, .a11y-doc li { font-size: 16px; }
+  .a11y-doc h2 { font-size: 22px; }
+}
