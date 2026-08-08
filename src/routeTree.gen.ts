@@ -21,9 +21,11 @@ import { Route as EnRouteImport } from './routes/en'
 import { Route as DonateRouteImport } from './routes/donate'
 import { Route as BrandingRouteImport } from './routes/branding'
 import { Route as AgreementsRouteImport } from './routes/agreements'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AccessibilityRouteImport } from './routes/accessibility'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EnIndexRouteImport } from './routes/en.index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as TefilinSlugRouteImport } from './routes/tefilin.$slug'
 import { Route as EnTheTefillinTieInitiativeRouteImport } from './routes/en.the-tefillin-tie-initiative'
 import { Route as EnThankYouLettersRouteImport } from './routes/en.thank-you-letters'
@@ -101,6 +103,11 @@ const AgreementsRoute = AgreementsRouteImport.update({
   path: '/agreements',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AccessibilityRoute = AccessibilityRouteImport.update({
   id: '/accessibility',
   path: '/accessibility',
@@ -115,6 +122,11 @@ const EnIndexRoute = EnIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => EnRoute,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
 } as any)
 const TefilinSlugRoute = TefilinSlugRouteImport.update({
   id: '/tefilin/$slug',
@@ -187,6 +199,7 @@ const EnTefilinSlugRoute = EnTefilinSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/accessibility': typeof AccessibilityRoute
+  '/admin': typeof AdminRouteWithChildren
   '/agreements': typeof AgreementsRoute
   '/branding': typeof BrandingRoute
   '/donate': typeof DonateRoute
@@ -211,6 +224,7 @@ export interface FileRoutesByFullPath {
   '/en/thank-you-letters': typeof EnThankYouLettersRoute
   '/en/the-tefillin-tie-initiative': typeof EnTheTefillinTieInitiativeRoute
   '/tefilin/$slug': typeof TefilinSlugRoute
+  '/admin/': typeof AdminIndexRoute
   '/en/': typeof EnIndexRoute
   '/en/tefilin/$slug': typeof EnTefilinSlugRoute
 }
@@ -240,6 +254,7 @@ export interface FileRoutesByTo {
   '/en/thank-you-letters': typeof EnThankYouLettersRoute
   '/en/the-tefillin-tie-initiative': typeof EnTheTefillinTieInitiativeRoute
   '/tefilin/$slug': typeof TefilinSlugRoute
+  '/admin': typeof AdminIndexRoute
   '/en': typeof EnIndexRoute
   '/en/tefilin/$slug': typeof EnTefilinSlugRoute
 }
@@ -247,6 +262,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/accessibility': typeof AccessibilityRoute
+  '/admin': typeof AdminRouteWithChildren
   '/agreements': typeof AgreementsRoute
   '/branding': typeof BrandingRoute
   '/donate': typeof DonateRoute
@@ -271,6 +287,7 @@ export interface FileRoutesById {
   '/en/thank-you-letters': typeof EnThankYouLettersRoute
   '/en/the-tefillin-tie-initiative': typeof EnTheTefillinTieInitiativeRoute
   '/tefilin/$slug': typeof TefilinSlugRoute
+  '/admin/': typeof AdminIndexRoute
   '/en/': typeof EnIndexRoute
   '/en/tefilin/$slug': typeof EnTefilinSlugRoute
 }
@@ -279,6 +296,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/accessibility'
+    | '/admin'
     | '/agreements'
     | '/branding'
     | '/donate'
@@ -303,6 +321,7 @@ export interface FileRouteTypes {
     | '/en/thank-you-letters'
     | '/en/the-tefillin-tie-initiative'
     | '/tefilin/$slug'
+    | '/admin/'
     | '/en/'
     | '/en/tefilin/$slug'
   fileRoutesByTo: FileRoutesByTo
@@ -332,12 +351,14 @@ export interface FileRouteTypes {
     | '/en/thank-you-letters'
     | '/en/the-tefillin-tie-initiative'
     | '/tefilin/$slug'
+    | '/admin'
     | '/en'
     | '/en/tefilin/$slug'
   id:
     | '__root__'
     | '/'
     | '/accessibility'
+    | '/admin'
     | '/agreements'
     | '/branding'
     | '/donate'
@@ -362,6 +383,7 @@ export interface FileRouteTypes {
     | '/en/thank-you-letters'
     | '/en/the-tefillin-tie-initiative'
     | '/tefilin/$slug'
+    | '/admin/'
     | '/en/'
     | '/en/tefilin/$slug'
   fileRoutesById: FileRoutesById
@@ -369,6 +391,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccessibilityRoute: typeof AccessibilityRoute
+  AdminRoute: typeof AdminRouteWithChildren
   AgreementsRoute: typeof AgreementsRoute
   BrandingRoute: typeof BrandingRoute
   DonateRoute: typeof DonateRoute
@@ -470,6 +493,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AgreementsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/accessibility': {
       id: '/accessibility'
       path: '/accessibility'
@@ -490,6 +520,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/en/'
       preLoaderRoute: typeof EnIndexRouteImport
       parentRoute: typeof EnRoute
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
     }
     '/tefilin/$slug': {
       id: '/tefilin/$slug'
@@ -585,6 +622,16 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AdminRouteChildren {
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 interface EnRouteChildren {
   EnAccessibilityRoute: typeof EnAccessibilityRoute
   EnArticlesInTheMediaRoute: typeof EnArticlesInTheMediaRoute
@@ -622,6 +669,7 @@ const EnRouteWithChildren = EnRoute._addFileChildren(EnRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccessibilityRoute: AccessibilityRoute,
+  AdminRoute: AdminRouteWithChildren,
   AgreementsRoute: AgreementsRoute,
   BrandingRoute: BrandingRoute,
   DonateRoute: DonateRoute,

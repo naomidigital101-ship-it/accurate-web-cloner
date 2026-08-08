@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /admin
 
 Sitemap: https://accurate-web-cloner.lovable.app/sitemap.xml
