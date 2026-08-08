@@ -113,17 +113,54 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@context": "https://schema.org",
           "@graph": [
             {
-              "@type": "Organization",
+              "@type": ["NGO", "Organization"],
+              "@id": "https://accurate-web-cloner.lovable.app/#org",
               name: "עמותת אור חדש",
-              alternateName: "קשר של תפילין",
+              legalName: "עמותת אור חדש",
+              alternateName: ["קשר של תפילין", "The Tefillin Tie Initiative"],
+              description:
+                "עמותת אור חדש מפעילה את מיזם 'קשר של תפילין', המחבר בין יהודים שברשותם תפילין שאינן בשימוש לבין יהודים שרוצים להתחיל להניח תפילין. התפילין נבדקות ומוגהות על ידי סופרי סת\"ם, מחודשות ונמסרות ללא עלות למי שאינו יכול לשלם.",
               url: "https://accurate-web-cloner.lovable.app/",
-              logo: "https://accurate-web-cloner.lovable.app/wp/img/אור-חדש-לוגו-01.svg",
+              logo: {
+                "@type": "ImageObject",
+                url: "https://accurate-web-cloner.lovable.app/wp/img/אור-חדש-לוגו-01.svg",
+              },
+              image:
+                "https://accurate-web-cloner.lovable.app/wp/uploads/2024/01/תמונת-עמוד-קשר-של-תפילין-min.webp",
+              taxID: "580703965",
+              telephone: "+972-54-6713966",
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "ארץ חמדה 33",
+                addressLocality: "בית אל",
+                addressCountry: "IL",
+              },
+              areaServed: { "@type": "Country", name: "ישראל" },
+              knowsLanguage: ["he", "en"],
+              founder: {
+                "@type": "Person",
+                "@id": "https://accurate-web-cloner.lovable.app/#founder",
+                name: "הרב עמיחי איל",
+                jobTitle: "מייסד ויו\"ר עמותת אור חדש",
+              },
+              sameAs: ["https://www.facebook.com/keshersheltfilin"],
+              contactPoint: [
+                {
+                  "@type": "ContactPoint",
+                  telephone: "+972-54-6713966",
+                  contactType: "customer service",
+                  availableLanguage: ["he", "en"],
+                  areaServed: "IL",
+                },
+              ],
             },
             {
               "@type": "WebSite",
+              "@id": "https://accurate-web-cloner.lovable.app/#website",
               name: "קשר של תפילין",
               url: "https://accurate-web-cloner.lovable.app/",
               inLanguage: "he",
+              publisher: { "@id": "https://accurate-web-cloner.lovable.app/#org" },
             },
           ],
         }),

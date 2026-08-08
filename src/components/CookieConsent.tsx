@@ -15,6 +15,34 @@ export type Consent = {
 
 const KEY = "cookie-consent-v1";
 
+/**
+ * מוחקת בפועל כל אחסון לא-הכרחי. נקראת כשהמשתמש דוחה קטגוריה,
+ * כדי שדחייה גם תנקה מה שכבר נשמר ולא רק תמנע טעינה עתידית.
+ * עוגיות ה-session של שרת האחסון הן הכרחיות ואינן נמחקות.
+ */
+function purgeNonEssential() {
+  try {
+    for (const k of Object.keys(window.localStorage)) {
+      if (k !== KEY) window.localStorage.removeItem(k);
+    }
+  } catch {
+    /* מצב פרטי */
+  }
+  try {
+    window.sessionStorage.clear();
+  } catch {
+    /* מצב פרטי */
+  }
+  // ניקוי המחלקות שסרגל הנגישות הותיר על המסמך, אחרת ההעדפה נמחקה אך עדיין מוצגת
+  const r = document.documentElement;
+  [...r.classList].filter((c) => c.startsWith("a11y-")).forEach((c) => r.classList.remove(c));
+  document.body.style.zoom = "";
+  document.querySelectorAll<HTMLElement>("[data-a11y-fs]").forEach((el) => {
+    el.style.fontSize = "";
+    delete el.dataset.a11yFs;
+  });
+}
+
 export function readConsent(): Consent | null {
   if (typeof window === "undefined") return null;
   try {
@@ -68,6 +96,8 @@ export function CookieConsent({ en = false }: { en?: boolean } = {}) {
   }, []);
 
   const decide = useCallback((f: boolean, e: boolean) => {
+    // דחייה חייבת גם למחוק מה שכבר נשמר, לא רק למנוע טעינה עתידית
+    if (!f) purgeNonEssential();
     write({ necessary: true, functional: f, embeds: e, decidedAt: new Date().toISOString() });
     setShow(false);
     setCustom(false);
@@ -124,8 +154,8 @@ export function CookieConsent({ en = false }: { en?: boolean } = {}) {
               </div>
               <p>
                 {t(
-                  "שמירה מקומית של הגדרות שבחרתם, למשל הגדרות סרגל הנגישות. המידע נשמר בדפדפן שלכם בלבד.",
-                  "Stores the settings you choose, such as your accessibility toolbar preferences. Kept in your browser only.",
+                  "שמירה מקומית של הגדרות שבחרתם, למשל הגדרות סרגל הנגישות. המידע נשמר בדפדפן שלכם בלבד, וכיבוי האפשרות מוחק אותו מיד.",
+                  "Stores the settings you choose, such as your accessibility toolbar preferences. Kept in your browser only, and switching this off deletes it immediately.",
                 )}
               </p>
             </div>

@@ -78,12 +78,59 @@ export function Footer() {
             בית אל, ארץ חמדה 33
           </a>
         </div>
-        <nav className="footer-legal" aria-label="קישורים משפטיים">
-          <a href="/accessibility/">הצהרת נגישות</a>
-          <a href="/privacy/">מדיניות פרטיות</a>
-          <a href="/terms/">תקנון</a>
-          <CookieSettingsLink />
+        <p className="footer-about">
+          מיזם של <b>עמותת אור חדש</b> לערבות הדדית וזיכוי הרבים: מחברים בין יהודי שברשותו
+          תפילין שאינן בשימוש לבין יהודי שרוצה להתחיל להניח. התפילין נבדקות ומוגהות אצל סופרי
+          סת"ם, מחודשות ונמסרות - ומי שאינו יכול לשלם מקבל בכל מקרה.
+        </p>
+
+        <ul className="footer-facts">
+          <li><b>מעל 1,300</b><span>זוגות תפילין חולקו</span></li>
+          <li><b>9</b><span>הסכמות מגדולי הרבנים</span></li>
+          <li><b>כל הארץ</b><span>איסוף, חידוש ומסירה</span></li>
+        </ul>
+
+        <nav className="footer-sitemap" aria-label="ניווט בפוטר">
+          <div>
+            <h3>המיזם</h3>
+            <a href="/stories/">סיפורים שמאחורי התפילין</a>
+            <a href="/in-news/">כתבות בתקשורת</a>
+            <a href="/agreements/">הסכמות הרבנים</a>
+            <a href="/מכתבי-תודה/">מכתבי תודה</a>
+          </div>
+          <div>
+            <h3>פעולות</h3>
+            <a href="/request/">בקשת תפילין</a>
+            <a href="/give/">מסירת תפילין</a>
+            <a href="/donate/">תרומה למיזם</a>
+            <a href="https://api.whatsapp.com/send?phone=972546713966" target="_blank" rel="noopener">שיחה בוואטסאפ</a>
+          </div>
+          <div>
+            <h3>מידע</h3>
+            <a href="/accessibility/">הצהרת נגישות</a>
+            <a href="/privacy/">מדיניות פרטיות</a>
+            <a href="/terms/">תקנון ותנאי שימוש</a>
+            <CookieSettingsLink />
+          </div>
+          <div>
+            <h3>English</h3>
+            <a href="/en/the-tefillin-tie-initiative/" lang="en">The Tefillin Tie Initiative</a>
+            <a href="/en/stories-2/" lang="en">Stories</a>
+            <a href="/en/support-and-donation/" lang="en">Support &amp; donate</a>
+          </div>
         </nav>
+
+        <div className="footer-social">
+          <a
+            href="https://www.facebook.com/keshersheltfilin"
+            target="_blank"
+            rel="noopener"
+            aria-label="קשר של תפילין בפייסבוק"
+          >
+            <svg viewBox="0 0 320 512" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z" /></svg>
+            <span>פייסבוק</span>
+          </a>
+        </div>
         <a href="https://kavnekuda.com" target="_blank" rel="noopener" aria-label="אפיון, בניה ופיתוח: KAV" className="footer-credit-link">
           <img src="/wp/img/קרדיט-45.svg" alt="אפיון, בניה ופיתוח: KAV" />
         </a>
