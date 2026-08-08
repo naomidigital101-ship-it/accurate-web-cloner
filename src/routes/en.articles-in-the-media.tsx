@@ -10,7 +10,7 @@ type PressItem = {
   logoText?: string;
 };
 
-const press: PressItem[] = [
+export const press: PressItem[] = [
   {
     title: "How Hamas Brought Jews Back to Judaism",
     source: "HAMODIA",

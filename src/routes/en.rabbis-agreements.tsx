@@ -5,7 +5,7 @@ const cdn = "/wp/uploads";
 
 type Rabbi = { name: string; role: string; letter: string; portrait: string };
 
-const rabbis: Rabbi[] = [
+export const rabbis: Rabbi[] = [
   { name: "Rav Asher Weiss", role: "Founder and rosh beit hamidrash 'Darchi Torah' and the 'Darchei Horaa' av beit din", letter: `${cdn}/2024/06/הרב-אשר-וייס-ערוך-2.png`, portrait: `${cdn}/2024/06/הרב-אשר-2-min.webp` },
   { name: "Rav Shlomo Amar", role: "Former Sephardic Chief Rabbi of Israel", letter: `${cdn}/2024/05/הרב-עמר-min-1.webp`, portrait: `${cdn}/2024/05/רב-עמר-2-min.webp` },
   { name: "Rabbi Yitzhak Zilberstein", role: "Ramat Elhanan neighborhood rabbi, Bnei Brak", letter: `${cdn}/2024/04/מכתב-הסכמה-מהרב-זילברשטיין-scaled.webp`, portrait: `${cdn}/2024/04/רב-זילברמן-3-1.webp` },

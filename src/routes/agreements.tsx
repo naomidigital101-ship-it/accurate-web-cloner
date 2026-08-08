@@ -5,7 +5,7 @@ const cdn = "/wp/uploads";
 
 type Rabbi = { name: string; role: string; letter: string; portrait: string };
 
-const rabbis: Rabbi[] = [
+export const rabbis: Rabbi[] = [
   { name: "הרב אשר וייס שליט\"א", role: "גאב\"ד וראש ישיבת דרכי תורה", letter: `${cdn}/2024/06/הרב-אשר-וייס-ערוך-2.png`, portrait: `${cdn}/2024/06/הרב-אשר-2-min.webp` },
   { name: "הרב שלמה משה עאמר שליט\"א", role: "הראשון לציון ורבה של ירושלים", letter: `${cdn}/2024/05/הרב-עמר-min-1.webp`, portrait: `${cdn}/2024/05/רב-עמר-2-min.webp` },
   { name: "הרב יצחק זילברשטיין שליט\"א", role: "רב שכונת רמת אלחנן, בני ברק", letter: `${cdn}/2024/04/מכתב-הסכמה-מהרב-זילברשטיין-scaled.webp`, portrait: `${cdn}/2024/04/רב-זילברמן-3-1.webp` },

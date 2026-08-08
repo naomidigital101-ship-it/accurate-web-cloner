@@ -1,7 +1,7 @@
 import { InnerPageFx } from "@/components/InnerPageFx";
 import { CookieSettingsLink } from "@/components/CookieConsent";
 
-const gallery = [
+export const gallery = [
 
   "g1.webp", "g2.webp", "g3.jpg", "g4.jpg", "g5.webp", "g6.jpg", "g7.jpg",
   "g8.jpg", "g9.jpg", "g10.jpg", "g11.png", "g12.jpg", "g13.jpg", "g14.jpg",

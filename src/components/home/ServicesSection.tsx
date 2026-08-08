@@ -10,7 +10,7 @@ type Service = {
 };
 
 
-const services: Service[] = [
+export const services: Service[] = [
   {
     title: "הקמת גמ\"ח לקהילות",
     more: "לפרטים נוספים >>",

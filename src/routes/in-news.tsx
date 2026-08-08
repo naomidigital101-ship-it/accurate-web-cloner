@@ -5,7 +5,7 @@ const cdn = "/wp/uploads";
 
 type NewsItem = { title?: string; source: string; date: string; img: string; href: string };
 
-const newsItems: NewsItem[] = [
+export const newsItems: NewsItem[] = [
   { title: "ארגון 'קשר של תפילין' – ככה זה עובד בשטח", source: "הידברות", date: "28.9.25", img: `${cdn}/2026/06/לוגו-הידברות.webp`, href: "https://www.hidabroot.org/article/1214439" },
   { source: "מגזין אתנחתא", date: "ג' תשרי תשפ\"ן 25.09.25", img: `${cdn}/2025/10/אתנחתא.png`, href: `${cdn}/2025/10/yedidya_1164-1.pdf` },
   { title: "כתבה על קשר של תפילין בעיתון של כפר חב\"ד", source: "עיתון כפר חב\"ד", date: "21/05/2025", img: `${cdn}/2025/05/כפר-חבד.jpg`, href: `${cdn}/2025/05/kfar-chabad-whatsapp-15.22.07.jpg` },
