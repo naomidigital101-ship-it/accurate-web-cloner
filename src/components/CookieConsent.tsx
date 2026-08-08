@@ -111,7 +111,7 @@ export function CookieConsent({ en = false }: { en?: boolean } = {}) {
             <div className="cc-cat">
               <div className="cc-cat-head">
                 <b>{t("העדפות ותפקוד", "Preferences")}</b>
-                <label className="cc-switch">
+                <label className={`cc-switch${functional ? " on" : ""}`}>
                   <input
                     type="checkbox"
                     checked={functional}
@@ -119,6 +119,7 @@ export function CookieConsent({ en = false }: { en?: boolean } = {}) {
                     aria-label={t("הפעלת עוגיות העדפות", "Enable preference cookies")}
                   />
                   <span />
+                  <em>{functional ? t("פעיל", "On") : t("כבוי", "Off")}</em>
                 </label>
               </div>
               <p>
@@ -132,7 +133,7 @@ export function CookieConsent({ en = false }: { en?: boolean } = {}) {
             <div className="cc-cat">
               <div className="cc-cat-head">
                 <b>{t("תוכן מוטמע מצד שלישי", "Embedded third-party content")}</b>
-                <label className="cc-switch">
+                <label className={`cc-switch${embeds ? " on" : ""}`}>
                   <input
                     type="checkbox"
                     checked={embeds}
@@ -140,6 +141,7 @@ export function CookieConsent({ en = false }: { en?: boolean } = {}) {
                     aria-label={t("הפעלת תוכן מוטמע", "Enable embedded content")}
                   />
                   <span />
+                  <em>{embeds ? t("פעיל", "On") : t("כבוי", "Off")}</em>
                 </label>
               </div>
               <p>

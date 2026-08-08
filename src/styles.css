@@ -2658,15 +2658,18 @@ html.a11y-hc-light body :is(section, div, article, header, footer, main, aside):
 .cc-cat p { margin: 0; font-size: 13.5px; line-height: 1.5em; }
 .cc-always { font-size: 12px; font-weight: 700; color: #1b7f3b; }
 
-.cc-switch { position: relative; display: inline-block; width: 46px; height: 26px; flex: 0 0 auto; }
+.cc-switch { position: relative; display: inline-flex; align-items: center; gap: 8px; width: auto; height: 26px; flex: 0 0 auto; }
+.cc-switch > span { position: relative; display: block; width: 46px; height: 26px; flex: 0 0 auto; }
+.cc-switch em { font-style: normal; font-size: 12px; font-weight: 700; color: #8a8aa3; min-width: 28px; }
+.cc-switch.on em { color: #1b7f3b; }
 .cc-switch input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; margin: 0; cursor: pointer; }
-.cc-switch span { position: absolute; inset: 0; background: #cfcfe0; border-radius: 999px; transition: background 0.2s ease; pointer-events: none; }
+.cc-switch > span { background: #cfcfe0; border-radius: 999px; transition: background 0.2s ease; pointer-events: none; }
 .cc-switch span::after { content: ""; position: absolute; inset-block-start: 3px; inset-inline-start: 3px; width: 20px; height: 20px; background: #fff; border-radius: 50%; transition: transform 0.2s ease; }
-.cc-switch input:checked + span { background: #67ffd1; }
-.cc-switch input:checked + span::after { transform: translateX(20px); }
-.cc-ltr .cc-switch input:checked + span::after { transform: translateX(20px); }
-.cc-root:not(.cc-ltr) .cc-switch input:checked + span::after { transform: translateX(-20px); }
-.cc-switch input:focus-visible + span { outline: 3px solid #f9b233; outline-offset: 2px; }
+.cc-switch.on > span { background: #67ffd1; }
+
+.cc-ltr 
+.cc-root:not(.cc-ltr) .cc-switch.on > span::after { transform: translateX(-20px); }
+.cc-switch input:focus-visible ~ span { outline: 3px solid #f9b233; outline-offset: 2px; }
 
 .cc-btns { display: flex; flex-wrap: wrap; gap: 8px; }
 .cc-btn { flex: 1 1 150px; border-radius: 12px; font-family: inherit; font-size: 15px; font-weight: 700; padding: 12px 14px; cursor: pointer; border: 2px solid transparent; transition: background 0.25s ease, color 0.25s ease; }
