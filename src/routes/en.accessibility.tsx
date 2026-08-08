@@ -34,12 +34,8 @@ function Page() {
         <h2>Level of accessibility</h2>
         <p>
           This site was made accessible according to Israeli Standard 5568, which is based on
-          the{" "}
-          <a href="https://www.w3.org/TR/WCAG21/" target="_blank" rel="noopener noreferrer">
-            W3C WCAG 2.1
-          </a>{" "}
-          guidelines, level AA. The work was done in the site's own code rather than through a
-          third-party overlay.
+          the W3C WCAG 2.1 guidelines, level AA. The work was done in the site's own code, and
+          an accessibility toolbar is available from every page.
         </p>
 
         <h2>What has been implemented</h2>

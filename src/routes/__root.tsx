@@ -13,6 +13,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { hreflangPair } from "../lib/hreflang";
+import { AccessibilityBar } from "../components/AccessibilityBar";
 
 function NotFoundComponent() {
   return (
@@ -155,6 +156,7 @@ function RootShell({ children }: { children: ReactNode }) {
       <body>
         <a href="#content" className="skip-link">{isEn ? "Skip to content" : "דלג לתוכן"}</a>
         {children}
+        <AccessibilityBar en={isEn} />
         <Scripts />
       </body>
     </html>
