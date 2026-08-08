@@ -38,6 +38,7 @@ import { Route as EnRabbisAgreementsRouteImport } from './routes/en.rabbis-agree
 import { Route as EnPrivacyRouteImport } from './routes/en.privacy'
 import { Route as EnArticlesInTheMediaRouteImport } from './routes/en.articles-in-the-media'
 import { Route as EnAccessibilityRouteImport } from './routes/en.accessibility'
+import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
 import { Route as EnTefilinSlugRouteImport } from './routes/en.tefilin.$slug'
 
 const Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route =
@@ -190,6 +191,11 @@ const EnAccessibilityRoute = EnAccessibilityRouteImport.update({
   path: '/accessibility',
   getParentRoute: () => EnRoute,
 } as any)
+const AdminLeadsRoute = AdminLeadsRouteImport.update({
+  id: '/leads',
+  path: '/leads',
+  getParentRoute: () => AdminRoute,
+} as any)
 const EnTefilinSlugRoute = EnTefilinSlugRouteImport.update({
   id: '/tefilin/$slug',
   path: '/tefilin/$slug',
@@ -212,6 +218,7 @@ export interface FileRoutesByFullPath {
   '/stories': typeof StoriesRoute
   '/terms': typeof TermsRoute
   '/מכתבי-תודה': typeof Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route
+  '/admin/leads': typeof AdminLeadsRoute
   '/en/accessibility': typeof EnAccessibilityRoute
   '/en/articles-in-the-media': typeof EnArticlesInTheMediaRoute
   '/en/privacy': typeof EnPrivacyRoute
@@ -242,6 +249,7 @@ export interface FileRoutesByTo {
   '/stories': typeof StoriesRoute
   '/terms': typeof TermsRoute
   '/מכתבי-תודה': typeof Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route
+  '/admin/leads': typeof AdminLeadsRoute
   '/en/accessibility': typeof EnAccessibilityRoute
   '/en/articles-in-the-media': typeof EnArticlesInTheMediaRoute
   '/en/privacy': typeof EnPrivacyRoute
@@ -275,6 +283,7 @@ export interface FileRoutesById {
   '/stories': typeof StoriesRoute
   '/terms': typeof TermsRoute
   '/מכתבי-תודה': typeof Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route
+  '/admin/leads': typeof AdminLeadsRoute
   '/en/accessibility': typeof EnAccessibilityRoute
   '/en/articles-in-the-media': typeof EnArticlesInTheMediaRoute
   '/en/privacy': typeof EnPrivacyRoute
@@ -309,6 +318,7 @@ export interface FileRouteTypes {
     | '/stories'
     | '/terms'
     | '/מכתבי-תודה'
+    | '/admin/leads'
     | '/en/accessibility'
     | '/en/articles-in-the-media'
     | '/en/privacy'
@@ -339,6 +349,7 @@ export interface FileRouteTypes {
     | '/stories'
     | '/terms'
     | '/מכתבי-תודה'
+    | '/admin/leads'
     | '/en/accessibility'
     | '/en/articles-in-the-media'
     | '/en/privacy'
@@ -371,6 +382,7 @@ export interface FileRouteTypes {
     | '/stories'
     | '/terms'
     | '/מכתבי-תודה'
+    | '/admin/leads'
     | '/en/accessibility'
     | '/en/articles-in-the-media'
     | '/en/privacy'
@@ -612,6 +624,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnAccessibilityRouteImport
       parentRoute: typeof EnRoute
     }
+    '/admin/leads': {
+      id: '/admin/leads'
+      path: '/leads'
+      fullPath: '/admin/leads'
+      preLoaderRoute: typeof AdminLeadsRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/en/tefilin/$slug': {
       id: '/en/tefilin/$slug'
       path: '/tefilin/$slug'
@@ -623,10 +642,12 @@ declare module '@tanstack/react-router' {
 }
 
 interface AdminRouteChildren {
+  AdminLeadsRoute: typeof AdminLeadsRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminLeadsRoute: AdminLeadsRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 

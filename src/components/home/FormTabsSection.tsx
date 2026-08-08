@@ -1,4 +1,31 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+
+import { submitLead } from "@/lib/api/leads.functions";
+
+/**
+ * הטפסים רב-שלביים ומסירים שדות מה-DOM בין שלבים, ולכן FormData בשליחה
+ * מכיל רק את השלב האחרון. הצילום הזה שומר את הערכים בכל מעבר ומאחד בסוף.
+ */
+function useMultiStepValues() {
+  const values = useRef<Record<string, string>>({});
+  const capture = (form: HTMLFormElement | null) => {
+    if (!form) return;
+    for (const [k, v] of new FormData(form).entries()) {
+      if (typeof v === "string" && v.trim() !== "") values.current[k] = v.trim();
+    }
+  };
+  return { values, capture };
+}
+
+/** שדה מלכודת לבוטים - מוסתר מהעין ומקוראי מסך, אדם לעולם לא ימלא אותו */
+function HoneyPot() {
+  return (
+    <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden" }}>
+      <label htmlFor="website">אתר</label>
+      <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+    </div>
+  );
+}
 
 type Col = 100 | 60 | 50 | 40;
 
@@ -71,30 +98,49 @@ function PrevNextRow({ onPrev, onNext, submitLabel }: { onPrev: () => void; onNe
 export function RequestForm() {
   const [step, setStep] = useState(1);
   const [sent, setSent] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+  const { values, capture } = useMultiStepValues();
+
+  const go = (n: number) => { capture(formRef.current); setStep(n); };
+
   if (sent) return <p className="form-card-sub" role="status">הטופס נשלח בהצלחה. תודה רבה!</p>;
   return (
     <form
-      onSubmit={(e) => {
+      ref={formRef}
+      onSubmit={async (e) => {
         e.preventDefault();
-        setSent(true);
+        capture(formRef.current);
+        setBusy(true);
+        setErr(null);
+        try {
+          await submitLead({ data: { kind: "request", lang: "he", ...values.current } });
+          setSent(true);
+        } catch {
+          setErr("השליחה נכשלה. אפשר לנסות שוב או להתקשר 054-6713966.");
+        } finally {
+          setBusy(false);
+        }
       }}
     >
+      <HoneyPot />
       <div className="e-form-fields">
         {step === 1 && (
           <>
             <SelectField label="למי מיועדות התפילין" col={50} name="target" options={["חייל", "בר מצוה", "מתחזק", "אחר"]} />
             <SelectField label="כותב ביד" col={50} name="hand" options={["ימין", "שמאל"]} />
             <SelectField label="שיטת אספקה" col={100} name="delivery" options={["אוכל להגיע לאסוף את התפילין", "מבקש משלוח (בתוספת תשלום)"]} />
-            <NextButton onClick={() => setStep(2)} />
+            <NextButton onClick={() => go(2)} />
           </>
         )}
         {step === 2 && (
           <>
-            <Field label="שם פרטי" col={50} name="first" required />
-            <Field label="שם משפחה" col={50} name="last" required />
+            <Field label="שם פרטי" col={50} name="first_name" required />
+            <Field label="שם משפחה" col={50} name="last_name" required />
             <Field label="כתובת למסירה" col={60} name="address" />
             <Field label="עיר/ישוב" col={40} name="city" />
-            <PrevNextRow onPrev={() => setStep(1)} onNext={() => setStep(3)} />
+            <PrevNextRow onPrev={() => go(1)} onNext={() => go(3)} />
           </>
         )}
         {step === 3 && (
@@ -102,7 +148,8 @@ export function RequestForm() {
             <Field label="טלפון" col={40} type="tel" name="phone" required />
             <Field label="אימייל" col={60} type="email" name="email" required />
             <Note />
-            <PrevNextRow onPrev={() => setStep(2)} submitLabel="שליחת בקשה" />
+            {err && <div className="e-field-group col-100"><p className="e-form-note" role="alert" style={{ color: "#b3261e", fontWeight: 700 }}>{err}</p></div>}
+            <PrevNextRow onPrev={() => go(2)} submitLabel={busy ? "שולח…" : "שליחת בקשה"} />
           </>
         )}
       </div>
@@ -113,22 +160,41 @@ export function RequestForm() {
 export function DonateForm() {
   const [step, setStep] = useState(1);
   const [sent, setSent] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+  const { values, capture } = useMultiStepValues();
+
+  const go = (n: number) => { capture(formRef.current); setStep(n); };
+
   if (sent) return <p className="form-card-sub" role="status">הטופס נשלח בהצלחה. תודה רבה!</p>;
   return (
     <form
+      ref={formRef}
       className="donate-form"
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
-        setSent(true);
+        capture(formRef.current);
+        setBusy(true);
+        setErr(null);
+        try {
+          await submitLead({ data: { kind: "donate", lang: "he", ...values.current } });
+          setSent(true);
+        } catch {
+          setErr("השליחה נכשלה. אפשר לנסות שוב או להתקשר 054-6713966.");
+        } finally {
+          setBusy(false);
+        }
       }}
     >
+      <HoneyPot />
       <div className="e-form-fields">
         {step === 1 && (
           <>
-            <Field label="שם מלא" col={100} name="name" required />
-            <Field label="כתובת לאיסוף" col={60} name="pickup" />
+            <Field label="שם מלא" col={100} name="full_name" required />
+            <Field label="כתובת לאיסוף" col={60} name="address" />
             <SelectField label="מצב התפילין" col={40} name="condition" options={["חדש", "משומש", "פגום/ישן מאוד"]} />
-            <NextButton onClick={() => setStep(2)} />
+            <NextButton onClick={() => go(2)} />
           </>
         )}
         {step === 2 && (
@@ -137,7 +203,8 @@ export function DonateForm() {
             <Field label="טלפון" col={40} type="tel" name="phone" required />
             <TextareaField label="רוצים להוסיף הקדשה?" col={100} name="dedication" />
             <Note />
-            <PrevNextRow onPrev={() => setStep(1)} submitLabel="שליחה" />
+            {err && <div className="e-field-group col-100"><p className="e-form-note" role="alert" style={{ color: "#b3261e", fontWeight: 700 }}>{err}</p></div>}
+            <PrevNextRow onPrev={() => go(1)} submitLabel={busy ? "שולח…" : "שליחה"} />
           </>
         )}
       </div>

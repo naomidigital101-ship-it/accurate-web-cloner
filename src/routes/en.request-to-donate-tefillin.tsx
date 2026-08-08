@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useRef, useState } from "react";
+
+import { submitLead } from "@/lib/api/leads.functions";
 import { PageShell } from "@/components/PageShell";
 
 export const Route = createFileRoute("/en/request-to-donate-tefillin")({
@@ -42,20 +44,66 @@ function SelectField({ label, col, name, options }: { label: string; col: 100 | 
 
 const NOTE = "When sending the request, no use will be made of the information you entered except for the association's technical needs.";
 
+
+/**
+ * הטופס רב-שלבי ומסיר שדות מה-DOM בין שלבים, לכן שומרים ערכים בכל מעבר.
+ * תוויות שלב 2 נשארות בעברית - כך במקור, החלטת לקוח. רק השליחה מחוברת.
+ */
+function useMultiStepValues() {
+  const values = useRef<Record<string, string>>({});
+  const capture = (form: HTMLFormElement | null) => {
+    if (!form) return;
+    for (const [k, v] of new FormData(form).entries()) {
+      if (typeof v === "string" && v.trim() !== "") values.current[k] = v.trim();
+    }
+  };
+  return { values, capture };
+}
+
+function HoneyPot() {
+  return (
+    <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden" }}>
+      <label htmlFor="website">website</label>
+      <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+    </div>
+  );
+}
+
 function EnDonateForm() {
   const [step, setStep] = useState(1);
   const [sent, setSent] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+  const { values, capture } = useMultiStepValues();
+  const go = (n: number) => { capture(formRef.current); setStep(n); };
   if (sent) return <p className="form-card-sub" role="status">The form has been sent successfully. Thank you!</p>;
   return (
-    <form className="donate-form" onSubmit={(e) => { e.preventDefault(); setSent(true); }}>
+    <form ref={formRef} className="donate-form"
+      onSubmit={async (e) => {
+        e.preventDefault();
+        capture(formRef.current);
+        setBusy(true);
+        setErr(null);
+        try {
+          await submitLead({ data: { kind: "donate", lang: "en", ...values.current } });
+          setSent(true);
+        } catch {
+          setErr("Sending failed. Please try again or call +972-54-6713966.");
+        } finally {
+          setBusy(false);
+        }
+      }}
+    >
+      <HoneyPot />
       {step === 1 && (
         <div className="e-form-fields">
-          <Field label="full name" col={100} name="name" />
+          <Field label="full name" col={100} name="full_name" />
           <Field label="address for pick up" col={60} name="pickup" />
           <SelectField label="The condition of the tefillin" col={40} name="condition" options={["New", "Used", "Damaged/very old"]} />
           <div className="e-field-group col-100">
             <div className="e-form-buttons">
-              <button type="button" className="e-btn-step" onClick={() => setStep(2)}>next</button>
+              <button type="button" className="e-btn-step" onClick={() => go(2)}>next</button>
             </div>
           </div>
         </div>
@@ -66,10 +114,11 @@ function EnDonateForm() {
           <Field label="phone" col={40} type="tel" name="phone" required />
           <Field label="Want to add a dedication?" col={100} name="dedication" />
           <div className="e-field-group col-100"><p className="e-form-note">{NOTE}</p></div>
+          {err && <div className="e-field-group col-100"><p className="e-form-note" role="alert" style={{ color: "#b3261e", fontWeight: 700 }}>{err}</p></div>}
           <div className="e-field-group col-100">
             <div className="e-form-buttons">
-              <button type="button" className="e-btn-step e-btn-prev" onClick={() => setStep(1)}>previous</button>
-              <button type="submit" className="e-btn-step">send</button>
+              <button type="button" className="e-btn-step e-btn-prev" onClick={() => go(1)}>previous</button>
+              <button type="submit" className="e-btn-step" disabled={busy}>send</button>
             </div>
           </div>
         </div>
