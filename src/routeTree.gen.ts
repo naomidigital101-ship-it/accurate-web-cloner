@@ -17,6 +17,7 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as LettersRouteImport } from './routes/letters'
 import { Route as InNewsRouteImport } from './routes/in-news'
 import { Route as GiveRouteImport } from './routes/give'
+import { Route as EnvcheckRouteImport } from './routes/envcheck'
 import { Route as EnRouteImport } from './routes/en'
 import { Route as DonateRouteImport } from './routes/donate'
 import { Route as BrandingRouteImport } from './routes/branding'
@@ -79,6 +80,11 @@ const InNewsRoute = InNewsRouteImport.update({
 const GiveRoute = GiveRouteImport.update({
   id: '/give',
   path: '/give',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnvcheckRoute = EnvcheckRouteImport.update({
+  id: '/envcheck',
+  path: '/envcheck',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EnRoute = EnRouteImport.update({
@@ -191,6 +197,7 @@ export interface FileRoutesByFullPath {
   '/branding': typeof BrandingRoute
   '/donate': typeof DonateRoute
   '/en': typeof EnRouteWithChildren
+  '/envcheck': typeof EnvcheckRoute
   '/give': typeof GiveRoute
   '/in-news': typeof InNewsRoute
   '/letters': typeof LettersRoute
@@ -220,6 +227,7 @@ export interface FileRoutesByTo {
   '/agreements': typeof AgreementsRoute
   '/branding': typeof BrandingRoute
   '/donate': typeof DonateRoute
+  '/envcheck': typeof EnvcheckRoute
   '/give': typeof GiveRoute
   '/in-news': typeof InNewsRoute
   '/letters': typeof LettersRoute
@@ -251,6 +259,7 @@ export interface FileRoutesById {
   '/branding': typeof BrandingRoute
   '/donate': typeof DonateRoute
   '/en': typeof EnRouteWithChildren
+  '/envcheck': typeof EnvcheckRoute
   '/give': typeof GiveRoute
   '/in-news': typeof InNewsRoute
   '/letters': typeof LettersRoute
@@ -283,6 +292,7 @@ export interface FileRouteTypes {
     | '/branding'
     | '/donate'
     | '/en'
+    | '/envcheck'
     | '/give'
     | '/in-news'
     | '/letters'
@@ -312,6 +322,7 @@ export interface FileRouteTypes {
     | '/agreements'
     | '/branding'
     | '/donate'
+    | '/envcheck'
     | '/give'
     | '/in-news'
     | '/letters'
@@ -342,6 +353,7 @@ export interface FileRouteTypes {
     | '/branding'
     | '/donate'
     | '/en'
+    | '/envcheck'
     | '/give'
     | '/in-news'
     | '/letters'
@@ -373,6 +385,7 @@ export interface RootRouteChildren {
   BrandingRoute: typeof BrandingRoute
   DonateRoute: typeof DonateRoute
   EnRoute: typeof EnRouteWithChildren
+  EnvcheckRoute: typeof EnvcheckRoute
   GiveRoute: typeof GiveRoute
   InNewsRoute: typeof InNewsRoute
   LettersRoute: typeof LettersRoute
@@ -440,6 +453,13 @@ declare module '@tanstack/react-router' {
       path: '/give'
       fullPath: '/give'
       preLoaderRoute: typeof GiveRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/envcheck': {
+      id: '/envcheck'
+      path: '/envcheck'
+      fullPath: '/envcheck'
+      preLoaderRoute: typeof EnvcheckRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/en': {
@@ -626,6 +646,7 @@ const rootRouteChildren: RootRouteChildren = {
   BrandingRoute: BrandingRoute,
   DonateRoute: DonateRoute,
   EnRoute: EnRouteWithChildren,
+  EnvcheckRoute: EnvcheckRoute,
   GiveRoute: GiveRoute,
   InNewsRoute: InNewsRoute,
   LettersRoute: LettersRoute,
