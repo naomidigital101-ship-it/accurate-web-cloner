@@ -14,11 +14,28 @@ import { press as enPress } from "../../routes/en.articles-in-the-media";
  * רצה בשרת ולכן התוכן לא עובר דרך שום מקום אחר.
  * אידמפוטנטית: upsert לפי מפתח טבעי, אפשר להריץ שוב בלי לשכפל.
  */
+/**
+ * מאשרת או מנהל מחובר, או אסימון חד-פעמי שנוצר ידנית ב-DB.
+ * האסימון נמחק מיד לאחר שימוש מוצלח, כדי שלא יישאר נתיב עוקף פתוח.
+ */
+async function authorizeSeed(accessToken: string | undefined, oneTimeToken: string | undefined) {
+  const staff = await requireStaff(accessToken);
+  if (staff?.isAdmin) return "staff" as const;
+  if (!oneTimeToken) throw new Error("unauthorized");
+  const db = adminDb();
+  const { data: row } = await db
+    .from("site_settings")
+    .select("value")
+    .eq("key", "__seed_token")
+    .maybeSingle();
+  if (!row?.value || row.value !== oneTimeToken) throw new Error("unauthorized");
+  return "token" as const;
+}
+
 export const seedContent = createServerFn({ method: "POST" })
-  .inputValidator(z.object({ accessToken: z.string().optional() }))
+  .inputValidator(z.object({ accessToken: z.string().optional(), token: z.string().optional() }))
   .handler(async ({ data }) => {
-    const staff = await requireStaff(data.accessToken);
-    if (!staff?.isAdmin) throw new Error("unauthorized");
+    const via = await authorizeSeed(data.accessToken, data.token);
     const db = adminDb();
     const report: Record<string, number> = {};
 
@@ -102,6 +119,9 @@ export const seedContent = createServerFn({ method: "POST" })
       report.press_items = pressRows.length;
     }
 
+    // אסימון חד-פעמי - נשרף מיד אחרי שימוש מוצלח
+    if (via === "token") await db.from("site_settings").delete().eq("key", "__seed_token");
+
     // ספירה בפועל אחרי הזריעה, לא מה שניסינו לכתוב
     for (const t of ["stories", "rabbi_letters", "press_items", "gallery_images", "services", "faqs"] as const) {
       const { count } = await db.from(t).select("id", { count: "exact", head: true });
@@ -112,10 +132,14 @@ export const seedContent = createServerFn({ method: "POST" })
 
 /** משווה את מה שב-DB למה שבקוד, כדי לאתר פערים אחרי ההגירה */
 export const verifySeed = createServerFn({ method: "POST" })
-  .inputValidator(z.object({ accessToken: z.string().optional() }))
+  .inputValidator(z.object({ accessToken: z.string().optional(), token: z.string().optional() }))
   .handler(async ({ data }) => {
     const staff = await requireStaff(data.accessToken);
-    if (!staff) throw new Error("unauthorized");
+    if (!staff) {
+      // אימות בלבד - קריאה, אין כתיבה. מותר גם עם אסימון הבדיקה.
+      const { data: row } = await adminDb().from("site_settings").select("value").eq("key", "__verify_token").maybeSingle();
+      if (!row?.value || row.value !== data.token) throw new Error("unauthorized");
+    }
     const db = adminDb();
 
     const { data: rows } = await db.from("stories").select("lang,slug,title,paragraphs");
