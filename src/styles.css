@@ -2837,3 +2837,46 @@ html.a11y-hc-light body :is(section, div, article, header, footer, main, aside):
 .adm-detail-actions { display: flex; flex-wrap: wrap; gap: 10px; }
 .adm-detail-actions a { background: #67ffd1; color: #2d2e83; border-radius: 10px; padding: 8px 14px; font-size: 13.5px; font-weight: 700; text-decoration: none; }
 .adm-detail-actions a:hover { background: #bdffeb; }
+
+/* --- מנהל תוכן: סרגל, טופס, מודאל --- */
+.adm-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+.adm-langswitch { display: inline-flex; border: 2px solid #dcdcea; border-radius: 999px; overflow: hidden; }
+.adm-langswitch button { border: none; background: #fff; padding: 7px 18px; font: inherit; font-size: 14px; cursor: pointer; }
+.adm-langswitch button.on { background: #2d2e83; color: #fff; font-weight: 700; }
+.adm-add { max-width: 150px; height: 42px; }
+
+.adm-thumb { width: 46px; height: 46px; object-fit: cover; border-radius: 8px; background: #f2f3fa; }
+.adm-clip { display: block; max-width: 320px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.adm-pill { display: inline-block; border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 700; background: #eceef7; color: #5a5a78; }
+.adm-pill.on { background: #d6ffee; color: #1b7f3b; }
+.adm-order { display: flex; flex-direction: column; gap: 2px; }
+.adm-order button { border: 1px solid #dcdcea; background: #fff; border-radius: 6px; width: 26px; height: 20px; line-height: 1; cursor: pointer; font-size: 10px; }
+.adm-order button:disabled { opacity: 0.35; cursor: default; }
+.adm-rowactions { white-space: nowrap; display: flex; gap: 10px; }
+.adm-danger { color: #b3261e; }
+
+.adm-modal { position: fixed; inset: 0; z-index: 3000; background: rgba(6, 6, 51, 0.55); display: grid; place-items: center; padding: 20px; }
+.adm-modal-box { background: #fff; border-radius: 20px; width: 100%; max-width: 760px; max-height: 88vh; display: flex; flex-direction: column; overflow: hidden; }
+.adm-modal-head { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: #2d2e83; color: #fff; }
+.adm-modal-head h2 { margin: 0; font-size: 19px; }
+.adm-modal-head button { background: none; border: none; color: #fff; font-size: 26px; line-height: 1; cursor: pointer; }
+.adm-modal-foot { display: flex; align-items: center; gap: 14px; padding: 14px 20px; border-top: 1px solid #eef0f7; }
+.adm-modal-foot .adm-primary { max-width: 170px; height: 42px; }
+
+.adm-form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 18px 20px; overflow-y: auto; }
+.adm-form label { display: flex; flex-direction: column; gap: 5px; font-size: 13.5px; font-weight: 700; }
+.adm-form label.full { grid-column: 1 / -1; }
+.adm-form em { font-style: normal; font-size: 11.5px; font-weight: 400; opacity: 0.6; }
+.adm-form input, .adm-form select, .adm-form textarea {
+  border: 2px solid #dcdcea; border-radius: 10px; padding: 9px 12px; font: inherit; font-weight: 400; font-size: 14px; background: #fff;
+}
+.adm-form input:focus, .adm-form select:focus, .adm-form textarea:focus { outline: 3px solid #67ffd1; outline-offset: 1px; border-color: #2d2e83; }
+.adm-form textarea { resize: vertical; line-height: 1.6; }
+.adm-preview { margin-top: 6px; max-height: 90px; width: auto; border-radius: 8px; align-self: flex-start; }
+
+.adm-sticky-save { position: sticky; bottom: 0; display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  background: #fff; border-radius: 14px; padding: 12px 18px; margin-top: 18px; box-shadow: 0px -4px 16px rgba(0,0,0,0.08); }
+.adm-sticky-save span { font-size: 14px; opacity: 0.7; }
+.adm-sticky-save .adm-primary { max-width: 190px; height: 42px; }
+
+@media (max-width: 700px) { .adm-form { grid-template-columns: 1fr; } }

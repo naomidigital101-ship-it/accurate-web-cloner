@@ -38,8 +38,16 @@ import { Route as EnRabbisAgreementsRouteImport } from './routes/en.rabbis-agree
 import { Route as EnPrivacyRouteImport } from './routes/en.privacy'
 import { Route as EnArticlesInTheMediaRouteImport } from './routes/en.articles-in-the-media'
 import { Route as EnAccessibilityRouteImport } from './routes/en.accessibility'
+import { Route as AdminStoriesRouteImport } from './routes/admin.stories'
+import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
+import { Route as AdminServicesRouteImport } from './routes/admin.services'
+import { Route as AdminRabbisRouteImport } from './routes/admin.rabbis'
+import { Route as AdminPressRouteImport } from './routes/admin.press'
 import { Route as AdminMigrateRouteImport } from './routes/admin.migrate'
 import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
+import { Route as AdminGalleryRouteImport } from './routes/admin.gallery'
+import { Route as AdminFaqsRouteImport } from './routes/admin.faqs'
+import { Route as AdminCertificatesRouteImport } from './routes/admin.certificates'
 import { Route as EnTefilinSlugRouteImport } from './routes/en.tefilin.$slug'
 
 const Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route =
@@ -192,6 +200,31 @@ const EnAccessibilityRoute = EnAccessibilityRouteImport.update({
   path: '/accessibility',
   getParentRoute: () => EnRoute,
 } as any)
+const AdminStoriesRoute = AdminStoriesRouteImport.update({
+  id: '/stories',
+  path: '/stories',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminServicesRoute = AdminServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminRabbisRoute = AdminRabbisRouteImport.update({
+  id: '/rabbis',
+  path: '/rabbis',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPressRoute = AdminPressRouteImport.update({
+  id: '/press',
+  path: '/press',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminMigrateRoute = AdminMigrateRouteImport.update({
   id: '/migrate',
   path: '/migrate',
@@ -200,6 +233,21 @@ const AdminMigrateRoute = AdminMigrateRouteImport.update({
 const AdminLeadsRoute = AdminLeadsRouteImport.update({
   id: '/leads',
   path: '/leads',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminGalleryRoute = AdminGalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminFaqsRoute = AdminFaqsRouteImport.update({
+  id: '/faqs',
+  path: '/faqs',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCertificatesRoute = AdminCertificatesRouteImport.update({
+  id: '/certificates',
+  path: '/certificates',
   getParentRoute: () => AdminRoute,
 } as any)
 const EnTefilinSlugRoute = EnTefilinSlugRouteImport.update({
@@ -224,8 +272,16 @@ export interface FileRoutesByFullPath {
   '/stories': typeof StoriesRoute
   '/terms': typeof TermsRoute
   '/מכתבי-תודה': typeof Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route
+  '/admin/certificates': typeof AdminCertificatesRoute
+  '/admin/faqs': typeof AdminFaqsRoute
+  '/admin/gallery': typeof AdminGalleryRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/migrate': typeof AdminMigrateRoute
+  '/admin/press': typeof AdminPressRoute
+  '/admin/rabbis': typeof AdminRabbisRoute
+  '/admin/services': typeof AdminServicesRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/stories': typeof AdminStoriesRoute
   '/en/accessibility': typeof EnAccessibilityRoute
   '/en/articles-in-the-media': typeof EnArticlesInTheMediaRoute
   '/en/privacy': typeof EnPrivacyRoute
@@ -256,8 +312,16 @@ export interface FileRoutesByTo {
   '/stories': typeof StoriesRoute
   '/terms': typeof TermsRoute
   '/מכתבי-תודה': typeof Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route
+  '/admin/certificates': typeof AdminCertificatesRoute
+  '/admin/faqs': typeof AdminFaqsRoute
+  '/admin/gallery': typeof AdminGalleryRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/migrate': typeof AdminMigrateRoute
+  '/admin/press': typeof AdminPressRoute
+  '/admin/rabbis': typeof AdminRabbisRoute
+  '/admin/services': typeof AdminServicesRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/stories': typeof AdminStoriesRoute
   '/en/accessibility': typeof EnAccessibilityRoute
   '/en/articles-in-the-media': typeof EnArticlesInTheMediaRoute
   '/en/privacy': typeof EnPrivacyRoute
@@ -291,8 +355,16 @@ export interface FileRoutesById {
   '/stories': typeof StoriesRoute
   '/terms': typeof TermsRoute
   '/מכתבי-תודה': typeof Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route
+  '/admin/certificates': typeof AdminCertificatesRoute
+  '/admin/faqs': typeof AdminFaqsRoute
+  '/admin/gallery': typeof AdminGalleryRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/migrate': typeof AdminMigrateRoute
+  '/admin/press': typeof AdminPressRoute
+  '/admin/rabbis': typeof AdminRabbisRoute
+  '/admin/services': typeof AdminServicesRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/stories': typeof AdminStoriesRoute
   '/en/accessibility': typeof EnAccessibilityRoute
   '/en/articles-in-the-media': typeof EnArticlesInTheMediaRoute
   '/en/privacy': typeof EnPrivacyRoute
@@ -327,8 +399,16 @@ export interface FileRouteTypes {
     | '/stories'
     | '/terms'
     | '/מכתבי-תודה'
+    | '/admin/certificates'
+    | '/admin/faqs'
+    | '/admin/gallery'
     | '/admin/leads'
     | '/admin/migrate'
+    | '/admin/press'
+    | '/admin/rabbis'
+    | '/admin/services'
+    | '/admin/settings'
+    | '/admin/stories'
     | '/en/accessibility'
     | '/en/articles-in-the-media'
     | '/en/privacy'
@@ -359,8 +439,16 @@ export interface FileRouteTypes {
     | '/stories'
     | '/terms'
     | '/מכתבי-תודה'
+    | '/admin/certificates'
+    | '/admin/faqs'
+    | '/admin/gallery'
     | '/admin/leads'
     | '/admin/migrate'
+    | '/admin/press'
+    | '/admin/rabbis'
+    | '/admin/services'
+    | '/admin/settings'
+    | '/admin/stories'
     | '/en/accessibility'
     | '/en/articles-in-the-media'
     | '/en/privacy'
@@ -393,8 +481,16 @@ export interface FileRouteTypes {
     | '/stories'
     | '/terms'
     | '/מכתבי-תודה'
+    | '/admin/certificates'
+    | '/admin/faqs'
+    | '/admin/gallery'
     | '/admin/leads'
     | '/admin/migrate'
+    | '/admin/press'
+    | '/admin/rabbis'
+    | '/admin/services'
+    | '/admin/settings'
+    | '/admin/stories'
     | '/en/accessibility'
     | '/en/articles-in-the-media'
     | '/en/privacy'
@@ -636,6 +732,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnAccessibilityRouteImport
       parentRoute: typeof EnRoute
     }
+    '/admin/stories': {
+      id: '/admin/stories'
+      path: '/stories'
+      fullPath: '/admin/stories'
+      preLoaderRoute: typeof AdminStoriesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/services': {
+      id: '/admin/services'
+      path: '/services'
+      fullPath: '/admin/services'
+      preLoaderRoute: typeof AdminServicesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/rabbis': {
+      id: '/admin/rabbis'
+      path: '/rabbis'
+      fullPath: '/admin/rabbis'
+      preLoaderRoute: typeof AdminRabbisRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/press': {
+      id: '/admin/press'
+      path: '/press'
+      fullPath: '/admin/press'
+      preLoaderRoute: typeof AdminPressRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/migrate': {
       id: '/admin/migrate'
       path: '/migrate'
@@ -650,6 +781,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLeadsRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/gallery': {
+      id: '/admin/gallery'
+      path: '/gallery'
+      fullPath: '/admin/gallery'
+      preLoaderRoute: typeof AdminGalleryRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/faqs': {
+      id: '/admin/faqs'
+      path: '/faqs'
+      fullPath: '/admin/faqs'
+      preLoaderRoute: typeof AdminFaqsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/certificates': {
+      id: '/admin/certificates'
+      path: '/certificates'
+      fullPath: '/admin/certificates'
+      preLoaderRoute: typeof AdminCertificatesRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/en/tefilin/$slug': {
       id: '/en/tefilin/$slug'
       path: '/tefilin/$slug'
@@ -661,14 +813,30 @@ declare module '@tanstack/react-router' {
 }
 
 interface AdminRouteChildren {
+  AdminCertificatesRoute: typeof AdminCertificatesRoute
+  AdminFaqsRoute: typeof AdminFaqsRoute
+  AdminGalleryRoute: typeof AdminGalleryRoute
   AdminLeadsRoute: typeof AdminLeadsRoute
   AdminMigrateRoute: typeof AdminMigrateRoute
+  AdminPressRoute: typeof AdminPressRoute
+  AdminRabbisRoute: typeof AdminRabbisRoute
+  AdminServicesRoute: typeof AdminServicesRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminStoriesRoute: typeof AdminStoriesRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminCertificatesRoute: AdminCertificatesRoute,
+  AdminFaqsRoute: AdminFaqsRoute,
+  AdminGalleryRoute: AdminGalleryRoute,
   AdminLeadsRoute: AdminLeadsRoute,
   AdminMigrateRoute: AdminMigrateRoute,
+  AdminPressRoute: AdminPressRoute,
+  AdminRabbisRoute: AdminRabbisRoute,
+  AdminServicesRoute: AdminServicesRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
+  AdminStoriesRoute: AdminStoriesRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 
