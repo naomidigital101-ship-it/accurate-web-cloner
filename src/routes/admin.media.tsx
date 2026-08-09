@@ -15,6 +15,9 @@ type Media = {
   alt: string | null;
   folder: string;
   created_at: string;
+  is_public: boolean;
+  title: string | null;
+  description: string | null;
 };
 
 const FOLDERS = ["כללי", "לוגואים ומיתוג", "תמונות לאתר", "מסמכים ואישורים", "מכתבים"];
@@ -95,6 +98,20 @@ function MediaPage() {
     }
   };
 
+  const togglePublic = async (m: Media) => {
+    const accessToken = await getAccessToken();
+    await saveRow({ data: { accessToken, table: "media", id: m.id, values: { is_public: !m.is_public } } });
+    await load();
+  };
+
+  const rename = async (m: Media) => {
+    const title = window.prompt("שם להצגה בעמוד ההורדות הציבורי:", m.title ?? m.file_name ?? "");
+    if (title === null) return;
+    const accessToken = await getAccessToken();
+    await saveRow({ data: { accessToken, table: "media", id: m.id, values: { title } } });
+    await load();
+  };
+
   const remove = async (m: Media) => {
     if (!window.confirm(`למחוק את "${m.file_name ?? m.url}"? הקובץ יימחק לצמיתות.`)) return;
     try {
@@ -113,7 +130,10 @@ function MediaPage() {
     <>
       <header className="adm-head">
         <h1>ספריית מדיה</h1>
-        <p>מקום אחסון לכל החומרים - לוגואים, מסמכים, תעודות ותמונות. כל קובץ מקבל כתובת לשימוש באתר.</p>
+        <p>
+          מקום אחסון לכל החומרים - לוגואים, מסמכים, תעודות ותמונות. קובץ שמסומן כציבורי מופיע
+          גם בעמוד <a href="/brand-kit/" target="_blank" rel="noopener">ערכת המותג</a> להורדה.
+        </p>
       </header>
 
       <section className="adm-panel adm-upload">
@@ -168,12 +188,17 @@ function MediaPage() {
                   <span className="adm-media-file">{(m.file_name ?? "").split(".").pop()?.toUpperCase() || "קובץ"}</span>
                 )}
                 <figcaption>
-                  <b title={m.file_name ?? ""}>{m.file_name ?? "ללא שם"}</b>
+                  <b title={m.file_name ?? ""}>{m.title ?? m.file_name ?? "ללא שם"}</b>
                   <span>{human(m.size_bytes)} · {m.folder}</span>
+                  <label className="bk-toggle">
+                    <input type="checkbox" checked={m.is_public} onChange={() => void togglePublic(m)} />
+                    <span>{m.is_public ? "ציבורי - מופיע בערכת המותג" : "פנימי בלבד"}</span>
+                  </label>
                   <div>
                     <button type="button" className="adm-linkbtn" onClick={() => void navigator.clipboard.writeText(m.url)}>
                       העתקת קישור
                     </button>
+                    <button type="button" className="adm-linkbtn" onClick={() => void rename(m)}>שם להצגה</button>
                     <a href={m.url} target="_blank" rel="noopener">פתיחה</a>
                     <button type="button" className="adm-linkbtn adm-danger" onClick={() => void remove(m)}>מחיקה</button>
                   </div>

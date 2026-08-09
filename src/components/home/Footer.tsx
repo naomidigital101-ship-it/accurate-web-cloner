@@ -120,6 +120,7 @@ export function Footer({ images }: { images?: { url: string; alt: string | null 
             <a href="/accessibility/">הצהרת נגישות</a>
             <a href="/privacy/">מדיניות פרטיות</a>
             <a href="/terms/">תקנון ותנאי שימוש</a>
+            <a href="/brand-kit/">ערכת מותג להורדה</a>
             <CookieSettingsLink />
           </div>
           <div>
