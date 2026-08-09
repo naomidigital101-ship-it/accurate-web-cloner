@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
+import { useSetting, useWhatsAppLink } from "@/lib/settings";
 
 const URL = "https://accurate-web-cloner.lovable.app/accessibility/";
 const TITLE = "הצהרת נגישות | קשר של תפילין";
@@ -21,11 +22,15 @@ export const Route = createFileRoute("/accessibility")({
 });
 
 function AccessibilityPage() {
+  const phone = useSetting("phone");
+  const phoneIntl = useSetting("phone_intl");
+  const orgNumber = useSetting("org_number");
+  const wa = useWhatsAppLink();
   return (
     <PageShell title="הצהרת נגישות">
       <div className="a11y-doc">
         <p>
-          עמותת <b>אור חדש</b> (ע"ר 580703965), המפעילה את מיזם <b>'קשר של תפילין'</b>, רואה
+          עמותת <b>אור חדש</b> (ע"ר {orgNumber}), המפעילה את מיזם <b>'קשר של תפילין'</b>, רואה
           חשיבות רבה במתן שירות שוויוני לכלל הציבור, ופועלת להנגשת האתר כך שיהיה זמין ונוח
           לשימוש גם עבור אנשים עם מוגבלות.
         </p>
@@ -78,12 +83,12 @@ function AccessibilityPage() {
             <b>הגורם האחראי על הנגישות בעמותה:</b> הרב עמיחי איל, יו"ר עמותת אור חדש
           </li>
           <li>
-            <b>טלפון:</b> <a href="tel:0546713966">054-6713966</a>
+            <b>טלפון:</b> <a href={`tel:${phone.replace(/[^\d+]/g, "")}`}>{phone}</a>
           </li>
           <li>
             <b>וואטסאפ:</b>{" "}
-            <a href="https://api.whatsapp.com/send?phone=972546713966" target="_blank" rel="noopener noreferrer">
-              054-6713966
+            <a href={wa} target="_blank" rel="noopener noreferrer">
+              {phone}
             </a>
           </li>
           <li>

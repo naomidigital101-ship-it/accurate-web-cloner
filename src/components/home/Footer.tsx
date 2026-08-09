@@ -1,5 +1,6 @@
 import { InnerPageFx } from "@/components/InnerPageFx";
 import { CookieSettingsLink } from "@/components/CookieConsent";
+import { useSetting, useWhatsAppLink } from "@/lib/settings";
 
 export const gallery = [
 
@@ -27,6 +28,15 @@ function HouseIcon() {
 }
 
 export function Footer() {
+  const phone = useSetting("phone");
+  const address = useSetting("address");
+  const orgName = useSetting("org_name");
+  const orgNumber = useSetting("org_number");
+  const tagline = useSetting("org_tagline");
+  const facebook = useSetting("facebook_url");
+  const pairs = useSetting("pairs_delivered");
+  const rabbisCount = useSetting("rabbi_letters_count");
+  const wa = useWhatsAppLink();
   return (
     <>
       <InnerPageFx />
@@ -59,34 +69,34 @@ export function Footer() {
           <img src="/wp/img/אור-חדש-לוגו-13.svg" alt="אור חדש" />
         </a>
         <h2 className="footer-tagline">
-          לקידום והעצמה של בעלי תשובה ומתקרבים ליהדות
+          {tagline}
           <br />
-          ע"ר: 580703965
+          ע"ר: {orgNumber}
         </h2>
         <div className="footer-contact-row">
-          <a href="tel:0546713966" aria-label="התקשרו אלינו: 054-6713966">
+          <a href={`tel:${phone.replace(/[^\d+]/g, "")}`} aria-label={`התקשרו אלינו: ${phone}`}>
             <PhoneIcon />
-            054-6713966
+            {phone}
           </a>
           <a
-            href="https://waze.com/ul?q=בית%20אל,%20ארץ%20חמדה%2033&z=10&navigate=yes"
+            href={`https://waze.com/ul?q=${encodeURIComponent(address)}&z=10&navigate=yes`}
             target="_blank"
             rel="noopener"
-            aria-label="ניווט בוויז לכתובת: בית אל, ארץ חמדה 33"
+            aria-label={`ניווט בוויז לכתובת: ${address}`}
           >
             <HouseIcon />
-            בית אל, ארץ חמדה 33
+            {address}
           </a>
         </div>
         <p className="footer-about">
-          מיזם של <b>עמותת אור חדש</b> לערבות הדדית וזיכוי הרבים: מחברים בין יהודי שברשותו
+          מיזם של <b>{orgName}</b> לערבות הדדית וזיכוי הרבים: מחברים בין יהודי שברשותו
           תפילין שאינן בשימוש לבין יהודי שרוצה להתחיל להניח. התפילין נבדקות ומוגהות אצל סופרי
           סת"ם, מחודשות ונמסרות - ומי שאינו יכול לשלם מקבל בכל מקרה.
         </p>
 
         <ul className="footer-facts">
-          <li><b>מעל 1,300</b><span>זוגות תפילין חולקו</span></li>
-          <li><b>9</b><span>הסכמות מגדולי הרבנים</span></li>
+          <li><b>מעל {pairs}</b><span>זוגות תפילין חולקו</span></li>
+          <li><b>{rabbisCount}</b><span>הסכמות מגדולי הרבנים</span></li>
           <li><b>כל הארץ</b><span>איסוף, חידוש ומסירה</span></li>
         </ul>
 
@@ -103,7 +113,7 @@ export function Footer() {
             <a href="/request/">בקשת תפילין</a>
             <a href="/give/">מסירת תפילין</a>
             <a href="/donate/">תרומה למיזם</a>
-            <a href="https://api.whatsapp.com/send?phone=972546713966" target="_blank" rel="noopener">שיחה בוואטסאפ</a>
+            <a href={wa} target="_blank" rel="noopener">שיחה בוואטסאפ</a>
           </div>
           <div>
             <h3>מידע</h3>
@@ -122,7 +132,7 @@ export function Footer() {
 
         <div className="footer-social">
           <a
-            href="https://www.facebook.com/keshersheltfilin"
+            href={facebook}
             target="_blank"
             rel="noopener"
             aria-label="קשר של תפילין בפייסבוק"

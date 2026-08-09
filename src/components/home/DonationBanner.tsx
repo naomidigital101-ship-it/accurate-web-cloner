@@ -1,4 +1,7 @@
+import { useSetting } from "@/lib/settings";
+
 export function DonationBanner() {
+  const donate = useSetting("donate_onetime_url");
   return (
     <section dir="rtl" className="partners-e">
       <span className="partners-overlay" aria-hidden="true" />
@@ -10,7 +13,7 @@ export function DonationBanner() {
         </p>
         <p className="partners-note">התרומה מוכרת לצרכי מס</p>
         <div className="partners-btns">
-          <a href="https://bit.ly/tfil" target="_blank" rel="noopener" className="btn-e btn-outline-light">לתרומה</a>
+          <a href={donate} target="_blank" rel="noopener" className="btn-e btn-outline-light">לתרומה</a>
         </div>
       </div>
     </section>

@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
+import { useSetting, useWhatsAppLink } from "@/lib/settings";
 
 const URL = "https://accurate-web-cloner.lovable.app/en/accessibility/";
 const TITLE = "Accessibility Statement | The Tefillin Tie Initiative";
@@ -22,11 +23,15 @@ export const Route = createFileRoute("/en/accessibility")({
 });
 
 function Page() {
+  const phone = useSetting("phone");
+  const phoneIntl = useSetting("phone_intl");
+  const orgNumber = useSetting("org_number");
+  const wa = useWhatsAppLink();
   return (
     <PageShell title="accessibility statement" en>
       <div className="a11y-doc" dir="ltr">
         <p>
-          The <b>Ohr Chadash</b> association (registered NPO 580703965), which runs the{" "}
+          The <b>Ohr Chadash</b> association (registered NPO {orgNumber}), which runs the{" "}
           <b>Tefillin Tie Initiative</b>, is committed to serving the whole public equally and
           works to keep this website usable for people with disabilities.
         </p>
@@ -77,12 +82,12 @@ function Page() {
             <b>Responsible for accessibility:</b> Rabbi Amichai Eyal, Chairman of Ohr Chadash
           </li>
           <li>
-            <b>Phone:</b> <a href="tel:+972546713966">+972-54-6713966</a>
+            <b>Phone:</b> <a href={`tel:${phoneIntl.replace(/[^\d+]/g, "")}`}>{phoneIntl}</a>
           </li>
           <li>
             <b>WhatsApp:</b>{" "}
-            <a href="https://api.whatsapp.com/send?phone=972546713966" target="_blank" rel="noopener noreferrer">
-              +972-54-6713966
+            <a href={wa} target="_blank" rel="noopener noreferrer">
+              {phoneIntl}
             </a>
           </li>
           <li>

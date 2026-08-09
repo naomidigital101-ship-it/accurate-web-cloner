@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
+import { useSetting } from "@/lib/settings";
 
 export const Route = createFileRoute("/donate")({
   head: () => ({
@@ -33,6 +34,8 @@ function CardIcon() {
 }
 
 function DonatePage() {
+  const onetime = useSetting("donate_onetime_url");
+  const recurring = useSetting("donate_recurring_url");
   return (
     <PageShell title="תרומה">
       <p className="donate-intro">
@@ -44,12 +47,12 @@ function DonatePage() {
           <span className="donate-card-icon"><HeartIcon /></span>
           <h2>תרומה חד פעמית</h2>
           <p>מוכר לצרכי מס</p>
-          <a href="https://bit.ly/tfil" target="_blank" rel="noopener" className="btn-donate">לתרומה</a>
+          <a href={onetime} target="_blank" rel="noopener" className="btn-donate">לתרומה</a>
         </div>
         <div className="donate-card donate-card-recurring">
           <span className="donate-card-icon"><CardIcon /></span>
           <h2>תרומה בהוראת קבע</h2>
-          <a href="https://meshulam.co.il/s/08cd0725-9e8a-ece2-1540-638f28f8919f" target="_blank" rel="noopener" className="btn-donate">לתרומה</a>
+          <a href={recurring} target="_blank" rel="noopener" className="btn-donate">לתרומה</a>
         </div>
       </div>
     </PageShell>

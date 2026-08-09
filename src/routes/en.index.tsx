@@ -1,4 +1,5 @@
 import { useConsent } from "@/components/CookieConsent";
+import { useSetting } from "@/lib/settings";
 
 /** נטען רק לאחר הסכמה מפורשת לתוכן מוטמע - אחרת לא נשלחת שום בקשה ל-YouTube */
 function ConsentedYouTube({ src, title, en = false }: { src: string; title: string; en?: boolean }) {
@@ -763,6 +764,7 @@ function EnMiKamcha() {
  * Contributions (LTR)
  * ============================================================ */
 function EnContributions() {
+  const onetime = useSetting("donate_onetime_url");
   return (
     <section dir="ltr" className="partners-e">
       <span className="partners-overlay" aria-hidden="true" />
@@ -777,10 +779,10 @@ function EnContributions() {
         </p>
         <p className="partners-note">— Donations are tax-deductible in Israel, the U.S., and Canada. —</p>
         <div className="partners-btns">
-          <a href="https://bit.ly/tfil" target="_blank" rel="noopener" className="btn-e btn-outline-light">
+          <a href={onetime} target="_blank" rel="noopener" className="btn-e btn-outline-light">
             Donate
           </a>
-          <a href="https://bit.ly/tfil" target="_blank" rel="noopener" className="btn-e btn-mint-solid">
+          <a href={onetime} target="_blank" rel="noopener" className="btn-e btn-mint-solid">
             Donate
           </a>
         </div>

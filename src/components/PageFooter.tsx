@@ -1,4 +1,5 @@
 import { CookieSettingsLink } from "@/components/CookieConsent";
+import { useSetting } from "@/lib/settings";
 
 function PhoneIcon() {
   return (
@@ -17,23 +18,27 @@ function HouseIcon() {
 }
 
 export function PageFooter({ en = false }: { en?: boolean } = {}) {
+  const phone = useSetting("phone");
+  const address = useSetting("address");
+  const orgNumber = useSetting("org_number");
+  const tagline = useSetting("org_tagline");
   return (
     <footer dir="rtl" className="page-footer">
       <a href="/" aria-label="אור חדש">
         <img src="/wp/img/אור-חדש-לוגו-13.svg" alt="אור חדש" className="page-footer-logo" />
       </a>
       <p className="page-footer-tagline">
-        לקידום והעצמה של בעלי תשובה ומתקרבים ליהדות<br />
-        ע"ר: 580703965
+        {tagline}<br />
+        ע"ר: {orgNumber}
       </p>
       <div className="page-footer-contact">
         <span>
           <HouseIcon />
-          בית אל, ארץ חמדה 33
+          {address}
         </span>
-        <a href="tel:0546713966" aria-label="התקשרו אלינו: 054-6713966">
+        <a href={`tel:${phone.replace(/[^\d+]/g, "")}`} aria-label={`התקשרו אלינו: ${phone}`}>
           <PhoneIcon />
-          054-6713966
+          {phone}
         </a>
       </div>
       <nav className="footer-legal" aria-label={en ? "Legal links" : "קישורים משפטיים"}>

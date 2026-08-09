@@ -15,6 +15,8 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { hreflangPair } from "../lib/hreflang";
 import { AccessibilityBar } from "../components/AccessibilityBar";
 import { CookieConsent } from "../components/CookieConsent";
+import { SettingsProvider, type Settings } from "../lib/settings";
+import { getSettings } from "../lib/api/content.functions";
 
 function NotFoundComponent() {
   return (
@@ -167,6 +169,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
     ],
   }),
+  // נטען פעם אחת ב-SSR. כשל בטעינה מחזיר אובייקט ריק, והרכיבים נופלים
+  // חזרה לברירות המחדל - האתר לא נשבר אם ה-DB לא זמין.
+  loader: async (): Promise<Settings> => {
+    try {
+      return (await getSettings()) as Settings;
+    } catch {
+      return {};
+    }
+  },
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
@@ -204,11 +215,14 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const settings = Route.useLoaderData();
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <SettingsProvider value={settings ?? {}}>
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <Outlet />
+      </SettingsProvider>
     </QueryClientProvider>
   );
 }
