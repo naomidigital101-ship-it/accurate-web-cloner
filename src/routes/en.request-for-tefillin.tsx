@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { submitLead } from "@/lib/api/leads.functions";
 import { PageShell } from "@/components/PageShell";
 import { SITE_URL } from "@/lib/site";
+import { HONEYPOT_STYLE } from "@/lib/honeypot";
 
 export const Route = createFileRoute("/en/request-for-tefillin")({
   head: () => ({
@@ -63,7 +64,7 @@ function useMultiStepValues() {
 
 function HoneyPot() {
   return (
-    <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden" }}>
+    <div aria-hidden="true" style={HONEYPOT_STYLE}>
       <label htmlFor="website">website</label>
       <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
     </div>

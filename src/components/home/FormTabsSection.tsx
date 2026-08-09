@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 
 import { submitLead } from "@/lib/api/leads.functions";
+import { HONEYPOT_STYLE } from "@/lib/honeypot";
 
 /**
  * הטפסים רב-שלביים ומסירים שדות מה-DOM בין שלבים, ולכן FormData בשליחה
@@ -20,7 +21,7 @@ function useMultiStepValues() {
 /** שדה מלכודת לבוטים - מוסתר מהעין ומקוראי מסך, אדם לעולם לא ימלא אותו */
 function HoneyPot() {
   return (
-    <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden" }}>
+    <div aria-hidden="true" style={HONEYPOT_STYLE}>
       <label htmlFor="website">אתר</label>
       <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
     </div>
