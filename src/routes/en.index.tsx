@@ -1013,7 +1013,7 @@ export function EnPage({ data }: { data?: Partial<EnPageData> } = {}) {
         <EnFaq items={faqItems} />
         <EnServices items={serviceItems as never} />
       </main>
-      <Footer images={gallery ?? undefined} />
+      <Footer images={gallery ?? undefined} en />
     </div>
   );
 }

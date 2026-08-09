@@ -1,165 +1,23 @@
 import { InnerPageFx } from "@/components/InnerPageFx";
-import { CookieSettingsLink } from "@/components/CookieConsent";
-import { useSetting, useWhatsAppLink } from "@/lib/settings";
+import { FooterGallery, gallery } from "@/components/FooterGallery";
+import { SiteFooter } from "@/components/SiteFooter";
 
-export const gallery = [
+// נשמר לתאימות אחורה - היה מיוצא מכאן לפני שהגלריה הופרדה
+export { gallery };
 
-  "g1.webp", "g2.webp", "g3.jpg", "g4.jpg", "g5.webp", "g6.jpg", "g7.jpg",
-  "g8.jpg", "g9.jpg", "g10.jpg", "g11.png", "g12.jpg", "g13.jpg", "g14.jpg",
-  "g15.webp", "g16.webp", "g17.jpg", "g18.webp", "g19.webp", "g20.jpg",
-  "g21.jpg", "g22.webp", "g23.jpg", "g24.webp", "g25.jpg", "g26.webp",
-  "g27.jpg", "g28.jpg",
-];
-
-function PhoneIcon() {
-  return (
-    <svg viewBox="0 0 512 512" width="16" height="16" fill="#67ffd1" aria-hidden="true">
-      <path d="M493.4 24.6l-104-24c-11.3-2.6-22.9 3.3-27.5 13.9l-48 112c-4.2 9.8-1.4 21.3 6.9 28l60.6 49.6c-36 76.7-98.9 140.5-177.2 177.2l-49.6-60.6c-6.8-8.3-18.2-11.1-28-6.9l-112 48C3.9 366.5-2 378.1.6 389.4l24 104C27.1 504.2 36.7 512 48 512c256.1 0 464-207.5 464-464 0-11.2-7.7-20.9-18.6-23.4z" />
-    </svg>
-  );
-}
-
-function HouseIcon() {
-  return (
-    <svg viewBox="0 0 576 512" width="16" height="16" fill="#67ffd1" aria-hidden="true">
-      <path d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z" />
-    </svg>
-  );
-}
-
-export function Footer({ images }: { images?: { url: string; alt: string | null }[] } = {}) {
-  const phone = useSetting("phone");
-  const address = useSetting("address");
-  const orgName = useSetting("org_name");
-  const orgNumber = useSetting("org_number");
-  const tagline = useSetting("org_tagline");
-  const facebook = useSetting("facebook_url");
-  const pairs = useSetting("pairs_delivered");
-  const rabbisCount = useSetting("rabbi_letters_count");
-  const wa = useWhatsAppLink();
+/**
+ * הפוטר של עמודי הבית: גלריה + הפוטר המלא.
+ * שאר עמודי האתר מרנדרים את SiteFooter ישירות, בלי הגלריה.
+ */
+export function Footer({
+  images,
+  en = false,
+}: { images?: { url: string; alt: string | null }[]; en?: boolean } = {}) {
   return (
     <>
       <InnerPageFx />
-      <section dir="rtl" className="footer-gallery-section" aria-label="גלריית תמונות">
-        <div className="footer-gallery">
-          {(images ?? gallery.map((g) => ({ url: `/wp/uploads/gallery/${g}`, alt: null }))).map((g) => (
-            <img
-              key={g.url}
-              src={g.url}
-              alt={g.alt ?? "רגעים ממיזם קשר של תפילין"}
-              className="footer-gallery-img"
-              loading="lazy"
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                // הלייטבוקס נפתח ב-click בלבד; בלי זה 28 התמונות ממוקדות אך לא נפתחות במקלדת
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  e.currentTarget.click();
-                }
-              }}
-              style={{ cursor: "zoom-in" }}
-            />
-          ))}
-        </div>
-      </section>
-
-      <footer dir="rtl" className="footer-e footer-brand-only">
-        <a href="/" aria-label="אור חדש - דף הבית" className="footer-brand-logo">
-          <img src="/wp/img/אור-חדש-לוגו-13.svg" alt="אור חדש" />
-        </a>
-        <h2 className="footer-tagline">
-          {tagline}
-          <br />
-          ע"ר: {orgNumber}
-        </h2>
-        <div className="footer-contact-row">
-          <a href={`tel:${phone.replace(/[^\d+]/g, "")}`} aria-label={`התקשרו אלינו: ${phone}`}>
-            <PhoneIcon />
-            {phone}
-          </a>
-          <a
-            href={`https://waze.com/ul?q=${encodeURIComponent(address)}&z=10&navigate=yes`}
-            target="_blank"
-            rel="noopener"
-            aria-label={`ניווט בוויז לכתובת: ${address}`}
-          >
-            <HouseIcon />
-            {address}
-          </a>
-        </div>
-        <p className="footer-about">
-          מיזם של <b>{orgName}</b> לערבות הדדית וזיכוי הרבים: מחברים בין יהודי שברשותו
-          תפילין שאינן בשימוש לבין יהודי שרוצה להתחיל להניח. התפילין נבדקות ומוגהות אצל סופרי
-          סת"ם, מחודשות ונמסרות - ומי שאינו יכול לשלם מקבל בכל מקרה.
-        </p>
-
-        <ul className="footer-facts">
-          <li><b>מעל {pairs}</b><span>זוגות תפילין חולקו</span></li>
-          <li><b>{rabbisCount}</b><span>הסכמות מגדולי הרבנים</span></li>
-          <li><b>כל הארץ</b><span>איסוף, חידוש ומסירה</span></li>
-        </ul>
-
-        <nav className="footer-sitemap" aria-label="ניווט בפוטר">
-          <div>
-            <h3>המיזם</h3>
-            <a href="/stories/">סיפורים שמאחורי התפילין</a>
-            <a href="/in-news/">כתבות בתקשורת</a>
-            <a href="/agreements/">הסכמות הרבנים</a>
-            <a href="/מכתבי-תודה/">מכתבי תודה</a>
-          </div>
-          <div>
-            <h3>פעולות</h3>
-            <a href="/request/">בקשת תפילין</a>
-            <a href="/give/">מסירת תפילין</a>
-            <a href="/donate/">תרומה למיזם</a>
-            <a href={wa} target="_blank" rel="noopener">שיחה בוואטסאפ</a>
-          </div>
-          <div>
-            <h3>מידע</h3>
-            <a href="/accessibility/">הצהרת נגישות</a>
-            <a href="/privacy/">מדיניות פרטיות</a>
-            <a href="/terms/">תקנון ותנאי שימוש</a>
-            <a href="/certificates/">אישורי העמותה</a>
-            <a href="/brand-kit/">ערכת מותג להורדה</a>
-            <CookieSettingsLink />
-          </div>
-          <div>
-            <h3>English</h3>
-            <a href="/en/the-tefillin-tie-initiative/" lang="en">The Tefillin Tie Initiative</a>
-            <a href="/en/stories-2/" lang="en">Stories</a>
-            <a href="/en/support-and-donation/" lang="en">Support &amp; donate</a>
-          </div>
-        </nav>
-
-        <div className="footer-social">
-          <a
-            href={facebook}
-            target="_blank"
-            rel="noopener"
-            aria-label="קשר של תפילין בפייסבוק"
-          >
-            <svg viewBox="0 0 320 512" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z" /></svg>
-            <span>פייסבוק</span>
-          </a>
-        </div>
-        <a href="https://kavnekuda.com" target="_blank" rel="noopener" aria-label="אפיון, בניה ופיתוח: KAV" className="footer-credit-link">
-          <img src="/wp/img/קרדיט-45.svg" alt="אפיון, בניה ופיתוח: KAV" />
-        </a>
-        <a
-          href="https://move-geo.ai/"
-          target="_blank"
-          rel="noopener"
-          dir="ltr"
-          className="move-credit"
-          aria-label="Built for AI Search — by MOVE"
-        >
-          <span>Built for AI Search — by </span>
-          <span className="move-credit-chip">
-            <img src="/branding/move-logo.png" alt="MOVE" />
-          </span>
-        </a>
-      </footer>
+      <FooterGallery images={images} />
+      <SiteFooter en={en} />
     </>
   );
 }

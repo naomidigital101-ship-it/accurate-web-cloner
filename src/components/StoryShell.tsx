@@ -1,5 +1,5 @@
 import { Header } from "@/components/home/Header";
-import { PageFooter } from "@/components/PageFooter";
+import { SiteFooter } from "@/components/SiteFooter";
 import { InnerPageFx } from "@/components/InnerPageFx";
 import { Link } from "@tanstack/react-router";
 
@@ -111,7 +111,7 @@ export function StoryShell({
         </nav>
       </main>
 
-      <PageFooter />
+      <SiteFooter en={en} />
       <InnerPageFx />
     </div>
   );

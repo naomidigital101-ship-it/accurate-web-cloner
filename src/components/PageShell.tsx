@@ -1,5 +1,5 @@
 import { Header } from "@/components/home/Header";
-import { PageFooter } from "@/components/PageFooter";
+import { SiteFooter } from "@/components/SiteFooter";
 import { InnerPageFx } from "@/components/InnerPageFx";
 
 export function PageShell({ title, en = false, children }: { title: string; en?: boolean; children: React.ReactNode }) {
@@ -12,7 +12,7 @@ export function PageShell({ title, en = false, children }: { title: string; en?:
         <h1 className={en ? "page-title page-title-ltr" : "page-title"}><span>{title}</span></h1>
         {children}
       </main>
-      <PageFooter en={en} />
+      <SiteFooter en={en} />
       <InnerPageFx />
     </div>
   );
