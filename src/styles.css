@@ -2915,3 +2915,15 @@ html.a11y-hc-light body :is(section, div, article, header, footer, main, aside):
 .bk-meta em { font-style: normal; font-size: 12.5px; font-weight: 700; color: #009fe3; }
 .bk-toggle { display: flex; align-items: center; gap: 7px; margin-top: 6px; font-size: 12px; cursor: pointer; }
 .bk-toggle input { accent-color: #2d2e83; }
+
+/* --- אישורי העמותה --- */
+.cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin-bottom: 8px; }
+.cert-item { background: #fff; border: 2px solid #eceef7; border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; }
+.cert-thumb { display: block; background: #f6f7fb; }
+.cert-thumb img { width: 100%; height: 190px; object-fit: contain; display: block; padding: 10px; }
+.cert-body { padding: 14px 16px 16px; }
+.cert-body h2 { margin: 0 0 4px; font-size: 18px; color: #2d2e83; }
+.cert-body p { margin: 0 0 6px; font-size: 14px; line-height: 1.5em; }
+.cert-issuer { font-weight: 700; opacity: 0.75; }
+.cert-valid { font-size: 13px; color: #1b7f3b; font-weight: 700; }
+.cert-link { display: inline-block; margin-top: 4px; font-size: 14px; font-weight: 700; color: #009fe3; }

@@ -19,7 +19,7 @@ function Page() {
     <ContentManager
       table="certificates"
       title="אישורי העמותה"
-      subtitle="אישור ניהול תקין, סעיף 46 ותעודות נוספות."
+      subtitle="אישור ניהול תקין, סעיף 46 ותעודות נוספות. מה שמסומן כמפורסם מופיע בעמוד /certificates."
       fields={FIELDS}
       columns={[{ key: "title", label: "שם האישור" }, { key: "issuer", label: "גורם מנפיק" }, { key: "valid_until", label: "בתוקף עד" }, { key: "thumb_url", label: "תצוגה" }]}
       

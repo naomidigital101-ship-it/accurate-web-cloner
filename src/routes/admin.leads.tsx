@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useCallback, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 
 import { getAccessToken } from "@/lib/supabase-browser";
 import { listLeads, updateLead } from "@/lib/api/leads.functions";
@@ -117,8 +117,8 @@ function LeadsPage() {
             </thead>
             <tbody>
               {rows.map((r) => (
-                <>
-                  <tr key={r.id} className={r.status === "new" ? "is-new" : undefined}>
+                <Fragment key={r.id}>
+                  <tr className={r.status === "new" ? "is-new" : undefined}>
                     <td className="adm-nowrap">{fmt(r.created_at)}</td>
                     <td>
                       <b>{r.full_name || [r.first_name, r.last_name].filter(Boolean).join(" ") || "ללא שם"}</b>
@@ -142,7 +142,7 @@ function LeadsPage() {
                     </td>
                   </tr>
                   {open === r.id && (
-                    <tr key={r.id + "-d"} className="adm-detail">
+                    <tr className="adm-detail">
                       <td colSpan={6}>
                         <dl>
                           {([
@@ -174,7 +174,7 @@ function LeadsPage() {
                       </td>
                     </tr>
                   )}
-                </>
+                </Fragment>
               ))}
             </tbody>
           </table>

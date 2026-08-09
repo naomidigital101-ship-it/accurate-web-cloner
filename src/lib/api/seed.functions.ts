@@ -170,14 +170,10 @@ async function seedInternal(accessToken: string | undefined, token: string | und
 
 /** משווה את מה שב-DB למה שבקוד, כדי לאתר פערים אחרי ההגירה */
 export const verifySeed = createServerFn({ method: "POST" })
-  .inputValidator(z.object({ accessToken: z.string().optional(), token: z.string().optional() }))
+  .inputValidator(z.object({ accessToken: z.string().optional() }))
   .handler(async ({ data }) => {
     const staff = await requireStaff(data.accessToken);
-    if (!staff) {
-      // אימות בלבד - קריאה, אין כתיבה. מותר גם עם אסימון הבדיקה.
-      const { data: row } = await adminDb().from("site_settings").select("value").eq("key", "__verify_token").maybeSingle();
-      if (!row?.value || row.value !== data.token) throw new Error("unauthorized");
-    }
+    if (!staff) throw new Error("unauthorized");
     const db = adminDb();
 
     const { data: rows } = await db.from("stories").select("lang,slug,title,paragraphs");

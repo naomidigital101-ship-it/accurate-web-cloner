@@ -107,8 +107,12 @@ function MediaPage() {
   const rename = async (m: Media) => {
     const title = window.prompt("שם להצגה בעמוד ההורדות הציבורי:", m.title ?? m.file_name ?? "");
     if (title === null) return;
+    const description = window.prompt("תיאור קצר (אופציונלי):", m.description ?? "");
+    const alt = window.prompt("טקסט חלופי לקורא מסך (חשוב לנגישות):", m.alt ?? "");
     const accessToken = await getAccessToken();
-    await saveRow({ data: { accessToken, table: "media", id: m.id, values: { title } } });
+    await saveRow({
+      data: { accessToken, table: "media", id: m.id, values: { title, description: description ?? m.description, alt: alt ?? m.alt } },
+    });
     await load();
   };
 
@@ -198,7 +202,7 @@ function MediaPage() {
                     <button type="button" className="adm-linkbtn" onClick={() => void navigator.clipboard.writeText(m.url)}>
                       העתקת קישור
                     </button>
-                    <button type="button" className="adm-linkbtn" onClick={() => void rename(m)}>שם להצגה</button>
+                    <button type="button" className="adm-linkbtn" onClick={() => void rename(m)}>עריכת פרטים</button>
                     <a href={m.url} target="_blank" rel="noopener">פתיחה</a>
                     <button type="button" className="adm-linkbtn adm-danger" onClick={() => void remove(m)}>מחיקה</button>
                   </div>

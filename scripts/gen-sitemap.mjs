@@ -30,6 +30,7 @@ const STATIC = [
   ["/en/privacy/", "yearly", "0.3"],
   ["/terms/", "yearly", "0.3"],
   ["/brand-kit/", "monthly", "0.4"],
+  ["/certificates/", "monthly", "0.5"],
   ["/en/terms/", "yearly", "0.3"],
 ];
 
