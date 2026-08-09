@@ -1,6 +1,6 @@
 type FaqItem = { q: string; a: string; subtitle?: string };
 
-const faqs: FaqItem[] = [
+export const faqs: FaqItem[] = [
   {
     q: "מה בדיוק אתם עושים ומה המטרה של הפרויקט ?",
     a: "לפרויקט התפילין של 'אור חדש' מגיעות פניות רבות של יהודים, שהתחילו להתחזק בשמירת תורה ומצוות ואין להם תפילין. הם לא יכולים לקנות תפילין חדשות בעלות של אלפי שקלים, אבל הם מאד רוצים שיהיו להם תפילין משלהם, כדי שיוכלו להניח אותם בכל יום. במקביל, אנחנו מקבלים תפילין משומשות ומחדשים אותם בתהליך הבא: א. בדיקת הפרשיות, הבתים והרצועות. ב. הגהת ותיקון הפרשיות. ג. שיפוץ וחידוש הבתים. ד. הכנסת הפרשיות וצביעה. ה. החלפת הרצועות.\nכל התהליך הזה, מתבצע על ידי סופרי סת\"ם ובעלי מלאכה, יראי שמיים, מקצועיים, בעלי ניסיון של שנים רבות ומומחים בתחום.\nהתפילין המחודשות נמסרות ליהודים שרוצים להניח תפילין ואין להם תפילין משלהם, מכל רחבי הארץ ומכל הגילאים.\n**המטרה שלנו היא כפולה: מצד אחד לזכות עוד יהודי לקיים מצוות הנחת תפילין, ומצד שני 'לגאול' את התפילין שמונחות בארון ללא שימוש.**",
@@ -51,13 +51,14 @@ function renderLine(line: string, key: number) {
   );
 }
 
-export function FaqSection() {
+export function FaqSection({ items }: { items?: FaqItem[] } = {}) {
+  const list = items && items.length > 0 ? items : faqs;
   return (
     <section dir="rtl" className="faq-e">
       <h2 className="faq-title-sm">יש לכם</h2>
       <h2 className="faq-title-lg">שאלה?</h2>
       <div className="faq-list">
-        {faqs.map((f) => (
+        {list.map((f) => (
           <details key={f.q} className="faq-item">
             <summary className="faq-q">{f.q}</summary>
             <div className="faq-a">

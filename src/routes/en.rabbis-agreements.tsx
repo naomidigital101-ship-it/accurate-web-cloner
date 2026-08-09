@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
+import { readRabbis } from "@/lib/content";
 
 const cdn = "/wp/uploads";
 
@@ -30,14 +31,19 @@ export const Route = createFileRoute("/en/rabbis-agreements")({
     ],
     links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/en/rabbis-agreements/" }],
   }),
+  loader: async () => ({ rabbis: await readRabbis("en") }),
   component: Page,
 });
 
 function Page() {
+  const { rabbis: fromDb } = Route.useLoaderData();
+  const list = fromDb
+    ? fromDb.map((r) => ({ name: r.name, role: r.role ?? "", letter: r.letter_url ?? "", portrait: r.portrait_url ?? "" }))
+    : rabbis;
   return (
     <PageShell title="RABBIS AGREEMENTS" en>
       <div className="doc-grid">
-        {rabbis.map((r) => (
+        {list.map((r) => (
           <div key={r.name} className="doc-card">
             <a href={r.letter} target="_blank" rel="noopener" className="doc-card-letter">
               <img src={r.letter} alt={`Letter of approval - ${r.name}`} loading="lazy" />

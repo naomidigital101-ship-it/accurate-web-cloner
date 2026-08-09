@@ -19,6 +19,7 @@ import { FaqSection } from "@/components/home/FaqSection";
 import { FounderSection } from "@/components/home/FounderSection";
 import { ServicesSection } from "@/components/home/ServicesSection";
 import { MobileDonateFab } from "@/components/home/MobileDonateFab";
+import { readFaqs, readGallery } from "@/lib/content";
 
 const HOME_TITLE = "קשר של תפילין - תרומה והשאלת תפילין לכל יהודי | אור חדש";
 const HOME_DESC = "מיזם קשר של תפילין של עמותת אור חדש מחבר בין תורמי תפילין שאינן בשימוש ליהודים שרוצים להתחיל להניח. מעל 1,300 זוגות חולקו - בקשו או תרמו תפילין עוד היום.";
@@ -57,10 +58,13 @@ export const Route = createFileRoute("/")({
       },
     ],
   }),
+  loader: async () => ({ faqs: await readFaqs("he"), gallery: await readGallery() }),
   component: Index,
 });
 
 function Index() {
+  const { faqs: dbFaqs, gallery } = Route.useLoaderData();
+  const faqItems = dbFaqs?.map((f) => ({ q: f.question, a: f.answer }));
   return (
     <div dir="rtl" lang="he" className="min-h-screen bg-background">
       <Header />
@@ -77,10 +81,10 @@ function Index() {
         <MiKamchaSection />
         <DonationBanner />
         <FounderSection />
-        <FaqSection />
+        <FaqSection items={faqItems} />
         <ServicesSection />
       </main>
-      <Footer />
+      <Footer images={gallery ?? undefined} />
       <MobileDonateFab />
     </div>
   );

@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
+import { readPress } from "@/lib/content";
 
 const cdn = "/wp/uploads";
 
@@ -29,14 +30,19 @@ export const Route = createFileRoute("/in-news")({
     links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/in-news/" }],
   }),
 
+  loader: async () => ({ press: await readPress("he") }),
   component: InNewsPage,
 });
 
 function InNewsPage() {
+  const { press: fromDb } = Route.useLoaderData();
+  const list = fromDb
+    ? fromDb.map((p) => ({ title: p.title ?? undefined, source: p.source, date: p.published_label ?? "", href: p.href ?? "#", img: p.logo_url ?? "" }))
+    : newsItems;
   return (
     <PageShell title="כתבות בתקשורת">
       <div className="news-list">
-        {newsItems.map((p, i) => (
+        {list.map((p, i) => (
           <a key={i} href={p.href} target="_blank" rel="noopener" className="press-item">
             <span className="press-item-logo" style={{ backgroundImage: `url('${p.img}')` }} />
             <span className="press-item-body">

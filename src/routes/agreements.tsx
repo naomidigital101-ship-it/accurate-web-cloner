@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
+import { readRabbis } from "@/lib/content";
 
 const cdn = "/wp/uploads";
 
@@ -28,15 +29,21 @@ export const Route = createFileRoute("/agreements")({
     ],
     links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/agreements/" }],
   }),
+  // התוכן מגיע מה-DB; אם אין - נופלים למערך שבקוד, כדי שהעמוד לא יתרוקן
+  loader: async () => ({ rabbis: await readRabbis("he") }),
   component: AgreementsPage,
 });
 
 
 function AgreementsPage() {
+  const { rabbis: fromDb } = Route.useLoaderData();
+  const list = fromDb
+    ? fromDb.map((r) => ({ name: r.name, role: r.role ?? "", letter: r.letter_url ?? "", portrait: r.portrait_url ?? "" }))
+    : rabbis;
   return (
     <PageShell title="הסכמות הרבנים">
       <div className="doc-grid">
-        {rabbis.map((r) => (
+        {list.map((r) => (
           <div key={r.name} className="doc-card">
             <a href={r.letter} target="_blank" rel="noopener" className="doc-card-letter">
               <img src={r.letter} alt={`מכתב הסכמה - ${r.name}`} loading="lazy" />

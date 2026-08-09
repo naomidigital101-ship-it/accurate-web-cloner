@@ -27,7 +27,7 @@ function HouseIcon() {
   );
 }
 
-export function Footer() {
+export function Footer({ images }: { images?: { url: string; alt: string | null }[] } = {}) {
   const phone = useSetting("phone");
   const address = useSetting("address");
   const orgName = useSetting("org_name");
@@ -42,11 +42,11 @@ export function Footer() {
       <InnerPageFx />
       <section dir="rtl" className="footer-gallery-section" aria-label="גלריית תמונות">
         <div className="footer-gallery">
-          {gallery.map((g) => (
+          {(images ?? gallery.map((g) => ({ url: `/wp/uploads/gallery/${g}`, alt: null }))).map((g) => (
             <img
-              key={g}
-              src={`/wp/uploads/gallery/${g}`}
-              alt="רגעים ממיזם קשר של תפילין"
+              key={g.url}
+              src={g.url}
+              alt={g.alt ?? "רגעים ממיזם קשר של תפילין"}
               className="footer-gallery-img"
               loading="lazy"
               role="button"

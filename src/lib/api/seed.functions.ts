@@ -8,6 +8,9 @@ import { rabbis as heRabbis } from "../../routes/agreements";
 import { rabbis as enRabbis } from "../../routes/en.rabbis-agreements";
 import { newsItems as hePress } from "../../routes/in-news";
 import { press as enPress } from "../../routes/en.articles-in-the-media";
+import { faqs as visibleFaqs } from "../../components/home/FaqSection";
+import { gallery as galleryFiles } from "../../components/home/Footer";
+import { services as heServices } from "../../components/home/ServicesSection";
 
 /**
  * זריעה חד-פעמית של התוכן שכתוב היום בקוד אל תוך ה-DB.
@@ -129,6 +132,51 @@ async function seedInternal(accessToken: string | undefined, token: string | und
         if (error) throw new Error(`press: ${error.message}`);
       }
       report.press_items = pressRows.length;
+    }
+
+    // --- שאלות נפוצות: הרשימה הנראית באתר היא מקור האמת, לא הקצרה של ה-JSON-LD ---
+    {
+      const rows = visibleFaqs.map((f, i) => ({
+        lang: "he",
+        sort_order: (i + 1) * 10,
+        question: f.q,
+        answer: [f.subtitle, f.a].filter(Boolean).join("\n\n"),
+        status: "published",
+      }));
+      await db.from("faqs").delete().eq("lang", "he");
+      const { error } = await db.from("faqs").insert(rows);
+      if (error) throw new Error(`faqs: ${error.message}`);
+      report.faqs = rows.length;
+    }
+
+    // --- שירותים נוספים ---
+    {
+      const { count } = await db.from("services").select("id", { count: "exact", head: true });
+      if (!count) {
+        const rows = heServices.map((s2, i) => ({
+          lang: "he", sort_order: (i + 1) * 10, title: s2.title, more_label: s2.more,
+          back_title: (s2 as { backTitle?: string }).backTitle ?? null,
+          back_text: s2.back || null, img: s2.img,
+          href: (s2 as { href?: string; waText?: string }).href ?? null,
+          card_height: s2.height, status: "published",
+        }));
+        await db.from("services").insert(rows);
+      }
+    }
+
+    // --- גלריה: משלימה רק אם ריקה ---
+    {
+      const { count } = await db.from("gallery_images").select("id", { count: "exact", head: true });
+      if (!count) {
+        await db.from("gallery_images").insert(
+          galleryFiles.map((g, i) => ({
+            sort_order: (i + 1) * 10,
+            url: `/wp/uploads/gallery/${g}`,
+            alt: "רגעים ממיזם קשר של תפילין",
+            status: "published",
+          })),
+        );
+      }
     }
 
     // אסימון חד-פעמי - נשרף מיד אחרי שימוש מוצלח
