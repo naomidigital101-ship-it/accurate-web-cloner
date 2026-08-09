@@ -1,7 +1,7 @@
 /**
- * מייצר את public/sitemap.xml מתוך קבצי הנתונים של הסיפורים.
+ * מייצר את public/sitemap.xml ואת public/robots.txt מתוך קבצי הנתונים של הסיפורים.
  * הרצה:  node scripts/gen-sitemap.mjs
- * להריץ אחרי כל הוספה/הסרה של סיפור, ואחרי מעבר לדומיין (עדכון ORIGIN).
+ * להריץ אחרי כל הוספה/הסרה של סיפור, ואחרי מעבר לדומיין (עדכון SITE_URL).
  */
 import { readFileSync, writeFileSync } from "node:fs";
 
@@ -64,3 +64,11 @@ const xml =
 
 writeFileSync("public/sitemap.xml", xml);
 console.log(`sitemap.xml: ${rows.length} URLs (${STATIC.length} static, ${he.length} HE stories, ${en.length} EN stories)`);
+
+// robots.txt נגזר מאותו ORIGIN. הנחיית Sitemap מחייבת כתובת מוחלטת לפי התקן,
+// ובלעדי הייצור הזה הדומיין מופיע קשיח בשני מקומות ומעבר דומיין שוכח אחד מהם.
+writeFileSync(
+  "public/robots.txt",
+  `User-agent: *\nAllow: /\nDisallow: /admin\n\nSitemap: ${ORIGIN}/sitemap.xml\n`,
+);
+console.log(`robots.txt: sitemap -> ${ORIGIN}/sitemap.xml`);
