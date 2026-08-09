@@ -40,6 +40,16 @@ import { Header } from "@/components/home/Header";
 import { Footer } from "@/components/home/Footer";
 import { SITE_URL } from "@/lib/site";
 
+/** לואודר משותף לשני הראוטים של עמוד הבית האנגלי */
+export async function enHomeLoader() {
+  return {
+    faqs: await readFaqs("en"),
+    services: await readServices("en"),
+    stories: await readStories("en"),
+    gallery: await readGallery(),
+  };
+}
+
 export const Route = createFileRoute("/en/")({
   head: () => ({
     meta: [
@@ -60,14 +70,13 @@ export const Route = createFileRoute("/en/")({
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/en/the-tefillin-tie-initiative/` }],
   }),
-  loader: async () => ({
-    faqs: await readFaqs("en"),
-    services: await readServices("en"),
-    stories: await readStories("en"),
-    gallery: await readGallery(),
-  }),
-  component: EnPage,
+  loader: enHomeLoader,
+  component: EnIndexPage,
 });
+
+function EnIndexPage() {
+  return <EnPage data={Route.useLoaderData()} />;
+}
 
 /* ============================================================
  * HERO (LTR)
@@ -963,8 +972,20 @@ function EnServices({ items }: { items?: typeof enServices } = {}) {
 /* ============================================================
  * PAGE
  * ============================================================ */
-export function EnPage() {
-  const { faqs, services, stories: enDbStories, gallery } = Route.useLoaderData();
+export type EnPageData = {
+  faqs: { question: string; answer: string }[] | null;
+  services: { title: string; more_label: string | null; back_title: string | null; back_text: string | null; img: string | null; href: string | null; card_height: number | null }[] | null;
+  stories: { slug: string; title: string; img: string | null }[] | null;
+  gallery: { url: string; alt: string | null }[] | null;
+};
+
+/**
+ * מרונדר גם ב-/en וגם ב-/en/the-tefillin-tie-initiative.
+ * לכן הוא מקבל את הנתונים כ-props ולא קורא useLoaderData - הוק כזה היה
+ * נקשר לראוט אחד בלבד ומרוקן את העמוד השני.
+ */
+export function EnPage({ data }: { data?: Partial<EnPageData> } = {}) {
+  const { faqs, services, stories: enDbStories, gallery } = (data ?? {}) as Partial<EnPageData>;
   const faqItems = faqs?.map((f) => ({ q: f.question, a: f.answer }));
   const serviceItems = services?.map((x) => ({
     title: x.title, more: x.more_label ?? "", img: x.img ?? "",

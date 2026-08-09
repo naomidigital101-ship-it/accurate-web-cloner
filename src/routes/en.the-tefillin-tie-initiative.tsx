@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { EnPage } from "./en.index";
+import { EnPage, enHomeLoader } from "./en.index";
 import { SITE_URL } from "@/lib/site";
 
 const URL = `${SITE_URL}/en/the-tefillin-tie-initiative/`;
@@ -24,5 +24,10 @@ export const Route = createFileRoute("/en/the-tefillin-tie-initiative")({
     ],
     links: [{ rel: "canonical", href: URL }],
   }),
-  component: EnPage,
+  loader: enHomeLoader,
+  component: Page,
 });
+
+function Page() {
+  return <EnPage data={Route.useLoaderData()} />;
+}
