@@ -1567,8 +1567,11 @@
 @media (max-width: 767px) { .svc-shape svg { width: calc(180% + 1.3px); } }
 .svc-shape path { fill: #ebebf0; }
 
-.footer-e { background-color: #ebebf0; }
-.footer-gallery-section { background-color: #ebebf0; padding: 10px; }
+/* z-index חובה: .page-bg-strip היא fixed עם z-index 0, ובלי הערימה הזו היא
+   מרחפת מעל הפוטר וחותכת את העמודה הראשונה בניווט. .page-content ו-.page-footer
+   נשאו את אותו זוג מאז ומעולם; הפוטר הרזה הקודם לא נחתך בזכותו. */
+.footer-e { background-color: #ebebf0; position: relative; z-index: 1; }
+.footer-gallery-section { background-color: #ebebf0; padding: 10px; position: relative; z-index: 1; }
 .footer-gallery { column-count: 5; column-gap: 10px; }
 @media (max-width: 1024px) { .footer-gallery { column-count: 3; } }
 @media (max-width: 767px) { .footer-gallery { column-count: 2; } }
