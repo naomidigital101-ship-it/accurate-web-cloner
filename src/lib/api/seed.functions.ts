@@ -34,8 +34,20 @@ async function authorizeSeed(accessToken: string | undefined, oneTimeToken: stri
 
 export const seedContent = createServerFn({ method: "POST" })
   .inputValidator(z.object({ accessToken: z.string().optional(), token: z.string().optional() }))
-  .handler(async ({ data }) => {
-    const via = await authorizeSeed(data.accessToken, data.token);
+  .handler(async ({ data }) => seedInternal(data.accessToken, data.token));
+
+/** לשימוש מ-loader של נתיב, שם אין מעטפת של server function */
+export async function runSeed(token: string | undefined) {
+  try {
+    return { ok: true as const, ...(await seedInternal(undefined, token)) };
+  } catch (e) {
+    return { ok: false as const, error: e instanceof Error ? e.message : String(e) };
+  }
+}
+
+async function seedInternal(accessToken: string | undefined, token: string | undefined) {
+  {
+    const via = await authorizeSeed(accessToken, token);
     const db = adminDb();
     const report: Record<string, number> = {};
 
@@ -128,7 +140,8 @@ export const seedContent = createServerFn({ method: "POST" })
       report[`${t}_in_db`] = count ?? 0;
     }
     return report;
-  });
+  }
+}
 
 /** משווה את מה שב-DB למה שבקוד, כדי לאתר פערים אחרי ההגירה */
 export const verifySeed = createServerFn({ method: "POST" })
