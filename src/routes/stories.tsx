@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
 import { storyIndex } from "@/data/stories-index";
+import { readStories } from "@/lib/content";
 
 export const Route = createFileRoute("/stories")({
   head: () => ({
@@ -13,11 +14,17 @@ export const Route = createFileRoute("/stories")({
     ],
     links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/stories/" }],
   }),
+  // הרשימה מגיעה מה-DB; בלי זה נשארים על המערך שבקוד
+  loader: async () => ({ stories: await readStories("he") }),
   component: StoriesPage,
 });
 
 
 function StoriesPage() {
+  const { stories: fromDb } = Route.useLoaderData();
+  const list = fromDb
+    ? fromDb.map((s) => ({ title: s.title, slug: s.slug, img: s.img ?? "" }))
+    : storyIndex;
   return (
     <PageShell title="סיפורים">
       <a href="/en/the-tefillin-tie-initiative/" className="eng-link" aria-label="לסיפורים באנגלית">
@@ -28,7 +35,7 @@ function StoriesPage() {
         For the stories <b>In English</b>
       </a>
       <div className="stories-page-grid">
-        {storyIndex.map((s) => (
+        {list.map((s) => (
           <a key={s.slug} href={`/tefilin/${s.slug}`} className="st-card" style={{ backgroundImage: `url('${s.img}')` }}>
             <span className="st-card-panel">
               <h3 className="st-card-title">{s.title}</h3>

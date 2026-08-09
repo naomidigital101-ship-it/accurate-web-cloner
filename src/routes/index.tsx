@@ -19,7 +19,7 @@ import { FaqSection } from "@/components/home/FaqSection";
 import { FounderSection } from "@/components/home/FounderSection";
 import { ServicesSection } from "@/components/home/ServicesSection";
 import { MobileDonateFab } from "@/components/home/MobileDonateFab";
-import { readFaqs, readGallery } from "@/lib/content";
+import { readFaqs, readGallery, readStories } from "@/lib/content";
 
 const HOME_TITLE = "קשר של תפילין - תרומה והשאלת תפילין לכל יהודי | אור חדש";
 const HOME_DESC = "מיזם קשר של תפילין של עמותת אור חדש מחבר בין תורמי תפילין שאינן בשימוש ליהודים שרוצים להתחיל להניח. מעל 1,300 זוגות חולקו - בקשו או תרמו תפילין עוד היום.";
@@ -58,12 +58,15 @@ export const Route = createFileRoute("/")({
       },
     ],
   }),
-  loader: async () => ({ faqs: await readFaqs("he"), gallery: await readGallery() }),
+  loader: async () => ({ faqs: await readFaqs("he"), gallery: await readGallery(), stories: await readStories("he") }),
   component: Index,
 });
 
 function Index() {
-  const { faqs: dbFaqs, gallery } = Route.useLoaderData();
+  const { faqs: dbFaqs, gallery, stories: dbStories } = Route.useLoaderData();
+  const storyCards = dbStories
+    ?.slice(0, 5)
+    .map((s) => ({ title: s.title, href: `/tefilin/${encodeURIComponent(s.slug)}/`, img: s.img ?? "" }));
   const faqItems = dbFaqs?.map((f) => ({ q: f.question, a: f.answer }));
   return (
     <div dir="rtl" lang="he" className="min-h-screen bg-background">
@@ -72,7 +75,7 @@ function Index() {
         <HeroSection />
         <FormTabsSection />
         <InterviewSection />
-        <StoriesSection />
+        <StoriesSection items={storyCards} />
         <PressStoriesSection />
         <PressSection />
         <AboutTefilinSection />

@@ -78,7 +78,8 @@ const pressItems: PressItem[] = [
   },
 ];
 
-export function StoriesSection() {
+export function StoriesSection({ items }: { items?: { title: string; href: string; img: string }[] } = {}) {
+  const cards = items && items.length > 0 ? items : stories;
   return (
     <section dir="rtl" className="st-e">
       <div className="st-wrap">
@@ -94,7 +95,7 @@ export function StoriesSection() {
             </div>
           </div>
           <div className="st-grid">
-            {stories.map((s, i) => (
+            {cards.map((s, i) => (
               <a
                 key={i}
                 href={s.href}

@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
 import { StoryShell } from "@/components/StoryShell";
 import { stories } from "@/data/stories";
+import { readStories } from "@/lib/content";
 
 
 export const Route = createFileRoute("/tefilin/$slug")({
@@ -56,6 +57,7 @@ export const Route = createFileRoute("/tefilin/$slug")({
       ],
     };
   },
+  loader: async () => ({ rows: await readStories("he") }),
   component: StoryPage,
 });
 
@@ -70,8 +72,17 @@ function norm(s: string) {
 
 function StoryPage() {
   const { slug } = Route.useParams();
-  const idx = stories.findIndex((s) => norm(s.slug) === norm(slug));
-  const story = stories[idx];
+  const { rows } = Route.useLoaderData();
+  // ה-DB הוא המקור; אם אינו זמין נופלים למערך שבקוד ושום סיפור לא נעלם
+  const list = rows && rows.length > 0
+    ? rows.map((r) => ({
+        slug: r.slug, title: r.title, subtitle: r.subtitle ?? "", author: r.author ?? "",
+        city: r.city ?? "", img: r.img ?? "", extraImg: r.extra_img ?? undefined,
+        paragraphs: r.paragraphs ?? [],
+      }))
+    : stories;
+  const idx = list.findIndex((s) => norm(s.slug) === norm(slug));
+  const story = list[idx];
   if (!story) {
     return (
       <PageShell title="סיפורים">
@@ -79,8 +90,8 @@ function StoryPage() {
       </PageShell>
     );
   }
-  const prev = stories[idx - 1];
-  const next = stories[idx + 1];
+  const prev = list[idx - 1];
+  const next = list[idx + 1];
   return (
     <StoryShell
       title={story.title}
