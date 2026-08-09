@@ -17,40 +17,20 @@ import { services as heServices } from "../../components/home/ServicesSection";
  * רצה בשרת ולכן התוכן לא עובר דרך שום מקום אחר.
  * אידמפוטנטית: upsert לפי מפתח טבעי, אפשר להריץ שוב בלי לשכפל.
  */
-/**
- * מאשרת או מנהל מחובר, או אסימון חד-פעמי שנוצר ידנית ב-DB.
- * האסימון נמחק מיד לאחר שימוש מוצלח, כדי שלא יישאר נתיב עוקף פתוח.
- */
-async function authorizeSeed(accessToken: string | undefined, oneTimeToken: string | undefined) {
+/** רק מנהל מחובר. מסלול האסימון החד-פעמי הוסר לאחר סיום ההגירה. */
+async function authorizeSeed(accessToken: string | undefined, _unused?: string) {
   const staff = await requireStaff(accessToken);
-  if (staff?.isAdmin) return "staff" as const;
-  if (!oneTimeToken) throw new Error("unauthorized");
-  const db = adminDb();
-  const { data: row } = await db
-    .from("site_settings")
-    .select("value")
-    .eq("key", "__seed_token")
-    .maybeSingle();
-  if (!row?.value || row.value !== oneTimeToken) throw new Error("unauthorized");
-  return "token" as const;
+  if (!staff?.isAdmin) throw new Error("unauthorized");
+  return "staff" as const;
 }
 
 export const seedContent = createServerFn({ method: "POST" })
   .inputValidator(z.object({ accessToken: z.string().optional(), token: z.string().optional() }))
   .handler(async ({ data }) => seedInternal(data.accessToken, data.token));
 
-/** לשימוש מ-loader של נתיב, שם אין מעטפת של server function */
-export async function runSeed(token: string | undefined) {
-  try {
-    return { ok: true as const, ...(await seedInternal(undefined, token)) };
-  } catch (e) {
-    return { ok: false as const, error: e instanceof Error ? e.message : String(e) };
-  }
-}
-
 async function seedInternal(accessToken: string | undefined, token: string | undefined) {
   {
-    const via = await authorizeSeed(accessToken, token);
+    await authorizeSeed(accessToken, token);
     const db = adminDb();
     const report: Record<string, number> = {};
 
@@ -178,9 +158,6 @@ async function seedInternal(accessToken: string | undefined, token: string | und
         );
       }
     }
-
-    // אסימון חד-פעמי - נשרף מיד אחרי שימוש מוצלח
-    if (via === "token") await db.from("site_settings").delete().eq("key", "__seed_token");
 
     // ספירה בפועל אחרי הזריעה, לא מה שניסינו לכתוב
     for (const t of ["stories", "rabbi_letters", "press_items", "gallery_images", "services", "faqs"] as const) {

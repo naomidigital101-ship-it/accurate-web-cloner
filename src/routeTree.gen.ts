@@ -41,7 +41,6 @@ import { Route as EnAccessibilityRouteImport } from './routes/en.accessibility'
 import { Route as AdminStoriesRouteImport } from './routes/admin.stories'
 import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
 import { Route as AdminServicesRouteImport } from './routes/admin.services'
-import { Route as AdminRunSeedRouteImport } from './routes/admin.run-seed'
 import { Route as AdminRabbisRouteImport } from './routes/admin.rabbis'
 import { Route as AdminPressRouteImport } from './routes/admin.press'
 import { Route as AdminMigrateRouteImport } from './routes/admin.migrate'
@@ -217,11 +216,6 @@ const AdminServicesRoute = AdminServicesRouteImport.update({
   path: '/services',
   getParentRoute: () => AdminRoute,
 } as any)
-const AdminRunSeedRoute = AdminRunSeedRouteImport.update({
-  id: '/run-seed',
-  path: '/run-seed',
-  getParentRoute: () => AdminRoute,
-} as any)
 const AdminRabbisRoute = AdminRabbisRouteImport.update({
   id: '/rabbis',
   path: '/rabbis',
@@ -292,7 +286,6 @@ export interface FileRoutesByFullPath {
   '/admin/migrate': typeof AdminMigrateRoute
   '/admin/press': typeof AdminPressRoute
   '/admin/rabbis': typeof AdminRabbisRoute
-  '/admin/run-seed': typeof AdminRunSeedRoute
   '/admin/services': typeof AdminServicesRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/stories': typeof AdminStoriesRoute
@@ -334,7 +327,6 @@ export interface FileRoutesByTo {
   '/admin/migrate': typeof AdminMigrateRoute
   '/admin/press': typeof AdminPressRoute
   '/admin/rabbis': typeof AdminRabbisRoute
-  '/admin/run-seed': typeof AdminRunSeedRoute
   '/admin/services': typeof AdminServicesRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/stories': typeof AdminStoriesRoute
@@ -379,7 +371,6 @@ export interface FileRoutesById {
   '/admin/migrate': typeof AdminMigrateRoute
   '/admin/press': typeof AdminPressRoute
   '/admin/rabbis': typeof AdminRabbisRoute
-  '/admin/run-seed': typeof AdminRunSeedRoute
   '/admin/services': typeof AdminServicesRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/stories': typeof AdminStoriesRoute
@@ -425,7 +416,6 @@ export interface FileRouteTypes {
     | '/admin/migrate'
     | '/admin/press'
     | '/admin/rabbis'
-    | '/admin/run-seed'
     | '/admin/services'
     | '/admin/settings'
     | '/admin/stories'
@@ -467,7 +457,6 @@ export interface FileRouteTypes {
     | '/admin/migrate'
     | '/admin/press'
     | '/admin/rabbis'
-    | '/admin/run-seed'
     | '/admin/services'
     | '/admin/settings'
     | '/admin/stories'
@@ -511,7 +500,6 @@ export interface FileRouteTypes {
     | '/admin/migrate'
     | '/admin/press'
     | '/admin/rabbis'
-    | '/admin/run-seed'
     | '/admin/services'
     | '/admin/settings'
     | '/admin/stories'
@@ -777,13 +765,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminServicesRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/admin/run-seed': {
-      id: '/admin/run-seed'
-      path: '/run-seed'
-      fullPath: '/admin/run-seed'
-      preLoaderRoute: typeof AdminRunSeedRouteImport
-      parentRoute: typeof AdminRoute
-    }
     '/admin/rabbis': {
       id: '/admin/rabbis'
       path: '/rabbis'
@@ -859,7 +840,6 @@ interface AdminRouteChildren {
   AdminMigrateRoute: typeof AdminMigrateRoute
   AdminPressRoute: typeof AdminPressRoute
   AdminRabbisRoute: typeof AdminRabbisRoute
-  AdminRunSeedRoute: typeof AdminRunSeedRoute
   AdminServicesRoute: typeof AdminServicesRoute
   AdminSettingsRoute: typeof AdminSettingsRoute
   AdminStoriesRoute: typeof AdminStoriesRoute
@@ -875,7 +855,6 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminMigrateRoute: AdminMigrateRoute,
   AdminPressRoute: AdminPressRoute,
   AdminRabbisRoute: AdminRabbisRoute,
-  AdminRunSeedRoute: AdminRunSeedRoute,
   AdminServicesRoute: AdminServicesRoute,
   AdminSettingsRoute: AdminSettingsRoute,
   AdminStoriesRoute: AdminStoriesRoute,
