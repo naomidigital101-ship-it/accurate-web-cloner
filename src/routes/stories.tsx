@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
 import { storyIndex } from "@/data/stories-index";
 import { readStories } from "@/lib/content";
+import { SITE_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/stories")({
   head: () => ({
@@ -10,9 +11,9 @@ export const Route = createFileRoute("/stories")({
       { name: "description", content: "סיפורים אמיתיים ומרגשים של חיילים, נערי בר מצווה ומתחזקים שקיבלו תפילין מהמיזם. קראו איך זוג תפילין אחד משנה חיים שלמים." },
       { property: "og:title", content: "הסיפורים שמאחורי התפילין - סיפורים אמיתיים | קשר של תפילין" },
       { property: "og:description", content: "סיפורים אמיתיים ומרגשים של חיילים, נערי בר מצווה ומתחזקים שקיבלו תפילין מהמיזם. קראו איך זוג תפילין אחד משנה חיים שלמים." },
-      { property: "og:url", content: "https://accurate-web-cloner.lovable.app/stories/" },
+      { property: "og:url", content: `${SITE_URL}/stories/` },
     ],
-    links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/stories/" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/stories/` }],
   }),
   // הרשימה מגיעה מה-DB; בלי זה נשארים על המערך שבקוד
   loader: async () => ({ stories: await readStories("he") }),

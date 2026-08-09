@@ -2,8 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { PageShell } from "@/components/PageShell";
 import { publicDb } from "@/lib/supabase.server";
+import { SITE_URL } from "@/lib/site";
 
-const URL = "https://accurate-web-cloner.lovable.app/brand-kit/";
+const URL = `${SITE_URL}/brand-kit/`;
 const TITLE = "ערכת מותג וחומרים להורדה | קשר של תפילין";
 const DESC =
   "לוגואים, תמונות ומסמכים רשמיים של מיזם קשר של תפילין ועמותת אור חדש - להורדה לשימוש עיתונאים, שותפים ומתנדבים.";

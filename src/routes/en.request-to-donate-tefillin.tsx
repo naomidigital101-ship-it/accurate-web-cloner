@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 
 import { submitLead } from "@/lib/api/leads.functions";
 import { PageShell } from "@/components/PageShell";
+import { SITE_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/en/request-to-donate-tefillin")({
   head: () => ({
@@ -13,9 +14,9 @@ export const Route = createFileRoute("/en/request-to-donate-tefillin")({
       { property: "og:description", content: "Have unused tefillin? Donate them to Ohr Chadash - we inspect, renew and deliver them to a Jew who will wear them every day." },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "en_US" },
-      { property: "og:url", content: "https://accurate-web-cloner.lovable.app/en/request-to-donate-tefillin/" },
+      { property: "og:url", content: `${SITE_URL}/en/request-to-donate-tefillin/` },
     ],
-    links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/en/request-to-donate-tefillin/" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/en/request-to-donate-tefillin/` }],
   }),
   component: Page,
 });

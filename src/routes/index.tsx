@@ -20,10 +20,11 @@ import { FounderSection } from "@/components/home/FounderSection";
 import { ServicesSection } from "@/components/home/ServicesSection";
 import { MobileDonateFab } from "@/components/home/MobileDonateFab";
 import { readFaqs, readGallery, readStories } from "@/lib/content";
+import { SITE_URL } from "@/lib/site";
 
 const HOME_TITLE = "קשר של תפילין - תרומה והשאלת תפילין לכל יהודי | אור חדש";
 const HOME_DESC = "מיזם קשר של תפילין של עמותת אור חדש מחבר בין תורמי תפילין שאינן בשימוש ליהודים שרוצים להתחיל להניח. מעל 1,300 זוגות חולקו - בקשו או תרמו תפילין עוד היום.";
-const HOME_URL = "https://accurate-web-cloner.lovable.app/";
+const HOME_URL = `${SITE_URL}/`;
 
 export const faqs: { q: string; a: string }[] = [
   { q: "מה בדיוק אתם עושים ומה המטרה של הפרויקט ?", a: "מיזם 'קשר של תפילין' של עמותת אור חדש מקבל תפילין משומשות, מחדש אותן על ידי סופרי סת\"ם מומחים, ומוסר אותן ליהודים שרוצים להניח תפילין ואין להם משלהם." },

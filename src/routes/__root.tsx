@@ -17,6 +17,7 @@ import { AccessibilityBar } from "../components/AccessibilityBar";
 import { CookieConsent } from "../components/CookieConsent";
 import { SettingsProvider, type Settings } from "../lib/settings";
 import { getSettings } from "../lib/api/content.functions";
+import { SITE_URL } from "@/lib/site";
 
 function NotFoundComponent() {
   return (
@@ -91,15 +92,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { property: "og:title", content: "קשר של תפילין - עמותת אור חדש מחברת בין יהודים שרוצים להניח תפילין" },
       { property: "og:description", content: "ערבות הדדית וזיכוי הרבים, מטרתינו לחבר בין יהודי שרוצה להתחיל להניח תפילין ולהיות יותר מחובר לה' יתברך, לבין יהודי שיש לו תפילין לא בשימוש" },
-      { property: "og:image", content: "https://accurate-web-cloner.lovable.app/wp/uploads/2024/01/תמונת-עמוד-קשר-של-תפילין-min.webp" },
+      { property: "og:image", content: `${SITE_URL}/wp/uploads/2024/01/תמונת-עמוד-קשר-של-תפילין-min.webp` },
       { property: "og:image:width", content: "1400" },
       { property: "og:image:height", content: "1400" },
       { property: "og:image:type", content: "image/webp" },
       { property: "og:locale:alternate", content: "en_US" },
       { property: "article:publisher", content: "https://www.facebook.com/keshersheltfilin" },
-      { name: "msapplication-TileImage", content: "https://accurate-web-cloner.lovable.app/wp/img/כוכבית-כחולה-16.svg" },
+      { name: "msapplication-TileImage", content: `${SITE_URL}/wp/img/כוכבית-כחולה-16.svg` },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: "https://accurate-web-cloner.lovable.app/wp/uploads/2024/01/תמונת-עמוד-קשר-של-תפילין-min.webp" },
+      { name: "twitter:image", content: `${SITE_URL}/wp/uploads/2024/01/תמונת-עמוד-קשר-של-תפילין-min.webp` },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -116,19 +117,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@graph": [
             {
               "@type": ["NGO", "Organization"],
-              "@id": "https://accurate-web-cloner.lovable.app/#org",
+              "@id": `${SITE_URL}/#org`,
               name: "עמותת אור חדש",
               legalName: "עמותת אור חדש",
               alternateName: ["קשר של תפילין", "The Tefillin Tie Initiative"],
               description:
                 "עמותת אור חדש מפעילה את מיזם 'קשר של תפילין', המחבר בין יהודים שברשותם תפילין שאינן בשימוש לבין יהודים שרוצים להתחיל להניח תפילין. התפילין נבדקות ומוגהות על ידי סופרי סת\"ם, מחודשות ונמסרות ללא עלות למי שאינו יכול לשלם.",
-              url: "https://accurate-web-cloner.lovable.app/",
+              url: `${SITE_URL}/`,
               logo: {
                 "@type": "ImageObject",
-                url: "https://accurate-web-cloner.lovable.app/wp/img/אור-חדש-לוגו-01.svg",
+                url: `${SITE_URL}/wp/img/אור-חדש-לוגו-01.svg`,
               },
               image:
-                "https://accurate-web-cloner.lovable.app/wp/uploads/2024/01/תמונת-עמוד-קשר-של-תפילין-min.webp",
+                `${SITE_URL}/wp/uploads/2024/01/תמונת-עמוד-קשר-של-תפילין-min.webp`,
               taxID: "580703965",
               telephone: "+972-54-6713966",
               address: {
@@ -141,7 +142,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
               knowsLanguage: ["he", "en"],
               founder: {
                 "@type": "Person",
-                "@id": "https://accurate-web-cloner.lovable.app/#founder",
+                "@id": `${SITE_URL}/#founder`,
                 name: "הרב עמיחי איל",
                 jobTitle: "מייסד ויו\"ר עמותת אור חדש",
               },
@@ -158,11 +159,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             },
             {
               "@type": "WebSite",
-              "@id": "https://accurate-web-cloner.lovable.app/#website",
+              "@id": `${SITE_URL}/#website`,
               name: "קשר של תפילין",
-              url: "https://accurate-web-cloner.lovable.app/",
+              url: `${SITE_URL}/`,
               inLanguage: "he",
-              publisher: { "@id": "https://accurate-web-cloner.lovable.app/#org" },
+              publisher: { "@id": `${SITE_URL}/#org` },
             },
           ],
         }),

@@ -1,5 +1,6 @@
 import { useConsent } from "@/components/CookieConsent";
 import { useSetting } from "@/lib/settings";
+import { readFaqs, readServices, readStories, readGallery } from "@/lib/content";
 
 /** נטען רק לאחר הסכמה מפורשת לתוכן מוטמע - אחרת לא נשלחת שום בקשה ל-YouTube */
 function ConsentedYouTube({ src, title, en = false }: { src: string; title: string; en?: boolean }) {
@@ -37,6 +38,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { Header } from "@/components/home/Header";
 import { Footer } from "@/components/home/Footer";
+import { SITE_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/en/")({
   head: () => ({
@@ -54,9 +56,15 @@ export const Route = createFileRoute("/en/")({
           "Connecting Jews who wish to begin wearing tefillin with donors of unused pairs. Over 1,300 sets of tefillin delivered across Israel - request or donate tefillin today.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://accurate-web-cloner.lovable.app/en/the-tefillin-tie-initiative/" },
+      { property: "og:url", content: `${SITE_URL}/en/the-tefillin-tie-initiative/` },
     ],
-    links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/en/the-tefillin-tie-initiative/" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/en/the-tefillin-tie-initiative/` }],
+  }),
+  loader: async () => ({
+    faqs: await readFaqs("en"),
+    services: await readServices("en"),
+    stories: await readStories("en"),
+    gallery: await readGallery(),
   }),
   component: EnPage,
 });
@@ -430,7 +438,7 @@ function EnInterview() {
 /* ============================================================
  * Stories (LTR) — no press column
  * ============================================================ */
-const enStories = [
+export const enStories = [
   {
     title: "DIVINE PROVIDENCE IN KIBBUTZ NIR OZ",
     href: "/en/tefilin/divine-providence-in-kibbutz-nir-oz",
@@ -466,7 +474,8 @@ function ArrowRightIcon() {
   );
 }
 
-function EnStories() {
+function EnStories({ items }: { items?: typeof enStories } = {}) {
+  const cards = items && items.length > 0 ? items : enStories;
   return (
     <section dir="ltr" className="st-e">
       <div className="st-wrap">
@@ -482,7 +491,7 @@ function EnStories() {
             </div>
           </div>
           <div className="st-grid">
-            {enStories.map((s, i) => (
+            {cards.map((s, i) => (
               <a
                 key={i}
                 href={s.href}
@@ -830,7 +839,7 @@ function EnFounder() {
 /* ============================================================
  * FAQ (LTR)
  * ============================================================ */
-const enFaqs = [
+export const enFaqs = [
   {
     q: "What precisely do you do, and what is the goal of the project?",
     a: 'The Tefillin project of Ohr Chadash receives many requests from Jews who are beginning to strengthen themselves in observing Torah and mitzvot, yet do not have a pair of Tefillin. They cannot afford the thousands of shekels that a new set costs, but very much want to own their own Tefillin so that they can don them every day. At the same time, other people turn to us with their old, unused Tefillin, which we then renew step-by-step, as follows: 1. Checking the parchment passages, the boxes, and the straps. 2. Proofreading and correcting the passages. 3. Renovating and renewing the boxes. 4. Inserting the passages, and painting the boxes (black). 5. Replacing the straps if necessary. The entire process is carried out by expert, professional, G-d-fearing scribes and artisans with many years of experience in the field. The renewed Tefillin are then given to people from all over the country, of all ages, who wish to start putting on Tefillin daily, yet don\'t have their own. Our objective is thus two-fold: To enable more Jews to have the privilege and merit of fulfilling the mitzvah of Tefillin, and to "redeem" old pairs of Tefillin laying unused in a closet or attic.',
@@ -865,13 +874,14 @@ const enFaqs = [
   },
 ];
 
-function EnFaq() {
+function EnFaq({ items }: { items?: { q: string; a: string }[] } = {}) {
+  const list = items && items.length > 0 ? items : enFaqs;
   return (
     <section dir="ltr" className="faq-e">
       <h2 className="faq-title-sm">Have a</h2>
       <h2 className="faq-title-lg">Question?</h2>
       <div className="faq-list">
-        {enFaqs.map((f) => (
+        {list.map((f) => (
           <details key={f.q} className="faq-item">
             <summary className="faq-q">{f.q}</summary>
             <div className="faq-a">
@@ -890,7 +900,7 @@ function EnFaq() {
 const WA_LINK =
   "https://wa.me/972546713966?text=%D7%A9%D7%9C%D7%95%D7%9D%20%D7%A2%D7%9E%D7%99%D7%97%D7%99";
 
-const enServices = [
+export const enServices = [
   {
     title: "Tefillin Gmach",
     more: "More info >>",
@@ -913,12 +923,13 @@ const enServices = [
   },
 ];
 
-function EnServices() {
+function EnServices({ items }: { items?: typeof enServices } = {}) {
+  const list = items && items.length > 0 ? items : enServices;
   return (
     <section dir="ltr" className="svc-e">
       <h2 className="e-h2-navy svc-title">What Else Do We Offer?</h2>
       <div className="svc-row">
-        {enServices.map((s) => (
+        {list.map((s) => (
           <div key={s.title} className="svc-flip" style={{ height: s.height }}>
             <div className="svc-flip-inner">
               <div className="svc-front" style={{ backgroundImage: `url('${s.img}')` }}>
@@ -953,6 +964,16 @@ function EnServices() {
  * PAGE
  * ============================================================ */
 export function EnPage() {
+  const { faqs, services, stories: enDbStories, gallery } = Route.useLoaderData();
+  const faqItems = faqs?.map((f) => ({ q: f.question, a: f.answer }));
+  const serviceItems = services?.map((x) => ({
+    title: x.title, more: x.more_label ?? "", img: x.img ?? "",
+    height: x.card_height ?? 250, back: x.back_text ?? "", backTitle: x.back_title ?? undefined,
+    href: x.href ?? undefined,
+  }));
+  const storyCards = enDbStories?.slice(0, 5).map((x) => ({
+    title: x.title, href: `/en/tefilin/${encodeURIComponent(x.slug)}/`, img: x.img ?? "",
+  }));
   return (
     <div dir="ltr" lang="en" className="min-h-screen bg-background en-ltr">
       <Header en />
@@ -960,7 +981,7 @@ export function EnPage() {
         <EnHero />
         <EnFormTabs />
         <EnInterview />
-        <EnStories />
+        <EnStories items={storyCards as never} />
 
         <EnAbout />
         <EnHowItWorks />
@@ -968,10 +989,10 @@ export function EnPage() {
         <EnMiKamcha />
         <EnContributions />
         <EnFounder />
-        <EnFaq />
-        <EnServices />
+        <EnFaq items={faqItems} />
+        <EnServices items={serviceItems as never} />
       </main>
-      <Footer />
+      <Footer images={gallery ?? undefined} />
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
+import { SITE_URL } from "@/lib/site";
 
 const cdn = "/wp/uploads";
 
@@ -32,9 +33,9 @@ export const Route = createFileRoute("/en/thank-you-letters")({
       { property: "og:description", content: "Moving thank-you letters from soldiers, commanders, communities and families who received tefillin from Ohr Chadash." },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "en_US" },
-      { property: "og:url", content: "https://accurate-web-cloner.lovable.app/en/thank-you-letters/" },
+      { property: "og:url", content: `${SITE_URL}/en/thank-you-letters/` },
     ],
-    links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/en/thank-you-letters/" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/en/thank-you-letters/` }],
   }),
   component: Page,
 });

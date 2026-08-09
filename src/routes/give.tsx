@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
 import { DonateForm } from "@/components/home/FormTabsSection";
+import { SITE_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/give")({
   head: () => ({
@@ -9,9 +10,9 @@ export const Route = createFileRoute("/give")({
       { name: "description", content: "יש לכם תפילין שאינן בשימוש? תרמו אותן לעמותת אור חדש - נבדוק, נחדש ונעביר אותן ליהודי שיניח אותן מדי יום. מלאו טופס מסירה." },
       { property: "og:title", content: "מסירת תפילין שאינן בשימוש | קשר של תפילין" },
       { property: "og:description", content: "יש לכם תפילין שאינן בשימוש? תרמו אותן לעמותת אור חדש - נבדוק, נחדש ונעביר אותן ליהודי שיניח אותן מדי יום. מלאו טופס מסירה." },
-      { property: "og:url", content: "https://accurate-web-cloner.lovable.app/give/" },
+      { property: "og:url", content: `${SITE_URL}/give/` },
     ],
-    links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/give/" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/give/` }],
   }),
   component: GivePage,
 });

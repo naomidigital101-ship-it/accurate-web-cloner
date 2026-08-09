@@ -1,3 +1,4 @@
+import { SITE_URL } from "@/lib/site";
 /**
  * מיפוי דו-כיווני בין העמודים המקבילים בעברית ובאנגלית, לצורך תגיות hreflang.
  * רק זוגות שהם באמת אותו תוכן בשתי שפות. עמודי הסיפורים לא מופיעים כאן
@@ -5,7 +6,7 @@
  *
  * בעת מעבר לדומיין הקבוע - לעדכן את ORIGIN.
  */
-export const ORIGIN = "https://accurate-web-cloner.lovable.app";
+export const ORIGIN = `${SITE_URL}`;
 
 /** [נתיב עברי, נתיב אנגלי] */
 const PAIRS: [string, string][] = [

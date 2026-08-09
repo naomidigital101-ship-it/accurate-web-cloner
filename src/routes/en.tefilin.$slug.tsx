@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { StoryShell } from "@/components/StoryShell";
 import { PageShell } from "@/components/PageShell";
 import { enStories } from "@/data/en-stories";
+import { readStories } from "@/lib/content";
+import { SITE_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/en/tefilin/$slug")({
   head: ({ params }) => {
@@ -14,10 +16,10 @@ export const Route = createFileRoute("/en/tefilin/$slug")({
         ],
       };
     }
-    const url = `https://accurate-web-cloner.lovable.app/en/tefilin/${params.slug}`;
+    const url = `${SITE_URL}/en/tefilin/${params.slug}`;
     const desc = (story.paragraphs?.[0] ?? story.title).replace(/\s+/g, " ").slice(0, 155);
     const title = `${story.title} | The Tefillin Tie Initiative`;
-    const image = story.img.startsWith("http") ? story.img : `https://accurate-web-cloner.lovable.app${story.img}`;
+    const image = story.img.startsWith("http") ? story.img : `${SITE_URL}${story.img}`;
     return {
       meta: [
         { title },
@@ -32,13 +34,21 @@ export const Route = createFileRoute("/en/tefilin/$slug")({
       links: [{ rel: "canonical", href: url }],
     };
   },
+  loader: async () => ({ rows: await readStories("en") }),
   component: StoryPage,
 });
 
 function StoryPage() {
   const { slug } = Route.useParams();
-  const idx = enStories.findIndex((s) => s.slug === slug);
-  const story = enStories[idx];
+  const { rows } = Route.useLoaderData();
+  const list = rows && rows.length > 0
+    ? rows.map((r) => ({
+        slug: r.slug, title: r.title, subtitle: r.subtitle ?? "", name: r.author ?? "",
+        place: r.city ?? "", img: r.img ?? "", paragraphs: r.paragraphs ?? [],
+      }))
+    : enStories;
+  const idx = list.findIndex((s) => s.slug === slug);
+  const story = list[idx];
   if (!story) {
     return (
       <PageShell title="stories" en>
@@ -47,8 +57,8 @@ function StoryPage() {
     );
   }
   // Sort: newest → oldest. Prev = next in array (older), Next = previous (newer).
-  const prev = enStories[idx + 1];
-  const next = enStories[idx - 1];
+  const prev = list[idx + 1];
+  const next = list[idx - 1];
   return (
     <StoryShell
       en

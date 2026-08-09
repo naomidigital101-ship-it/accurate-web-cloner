@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
 import { useSetting, useWhatsAppLink } from "@/lib/settings";
+import { SITE_URL } from "@/lib/site";
 
-const URL = "https://accurate-web-cloner.lovable.app/en/accessibility/";
+const URL = `${SITE_URL}/en/accessibility/`;
 const TITLE = "Accessibility Statement | The Tefillin Tie Initiative";
 const DESC =
   "Accessibility statement for the Tefillin Tie Initiative website - the adjustments made, known limitations and how to reach us about accessibility.";

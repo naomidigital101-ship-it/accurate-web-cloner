@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
 import { readPress } from "@/lib/content";
+import { SITE_URL } from "@/lib/site";
 
 type PressItem = {
   title: string;
@@ -51,9 +52,9 @@ export const Route = createFileRoute("/en/articles-in-the-media")({
       { property: "og:description", content: "Media coverage of the Tefillin Tie Initiative: Hamodia, Mishpacha Magazine, Israel National News and more." },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "en_US" },
-      { property: "og:url", content: "https://accurate-web-cloner.lovable.app/en/articles-in-the-media/" },
+      { property: "og:url", content: `${SITE_URL}/en/articles-in-the-media/` },
     ],
-    links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/en/articles-in-the-media/" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/en/articles-in-the-media/` }],
   }),
   loader: async () => ({ press: await readPress("en") }),
   component: Page,

@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
 import { CookieSettingsLink } from "@/components/CookieConsent";
+import { SITE_URL } from "@/lib/site";
 
-const URL = "https://accurate-web-cloner.lovable.app/privacy/";
+const URL = `${SITE_URL}/privacy/`;
 const TITLE = "מדיניות פרטיות | קשר של תפילין";
 const DESC =
   "מדיניות הפרטיות של אתר קשר של תפילין, עמותת אור חדש - איזה מידע נאסף, למה הוא משמש, שימוש בעוגיות וזכויותיכם.";

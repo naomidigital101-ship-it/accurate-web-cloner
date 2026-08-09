@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
 import { useSetting } from "@/lib/settings";
+import { SITE_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/donate")({
   head: () => ({
@@ -9,9 +10,9 @@ export const Route = createFileRoute("/donate")({
       { name: "description", content: "היו שותפים במיזם קשר של תפילין - תרומה חד-פעמית או בהוראת קבע. עלויות חידוש וחלוקת התפילין גבוהות וכל תרומה מזכה יהודי במצווה." },
       { property: "og:title", content: "תרומה למיזם קשר של תפילין | אור חדש" },
       { property: "og:description", content: "היו שותפים במיזם קשר של תפילין - תרומה חד-פעמית או בהוראת קבע. עלויות חידוש וחלוקת התפילין גבוהות וכל תרומה מזכה יהודי במצווה." },
-      { property: "og:url", content: "https://accurate-web-cloner.lovable.app/donate/" },
+      { property: "og:url", content: `${SITE_URL}/donate/` },
     ],
-    links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/donate/" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/donate/` }],
   }),
   component: DonatePage,
 });

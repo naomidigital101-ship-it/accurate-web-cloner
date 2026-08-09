@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
 import { useSetting } from "@/lib/settings";
+import { SITE_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/en/support-and-donation")({
   head: () => ({
@@ -11,9 +12,9 @@ export const Route = createFileRoute("/en/support-and-donation")({
       { property: "og:description", content: "Partner with the Tefillin Tie Initiative - one-time or recurring donations supporting Jews who want to start putting on tefillin." },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "en_US" },
-      { property: "og:url", content: "https://accurate-web-cloner.lovable.app/en/support-and-donation/" },
+      { property: "og:url", content: `${SITE_URL}/en/support-and-donation/` },
     ],
-    links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/en/support-and-donation/" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/en/support-and-donation/` }],
   }),
   component: Page,
 });

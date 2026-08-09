@@ -3,6 +3,7 @@ import { PageShell } from "@/components/PageShell";
 import { StoryShell } from "@/components/StoryShell";
 import { stories } from "@/data/stories";
 import { readStories } from "@/lib/content";
+import { SITE_URL } from "@/lib/site";
 
 
 export const Route = createFileRoute("/tefilin/$slug")({
@@ -17,10 +18,10 @@ export const Route = createFileRoute("/tefilin/$slug")({
         ],
       };
     }
-    const url = `https://accurate-web-cloner.lovable.app/tefilin/${slug}/`;
+    const url = `${SITE_URL}/tefilin/${slug}/`;
     const desc = (story.paragraphs?.[0] ?? story.title).replace(/\s+/g, " ").slice(0, 155);
     const title = `${story.title.slice(0, 55)} | קשר של תפילין`;
-    const image = story.img?.startsWith("http") ? story.img : `https://accurate-web-cloner.lovable.app${story.img}`;
+    const image = story.img?.startsWith("http") ? story.img : `${SITE_URL}${story.img}`;
     return {
       meta: [
         { title },
@@ -48,7 +49,7 @@ export const Route = createFileRoute("/tefilin/$slug")({
               name: "עמותת אור חדש",
               logo: {
                 "@type": "ImageObject",
-                url: "https://accurate-web-cloner.lovable.app/wp/img/אור-חדש-לוגו-01.svg",
+                url: `${SITE_URL}/wp/img/אור-חדש-לוגו-01.svg`,
               },
             },
             mainEntityOfPage: url,

@@ -1,3 +1,4 @@
+import { SITE_URL } from "@/lib/site";
 type Story = {
   title: string;
   href: string;
@@ -67,7 +68,7 @@ const pressItems: PressItem[] = [
     source: "עיתון כפר חב\"ד",
     date: "21/05/2025",
     img: "/wp/img/כפר-חבד.jpg",
-    href: "https://accurate-web-cloner.lovable.app/wp/uploads/2025/05/kfar-chabad-2025-05-18.jpg",
+    href: `${SITE_URL}/wp/uploads/2025/05/kfar-chabad-2025-05-18.jpg`,
   },
   {
     title: "גם לזוג התפילין הישנות שלכם יש ייעוד חשוב | מיזם 'קשר של תפילין' – כסף אנושי, פרק 5",

@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
+import { SITE_URL } from "@/lib/site";
 
-const URL = "https://accurate-web-cloner.lovable.app/en/terms/";
+const URL = `${SITE_URL}/en/terms/`;
 const TITLE = "Terms of Use | The Tefillin Tie Initiative";
 const DESC =
   "Terms of use for the Tefillin Tie Initiative website of Ohr Chadash - how the project works, requesting and donating tefillin, donations, intellectual property and liability.";

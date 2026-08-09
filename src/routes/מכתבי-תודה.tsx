@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LettersPage } from "./letters";
+import { SITE_URL } from "@/lib/site";
 
-const CANONICAL = "https://accurate-web-cloner.lovable.app/%D7%9E%D7%9B%D7%AA%D7%91%D7%99-%D7%AA%D7%95%D7%93%D7%94/";
+const CANONICAL = `${SITE_URL}/%D7%9E%D7%9B%D7%AA%D7%91%D7%99-%D7%AA%D7%95%D7%93%D7%94/`;
 
 export const Route = createFileRoute("/מכתבי-תודה")({
   head: () => ({

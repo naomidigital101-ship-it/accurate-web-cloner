@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
+import { readStories } from "@/lib/content";
+import { SITE_URL } from "@/lib/site";
 
 type EnStory = { slug: string; title: string; img: string };
 
@@ -30,14 +32,19 @@ export const Route = createFileRoute("/en/stories-2")({
       { property: "og:description", content: "True stories of soldiers, Bar Mitzvah boys and returnees who received tefillin through the initiative - read how one pair changes a life." },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "en_US" },
-      { property: "og:url", content: "https://accurate-web-cloner.lovable.app/en/stories-2/" },
+      { property: "og:url", content: `${SITE_URL}/en/stories-2/` },
     ],
-    links: [{ rel: "canonical", href: "https://accurate-web-cloner.lovable.app/en/stories-2/" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/en/stories-2/` }],
   }),
+  loader: async () => ({ rows: await readStories("en") }),
   component: Page,
 });
 
 function Page() {
+  const { rows } = Route.useLoaderData();
+  const list = rows && rows.length > 0
+    ? rows.map((r) => ({ slug: r.slug, title: r.title, img: r.img ?? "" }))
+    : stories;
   return (
     <PageShell title="stories" en>
       <a href="/stories/" className="eng-link">
@@ -45,7 +52,7 @@ function Page() {
         צפייה בסיפורים בעברית
       </a>
       <div className="stories-page-grid">
-        {stories.map((s) => (
+        {list.map((s) => (
           <a key={s.slug} href={`/en/tefilin/${s.slug}`} className="st-card" style={{ backgroundImage: `url('${s.img}')` }}>
             <span className="st-card-panel">
               <h3 className="st-card-title">{s.title}</h3>

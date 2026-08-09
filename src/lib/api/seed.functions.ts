@@ -11,6 +11,7 @@ import { press as enPress } from "../../routes/en.articles-in-the-media";
 import { faqs as visibleFaqs } from "../../components/home/FaqSection";
 import { gallery as galleryFiles } from "../../components/home/Footer";
 import { services as heServices } from "../../components/home/ServicesSection";
+import { enFaqs, enServices } from "../../routes/en.index";
 
 /**
  * זריעה חד-פעמית של התוכן שכתוב היום בקוד אל תוך ה-DB.
@@ -127,6 +128,36 @@ async function seedInternal(accessToken: string | undefined, token: string | und
       const { error } = await db.from("faqs").insert(rows);
       if (error) throw new Error(`faqs: ${error.message}`);
       report.faqs = rows.length;
+    }
+
+    // --- שאלות נפוצות באנגלית ---
+    {
+      const { count } = await db.from("faqs").select("id", { count: "exact", head: true }).eq("lang", "en");
+      if (!count) {
+        const rows = enFaqs.map((f, i) => ({
+          lang: "en", sort_order: (i + 1) * 10, question: f.q,
+          answer: [(f as { subtitle?: string }).subtitle, f.a].filter(Boolean).join("\n\n"),
+          status: "published",
+        }));
+        const { error } = await db.from("faqs").insert(rows);
+        if (error) throw new Error(`faqs_en: ${error.message}`);
+      }
+    }
+
+    // --- שירותים באנגלית ---
+    {
+      const { count } = await db.from("services").select("id", { count: "exact", head: true }).eq("lang", "en");
+      if (!count) {
+        const rows = enServices.map((s2, i) => ({
+          lang: "en", sort_order: (i + 1) * 10, title: s2.title, more_label: s2.more,
+          back_title: (s2 as { backTitle?: string }).backTitle ?? null,
+          back_text: (s2 as { back?: string }).back || null, img: s2.img,
+          href: (s2 as { href?: string }).href ?? null,
+          card_height: s2.height, status: "published",
+        }));
+        const { error } = await db.from("services").insert(rows);
+        if (error) throw new Error(`services_en: ${error.message}`);
+      }
     }
 
     // --- שירותים נוספים ---

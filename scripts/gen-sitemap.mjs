@@ -5,7 +5,9 @@
  */
 import { readFileSync, writeFileSync } from "node:fs";
 
-const ORIGIN = "https://accurate-web-cloner.lovable.app";
+// מקור אמת יחיד - נקרא מ-src/lib/site.ts כדי שלא יהיו שתי כתובות שונות
+const ORIGIN = (readFileSync("src/lib/site.ts", "utf8").match(/SITE_URL = "([^"]+)"/) ?? [])[1];
+if (!ORIGIN) throw new Error("SITE_URL not found in src/lib/site.ts");
 
 const STATIC = [
   ["/", "weekly", "1.0"],
