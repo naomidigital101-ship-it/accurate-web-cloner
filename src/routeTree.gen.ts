@@ -48,6 +48,7 @@ import { Route as AdminPressRouteImport } from './routes/admin.press'
 import { Route as AdminMigrateRouteImport } from './routes/admin.migrate'
 import { Route as AdminMediaRouteImport } from './routes/admin.media'
 import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
+import { Route as AdminImportRouteImport } from './routes/admin.import'
 import { Route as AdminGalleryRouteImport } from './routes/admin.gallery'
 import { Route as AdminFaqsRouteImport } from './routes/admin.faqs'
 import { Route as AdminCertificatesRouteImport } from './routes/admin.certificates'
@@ -253,6 +254,11 @@ const AdminLeadsRoute = AdminLeadsRouteImport.update({
   path: '/leads',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminImportRoute = AdminImportRouteImport.update({
+  id: '/import',
+  path: '/import',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminGalleryRoute = AdminGalleryRouteImport.update({
   id: '/gallery',
   path: '/gallery',
@@ -295,6 +301,7 @@ export interface FileRoutesByFullPath {
   '/admin/certificates': typeof AdminCertificatesRoute
   '/admin/faqs': typeof AdminFaqsRoute
   '/admin/gallery': typeof AdminGalleryRoute
+  '/admin/import': typeof AdminImportRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/media': typeof AdminMediaRoute
   '/admin/migrate': typeof AdminMigrateRoute
@@ -338,6 +345,7 @@ export interface FileRoutesByTo {
   '/admin/certificates': typeof AdminCertificatesRoute
   '/admin/faqs': typeof AdminFaqsRoute
   '/admin/gallery': typeof AdminGalleryRoute
+  '/admin/import': typeof AdminImportRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/media': typeof AdminMediaRoute
   '/admin/migrate': typeof AdminMigrateRoute
@@ -384,6 +392,7 @@ export interface FileRoutesById {
   '/admin/certificates': typeof AdminCertificatesRoute
   '/admin/faqs': typeof AdminFaqsRoute
   '/admin/gallery': typeof AdminGalleryRoute
+  '/admin/import': typeof AdminImportRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/media': typeof AdminMediaRoute
   '/admin/migrate': typeof AdminMigrateRoute
@@ -431,6 +440,7 @@ export interface FileRouteTypes {
     | '/admin/certificates'
     | '/admin/faqs'
     | '/admin/gallery'
+    | '/admin/import'
     | '/admin/leads'
     | '/admin/media'
     | '/admin/migrate'
@@ -474,6 +484,7 @@ export interface FileRouteTypes {
     | '/admin/certificates'
     | '/admin/faqs'
     | '/admin/gallery'
+    | '/admin/import'
     | '/admin/leads'
     | '/admin/media'
     | '/admin/migrate'
@@ -519,6 +530,7 @@ export interface FileRouteTypes {
     | '/admin/certificates'
     | '/admin/faqs'
     | '/admin/gallery'
+    | '/admin/import'
     | '/admin/leads'
     | '/admin/media'
     | '/admin/migrate'
@@ -840,6 +852,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLeadsRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/import': {
+      id: '/admin/import'
+      path: '/import'
+      fullPath: '/admin/import'
+      preLoaderRoute: typeof AdminImportRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/gallery': {
       id: '/admin/gallery'
       path: '/gallery'
@@ -875,6 +894,7 @@ interface AdminRouteChildren {
   AdminCertificatesRoute: typeof AdminCertificatesRoute
   AdminFaqsRoute: typeof AdminFaqsRoute
   AdminGalleryRoute: typeof AdminGalleryRoute
+  AdminImportRoute: typeof AdminImportRoute
   AdminLeadsRoute: typeof AdminLeadsRoute
   AdminMediaRoute: typeof AdminMediaRoute
   AdminMigrateRoute: typeof AdminMigrateRoute
@@ -890,6 +910,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminCertificatesRoute: AdminCertificatesRoute,
   AdminFaqsRoute: AdminFaqsRoute,
   AdminGalleryRoute: AdminGalleryRoute,
+  AdminImportRoute: AdminImportRoute,
   AdminLeadsRoute: AdminLeadsRoute,
   AdminMediaRoute: AdminMediaRoute,
   AdminMigrateRoute: AdminMigrateRoute,

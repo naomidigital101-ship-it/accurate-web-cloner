@@ -25,6 +25,7 @@ const NAV = [
   { to: "/admin/faqs", label: "שאלות נפוצות" },
   { to: "/admin/media", label: "ספריית מדיה" },
   { to: "/admin/settings", label: "הגדרות האתר" },
+  { to: "/admin/import", label: "ייבוא פניות" },
   { to: "/admin/migrate", label: "הגירת תוכן" },
 ];
 

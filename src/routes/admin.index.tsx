@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 
 import { getAccessToken } from "@/lib/supabase-browser";
 import { getAdminOverview } from "@/lib/api/admin.functions";
+import { getLeadStats, type LeadStats } from "@/lib/api/stats.functions";
+import { LeadsDashboard } from "@/components/admin/LeadsDashboard";
 
 export const Route = createFileRoute("/admin/")({ component: Overview });
 
@@ -21,13 +23,19 @@ const CARDS: { key: string; label: string; to: string; hint: string }[] = [
 
 function Overview() {
   const [counts, setCounts] = useState<Counts | null>(null);
+  const [stats, setStats] = useState<LeadStats | null>(null);
   const [err, setErr] = useState<string | null>(null);
 
   useEffect(() => {
     (async () => {
       try {
         const token = await getAccessToken();
-        setCounts(await getAdminOverview({ data: { accessToken: token } }));
+        const [c, s2] = await Promise.all([
+          getAdminOverview({ data: { accessToken: token } }),
+          getLeadStats({ data: { accessToken: token, months: 12 } }),
+        ]);
+        setCounts(c);
+        setStats(s2 as LeadStats);
       } catch {
         setErr("לא הצלחנו לטעון את הנתונים.");
       }
@@ -42,6 +50,10 @@ function Overview() {
       </header>
 
       {err && <p className="adm-err">{err}</p>}
+
+      {stats && <LeadsDashboard stats={stats} />}
+
+      <h2 className="dash-h2">התוכן באתר</h2>
 
       <div className="adm-cards">
         {CARDS.map((c) => (
