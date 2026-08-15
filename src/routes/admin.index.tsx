@@ -24,6 +24,7 @@ const CARDS: { key: string; label: string; to: string; hint: string }[] = [
 function Overview() {
   const [counts, setCounts] = useState<Counts | null>(null);
   const [stats, setStats] = useState<LeadStats | null>(null);
+  const [months, setMonths] = useState(12);
   const [err, setErr] = useState<string | null>(null);
 
   useEffect(() => {
@@ -32,7 +33,7 @@ function Overview() {
         const token = await getAccessToken();
         const [c, s2] = await Promise.all([
           getAdminOverview({ data: { accessToken: token } }),
-          getLeadStats({ data: { accessToken: token, months: 12 } }),
+          getLeadStats({ data: { accessToken: token, months } }),
         ]);
         setCounts(c);
         setStats(s2 as LeadStats);
@@ -40,7 +41,7 @@ function Overview() {
         setErr("לא הצלחנו לטעון את הנתונים.");
       }
     })();
-  }, []);
+  }, [months]);
 
   return (
     <>
@@ -51,7 +52,7 @@ function Overview() {
 
       {err && <p className="adm-err">{err}</p>}
 
-      {stats && <LeadsDashboard stats={stats} />}
+      {stats && <LeadsDashboard stats={stats} months={months} onMonthsChange={setMonths} />}
 
       <h2 className="dash-h2">התוכן באתר</h2>
 

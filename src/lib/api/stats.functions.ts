@@ -31,87 +31,21 @@ export type LeadStats = {
 };
 
 /**
- * כל הסטטיסטיקה מחושבת מהשורות עצמן ולא נשמרת בשום מקום,
+ * כל הסטטיסטיקה מחושבת בפוסטגרס (`public.lead_stats`) ולא נשמרת בשום מקום,
  * כדי שלא יהיה מצב של מספר שמוצג ולא תואם את הנתונים.
+ *
+ * **חובה לחשב בצד ה-DB ולא בצד השרת:** PostgREST מחזיר לכל היותר 1,000 שורות
+ * לבקשה, ומתעלם מ-limit גדול יותר. חישוב על התוצאה החתוכה נתן דשבורד ששיקר -
+ * הגרף הראה חודש אחד עם 32 פניות ואפס בכל השאר, כי אלה היו 1,000 הפניות
+ * הישנות ביותר. אין להחזיר את הפניות לשרת רק כדי לספור אותן.
  */
 export const getLeadStats = createServerFn({ method: "POST" })
   .inputValidator(z.object({ accessToken: z.string().optional(), months: z.number().min(3).max(36).default(12) }))
   .handler(async ({ data }): Promise<LeadStats> => {
     await staffOrThrow(data.accessToken);
-    const db = adminDb();
-
-    const { data: rows } = await db
-      .from("leads")
-      .select("kind,status,city,target,delivery,phone,supplied_at,created_at")
-      .order("created_at", { ascending: true })
-      .limit(20000);
-    const all = rows ?? [];
-
-    const ym = (iso: string) => iso.slice(0, 7);
-    const now = new Date();
-    const thisKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
-    const prev = new Date(now.getFullYear(), now.getMonth() - 1, 1);
-    const prevKey = `${prev.getFullYear()}-${String(prev.getMonth() + 1).padStart(2, "0")}`;
-
-    // סדרת חודשים רציפה - חודש בלי פניות חייב להופיע כאפס, אחרת הגרף משקר
-    const keys: string[] = [];
-    for (let i = data.months - 1; i >= 0; i--) {
-      const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
-      keys.push(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`);
-    }
-    const byMonth = new Map(keys.map((k) => [k, { month: k, requests: 0, donations: 0 }]));
-    for (const r of all) {
-      const k = ym(r.created_at as string);
-      const b = byMonth.get(k);
-      if (!b) continue;
-      if (r.kind === "donate") b.donations++;
-      else b.requests++;
-    }
-
-    const tally = (get: (r: (typeof all)[number]) => string | null, limit: number) => {
-      const m = new Map<string, number>();
-      for (const r of all) {
-        if (r.status === "spam") continue;
-        const v = (get(r) ?? "").trim();
-        if (!v) continue;
-        m.set(v, (m.get(v) ?? 0) + 1);
-      }
-      return [...m.entries()]
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, limit)
-        .map(([name, count]) => ({ name, count }));
-    };
-
-    const phones = new Map<string, number>();
-    for (const r of all) {
-      const p = String(r.phone ?? "").replace(/\D/g, "");
-      if (p.length >= 9) phones.set(p, (phones.get(p) ?? 0) + 1);
-    }
-
-    const count = (f: (r: (typeof all)[number]) => boolean) => all.filter(f).length;
-
-    return {
-      total: all.length,
-      newCount: count((r) => r.status === "new"),
-      inProgress: count((r) => r.status === "in_progress"),
-      done: count((r) => r.status === "done"),
-      spam: count((r) => r.status === "spam"),
-      requests: count((r) => r.kind === "request" && r.status !== "spam"),
-      donations: count((r) => r.kind === "donate" && r.status !== "spam"),
-      thisMonth: count((r) => ym(r.created_at as string) === thisKey),
-      lastMonth: count((r) => ym(r.created_at as string) === prevKey),
-      monthly: keys.map((k) => byMonth.get(k)!),
-      cities: tally((r) => r.city as string | null, 8),
-      targets: tally((r) => r.target as string | null, 6),
-      delivery: tally((r) => r.delivery as string | null, 4),
-      repeatContacts: [...phones.values()].filter((n) => n > 1).length,
-      supplied: count((r) => Boolean(r.supplied_at)),
-      needsShipping: count(
-        (r) => typeof r.delivery === "string" && r.delivery.includes("משלוח") && r.status !== "spam",
-      ),
-      firstLead: (all[0]?.created_at as string) ?? null,
-      lastLead: (all[all.length - 1]?.created_at as string) ?? null,
-    };
+    const { data: stats, error } = await adminDb().rpc("lead_stats", { p_months: data.months });
+    if (error) throw new Error(error.message);
+    return stats as LeadStats;
   });
 
 /* ===== ייבוא פניות מקובץ CSV של Elementor ===== */

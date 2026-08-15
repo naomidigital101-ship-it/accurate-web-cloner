@@ -53,26 +53,6 @@ async function staffOrThrow(accessToken: string | undefined) {
   return staff;
 }
 
-/**
- * מפתח זיהוי לאותו אדם: תשע הספרות האחרונות של הטלפון.
- * כך 0546713966, 546713966 ו-+972546713966 נספרים כפנייה של אותו אדם.
- */
-function personKey(phoneDigits: string | null | undefined): string {
-  const d = String(phoneDigits ?? "").replace(/\D/g, "");
-  return d.length >= 9 ? d.slice(-9) : "";
-}
-
-/** כמה פעמים פנה כל מספר טלפון - נספר על כל הפניות, לא רק על אלה שמוצגות */
-async function repeatCounts(): Promise<Map<string, number>> {
-  const { data: all } = await adminDb().from("leads").select("phone_key").limit(20000);
-  const m = new Map<string, number>();
-  for (const r of all ?? []) {
-    const k = personKey(r.phone_key as string | null);
-    if (k) m.set(k, (m.get(k) ?? 0) + 1);
-  }
-  return m;
-}
-
 const ListInput = z.object({
   accessToken: z.string().optional(),
   status: z.enum(["all", "new", "in_progress", "done", "spam"]).default("all"),
@@ -81,25 +61,36 @@ const ListInput = z.object({
   limit: z.number().min(1).max(20000).default(500),
 });
 
+/**
+ * `leads_admin` הוא ה-view שמוסיף repeat_count - כמה פעמים פנה אותו טלפון,
+ * מחושב בפוסטגרס על כל הטבלה. חישוב בצד השרת לא אפשרי כאן: PostgREST מחזיר
+ * לכל היותר 1,000 שורות לבקשה, ולכן ספירה על מה שחזר הייתה מפספסת פונים חוזרים.
+ */
 export const listLeads = createServerFn({ method: "POST" })
   .inputValidator(ListInput)
   .handler(async ({ data }) => {
     await staffOrThrow(data.accessToken);
-    let q = adminDb().from("leads").select("*").order("created_at", { ascending: false }).limit(data.limit);
-    if (data.status !== "all") q = q.eq("status", data.status);
-    if (data.kind !== "all") q = q.eq("kind", data.kind);
-    if (data.search) {
-      const s = data.search.replace(/[%,()]/g, " ").trim();
-      if (s) q = q.or(`full_name.ilike.%${s}%,phone.ilike.%${s}%,email.ilike.%${s}%,city.ilike.%${s}%`);
-    }
-    const { data: rows, error } = await q;
-    if (error) throw new Error("load_failed");
 
-    const counts = await repeatCounts();
-    return (rows ?? []).map((r) => ({
-      ...r,
-      repeat_count: counts.get(personKey(r.phone_key as string | null)) ?? 1,
-    }));
+    const PAGE = 1000; // התקרה הקשיחה של PostgREST
+    const out: Record<string, unknown>[] = [];
+    for (let from = 0; from < data.limit; from += PAGE) {
+      let q = adminDb()
+        .from("leads_admin")
+        .select("*")
+        .order("created_at", { ascending: false })
+        .range(from, Math.min(from + PAGE, data.limit) - 1);
+      if (data.status !== "all") q = q.eq("status", data.status);
+      if (data.kind !== "all") q = q.eq("kind", data.kind);
+      if (data.search) {
+        const s = data.search.replace(/[%,()]/g, " ").trim();
+        if (s) q = q.or(`full_name.ilike.%${s}%,phone.ilike.%${s}%,email.ilike.%${s}%,city.ilike.%${s}%`);
+      }
+      const { data: rows, error } = await q;
+      if (error) throw new Error("load_failed");
+      out.push(...(rows ?? []));
+      if (!rows || rows.length < PAGE) break;
+    }
+    return out;
   });
 
 /** ספירת התורים לכותרות הטאבים - זול, בלי להביא שורות */
