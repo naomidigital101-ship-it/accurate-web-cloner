@@ -44,22 +44,8 @@ export function LeadsDashboard({
   const max = Math.max(1, ...stats.monthly.map(value));
   const diff = stats.thisMonth - stats.lastMonth;
 
-  const recent = stats.monthly.slice(-3).reduce((a, m) => a + m.requests + m.donations, 0);
-  const before = stats.monthly.slice(-6, -3).reduce((a, m) => a + m.requests + m.donations, 0);
-  const collapsed = before >= 30 && recent < before * 0.4;
-
   return (
     <>
-      {collapsed && (
-        <div className="dash-alert">
-          <b>שימו לב - ירידה חדה בפניות</b>
-          <p>
-            בשלושת החודשים האחרונים התקבלו <b>{recent}</b> פניות, לעומת <b>{before}</b> בשלושת
-            החודשים שלפניהם. כדאי לבדוק שהטפסים באתר עובדים ושהאתר מופיע בחיפוש.
-          </p>
-        </div>
-      )}
-
       <div className="dash-tiles">
         <div className="dash-tile dash-tile-accent">
           <span className="dash-num">{stats.newCount}</span>
