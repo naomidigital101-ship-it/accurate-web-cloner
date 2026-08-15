@@ -67,6 +67,11 @@ export function LeadsDashboard({ stats }: { stats: LeadStats }) {
           <span className="dash-lbl">פנו יותר מפעם</span>
           <span className="dash-sub">אותו מספר טלפון</span>
         </div>
+        <div className="dash-tile">
+          <span className="dash-num">{stats.supplied}</span>
+          <span className="dash-lbl">תפילין שסופקו</span>
+          <span className="dash-sub">{stats.supplied === 0 ? "סמנו 'סופק' במסך הפניות" : "נספר מתוך הפניות"}</span>
+        </div>
       </div>
 
       <section className="adm-panel">

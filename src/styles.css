@@ -2833,6 +2833,27 @@ html.a11y-hc-light body :is(section, div, article, header, footer, main, aside):
 .adm-tag { display: inline-block; margin-inline-start: 6px; background: #2d2e83; color: #fff; border-radius: 999px; padding: 1px 7px; font-size: 11px; font-weight: 700; }
 .adm-table select { border: 2px solid #dcdcea; border-radius: 8px; padding: 5px 8px; font: inherit; font-size: 13px; background: #fff; }
 
+/* תגיות שורה - הפרמטרים שקובעים אם אפשר לספק, בלי לפתוח את הפנייה */
+.adm-tag.is-repeat { background: #b3261e; }
+.adm-tag.is-hand { background: #8a5300; }
+.adm-tag.is-ship { background: #0b5f8a; }
+.adm-table td .adm-tag:first-child { margin-inline-start: 0; }
+
+/* תורים נפרדים: מבקש ומוסר דורשים פעולות הפוכות */
+.adm-queues { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.adm-queues button { display: inline-flex; align-items: center; gap: 8px; border: 2px solid #dcdcea; background: #fff; border-radius: 12px; padding: 9px 16px; font: inherit; font-size: 15px; font-weight: 700; color: #2d2e83; cursor: pointer; }
+.adm-queues button:hover { border-color: #2d2e83; }
+.adm-queues button.on { background: #2d2e83; border-color: #2d2e83; color: #fff; }
+.adm-qnum { background: #eef0f7; color: #2d2e83; border-radius: 999px; min-width: 24px; padding: 1px 8px; font-size: 13px; text-align: center; }
+.adm-queues button.on .adm-qnum { background: #67ffd1; color: #060633; }
+
+.adm-search { flex: 1 1 260px; }
+.adm-search input { flex: 1 1 200px; min-width: 160px; border: 2px solid #dcdcea; border-radius: 999px; padding: 7px 14px; font: inherit; font-size: 14px; }
+.adm-search input:focus { outline: none; border-color: #2d2e83; }
+
+.adm-check { display: inline-flex; align-items: center; cursor: pointer; }
+.adm-check input { width: 20px; height: 20px; accent-color: #2d2e83; cursor: pointer; }
+
 .adm-detail td { background: #fafbff; }
 .adm-detail dl { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px 20px; margin: 0 0 12px; }
 .adm-detail dt { font-size: 12px; font-weight: 700; opacity: 0.6; }

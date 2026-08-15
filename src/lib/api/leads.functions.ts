@@ -53,22 +53,74 @@ async function staffOrThrow(accessToken: string | undefined) {
   return staff;
 }
 
+/**
+ * מפתח זיהוי לאותו אדם: תשע הספרות האחרונות של הטלפון.
+ * כך 0546713966, 546713966 ו-+972546713966 נספרים כפנייה של אותו אדם.
+ */
+function personKey(phoneDigits: string | null | undefined): string {
+  const d = String(phoneDigits ?? "").replace(/\D/g, "");
+  return d.length >= 9 ? d.slice(-9) : "";
+}
+
+/** כמה פעמים פנה כל מספר טלפון - נספר על כל הפניות, לא רק על אלה שמוצגות */
+async function repeatCounts(): Promise<Map<string, number>> {
+  const { data: all } = await adminDb().from("leads").select("phone_key").limit(20000);
+  const m = new Map<string, number>();
+  for (const r of all ?? []) {
+    const k = personKey(r.phone_key as string | null);
+    if (k) m.set(k, (m.get(k) ?? 0) + 1);
+  }
+  return m;
+}
+
+const ListInput = z.object({
+  accessToken: z.string().optional(),
+  status: z.enum(["all", "new", "in_progress", "done", "spam"]).default("all"),
+  kind: z.enum(["all", "request", "donate"]).default("all"),
+  search: z.string().trim().max(120).optional(),
+  limit: z.number().min(1).max(20000).default(500),
+});
+
 export const listLeads = createServerFn({ method: "POST" })
-  .inputValidator(
-    z.object({
-      accessToken: z.string().optional(),
-      status: z.enum(["all", "new", "in_progress", "done", "spam"]).default("all"),
-      kind: z.enum(["all", "request", "donate"]).default("all"),
-    }),
-  )
+  .inputValidator(ListInput)
   .handler(async ({ data }) => {
     await staffOrThrow(data.accessToken);
-    let q = adminDb().from("leads").select("*").order("created_at", { ascending: false }).limit(500);
+    let q = adminDb().from("leads").select("*").order("created_at", { ascending: false }).limit(data.limit);
     if (data.status !== "all") q = q.eq("status", data.status);
     if (data.kind !== "all") q = q.eq("kind", data.kind);
+    if (data.search) {
+      const s = data.search.replace(/[%,()]/g, " ").trim();
+      if (s) q = q.or(`full_name.ilike.%${s}%,phone.ilike.%${s}%,email.ilike.%${s}%,city.ilike.%${s}%`);
+    }
     const { data: rows, error } = await q;
     if (error) throw new Error("load_failed");
-    return rows ?? [];
+
+    const counts = await repeatCounts();
+    return (rows ?? []).map((r) => ({
+      ...r,
+      repeat_count: counts.get(personKey(r.phone_key as string | null)) ?? 1,
+    }));
+  });
+
+/** ספירת התורים לכותרות הטאבים - זול, בלי להביא שורות */
+export const leadCounts = createServerFn({ method: "POST" })
+  .inputValidator(z.object({ accessToken: z.string().optional() }))
+  .handler(async ({ data }) => {
+    await staffOrThrow(data.accessToken);
+    const db = adminDb();
+    const one = async (kind: "request" | "donate", status?: string) => {
+      let q = db.from("leads").select("id", { count: "exact", head: true }).eq("kind", kind);
+      if (status) q = q.eq("status", status);
+      const { count } = await q;
+      return count ?? 0;
+    };
+    const [requestsNew, donationsNew, requests, donations] = await Promise.all([
+      one("request", "new"),
+      one("donate", "new"),
+      one("request"),
+      one("donate"),
+    ]);
+    return { requestsNew, donationsNew, requests, donations };
   });
 
 export const updateLead = createServerFn({ method: "POST" })
@@ -78,6 +130,7 @@ export const updateLead = createServerFn({ method: "POST" })
       id: z.string().uuid(),
       status: z.enum(["new", "in_progress", "done", "spam"]).optional(),
       notes: z.string().max(4000).optional(),
+      supplied: z.boolean().optional(),
     }),
   )
   .handler(async ({ data }) => {
@@ -85,6 +138,11 @@ export const updateLead = createServerFn({ method: "POST" })
     const patch: Record<string, unknown> = { updated_at: new Date().toISOString() };
     if (data.status) patch.status = data.status;
     if (data.notes !== undefined) patch.notes = data.notes;
+    // סימון "סופק" הוא גם מה שמזין את מונה הזוגות באתר, ולכן נשמר עם תאריך
+    if (data.supplied !== undefined) {
+      patch.supplied_at = data.supplied ? new Date().toISOString() : null;
+      if (data.supplied && !data.status) patch.status = "done";
+    }
     const { error } = await adminDb().from("leads").update(patch).eq("id", data.id);
     if (error) throw new Error("update_failed");
     return { ok: true as const };

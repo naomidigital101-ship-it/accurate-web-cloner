@@ -25,6 +25,7 @@ export type LeadStats = {
   delivery: { name: string; count: number }[];
   repeatContacts: number;
   needsShipping: number;
+  supplied: number;
   firstLead: string | null;
   lastLead: string | null;
 };
@@ -41,7 +42,7 @@ export const getLeadStats = createServerFn({ method: "POST" })
 
     const { data: rows } = await db
       .from("leads")
-      .select("kind,status,city,target,delivery,phone,created_at")
+      .select("kind,status,city,target,delivery,phone,supplied_at,created_at")
       .order("created_at", { ascending: true })
       .limit(20000);
     const all = rows ?? [];
@@ -104,6 +105,7 @@ export const getLeadStats = createServerFn({ method: "POST" })
       targets: tally((r) => r.target as string | null, 6),
       delivery: tally((r) => r.delivery as string | null, 4),
       repeatContacts: [...phones.values()].filter((n) => n > 1).length,
+      supplied: count((r) => Boolean(r.supplied_at)),
       needsShipping: count(
         (r) => typeof r.delivery === "string" && r.delivery.includes("משלוח") && r.status !== "spam",
       ),

@@ -154,5 +154,27 @@ export const getSettings = createServerFn({ method: "GET" }).handler(async () =>
   for (const r of rows ?? []) {
     if (r.key && !String(r.key).startsWith("__") && r.value) out[r.key as string] = r.value as string;
   }
+
+  /**
+   * מונה הזוגות שחולקו.
+   * כברירת מחדל המספר ידני, בדיוק כפי שהיה. אם מפעילים pairs_delivered_auto,
+   * המונה = בסיס היסטורי + כל פנייה שסומנה "סופק" באדמין, כך שהוא מתעדכן לבד.
+   * כל כשל בחישוב משאיר את הערך הידני - המספר באתר לעולם לא יתרוקן.
+   */
+  if (out.pairs_delivered_auto === "1") {
+    try {
+      const base = Number(String(out.pairs_delivered_base ?? "0").replace(/\D/g, "")) || 0;
+      const { count } = await adminDb()
+        .from("leads")
+        .select("id", { count: "exact", head: true })
+        .not("supplied_at", "is", null);
+      out.pairs_delivered = (base + (count ?? 0)).toLocaleString("en-US");
+    } catch {
+      /* נשאר הערך הידני */
+    }
+  }
+  delete out.pairs_delivered_auto;
+  delete out.pairs_delivered_base;
+
   return out;
 });
