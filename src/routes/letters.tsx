@@ -26,7 +26,7 @@ const letters: Letter[] = [
   { title: "מכתב מרב בסיס חיל האויר", img: `${cdn}/2024/04/מכתב-תודה-רב-בסיס-חיל-האוויר-scaled.webp` },
 ];
 
-const LETTERS_CANONICAL = `${SITE_URL}/%D7%9E%D7%9B%D7%AA%D7%91%D7%99-%D7%AA%D7%95%D7%93%D7%94/`;
+const LETTERS_CANONICAL = `${SITE_URL}/%D7%9E%D7%9B%D7%AA%D7%91%D7%99-%D7%AA%D7%95%D7%93%D7%94`;
 
 export const Route = createFileRoute("/letters")({
   beforeLoad: () => {

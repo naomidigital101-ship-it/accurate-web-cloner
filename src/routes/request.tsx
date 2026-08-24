@@ -10,9 +10,9 @@ export const Route = createFileRoute("/request")({
       { name: "description", content: "רוצים להתחיל להניח תפילין? מלאו טופס קצר ונדאג לכם לזוג תפילין מהודר וכשר - לחיילים, נערי בר מצווה, מתחזקים וכל יהודי." },
       { property: "og:title", content: "בקשת תפילין - טופס פנייה | קשר של תפילין" },
       { property: "og:description", content: "רוצים להתחיל להניח תפילין? מלאו טופס קצר ונדאג לכם לזוג תפילין מהודר וכשר - לחיילים, נערי בר מצווה, מתחזקים וכל יהודי." },
-      { property: "og:url", content: `${SITE_URL}/request/` },
+      { property: "og:url", content: `${SITE_URL}/request` },
     ],
-    links: [{ rel: "canonical", href: `${SITE_URL}/request/` }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/request` }],
   }),
   component: RequestPage,
 });

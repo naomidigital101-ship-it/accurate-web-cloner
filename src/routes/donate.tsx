@@ -10,9 +10,9 @@ export const Route = createFileRoute("/donate")({
       { name: "description", content: "היו שותפים במיזם קשר של תפילין - תרומה חד-פעמית או בהוראת קבע. עלויות חידוש וחלוקת התפילין גבוהות וכל תרומה מזכה יהודי במצווה." },
       { property: "og:title", content: "תרומה למיזם קשר של תפילין | אור חדש" },
       { property: "og:description", content: "היו שותפים במיזם קשר של תפילין - תרומה חד-פעמית או בהוראת קבע. עלויות חידוש וחלוקת התפילין גבוהות וכל תרומה מזכה יהודי במצווה." },
-      { property: "og:url", content: `${SITE_URL}/donate/` },
+      { property: "og:url", content: `${SITE_URL}/donate` },
     ],
-    links: [{ rel: "canonical", href: `${SITE_URL}/donate/` }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/donate` }],
   }),
   component: DonatePage,
 });

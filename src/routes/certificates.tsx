@@ -4,7 +4,7 @@ import { PageShell } from "@/components/PageShell";
 import { publicDb } from "@/lib/supabase.server";
 import { SITE_URL } from "@/lib/site";
 
-const URL = `${SITE_URL}/certificates/`;
+const URL = `${SITE_URL}/certificates`;
 const TITLE = "אישורי העמותה | קשר של תפילין";
 const DESC =
   "האישורים הרשמיים של עמותת אורחדש, המפעילה את מיזם קשר של תפילין - אישור ניהול תקין ומסמכים נוספים.";

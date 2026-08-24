@@ -3,7 +3,7 @@ import { PageShell } from "@/components/PageShell";
 import { useSetting, useWhatsAppLink } from "@/lib/settings";
 import { SITE_URL } from "@/lib/site";
 
-const URL = `${SITE_URL}/accessibility/`;
+const URL = `${SITE_URL}/accessibility`;
 const TITLE = "הצהרת נגישות | קשר של תפילין";
 const DESC =
   "הצהרת הנגישות של אתר קשר של תפילין, עמותת אור חדש - התאמות שבוצעו, מגבלות ידועות ודרכי פנייה בנושא נגישות.";

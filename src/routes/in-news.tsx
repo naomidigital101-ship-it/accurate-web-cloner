@@ -26,9 +26,9 @@ export const Route = createFileRoute("/in-news")({
       { name: "description", content: "סיקור תקשורתי של מיזם קשר של תפילין: כתבות בערוץ 7, מגזין משפחה, HAMODIA, בשבע ועוד על חלוקת תפילין לאלפי יהודים." },
       { property: "og:title", content: "כתבות בתקשורת על המיזם | קשר של תפילין" },
       { property: "og:description", content: "סיקור תקשורתי של מיזם קשר של תפילין: כתבות בערוץ 7, מגזין משפחה, HAMODIA, בשבע ועוד על חלוקת תפילין לאלפי יהודים." },
-      { property: "og:url", content: `${SITE_URL}/in-news/` },
+      { property: "og:url", content: `${SITE_URL}/in-news` },
     ],
-    links: [{ rel: "canonical", href: `${SITE_URL}/in-news/` }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/in-news` }],
   }),
 
   loader: async () => ({ press: await readPress("he") }),

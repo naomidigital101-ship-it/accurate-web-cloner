@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
 import { SITE_URL } from "@/lib/site";
 
-const URL = `${SITE_URL}/terms/`;
+const URL = `${SITE_URL}/terms`;
 const TITLE = "תקנון ותנאי שימוש | קשר של תפילין";
 const DESC =
   "תנאי השימוש באתר קשר של תפילין של עמותת אור חדש - אופן הפעילות, בקשת ומסירת תפילין, תרומות, קניין רוחני ואחריות.";

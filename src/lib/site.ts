@@ -7,9 +7,15 @@
  */
 export const SITE_URL = "https://accurate-web-cloner.lovable.app";
 
-/** בונה כתובת מוחלטת מנתיב יחסי, עם סלאש סוגר אחיד */
+/**
+ * בונה כתובת מוחלטת מנתיב יחסי, **בלי** סלאש סוגר.
+ *
+ * הראוטר מגיש את הגרסה בלי הסלאש כ-200 ומפנה אליה את הגרסה עם הסלאש ב-307.
+ * לכן canonical/hreflang/סייטמאפ שמצביעים על הגרסה עם הסלאש מצביעים על
+ * הפניה, וגוגל בוחר קנוניקל בעצמו. תמיד לפלוט את הכתובת שמחזירה 200.
+ */
 export function abs(path = "/"): string {
   const p = path.startsWith("/") ? path : `/${path}`;
-  const withSlash = p.endsWith("/") || p.includes(".") ? p : `${p}/`;
-  return `${SITE_URL}${withSlash}`;
+  const clean = p.length > 1 ? p.replace(/\/+$/, "") : p;
+  return `${SITE_URL}${clean}`;
 }

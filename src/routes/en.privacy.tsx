@@ -3,7 +3,7 @@ import { PageShell } from "@/components/PageShell";
 import { CookieSettingsLink } from "@/components/CookieConsent";
 import { SITE_URL } from "@/lib/site";
 
-const URL = `${SITE_URL}/en/privacy/`;
+const URL = `${SITE_URL}/en/privacy`;
 const TITLE = "Privacy Policy | The Tefillin Tie Initiative";
 const DESC =
   "Privacy policy of the Tefillin Tie Initiative, Ohr Chadash - what we collect, what it is used for, cookies and your rights.";

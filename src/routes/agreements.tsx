@@ -26,9 +26,9 @@ export const Route = createFileRoute("/agreements")({
       { name: "description", content: "מכתבי הסכמה וברכה מגדולי הרבנים - הרב זילברשטיין, הרב עמאר, הרב אשר וייס, הרב דוד יוסף ועוד - למיזם קשר של תפילין של עמותת אור חדש." },
       { property: "og:title", content: "הסכמות רבנים למיזם | קשר של תפילין" },
       { property: "og:description", content: "מכתבי הסכמה וברכה מגדולי הרבנים - הרב זילברשטיין, הרב עמאר, הרב אשר וייס, הרב דוד יוסף ועוד - למיזם קשר של תפילין של עמותת אור חדש." },
-      { property: "og:url", content: `${SITE_URL}/agreements/` },
+      { property: "og:url", content: `${SITE_URL}/agreements` },
     ],
-    links: [{ rel: "canonical", href: `${SITE_URL}/agreements/` }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/agreements` }],
   }),
   // התוכן מגיע מה-DB; אם אין - נופלים למערך שבקוד, כדי שהעמוד לא יתרוקן
   loader: async () => ({ rabbis: await readRabbis("he") }),

@@ -15,9 +15,9 @@ export const Route = createFileRoute("/en/request-for-tefillin")({
       { property: "og:description", content: "Want to start wearing tefillin? Fill out a short form and we will provide a kosher, high-quality pair - for soldiers, Bar Mitzvah boys and anyone strengthening their observance." },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "en_US" },
-      { property: "og:url", content: `${SITE_URL}/en/request-for-tefillin/` },
+      { property: "og:url", content: `${SITE_URL}/en/request-for-tefillin` },
     ],
-    links: [{ rel: "canonical", href: `${SITE_URL}/en/request-for-tefillin/` }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/en/request-for-tefillin` }],
   }),
   component: Page,
 });

@@ -11,9 +11,9 @@ export const Route = createFileRoute("/stories")({
       { name: "description", content: "סיפורים אמיתיים ומרגשים של חיילים, נערי בר מצווה ומתחזקים שקיבלו תפילין מהמיזם. קראו איך זוג תפילין אחד משנה חיים שלמים." },
       { property: "og:title", content: "הסיפורים שמאחורי התפילין - סיפורים אמיתיים | קשר של תפילין" },
       { property: "og:description", content: "סיפורים אמיתיים ומרגשים של חיילים, נערי בר מצווה ומתחזקים שקיבלו תפילין מהמיזם. קראו איך זוג תפילין אחד משנה חיים שלמים." },
-      { property: "og:url", content: `${SITE_URL}/stories/` },
+      { property: "og:url", content: `${SITE_URL}/stories` },
     ],
-    links: [{ rel: "canonical", href: `${SITE_URL}/stories/` }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/stories` }],
   }),
   // הרשימה מגיעה מה-DB; בלי זה נשארים על המערך שבקוד
   loader: async () => ({ stories: await readStories("he") }),

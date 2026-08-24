@@ -18,7 +18,7 @@ export const Route = createFileRoute("/tefilin/$slug")({
         ],
       };
     }
-    const url = `${SITE_URL}/tefilin/${slug}/`;
+    const url = `${SITE_URL}/tefilin/${slug}`;
     const desc = (story.paragraphs?.[0] ?? story.title).replace(/\s+/g, " ").slice(0, 155);
     const title = `${story.title.slice(0, 55)} | קשר של תפילין`;
     const image = story.img?.startsWith("http") ? story.img : `${SITE_URL}${story.img}`;

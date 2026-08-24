@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { EnPage, enHomeLoader } from "./en.index";
 import { SITE_URL } from "@/lib/site";
 
-const URL = `${SITE_URL}/en/the-tefillin-tie-initiative/`;
+const URL = `${SITE_URL}/en/the-tefillin-tie-initiative`;
 
 export const Route = createFileRoute("/en/the-tefillin-tie-initiative")({
   head: () => ({

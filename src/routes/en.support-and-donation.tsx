@@ -12,9 +12,9 @@ export const Route = createFileRoute("/en/support-and-donation")({
       { property: "og:description", content: "Partner with the Tefillin Tie Initiative - one-time or recurring donations supporting Jews who want to start putting on tefillin." },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "en_US" },
-      { property: "og:url", content: `${SITE_URL}/en/support-and-donation/` },
+      { property: "og:url", content: `${SITE_URL}/en/support-and-donation` },
     ],
-    links: [{ rel: "canonical", href: `${SITE_URL}/en/support-and-donation/` }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/en/support-and-donation` }],
   }),
   component: Page,
 });

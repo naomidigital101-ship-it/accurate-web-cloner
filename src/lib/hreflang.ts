@@ -32,5 +32,5 @@ export function hreflangPair(pathname: string): { he: string; en: string } | nul
   const p = strip(pathname);
   const hit = PAIRS.find(([he, en]) => strip(he) === p || strip(en) === p);
   if (!hit) return null;
-  return { he: ORIGIN + encodeURI(hit[0]), en: ORIGIN + encodeURI(hit[1]) };
+  return { he: ORIGIN + encodeURI(strip(hit[0])), en: ORIGIN + encodeURI(strip(hit[1])) };
 }
