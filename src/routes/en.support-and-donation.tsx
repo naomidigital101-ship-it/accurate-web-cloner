@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
-import { useDonateUrl } from "@/lib/settings";
+import { useSetting, useDonateUrl } from "@/lib/settings";
 import { SITE_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/en/support-and-donation")({
@@ -37,7 +37,9 @@ function CardIcon() {
 }
 
 function Page() {
-  const onetime = useDonateUrl("onetime", true);
+  // התרומה החד-פעמית בעמוד הזה חוזרת לערוץ הישראלי לפי בקשת הלקוחה.
+  // ערוץ קרן נאמן (מוכר לצרכי מס בארה"ב ובקנדה) נשאר בכפתורי עמוד הבית האנגלי.
+  const onetime = useSetting("donate_onetime_url");
   const recurring = useDonateUrl("recurring", true);
   return (
     <PageShell title="support and donation" en>
