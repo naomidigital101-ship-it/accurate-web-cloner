@@ -2993,3 +2993,31 @@ html.a11y-hc-light body :is(section, div, article, header, footer, main, aside):
 .imp-done p { margin: 0; font-size: 14px; }
 
 @media (max-width: 800px) { .dash-cols { grid-template-columns: 1fr; } }
+
+/* ===== דף נחיתה /keshersheltfilin - עומד בפני עצמו, בלי תפריט ופוטר ===== */
+.lp {
+  position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  padding: 48px 20px; background: #060633 url("/wp/uploads/2024/09/הרב-שמואל-אליהו.jpg") center/cover no-repeat;
+  font-family: "Heebo", sans-serif;
+}
+.lp-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(6,6,51,0.82), rgba(45,46,131,0.88)); }
+.lp-inner { position: relative; z-index: 1; width: 100%; max-width: 760px; text-align: center; color: #fff; }
+.lp-logo { width: 150px; height: auto; margin: 0 auto 22px; display: block; }
+.lp-title { font-size: 34px; line-height: 1.35; font-weight: 800; margin: 0 0 14px; color: #fff; }
+.lp-sub { font-size: 18px; line-height: 1.6; margin: 0 0 26px; color: #e9eaf5; }
+.lp-video { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 16px; overflow: hidden; box-shadow: 0 14px 40px rgba(0,0,0,0.45); background: #000; }
+.lp-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.lp-cta {
+  display: inline-block; margin-top: 28px; padding: 15px 46px; border-radius: 999px;
+  background: #67ffd1; color: #060633; font-size: 19px; font-weight: 800; text-decoration: none;
+  box-shadow: 0 8px 24px rgba(103,255,209,0.35); transition: transform .15s ease, box-shadow .15s ease;
+}
+.lp-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(103,255,209,0.45); }
+.lp-cta:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+@media (max-width: 767px) {
+  .lp { padding: 32px 16px; }
+  .lp-logo { width: 116px; }
+  .lp-title { font-size: 25px; }
+  .lp-sub { font-size: 16px; }
+  .lp-cta { padding: 14px 34px; font-size: 17px; }
+}

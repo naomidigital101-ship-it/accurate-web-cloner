@@ -15,6 +15,7 @@ import { Route as StoriesRouteImport } from './routes/stories'
 import { Route as RequestRouteImport } from './routes/request'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as LettersRouteImport } from './routes/letters'
+import { Route as KeshersheltfilinRouteImport } from './routes/keshersheltfilin'
 import { Route as InNewsRouteImport } from './routes/in-news'
 import { Route as GiveRouteImport } from './routes/give'
 import { Route as EnRouteImport } from './routes/en'
@@ -86,6 +87,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const LettersRoute = LettersRouteImport.update({
   id: '/letters',
   path: '/letters',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KeshersheltfilinRoute = KeshersheltfilinRouteImport.update({
+  id: '/keshersheltfilin',
+  path: '/keshersheltfilin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const InNewsRoute = InNewsRouteImport.update({
@@ -298,6 +304,7 @@ export interface FileRoutesByFullPath {
   '/en': typeof EnRouteWithChildren
   '/give': typeof GiveRoute
   '/in-news': typeof InNewsRoute
+  '/keshersheltfilin': typeof KeshersheltfilinRoute
   '/letters': typeof LettersRoute
   '/privacy': typeof PrivacyRoute
   '/request': typeof RequestRoute
@@ -343,6 +350,7 @@ export interface FileRoutesByTo {
   '/donate': typeof DonateRoute
   '/give': typeof GiveRoute
   '/in-news': typeof InNewsRoute
+  '/keshersheltfilin': typeof KeshersheltfilinRoute
   '/letters': typeof LettersRoute
   '/privacy': typeof PrivacyRoute
   '/request': typeof RequestRoute
@@ -391,6 +399,7 @@ export interface FileRoutesById {
   '/en': typeof EnRouteWithChildren
   '/give': typeof GiveRoute
   '/in-news': typeof InNewsRoute
+  '/keshersheltfilin': typeof KeshersheltfilinRoute
   '/letters': typeof LettersRoute
   '/privacy': typeof PrivacyRoute
   '/request': typeof RequestRoute
@@ -440,6 +449,7 @@ export interface FileRouteTypes {
     | '/en'
     | '/give'
     | '/in-news'
+    | '/keshersheltfilin'
     | '/letters'
     | '/privacy'
     | '/request'
@@ -485,6 +495,7 @@ export interface FileRouteTypes {
     | '/donate'
     | '/give'
     | '/in-news'
+    | '/keshersheltfilin'
     | '/letters'
     | '/privacy'
     | '/request'
@@ -532,6 +543,7 @@ export interface FileRouteTypes {
     | '/en'
     | '/give'
     | '/in-news'
+    | '/keshersheltfilin'
     | '/letters'
     | '/privacy'
     | '/request'
@@ -580,6 +592,7 @@ export interface RootRouteChildren {
   EnRoute: typeof EnRouteWithChildren
   GiveRoute: typeof GiveRoute
   InNewsRoute: typeof InNewsRoute
+  KeshersheltfilinRoute: typeof KeshersheltfilinRoute
   LettersRoute: typeof LettersRoute
   PrivacyRoute: typeof PrivacyRoute
   RequestRoute: typeof RequestRoute
@@ -631,6 +644,13 @@ declare module '@tanstack/react-router' {
       path: '/letters'
       fullPath: '/letters'
       preLoaderRoute: typeof LettersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/keshersheltfilin': {
+      id: '/keshersheltfilin'
+      path: '/keshersheltfilin'
+      fullPath: '/keshersheltfilin'
+      preLoaderRoute: typeof KeshersheltfilinRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/in-news': {
@@ -991,6 +1011,7 @@ const rootRouteChildren: RootRouteChildren = {
   EnRoute: EnRouteWithChildren,
   GiveRoute: GiveRoute,
   InNewsRoute: InNewsRoute,
+  KeshersheltfilinRoute: KeshersheltfilinRoute,
   LettersRoute: LettersRoute,
   PrivacyRoute: PrivacyRoute,
   RequestRoute: RequestRoute,
