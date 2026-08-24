@@ -20,6 +20,7 @@ const NAV = [
   { to: "/admin/rabbis", label: "הסכמות רבנים" },
   { to: "/admin/press", label: "כתבות בתקשורת" },
   { to: "/admin/certificates", label: "אישורי העמותה" },
+  { to: "/admin/thank-you-letters", label: "מכתבי תודה" },
   { to: "/admin/gallery", label: "גלריה" },
   { to: "/admin/services", label: "שירותים" },
   { to: "/admin/faqs", label: "שאלות נפוצות" },

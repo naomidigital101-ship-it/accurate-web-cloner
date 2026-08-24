@@ -55,3 +55,8 @@ export const readGallery = () => read<DbGallery>("gallery_images");
 export const readServices = (lang: "he" | "en") => read<DbService>("services", lang);
 export const readFaqs = (lang: "he" | "en") => read<DbFaq>("faqs", lang);
 export const readStories = (lang: "he" | "en") => read<DbStory>("stories", lang);
+
+export type DbThankYouLetter = { title: string; sub: string | null; img: string };
+/** מכתבי תודה - נקראים לפי שפה, ואם אין שורות מוצג המערך שבקוד */
+export const readThankYouLetters = (lang: "he" | "en") =>
+  read<DbThankYouLetter>("thank_you_letters", lang);

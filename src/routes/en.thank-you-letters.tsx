@@ -1,10 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
 import { SITE_URL } from "@/lib/site";
+import { readThankYouLetters } from "@/lib/content";
 
 const cdn = "/wp/uploads";
 
-type Letter = { title: string; sub?: string; img: string };
+type Letter = { title: string; sub?: string | null; img: string };
 
 const letters: Letter[] = [
   { title: "Thank you letter from Ramat Tamir sheltered housing", sub: "Heftzi Leibovitz", img: `${cdn}/2026/05/מכתב-תודה-דיור-מוגן.jpg` },
@@ -25,6 +26,7 @@ const letters: Letter[] = [
 ];
 
 export const Route = createFileRoute("/en/thank-you-letters")({
+  loader: async () => ({ items: await readThankYouLetters("en") }),
   head: () => ({
     meta: [
       { title: "Thank You Letters | The Tefillin Tie Initiative" },
@@ -41,10 +43,13 @@ export const Route = createFileRoute("/en/thank-you-letters")({
 });
 
 function Page() {
+  // הרשימה מגיעה מהאדמין; אם ה-DB ריק מוצג המערך שבקוד
+  const { items } = Route.useLoaderData();
+  const list = items && items.length > 0 ? (items as Letter[]) : letters;
   return (
     <PageShell title="Thank you letters" en>
       <div className="doc-grid doc-grid-letters">
-        {letters.map((l, i) => (
+        {list.map((l, i) => (
           <div key={i} className="doc-card doc-card-natural">
             <a href={l.img} target="_blank" rel="noopener" className="doc-card-letter">
               <img src={l.img} alt={l.title} loading="lazy" />

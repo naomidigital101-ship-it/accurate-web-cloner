@@ -40,6 +40,7 @@ import { Route as EnRabbisAgreementsRouteImport } from './routes/en.rabbis-agree
 import { Route as EnPrivacyRouteImport } from './routes/en.privacy'
 import { Route as EnArticlesInTheMediaRouteImport } from './routes/en.articles-in-the-media'
 import { Route as EnAccessibilityRouteImport } from './routes/en.accessibility'
+import { Route as AdminThankYouLettersRouteImport } from './routes/admin.thank-you-letters'
 import { Route as AdminStoriesRouteImport } from './routes/admin.stories'
 import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
 import { Route as AdminServicesRouteImport } from './routes/admin.services'
@@ -214,6 +215,11 @@ const EnAccessibilityRoute = EnAccessibilityRouteImport.update({
   path: '/accessibility',
   getParentRoute: () => EnRoute,
 } as any)
+const AdminThankYouLettersRoute = AdminThankYouLettersRouteImport.update({
+  id: '/thank-you-letters',
+  path: '/thank-you-letters',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminStoriesRoute = AdminStoriesRouteImport.update({
   id: '/stories',
   path: '/stories',
@@ -310,6 +316,7 @@ export interface FileRoutesByFullPath {
   '/admin/services': typeof AdminServicesRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/stories': typeof AdminStoriesRoute
+  '/admin/thank-you-letters': typeof AdminThankYouLettersRoute
   '/en/accessibility': typeof EnAccessibilityRoute
   '/en/articles-in-the-media': typeof EnArticlesInTheMediaRoute
   '/en/privacy': typeof EnPrivacyRoute
@@ -354,6 +361,7 @@ export interface FileRoutesByTo {
   '/admin/services': typeof AdminServicesRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/stories': typeof AdminStoriesRoute
+  '/admin/thank-you-letters': typeof AdminThankYouLettersRoute
   '/en/accessibility': typeof EnAccessibilityRoute
   '/en/articles-in-the-media': typeof EnArticlesInTheMediaRoute
   '/en/privacy': typeof EnPrivacyRoute
@@ -401,6 +409,7 @@ export interface FileRoutesById {
   '/admin/services': typeof AdminServicesRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/stories': typeof AdminStoriesRoute
+  '/admin/thank-you-letters': typeof AdminThankYouLettersRoute
   '/en/accessibility': typeof EnAccessibilityRoute
   '/en/articles-in-the-media': typeof EnArticlesInTheMediaRoute
   '/en/privacy': typeof EnPrivacyRoute
@@ -449,6 +458,7 @@ export interface FileRouteTypes {
     | '/admin/services'
     | '/admin/settings'
     | '/admin/stories'
+    | '/admin/thank-you-letters'
     | '/en/accessibility'
     | '/en/articles-in-the-media'
     | '/en/privacy'
@@ -493,6 +503,7 @@ export interface FileRouteTypes {
     | '/admin/services'
     | '/admin/settings'
     | '/admin/stories'
+    | '/admin/thank-you-letters'
     | '/en/accessibility'
     | '/en/articles-in-the-media'
     | '/en/privacy'
@@ -539,6 +550,7 @@ export interface FileRouteTypes {
     | '/admin/services'
     | '/admin/settings'
     | '/admin/stories'
+    | '/admin/thank-you-letters'
     | '/en/accessibility'
     | '/en/articles-in-the-media'
     | '/en/privacy'
@@ -796,6 +808,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnAccessibilityRouteImport
       parentRoute: typeof EnRoute
     }
+    '/admin/thank-you-letters': {
+      id: '/admin/thank-you-letters'
+      path: '/thank-you-letters'
+      fullPath: '/admin/thank-you-letters'
+      preLoaderRoute: typeof AdminThankYouLettersRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/stories': {
       id: '/admin/stories'
       path: '/stories'
@@ -903,6 +922,7 @@ interface AdminRouteChildren {
   AdminServicesRoute: typeof AdminServicesRoute
   AdminSettingsRoute: typeof AdminSettingsRoute
   AdminStoriesRoute: typeof AdminStoriesRoute
+  AdminThankYouLettersRoute: typeof AdminThankYouLettersRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
@@ -919,6 +939,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminServicesRoute: AdminServicesRoute,
   AdminSettingsRoute: AdminSettingsRoute,
   AdminStoriesRoute: AdminStoriesRoute,
+  AdminThankYouLettersRoute: AdminThankYouLettersRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 

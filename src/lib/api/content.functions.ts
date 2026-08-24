@@ -12,6 +12,7 @@ const TABLES = [
   "services",
   "faqs",
   "certificates",
+  "thank_you_letters",
   "media",
 ] as const;
 const TableName = z.enum(TABLES);
@@ -22,6 +23,7 @@ const ORDER: Record<TableName, { col: string; asc: boolean }> = {
   rabbi_letters: { col: "sort_order", asc: true },
   press_items: { col: "sort_order", asc: true },
   gallery_images: { col: "sort_order", asc: true },
+  thank_you_letters: { col: "sort_order", asc: true },
   services: { col: "sort_order", asc: true },
   faqs: { col: "sort_order", asc: true },
   certificates: { col: "sort_order", asc: true },
