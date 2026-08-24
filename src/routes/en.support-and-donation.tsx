@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
-import { useSetting } from "@/lib/settings";
+import { useDonateUrl } from "@/lib/settings";
 import { SITE_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/en/support-and-donation")({
@@ -37,8 +37,8 @@ function CardIcon() {
 }
 
 function Page() {
-  const onetime = useSetting("donate_onetime_url");
-  const recurring = useSetting("donate_recurring_url");
+  const onetime = useDonateUrl("onetime", true);
+  const recurring = useDonateUrl("recurring", true);
   return (
     <PageShell title="support and donation" en>
       <p className="donate-intro">

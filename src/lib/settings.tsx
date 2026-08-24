@@ -28,6 +28,9 @@ export const SETTING_DEFAULTS = {
   founder_children: "שמונה",
   donate_onetime_url: "https://bit.ly/tfil",
   donate_recurring_url: "https://meshulam.co.il/s/08cd0725-9e8a-ece2-1540-638f28f8919f",
+  // ערוצי תרומה לעמודים באנגלית. ריק = ליפול חזרה לערוץ הישראלי.
+  donate_onetime_url_en: "",
+  donate_recurring_url_en: "",
   pairs_delivered: "1,300",
   rabbi_letters_count: "9",
 } as const;
@@ -46,6 +49,19 @@ export function useSetting(key: SettingKey): string {
   const s = useContext(Ctx);
   const v = s[key];
   return v && v.trim() !== "" ? v : SETTING_DEFAULTS[key];
+}
+
+/**
+ * קישור התרומה לפי שפת העמוד.
+ *
+ * הקהל דובר האנגלית תורם דרך ערוץ אמריקאי מוכר לצרכי מס, ולכן לעמודים
+ * באנגלית יש מפתחות נפרדים. אם המפתח האנגלי ריק - נופלים חזרה לערוץ
+ * הישראלי, כך שהכפתור לעולם לא מוביל לשום מקום.
+ */
+export function useDonateUrl(kind: "onetime" | "recurring", en = false): string {
+  const he = useSetting(kind === "onetime" ? "donate_onetime_url" : "donate_recurring_url");
+  const enUrl = useSetting(kind === "onetime" ? "donate_onetime_url_en" : "donate_recurring_url_en");
+  return en && enUrl.trim() !== "" ? enUrl : he;
 }
 
 /** קישור וואטסאפ מוכן, מתוך ההגדרות */
