@@ -1,3 +1,5 @@
+import { track } from "@/lib/analytics";
+
 type FaqItem = { q: string; a: string; subtitle?: string };
 
 export const faqs: FaqItem[] = [
@@ -59,7 +61,15 @@ export function FaqSection({ items }: { items?: FaqItem[] } = {}) {
       <h2 className="faq-title-lg">שאלה?</h2>
       <div className="faq-list">
         {list.map((f) => (
-          <details key={f.q} className="faq-item">
+          <details
+            key={f.q}
+            className="faq-item"
+            onToggle={(e) => {
+              if ((e.currentTarget as HTMLDetailsElement).open) {
+                track("faq_open", { question: f.q.slice(0, 100) });
+              }
+            }}
+          >
             <summary className="faq-q">{f.q}</summary>
             <div className="faq-a">
               {f.subtitle && <h2 className="faq-a-subtitle">{f.subtitle}</h2>}
