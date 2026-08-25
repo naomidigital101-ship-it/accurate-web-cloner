@@ -62,7 +62,7 @@ export const Route = createFileRoute("/tefilin/$slug")({
    * סלאג שאינו קיים חייב להחזיר 404 אמיתי ולא 200 עם "לא נמצא" - אחרת זה
    * soft-404: גוגל סופר את העמוד כתקין, וכל טעות בכתובת סיפור נבלעת בשקט.
    */
-  loader: async ({ params }) => {
+  loader: async ({ params }: { params: { slug: string } }): Promise<{ rows: DbStory[] | null }> => {
     const rows = await readStories("he");
     const list = rows && rows.length > 0 ? rows : stories;
     if (!list.some((s) => norm(s.slug) === norm(params.slug))) throw notFound();
