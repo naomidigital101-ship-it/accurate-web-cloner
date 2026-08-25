@@ -2,7 +2,7 @@ import "./lib/error-capture";
 
 import { consumeLastCapturedError } from "./lib/error-capture";
 import { renderErrorPage } from "./lib/error-page";
-import { LEGACY_HOST, legacyTarget } from "./lib/legacy-redirects";
+import { LEGACY_HOST, legacyTarget, normalizePath } from "./lib/legacy-redirects";
 import { SITE_URL } from "./lib/site";
 
 type ServerEntry = {
@@ -40,7 +40,15 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
 }
 
 /**
- * בקשות שהגיעו לדומיין הישן מטופלות כאן, לפני ה-SSR.
+ * הפניות הכתובות הישנות, לפני ה-SSR.
+ *
+ * למה גם על הדומיין הראשי ולא רק על הסאב-דומיין: לאבבל מפנה בעצמו כל דומיין
+ * משני לדומיין הראשי, ב-302 ששומר על הנתיב, עוד לפני שהבקשה מגיעה לקוד הזה.
+ * כלומר /tefilin בסאב-דומיין מגיע בפועל כ-/tefilin על or-hadash.org.il, ורק
+ * כאן אפשר לתרגם אותו ליעד הנכון.
+ *
+ * על הדומיין הראשי פועלים רק כשהיעד באמת שונה מהנתיב שהתבקש, אחרת כל עמוד
+ * תקין היה מפנה לעצמו בלולאה.
  *
  * 301 ולא 302: המעבר קבוע, וזה מה שמעביר לגוגל את הערך של הכתובת הישנה.
  * 410 ולא 404 לארכיוני וורדפרס: 410 אומר "הוסר לצמיתות" ומזרז את הסרתם
@@ -48,7 +56,7 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
  */
 function handleLegacyHost(request: Request): Response | null {
   const url = new URL(request.url);
-  if (url.hostname !== LEGACY_HOST) return null;
+  const isLegacyHost = url.hostname === LEGACY_HOST;
 
   const target = legacyTarget(url.pathname, url.search);
   if (target === null) {
@@ -59,6 +67,8 @@ function handleLegacyHost(request: Request): Response | null {
   }
 
   const [path, search = ""] = target.split(/(?=\?)/);
+  if (!isLegacyHost && normalizePath(path) === normalizePath(url.pathname)) return null;
+
   return new Response(null, {
     status: 301,
     headers: {
