@@ -16,6 +16,7 @@ import { hreflangPair } from "../lib/hreflang";
 import { AccessibilityBar } from "../components/AccessibilityBar";
 import { CookieConsent } from "../components/CookieConsent";
 import { GoogleAnalytics } from "../components/GoogleAnalytics";
+import { AnalyticsLinks } from "../components/AnalyticsLinks";
 import { SettingsProvider, type Settings } from "../lib/settings";
 import { getSettings } from "../lib/api/content.functions";
 import { SITE_URL } from "@/lib/site";
