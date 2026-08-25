@@ -66,13 +66,15 @@ const ListInput = z.object({
  * מחושב בפוסטגרס על כל הטבלה. חישוב בצד השרת לא אפשרי כאן: PostgREST מחזיר
  * לכל היותר 1,000 שורות לבקשה, ולכן ספירה על מה שחזר הייתה מפספסת פונים חוזרים.
  */
+type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
+
 export const listLeads = createServerFn({ method: "POST" })
   .inputValidator(ListInput)
   .handler(async ({ data }) => {
     await staffOrThrow(data.accessToken);
 
     const PAGE = 1000; // התקרה הקשיחה של PostgREST
-    const out: Record<string, unknown>[] = [];
+    const out: Record<string, JsonValue>[] = [];
     for (let from = 0; from < data.limit; from += PAGE) {
       let q = adminDb()
         .from("leads_admin")

@@ -160,6 +160,7 @@ export function parseElementorCsv(text: string): { rows: ParsedLead[]; skipped: 
         city: null,
         target: null,
         hand: null,
+        delivery: null,
       });
     } else {
       const first = at(5);
