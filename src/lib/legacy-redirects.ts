@@ -8,7 +8,9 @@
  *
  * שלושה כללים, לפי סדר:
  *   1. GONE - ארכיוני וורדפרס ופידים: 404, בלי הפניה מלאכותית לדף הבית
- *   2. MAP  - איחוד: המכתבים הבודדים לעמוד המכתבים, הכתבות לעמוד הכתבות
+ *   2. MAP  - איחוד. שימו לב: באתר הישן /letters/ הכיל שני סוגי תוכן -
+ *      מכתבי תודה ממקבלי תפילין, והסכמות רבנים. באתר החדש הם פוצלו לשני
+ *      עמודים, ולכן 17 כתובות של הסכמות מופנות ל-/agreements ולא למכתבים.
  *   3. ברירת מחדל - אותו נתיב בדיוק על הדומיין החדש (עמודי התוכן)
  */
 export const LEGACY_HOST = "tefilin.or-hadash.org.il";
@@ -30,8 +32,8 @@ export const GONE: ReadonlySet<string> = new Set([
 /** נתיבים שהתאחדו לעמוד מרכזי, או ששינו כתובת */
 export const MAP: Readonly<Record<string, string>> = {
   "/en/letters": "/en/thank-you-letters",
-  "/en/letters/2rabbi-yitzhak-zilberstein": "/en/thank-you-letters",
-  "/en/letters/3rabbi-osher-weiss": "/en/thank-you-letters",
+  "/en/letters/2rabbi-yitzhak-zilberstein": "/en/rabbis-agreements",
+  "/en/letters/3rabbi-osher-weiss": "/en/rabbis-agreements",
   "/en/letters/a-heartfelt-thank-you-letter-to-the-brothers": "/en/thank-you-letters",
   "/en/letters/a-letter-from-rabbi-amihud-shiloh": "/en/thank-you-letters",
   "/en/letters/a-letter-from-the-air-force-base-chief": "/en/thank-you-letters",
@@ -44,12 +46,12 @@ export const MAP: Readonly<Record<string, string>> = {
   "/en/letters/letter-of-thanks-from-rabbi-eitan-eckstein": "/en/thank-you-letters",
   "/en/letters/letter-of-thanks-from-the-jewish-community-in-romania": "/en/thank-you-letters",
   "/en/letters/letter-of-thanks-gerin-hadar-haifa": "/en/thank-you-letters",
-  "/en/letters/rabbi-eliakim-lebanon": "/en/thank-you-letters",
-  "/en/letters/rabbi-shlomo-moshe-amer": "/en/thank-you-letters",
-  "/en/letters/rabbi-yehoshua-katz": "/en/thank-you-letters",
-  "/en/letters/rabbi-zalman-baruch-melamed": "/en/thank-you-letters",
-  "/en/letters/rav-david-yosef": "/en/thank-you-letters",
-  "/en/letters/rebii-aharun-biton": "/en/thank-you-letters",
+  "/en/letters/rabbi-eliakim-lebanon": "/en/rabbis-agreements",
+  "/en/letters/rabbi-shlomo-moshe-amer": "/en/rabbis-agreements",
+  "/en/letters/rabbi-yehoshua-katz": "/en/rabbis-agreements",
+  "/en/letters/rabbi-zalman-baruch-melamed": "/en/rabbis-agreements",
+  "/en/letters/rav-david-yosef": "/en/rabbis-agreements",
+  "/en/letters/rebii-aharun-biton": "/en/rabbis-agreements",
   "/en/letters/thank-you-letter-from-a-soldiers-mother": "/en/thank-you-letters",
   "/en/letters/thank-you-letter-from-ramat-tamir-sheltered-housing": "/en/thank-you-letters",
   "/en/letters/המלצה-מבית-ספר-חטיבת-הביינים": "/en/thank-you-letters",
@@ -60,16 +62,16 @@ export const MAP: Readonly<Record<string, string>> = {
   "/en/news-ment/כתבה-בעיתון-בשבע-מהדקים-את-הקשר": "/en/articles-in-the-media",
   "/en/tefilin": "/en/stories-2",
   "/letters": "/מכתבי-תודה",
-  "/letters/1": "/מכתבי-תודה",
-  "/letters/2": "/מכתבי-תודה",
-  "/letters/3": "/מכתבי-תודה",
+  "/letters/1": "/agreements",
+  "/letters/2": "/agreements",
+  "/letters/3": "/agreements",
   "/letters/ביס-בית-אל-חטיבת-הביניים": "/מכתבי-תודה",
-  "/letters/הרב-דוד-יוסף-שליטא": "/מכתבי-תודה",
-  "/letters/הרב-המקובל-חכם-אהרון-ביטון-שליטא": "/מכתבי-תודה",
-  "/letters/הרב-שלמה-יהודה-בארי-הינוקא": "/מכתבי-תודה",
-  "/letters/מכתב-ברכה-מהרב-אליקים-לבנון": "/מכתבי-תודה",
-  "/letters/מכתב-ברכה-מהרב-זלמן-ברוך-מלמד": "/מכתבי-תודה",
-  "/letters/מכתב-ברכה-מהרב-יהושוע-כץ": "/מכתבי-תודה",
+  "/letters/הרב-דוד-יוסף-שליטא": "/agreements",
+  "/letters/הרב-המקובל-חכם-אהרון-ביטון-שליטא": "/agreements",
+  "/letters/הרב-שלמה-יהודה-בארי-הינוקא": "/agreements",
+  "/letters/מכתב-ברכה-מהרב-אליקים-לבנון": "/agreements",
+  "/letters/מכתב-ברכה-מהרב-זלמן-ברוך-מלמד": "/agreements",
+  "/letters/מכתב-ברכה-מהרב-יהושוע-כץ": "/agreements",
   "/letters/מכתב-מאמית-מעלה-אדומים": "/מכתבי-תודה",
   "/letters/מכתב-מהרב-שילה-חיל-האוויר": "/מכתבי-תודה",
   "/letters/מכתב-ממפקד-גדוד-נחשון": "/מכתבי-תודה",
