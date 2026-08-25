@@ -2,6 +2,8 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
 import { adminDb, requireStaff } from "../supabase.server";
+import { leadEmailHtml, leadEmailText, leadSubject } from "../email/lead-notification";
+import { mailConfigured, sendMail } from "../email/send.server";
 
 const LeadInput = z.object({
   kind: z.enum(["request", "donate"]),
@@ -35,15 +37,22 @@ export const submitLead = createServerFn({ method: "POST" })
     const hasContact = Boolean(lead.phone?.trim() || lead.email?.trim());
     if (!hasContact) throw new Error("missing_contact");
 
+    const fullName =
+      lead.full_name?.trim() ||
+      [lead.first_name, lead.last_name].filter(Boolean).join(" ").trim() ||
+      null;
+
     const { error } = await adminDb().from("leads").insert({
       ...lead,
-      full_name:
-        lead.full_name?.trim() ||
-        [lead.first_name, lead.last_name].filter(Boolean).join(" ").trim() ||
-        null,
+      full_name: fullName,
       status: "new",
     });
     if (error) throw new Error("save_failed");
+
+    // ההתראה נשלחת אחרי השמירה ולעולם לא חוסמת אותה. פנייה שנשמרה היא
+    // הדבר החשוב; מייל שנכשל הוא אי-נוחות, לא אובדן ליד.
+    void notifyNewLead({ ...lead, full_name: fullName }).catch(() => {});
+
     return { ok: true as const };
   });
 
@@ -140,3 +149,64 @@ export const updateLead = createServerFn({ method: "POST" })
     if (error) throw new Error("update_failed");
     return { ok: true as const };
   });
+
+
+/**
+ * מייל התראה על פנייה חדשה.
+ *
+ * היעד נלקח מהגדרות האתר (lead_notify_to) ואם הוא ריק - מרשימת המורשים,
+ * כך שההתראה לא נעלמת רק בגלל שדה שלא מולא.
+ */
+async function notifyNewLead(lead: Record<string, unknown>): Promise<void> {
+  if (!mailConfigured()) return;
+
+  const db = adminDb();
+  const { data: setting } = await db
+    .from("site_settings")
+    .select("value")
+    .eq("key", "lead_notify_to")
+    .maybeSingle();
+
+  let to = String(setting?.value ?? "").trim();
+  if (!to) {
+    const { data: admins } = await db.from("admin_allowlist").select("email");
+    to = (admins ?? []).map((a) => a.email as string).filter(Boolean).join(",");
+  }
+  if (!to) return;
+
+  const phone = String(lead.phone ?? "").trim();
+  let repeatCount = 1;
+  if (phone) {
+    const { count } = await db
+      .from("leads")
+      .select("id", { count: "exact", head: true })
+      .eq("phone", phone);
+    repeatCount = count ?? 1;
+  }
+
+  const payload = {
+    kind: lead.kind as "request" | "donate",
+    lang: lead.lang as "he" | "en" | undefined,
+    fullName: (lead.full_name as string) ?? null,
+    phone: (lead.phone as string) ?? null,
+    email: (lead.email as string) ?? null,
+    city: (lead.city as string) ?? null,
+    address: (lead.address as string) ?? null,
+    target: (lead.target as string) ?? null,
+    hand: (lead.hand as string) ?? null,
+    delivery: (lead.delivery as string) ?? null,
+    condition: (lead.condition as string) ?? null,
+    dedication: (lead.dedication as string) ?? null,
+    createdAt: new Date(),
+    repeatCount,
+  };
+
+  await sendMail({
+    to: to.split(",").map((x) => x.trim()).filter(Boolean),
+    subject: leadSubject(payload),
+    html: leadEmailHtml(payload),
+    text: leadEmailText(payload),
+    // תשובה למייל תגיע ישירות לפונה, אם השאיר כתובת
+    replyTo: (lead.email as string) || undefined,
+  });
+}
