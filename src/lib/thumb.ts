@@ -49,5 +49,5 @@ export function thumbFallback(e: { currentTarget: HTMLImageElement }, full: stri
  */
 export function thumbSize(url: string | null | undefined): [number, number] | null {
   const t = thumbPath(url);
-  return (t && THUMB_SIZES[t]) ?? null;
+  return (t ? THUMB_SIZES[t] : null) ?? null;
 }
