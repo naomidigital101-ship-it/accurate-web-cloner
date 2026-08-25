@@ -10,6 +10,7 @@ export type Consent = {
   necessary: true;
   functional: boolean;
   embeds: boolean;
+  analytics: boolean;
   decidedAt: string;
 };
 
@@ -79,6 +80,7 @@ export function CookieConsent({ en = false }: { en?: boolean } = {}) {
   const [custom, setCustom] = useState(false);
   const [functional, setFunctional] = useState(true);
   const [embeds, setEmbeds] = useState(false);
+  const [analytics, setAnalytics] = useState(false);
 
   const t = (he: string, eng: string) => (en ? eng : he);
 
@@ -88,6 +90,7 @@ export function CookieConsent({ en = false }: { en?: boolean } = {}) {
       const c = readConsent();
       setFunctional(c?.functional ?? true);
       setEmbeds(c?.embeds ?? false);
+      setAnalytics(c?.analytics ?? false);
       setCustom(true);
       setShow(true);
     };
@@ -95,10 +98,11 @@ export function CookieConsent({ en = false }: { en?: boolean } = {}) {
     return () => window.removeEventListener("cookie-consent-reopen", reopen);
   }, []);
 
-  const decide = useCallback((f: boolean, e: boolean) => {
+  const decide = useCallback(
+    (f: boolean, e: boolean, a: boolean) => {
     // דחייה חייבת גם למחוק מה שכבר נשמר, לא רק למנוע טעינה עתידית
     if (!f) purgeNonEssential();
-    write({ necessary: true, functional: f, embeds: e, decidedAt: new Date().toISOString() });
+    write({ necessary: true, functional: f, embeds: e, analytics: a, decidedAt: new Date().toISOString() });
     setShow(false);
     setCustom(false);
   }, []);
@@ -119,8 +123,8 @@ export function CookieConsent({ en = false }: { en?: boolean } = {}) {
         {!custom ? (
           <p className="cc-text">
             {t(
-              "האתר עושה שימוש בעוגיות הכרחיות להפעלתו, ובעוגיות נוספות לשמירת העדפות ולהצגת תוכן מוטמע כמו סרטוני וידאו. אין באתר עוגיות פרסום או מעקב שיווקי.",
-              "This site uses cookies that are necessary for it to work, plus optional ones that remember your preferences and allow embedded content such as videos. There are no advertising or marketing tracking cookies on this site.",
+              "האתר עושה שימוש בעוגיות הכרחיות להפעלתו, ובעוגיות נוספות לשמירת העדפות, להצגת תוכן מוטמע כמו סרטוני וידאו ולמדידת תנועה באתר. אין באתר עוגיות פרסום או ריטרגטינג.",
+              "This site uses cookies that are necessary for it to work, plus optional ones that remember your preferences, allow embedded content such as videos, and measure site traffic. There are no advertising or retargeting cookies on this site.",
             )}
           </p>
         ) : (
@@ -162,6 +166,28 @@ export function CookieConsent({ en = false }: { en?: boolean } = {}) {
 
             <div className="cc-cat">
               <div className="cc-cat-head">
+                <b>{t("מדידה וסטטיסטיקה", "Analytics")}</b>
+                <label className={`cc-switch${analytics ? " on" : ""}`}>
+                  <input
+                    type="checkbox"
+                    checked={analytics}
+                    onChange={(e) => setAnalytics(e.target.checked)}
+                    aria-label={t("הפעלת עוגיות מדידה", "Enable analytics cookies")}
+                  />
+                  <span />
+                  <em>{analytics ? t("פעיל", "On") : t("כבוי", "Off")}</em>
+                </label>
+              </div>
+              <p>
+                {t(
+                  "Google Analytics, לספירת מבקרים והבנת אילו עמודים מעניינים. אם לא תאשרו, הסקריפט לא נטען כלל ולא מועבר מידע לגוגל.",
+                  "Google Analytics, to count visitors and understand which pages are of interest. If you decline, the script is not loaded at all and no data is sent to Google.",
+                )}
+              </p>
+            </div>
+
+            <div className="cc-cat">
+              <div className="cc-cat-head">
                 <b>{t("תוכן מוטמע מצד שלישי", "Embedded third-party content")}</b>
                 <label className={`cc-switch${embeds ? " on" : ""}`}>
                   <input
@@ -185,10 +211,10 @@ export function CookieConsent({ en = false }: { en?: boolean } = {}) {
         )}
 
         <div className="cc-btns">
-          <button type="button" className="cc-btn cc-accept" onClick={() => decide(true, true)}>
+          <button type="button" className="cc-btn cc-accept" onClick={() => decide(true, true, true)}>
             {t("אישור הכל", "Accept all")}
           </button>
-          <button type="button" className="cc-btn cc-reject" onClick={() => decide(false, false)}>
+          <button type="button" className="cc-btn cc-reject" onClick={() => decide(false, false, false)}>
             {t("דחיית הכל", "Reject all")}
           </button>
           {!custom ? (
@@ -196,7 +222,7 @@ export function CookieConsent({ en = false }: { en?: boolean } = {}) {
               {t("התאמה אישית", "Customise")}
             </button>
           ) : (
-            <button type="button" className="cc-btn cc-custom" onClick={() => decide(functional, embeds)}>
+            <button type="button" className="cc-btn cc-custom" onClick={() => decide(functional, embeds, analytics)}>
               {t("שמירת הבחירה", "Save my choice")}
             </button>
           )}

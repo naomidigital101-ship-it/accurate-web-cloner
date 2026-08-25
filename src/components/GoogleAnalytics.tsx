@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useRouterState } from "@tanstack/react-router";
+import { useConsent } from "./CookieConsent";
 
 declare global {
   interface Window {
@@ -19,11 +20,19 @@ function loadGtag(measurementId: string) {
   document.head.appendChild(script);
 }
 
+/**
+ * נטען אך ורק אחרי הסכמה מפורשת בקטגוריית "מדידה וסטטיסטיקה" בבאנר העוגיות.
+ * בלי התנאי הזה הסקריפט היה נטען לכל מבקר עוד לפני שנשאל - וזה גם סותר את
+ * מה שכתוב בבאנר עצמו.
+ */
 export function GoogleAnalytics() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const consent = useConsent();
+  const allowed = consent?.analytics === true;
   const isFirst = useRef(true);
 
   useEffect(() => {
+    if (!allowed) return;
     if (!MEASUREMENT_ID) return;
     if (typeof window === "undefined") return;
 
@@ -37,16 +46,17 @@ export function GoogleAnalytics() {
 
     gtag("js", new Date());
     gtag("config", MEASUREMENT_ID);
-  }, []);
+  }, [allowed]);
 
   useEffect(() => {
+    if (!allowed) return;
     if (!MEASUREMENT_ID) return;
     if (isFirst.current) {
       isFirst.current = false;
       return;
     }
     window.gtag?.("event", "page_view", { page_path: pathname });
-  }, [pathname]);
+  }, [allowed, pathname]);
 
   return null;
 }
