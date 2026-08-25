@@ -16,7 +16,7 @@ export const newsItems: NewsItem[] = [
   { title: "STRAPPED TOGETHER – כתבה במגזין \"משפחה\"", source: "MISHPACHA", date: "05.03.2024", img: `${cdn}/2024/05/לוגו-עיתון-משפחה-עברית.webp`, href: "https://mishpacha.com/strapped-together/" },
   { title: "התפילין של הזולת: סיפורים מרגשים מפרויקט החיבור בין יהודים – כתבה בכיכר השבת", source: "כיכר השבת", date: "י' בניסן התשפ\"ד | 14.04.2024", img: `${cdn}/2024/05/כיכר-השבת-לוגו.png`, href: "https://www.kikar.co.il/haredim-news/sc5lp6" },
   { title: "כך מחברים את עם ישראל בעזרת מצוות תפילין", source: "בשבע", date: "י\"ז שבט תשפ\"ד 27.01.24", img: `${cdn}/2024/01/בשבע-1.svg`, href: "https://www.inn.co.il/news/627412" },
-  { title: "לע\"נ הנופלים בעזה: 'זמן אוויר' במבצע תפילין מיוחד", source: "קול חי", date: "יג' שבט התשפ\"ד 23.01.2024", img: `${cdn}/2024/01/קול-חי.png`, href: "https://www.93fm.co.il/radio/979389/" },
+  { title: "לע\"נ הנופלים בעזה: 'זמן אוויר' במבצע תפילין מיוחד", source: "קול חי", date: "יג' שבט התשפ\"ד 23.01.2024", img: `${cdn}/2024/01/קול-חי.png`, href: "https://www.93fm.co.il/radio/979389" },
   { title: "סיפורים מפעימים – עלון \"צפנת פענח\" פרשת בא", source: "צפנת פענח", date: "יא' שבט התשפ\"ד", img: `${cdn}/2024/01/צפנת-פענח-min-1024x474.webp`, href: "/wp/uploads/2024/01/צפנת-פענח.pdf" },
 ];
 

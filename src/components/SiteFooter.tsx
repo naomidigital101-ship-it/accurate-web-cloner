@@ -51,7 +51,7 @@ export function SiteFooter({ en = false }: { en?: boolean } = {}) {
           {phone}
         </a>
         <a
-          href={`https://waze.com/ul?q=${encodeURIComponent(address)}&z=10&navigate=yes`}
+          href={`https://www.waze.com/ul?q=${encodeURIComponent(address)}&z=10&navigate=yes`}
           target="_blank"
           rel="noopener"
           aria-label={en ? `Navigate with Waze to: ${address}` : `ניווט בוויז לכתובת: ${address}`}
@@ -168,7 +168,7 @@ export function SiteFooter({ en = false }: { en?: boolean } = {}) {
           <span>{en ? "Facebook" : "פייסבוק"}</span>
         </a>
       </div>
-      <a href="https://kavnekuda.com" target="_blank" rel="noopener" aria-label="אפיון, בניה ופיתוח: KAV" className="footer-credit-link">
+      <a href="https://benkemoun.co.il/" target="_blank" rel="noopener" aria-label="אפיון, בניה ופיתוח: KAV" className="footer-credit-link">
         <img src="/wp/img/קרדיט-45.svg" alt="אפיון, בניה ופיתוח: KAV" loading="lazy" decoding="async" />
       </a>
       <a
