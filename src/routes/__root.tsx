@@ -15,6 +15,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { hreflangPair } from "../lib/hreflang";
 import { AccessibilityBar } from "../components/AccessibilityBar";
 import { CookieConsent } from "../components/CookieConsent";
+import { GoogleAnalytics } from "../components/GoogleAnalytics";
 import { SettingsProvider, type Settings } from "../lib/settings";
 import { getSettings } from "../lib/api/content.functions";
 import { SITE_URL } from "@/lib/site";
@@ -222,6 +223,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <SettingsProvider value={settings ?? {}}>
+        <GoogleAnalytics />
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
         <Outlet />
       </SettingsProvider>
