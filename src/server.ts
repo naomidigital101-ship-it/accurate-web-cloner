@@ -2,6 +2,8 @@ import "./lib/error-capture";
 
 import { consumeLastCapturedError } from "./lib/error-capture";
 import { renderErrorPage } from "./lib/error-page";
+import { LEGACY_HOST, legacyTarget } from "./lib/legacy-redirects";
+import { SITE_URL } from "./lib/site";
 
 type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
@@ -37,9 +39,41 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
   });
 }
 
+/**
+ * בקשות שהגיעו לדומיין הישן מטופלות כאן, לפני ה-SSR.
+ *
+ * 301 ולא 302: המעבר קבוע, וזה מה שמעביר לגוגל את הערך של הכתובת הישנה.
+ * 410 ולא 404 לארכיוני וורדפרס: 410 אומר "הוסר לצמיתות" ומזרז את הסרתם
+ * מהאינדקס, במקום להשאיר אותם בתור לסריקה חוזרת.
+ */
+function handleLegacyHost(request: Request): Response | null {
+  const url = new URL(request.url);
+  if (url.hostname !== LEGACY_HOST) return null;
+
+  const target = legacyTarget(url.pathname, url.search);
+  if (target === null) {
+    return new Response("<!doctype html><meta charset=utf-8><title>410</title><p>העמוד הוסר.", {
+      status: 410,
+      headers: { "content-type": "text/html; charset=utf-8", "cache-control": "public, max-age=3600" },
+    });
+  }
+
+  const [path, search = ""] = target.split(/(?=\?)/);
+  return new Response(null, {
+    status: 301,
+    headers: {
+      location: `${SITE_URL}${encodeURI(path)}${search}`,
+      "cache-control": "public, max-age=3600",
+    },
+  });
+}
+
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
+      const legacy = handleLegacyHost(request);
+      if (legacy) return legacy;
+
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
       return await normalizeCatastrophicSsrResponse(response);
