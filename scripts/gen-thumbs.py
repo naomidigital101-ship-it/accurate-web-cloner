@@ -59,11 +59,12 @@ for root in SRC_ROOTS:
             if os.path.splitext(f)[1].lower() not in ('.jpg', '.jpeg', '.png', '.webp'):
                 continue
             fp = os.path.join(dp, f)
-            if os.path.getsize(fp) < MIN_BYTES:
+            in_gallery = 'gallery' in dp.replace(os.sep, '/')
+            if not in_gallery and os.path.getsize(fp) < MIN_BYTES:
                 continue
             urls.append('/' + os.path.relpath(fp, PUB).replace(os.sep, '/'))
 
-rep = io.open(os.devnull, 'w', encoding='utf-8', newline='\n')
+rep = io.open('thumbs_report.txt', 'w', encoding='utf-8', newline='\n')
 rep.write('הוחל\n\n' if apply else 'הרצת יבש\n\n')
 b = a = 0
 for u in urls:

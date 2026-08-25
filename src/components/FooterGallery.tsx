@@ -1,4 +1,4 @@
-import { thumb, thumbFallback } from "@/lib/thumb";
+import { thumb, thumbFallback, thumbSize } from "@/lib/thumb";
 
 /**
  * גלריית התמונות שמעל הפוטר. הופרדה מהפוטר עצמו כדי שהפוטר יוכל לרוץ בכל האתר
@@ -22,6 +22,8 @@ export function FooterGallery({ images }: { images?: { url: string; alt: string 
             key={g.url}
             src={thumb(g.url)}
             data-full={g.url}
+            width={thumbSize(g.url)?.[0]}
+            height={thumbSize(g.url)?.[1]}
             onError={(e) => thumbFallback(e, g.url)}
             alt={g.alt ?? "רגעים ממיזם קשר של תפילין"}
             className="footer-gallery-img"

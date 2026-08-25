@@ -12,6 +12,8 @@
  * הממוזערות נוצרות ב-scripts/gen-thumbs.mjs. אם אין ממוזערת לתמונה מסוימת,
  * ה-onError שבקומפוננטה מחזיר את המקור, כך שתמונה חדשה מהאדמין לא נשברת.
  */
+import { THUMB_SIZES } from "@/data/thumb-sizes";
+
 const THUMB_DIR = "/wp/thumbs/";
 
 export function thumb(url: string | null | undefined): string {
@@ -29,4 +31,16 @@ export function thumbFallback(e: { currentTarget: HTMLImageElement }, full: stri
   if (img.dataset.fellBack) return;
   img.dataset.fellBack = "1";
   img.src = full;
+}
+
+/**
+ * מידות הממוזערת, לשימוש ב-width/height של התגית.
+ *
+ * בלי זה תמונה עם loading="lazy" נשארת בגובה אפס עד שהיא נטענת - ובפריסת
+ * עמודות היא אז לא חותכת את הוויופורט, ולכן לעולם לא נטענת. זה בדיוק מה
+ * שקרה בגלריה: 28 תמונות שלא ירדו כלל.
+ */
+export function thumbSize(url: string | null | undefined): [number, number] | null {
+  const t = thumb(url);
+  return THUMB_SIZES[t] ?? null;
 }
