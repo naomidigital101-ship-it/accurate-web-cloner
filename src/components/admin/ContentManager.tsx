@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { getAccessToken } from "@/lib/supabase-browser";
-import { listAll, saveRow, deleteRow, reorder } from "@/lib/api/content.functions";
+import { listAll, saveRow, deleteRow, reorder, type TableName } from "@/lib/api/content.functions";
 
 export type FieldDef = {
   key: string;
@@ -14,7 +14,7 @@ export type FieldDef = {
 };
 
 export type ManagerProps = {
-  table: string;
+  table: TableName;
   title: string;
   subtitle: string;
   fields: FieldDef[];

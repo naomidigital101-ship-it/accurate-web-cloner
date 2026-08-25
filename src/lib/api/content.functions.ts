@@ -16,7 +16,7 @@ const TABLES = [
   "media",
 ] as const;
 const TableName = z.enum(TABLES);
-type TableName = z.infer<typeof TableName>;
+export type TableName = z.infer<typeof TableName>;
 
 const ORDER: Record<TableName, { col: string; asc: boolean }> = {
   stories: { col: "sort_order", asc: true },
