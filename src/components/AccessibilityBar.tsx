@@ -285,7 +285,7 @@ export function AccessibilityBar({ en = false }: { en?: boolean } = {}) {
               <button type="button" className="a11y-reset" onClick={reset}>
                 {t("איפוס כל ההגדרות", "Reset all settings")}
               </button>
-              <a href={en ? "/en/accessibility/" : "/accessibility/"} className="a11y-statement">
+              <a href={en ? "/en/accessibility" : "/accessibility"} className="a11y-statement">
                 {t("להצהרת הנגישות המלאה", "Full accessibility statement")}
               </a>
             </div>

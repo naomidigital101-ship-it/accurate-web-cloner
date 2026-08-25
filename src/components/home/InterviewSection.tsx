@@ -66,13 +66,13 @@ export function InterviewSection() {
       <div className="iv-cards-col">
         <HoverCard
           title="הסכמות רבנים"
-          href="/agreements/"
+          href="/agreements"
           img="/wp/img/מכתב-הסכמה-מהרב-זילברשטיין-212x300.webp"
           bg="#2D2E83"
         />
         <HoverCard
           title="מכתבי תודה"
-          href="/מכתבי-תודה/"
+          href="/מכתבי-תודה"
           img="/wp/img/-תודה-אמא-לחייל-e1712736869916-218x300.webp"
           bg="#009FE3"
         />

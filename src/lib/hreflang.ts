@@ -10,17 +10,17 @@ export const ORIGIN = `${SITE_URL}`;
 
 /** [נתיב עברי, נתיב אנגלי] */
 const PAIRS: [string, string][] = [
-  ["/", "/en/the-tefillin-tie-initiative/"],
-  ["/stories/", "/en/stories-2/"],
-  ["/in-news/", "/en/articles-in-the-media/"],
-  ["/מכתבי-תודה/", "/en/thank-you-letters/"],
-  ["/agreements/", "/en/rabbis-agreements/"],
-  ["/request/", "/en/request-for-tefillin/"],
-  ["/give/", "/en/request-to-donate-tefillin/"],
-  ["/donate/", "/en/support-and-donation/"],
-  ["/accessibility/", "/en/accessibility/"],
-  ["/privacy/", "/en/privacy/"],
-  ["/terms/", "/en/terms/"],
+  ["/", "/en/the-tefillin-tie-initiative"],
+  ["/stories", "/en/stories-2"],
+  ["/in-news", "/en/articles-in-the-media"],
+  ["/מכתבי-תודה", "/en/thank-you-letters"],
+  ["/agreements", "/en/rabbis-agreements"],
+  ["/request", "/en/request-for-tefillin"],
+  ["/give", "/en/request-to-donate-tefillin"],
+  ["/donate", "/en/support-and-donation"],
+  ["/accessibility", "/en/accessibility"],
+  ["/privacy", "/en/privacy"],
+  ["/terms", "/en/terms"],
 ];
 
 const strip = (p: string) => p.replace(/\/+$/, "") || "/";

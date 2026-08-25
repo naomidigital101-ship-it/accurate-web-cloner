@@ -228,7 +228,7 @@ export function CookieConsent({ en = false }: { en?: boolean } = {}) {
           )}
         </div>
 
-        <a href={en ? "/en/privacy/" : "/privacy/"} className="cc-link">
+        <a href={en ? "/en/privacy" : "/privacy"} className="cc-link">
           {t("למדיניות הפרטיות המלאה", "Read the full privacy policy")}
         </a>
       </div>

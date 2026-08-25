@@ -13,7 +13,7 @@ export function AboutMitzvaSection() {
           מלכות שמיים. לכן מצוות תפילין היא אחת משלוש המצוות הנקראות 'אות' (בנוסף לשבת וברית
           מילה) כי היא מחברת את האדם לאמונה בה' לתורה ולמצוות כולם.
         </p>
-        <a href="/request/" className="e-btn-white">לבקשת תפילין</a>
+        <a href="/request" className="e-btn-white">לבקשת תפילין</a>
       </div>
       <div className="mitzva-img">
         <img src="/wp/img/תפילין-4-חתוך-min-1.webp" alt="תפילין" loading="lazy" />

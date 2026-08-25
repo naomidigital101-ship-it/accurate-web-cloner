@@ -126,9 +126,9 @@ function Page() {
 
         <h2>Privacy and accessibility</h2>
         <p>
-          Use of personal information is governed by our <a href="/en/privacy/">privacy policy</a>.
+          Use of personal information is governed by our <a href="/en/privacy">privacy policy</a>.
           Details of the accessibility work on this site appear in the{" "}
-          <a href="/en/accessibility/">accessibility statement</a>.
+          <a href="/en/accessibility">accessibility statement</a>.
         </p>
 
         <h2>Governing law</h2>

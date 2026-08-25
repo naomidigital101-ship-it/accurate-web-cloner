@@ -37,7 +37,7 @@ export function SiteFooter({ en = false }: { en?: boolean } = {}) {
 
   return (
     <footer dir={en ? "ltr" : "rtl"} className="footer-e footer-brand-only">
-      <a href={en ? "/en/the-tefillin-tie-initiative/" : "/"} aria-label={en ? "Ohr Chadash - home" : "אור חדש - דף הבית"} className="footer-brand-logo">
+      <a href={en ? "/en/the-tefillin-tie-initiative" : "/"} aria-label={en ? "Ohr Chadash - home" : "אור חדש - דף הבית"} className="footer-brand-logo">
         <img src="/wp/img/אור-חדש-לוגו-13.svg" alt={en ? "Ohr Chadash" : "אור חדש"} />
       </a>
       <h2 className="footer-tagline">
@@ -97,61 +97,61 @@ export function SiteFooter({ en = false }: { en?: boolean } = {}) {
           <>
             <div>
               <h3>The project</h3>
-              <a href="/en/stories-2/">Stories</a>
-              <a href="/en/articles-in-the-media/">Articles in the media</a>
-              <a href="/en/rabbis-agreements/">Rabbis agreements</a>
-              <a href="/en/thank-you-letters/">Thank you letters</a>
+              <a href="/en/stories-2">Stories</a>
+              <a href="/en/articles-in-the-media">Articles in the media</a>
+              <a href="/en/rabbis-agreements">Rabbis agreements</a>
+              <a href="/en/thank-you-letters">Thank you letters</a>
             </div>
             <div>
               <h3>Actions</h3>
-              <a href="/en/request-for-tefillin/">Request for Tefillin</a>
-              <a href="/en/request-to-donate-tefillin/">Donate Tefillin</a>
-              <a href="/en/support-and-donation/">Support and donation</a>
+              <a href="/en/request-for-tefillin">Request for Tefillin</a>
+              <a href="/en/request-to-donate-tefillin">Donate Tefillin</a>
+              <a href="/en/support-and-donation">Support and donation</a>
               <a href={wa} target="_blank" rel="noopener">Chat on WhatsApp</a>
             </div>
             <div>
               <h3>Information</h3>
-              <a href="/en/accessibility/">Accessibility</a>
-              <a href="/en/privacy/">Privacy policy</a>
-              <a href="/en/terms/">Terms of use</a>
+              <a href="/en/accessibility">Accessibility</a>
+              <a href="/en/privacy">Privacy policy</a>
+              <a href="/en/terms">Terms of use</a>
               <CookieSettingsLink en />
             </div>
             <div>
               <h3 lang="he">עברית</h3>
               <a href="/" lang="he">קשר של תפילין</a>
-              <a href="/stories/" lang="he">סיפורים</a>
-              <a href="/donate/" lang="he">תרומה למיזם</a>
+              <a href="/stories" lang="he">סיפורים</a>
+              <a href="/donate" lang="he">תרומה למיזם</a>
             </div>
           </>
         ) : (
           <>
             <div>
               <h3>המיזם</h3>
-              <a href="/stories/">סיפורים שמאחורי התפילין</a>
-              <a href="/in-news/">כתבות בתקשורת</a>
-              <a href="/agreements/">הסכמות הרבנים</a>
-              <a href="/מכתבי-תודה/">מכתבי תודה</a>
+              <a href="/stories">סיפורים שמאחורי התפילין</a>
+              <a href="/in-news">כתבות בתקשורת</a>
+              <a href="/agreements">הסכמות הרבנים</a>
+              <a href="/מכתבי-תודה">מכתבי תודה</a>
             </div>
             <div>
               <h3>פעולות</h3>
-              <a href="/request/">בקשת תפילין</a>
-              <a href="/give/">מסירת תפילין</a>
-              <a href="/donate/">תרומה למיזם</a>
+              <a href="/request">בקשת תפילין</a>
+              <a href="/give">מסירת תפילין</a>
+              <a href="/donate">תרומה למיזם</a>
               <a href={wa} target="_blank" rel="noopener">שיחה בוואטסאפ</a>
             </div>
             <div>
               <h3>מידע</h3>
-              <a href="/accessibility/">הצהרת נגישות</a>
-              <a href="/privacy/">מדיניות פרטיות</a>
-              <a href="/terms/">תקנון ותנאי שימוש</a>
-              <a href="/certificates/">אישורי העמותה</a>
+              <a href="/accessibility">הצהרת נגישות</a>
+              <a href="/privacy">מדיניות פרטיות</a>
+              <a href="/terms">תקנון ותנאי שימוש</a>
+              <a href="/certificates">אישורי העמותה</a>
               <CookieSettingsLink />
             </div>
             <div>
               <h3>English</h3>
-              <a href="/en/the-tefillin-tie-initiative/" lang="en">The Tefillin Tie Initiative</a>
-              <a href="/en/stories-2/" lang="en">Stories</a>
-              <a href="/en/support-and-donation/" lang="en">Support &amp; donate</a>
+              <a href="/en/the-tefillin-tie-initiative" lang="en">The Tefillin Tie Initiative</a>
+              <a href="/en/stories-2" lang="en">Stories</a>
+              <a href="/en/support-and-donation" lang="en">Support &amp; donate</a>
             </div>
           </>
         )}
