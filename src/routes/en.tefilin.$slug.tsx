@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { StoryShell } from "@/components/StoryShell";
 import { PageShell } from "@/components/PageShell";
 import { enStories } from "@/data/en-stories";
@@ -34,7 +34,16 @@ export const Route = createFileRoute("/en/tefilin/$slug")({
       links: [{ rel: "canonical", href: url }],
     };
   },
-  loader: async () => ({ rows: await readStories("en") }),
+  /**
+   * סלאג שאינו קיים חייב להחזיר 404 אמיתי ולא 200 עם "לא נמצא" - אחרת זה
+   * soft-404: גוגל סופר את העמוד כתקין, וכל טעות בכתובת סיפור נבלעת בשקט.
+   */
+  loader: async ({ params }) => {
+    const rows = await readStories("en");
+    const list = rows && rows.length > 0 ? rows : enStories;
+    if (!list.some((s) => s.slug === params.slug)) throw notFound();
+    return { rows };
+  },
   component: StoryPage,
 });
 

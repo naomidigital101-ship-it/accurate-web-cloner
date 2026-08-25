@@ -12,6 +12,7 @@ const letters: Letter[] = [
   { title: "Letter of thanks from the Jewish community in Romania", sub: "מנשיא הקהילה הודית ברומניה", img: `${cdn}/2026/05/הקהילה-היהודית-ברומניה-min.webp` },
 
   { title: "Letter of thanks from Rabbi Eitan Eckstein", sub: "Manager of Retorno", img: `${cdn}/2026/05/איתן-אקשטיין-רטורנו.png` },
+  { title: "A letter of recommendation from Beit El Middle School", sub: "Rabbi Eliezer Katzover, School Rabbi", img: `${cdn}/2025/05/תמונה-של-WhatsApp‏-2025-05-18-בשעה-15.23.54_44db3e8d.jpg` },
   { title: "A letter from the air force base chief", img: `${cdn}/2024/04/מכתב-תודה-רב-בסיס-חיל-האוויר-scaled.webp` },
   { title: "A letter from the day center to the elderly", img: `${cdn}/2024/04/-תודה-מרכז-יום-לקשיש-e1712736849999.webp` },
   { title: "A letter from the commander of the camp of Zirifin", img: `${cdn}/2024/04/מכתב-תודה-מפקד-מחנה-צריפין.webp` },
