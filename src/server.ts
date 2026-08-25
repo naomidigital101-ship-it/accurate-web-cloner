@@ -48,7 +48,9 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
  * כאן אפשר לתרגם אותו ליעד הנכון.
  *
  * על הדומיין הראשי פועלים רק כשהיעד באמת שונה מהנתיב שהתבקש, אחרת כל עמוד
- * תקין היה מפנה לעצמו בלולאה.
+ * תקין היה מפנה לעצמו בלולאה. יוצא דופן: סלאש סוגר. הראוטר מנרמל אותו בעצמו
+ * ב-307 זמני, ומכיוון שכל הכתובות הישנות נכתבו עם סלאש סוגר, זה היה משאיר
+ * 75 מהן בלי 301 בכלל. לכן מנרמלים אותו כאן, ב-301.
  *
  * 301 ולא 302: המעבר קבוע, וזה מה שמעביר לגוגל את הערך של הכתובת הישנה.
  * 410 ולא 404 לארכיוני וורדפרס: 410 אומר "הוסר לצמיתות" ומזרז את הסרתם
@@ -67,7 +69,10 @@ function handleLegacyHost(request: Request): Response | null {
   }
 
   const [path, search = ""] = target.split(/(?=\?)/);
-  if (!isLegacyHost && normalizePath(path) === normalizePath(url.pathname)) return null;
+  const hasTrailingSlash = url.pathname.length > 1 && url.pathname.endsWith("/");
+  if (!isLegacyHost && !hasTrailingSlash && normalizePath(path) === normalizePath(url.pathname)) {
+    return null;
+  }
 
   return new Response(null, {
     status: 301,
