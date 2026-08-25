@@ -118,6 +118,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&family=Frank+Ruhl+Libre:wght@400;500;700;800;900&display=swap" },
     ],
     scripts: [
+      { async: true, src: "https://www.googletagmanager.com/gtag/js?id=G-TG5SE28LKK" },
+      {
+        children:
+          "window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js', new Date());gtag('config', 'G-TG5SE28LKK', { send_page_view: false });",
+      },
       {
         type: "application/ld+json",
 
