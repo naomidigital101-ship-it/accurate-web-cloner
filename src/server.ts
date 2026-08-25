@@ -125,11 +125,37 @@ function withSecurityHeaders(response: Response): Response {
   return new Response(response.body, { status: response.status, statusText: response.statusText, headers: h });
 }
 
+/**
+ * קבצי המדיה שהגיעו מהוורדפרס אף פעם לא משתנים בשם, ולכן אפשר לתת להם
+ * קאשינג לצמיתות. עד עכשיו הם הוגשו בלי שום כותרת, ומבקר חוזר הוריד מחדש
+ * שלושה מגה בכל ביקור.
+ *
+ * הכותרת נקבעת כאן ולא בקובץ _headers, כי לאבבל בונה אותו מחדש בפריסה.
+ * wrangler.json מוגדר עם run_worker_first עבור /wp/* בלבד, כך שרק הנתיב
+ * הזה עובר דרכנו וכל שאר הנכסים ממשיכים בדרך המהירה של קלאודפלייר.
+ */
+async function serveMedia(request: Request, env: unknown): Promise<Response | null> {
+  const assets = (env as { ASSETS?: { fetch: (r: Request) => Promise<Response> } } | undefined)?.ASSETS;
+  if (!assets) return null;
+
+  const res = await assets.fetch(request);
+  if (res.status !== 200) return res;
+
+  const h = new Headers(res.headers);
+  h.set("cache-control", "public, max-age=31536000, immutable");
+  return new Response(res.body, { status: res.status, statusText: res.statusText, headers: h });
+}
+
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
       const legacy = handleLegacyHost(request);
       if (legacy) return withSecurityHeaders(legacy);
+
+      if (new URL(request.url).pathname.startsWith("/wp/")) {
+        const media = await serveMedia(request, env);
+        if (media) return media;
+      }
 
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);

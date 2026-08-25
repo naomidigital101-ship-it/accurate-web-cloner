@@ -146,11 +146,27 @@ export const saveSettings = createServerFn({ method: "POST" })
       if (c.key.startsWith("__")) continue; // מפתחות מערכת אינם ניתנים לעריכה מהממשק
       await db.from("site_settings").update({ value: c.value, updated_at: new Date().toISOString() }).eq("key", c.key);
     }
+    settingsCache = null; // שמירה מהאדמין מבטלת את המטמון מיד
     return { ok: true as const, saved: data.changes.length };
   });
 
 /** קריאה ציבורית של ההגדרות - זה מה שמזין את הפרונט */
+/**
+ * ההגדרות נטענות בכל רינדור של כל עמוד, ולכן כל בקשה שילמה נסיעה לסופבייס
+ * לפני שהוגש ביט אחד של HTML. זה היה חלק ניכר מזמן התגובה של השרת.
+ *
+ * המטמון חי בזיכרון של ה-worker, שנשמר בין בקשות. 60 שניות הן פשרה: שינוי
+ * הגדרה מהאדמין מופיע באתר תוך דקה לכל היותר, ובתמורה רוב הבקשות לא נוגעות
+ * ב-DB בכלל. אין כאן נתונים אישיים - רק טלפון, כתובת וקישורי תרומה.
+ */
+const SETTINGS_TTL_MS = 60_000;
+let settingsCache: { at: number; value: Record<string, string> } | null = null;
+
 export const getSettings = createServerFn({ method: "GET" }).handler(async () => {
+  const now = Date.now();
+  if (settingsCache && now - settingsCache.at < SETTINGS_TTL_MS) {
+    return settingsCache.value;
+  }
   const { data: rows } = await publicDb().from("site_settings").select("key,value");
   const out: Record<string, string> = {};
   for (const r of rows ?? []) {
@@ -178,5 +194,6 @@ export const getSettings = createServerFn({ method: "GET" }).handler(async () =>
   delete out.pairs_delivered_auto;
   delete out.pairs_delivered_base;
 
+  settingsCache = { at: now, value: out };
   return out;
 });

@@ -119,10 +119,28 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preload", as: "font", type: "font/woff2", href: "/fonts/FrankRuhlLibre-hebrew.woff2", crossOrigin: "anonymous" },
     ],
     scripts: [
-      { async: true, src: "https://www.googletagmanager.com/gtag/js?id=G-TG5SE28LKK" },
       {
+        /**
+         * gtag.js שוקל 165KB - הסקריפט הכבד ביותר בעמוד. כשהוא נטען עם async
+         * מה-head הוא מתחרה על רוחב הפס עם תמונת ה-hero, שהיא ה-LCP, ומעכב
+         * אותה בדיוק ברגע הקריטי.
+         *
+         * הפתרון אינו לוותר על המדידה אלא להזיז אותה בתור: ה-stub של dataLayer
+         * נוצר מיד, וכל קריאה ל-gtag לפני שהסקריפט ירד נערמת בתור ומשוחררת
+         * ברגע שהוא נטען. זו התנהגות מובנית של gtag ולא טריק - אף אירוע לא
+         * הולך לאיבוד, כולל צפיית העמוד הראשונה.
+         *
+         * הטעינה מתחילה אחרי אירוע load, או אחרי 3 שניות אם הוא כבר עבר.
+         */
         children:
-          "window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js', new Date());gtag('config', 'G-TG5SE28LKK', { send_page_view: false });",
+          "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}window.gtag=gtag;" +
+          "gtag('js',new Date());gtag('config','G-TG5SE28LKK',{send_page_view:false});" +
+          "(function(){var f=function(){if(window.__gaLoaded)return;window.__gaLoaded=1;" +
+          "var s=document.createElement('script');s.async=true;" +
+          "s.src='https://www.googletagmanager.com/gtag/js?id=G-TG5SE28LKK';" +
+          "document.head.appendChild(s)};" +
+          "if(document.readyState==='complete'){setTimeout(f,0)}else{addEventListener('load',f,{once:true})}" +
+          "setTimeout(f,3000)})();",
       },
       {
         type: "application/ld+json",
