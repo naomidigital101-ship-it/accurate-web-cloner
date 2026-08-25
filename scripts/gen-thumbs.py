@@ -22,7 +22,7 @@ GALLERY = [f'g{i}' for i in range(1, 29)]
 # כל תמונה מעל הסף מקבלת ממוזערת. הכרטיסים באתר - גלריה, מכתבים, הסכמות,
 # אישורים - כולם מציגים בסביבות 300 פיקסל ופותחים את המקור בלחיצה.
 SRC_ROOTS = ['wp/uploads', 'wp/img', 'wp/assets']
-MIN_BYTES = 60 * 1024
+MIN_BYTES = 0  # ממוזערת לכל תמונה: סף משקל השאיר חורים שהחזירו 404
 
 
 def thumb_name(url):
@@ -44,6 +44,8 @@ def build(url):
     im.thumbnail((THUMB, THUMB), Image.LANCZOS)
     buf = io.BytesIO()
     im.save(buf, 'WEBP', quality=80, method=6)
+    if buf.tell() >= os.path.getsize(src):
+        return None  # הממוזערת לא קטנה מהמקור - אין טעם
     if apply:
         os.makedirs(os.path.dirname(dst), exist_ok=True)
         io.open(dst, 'wb').write(buf.getvalue())
