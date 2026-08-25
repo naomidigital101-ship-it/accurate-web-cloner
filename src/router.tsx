@@ -10,6 +10,9 @@ export const getRouter = () => {
     context: { queryClient },
     scrollRestoration: true,
     defaultPreloadStaleTime: 0,
+    // הכתובת הקנונית היא בלי סלאש סוגר. בלי זה הראוטר מוסיף סלאש לקישורי
+    // הסיפורים, וכל אחד מהם עולה בהפניית 301 לסורק שעוקב אחריו.
+    trailingSlash: "never",
   });
 
   return router;
