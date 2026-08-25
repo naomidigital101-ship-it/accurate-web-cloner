@@ -1,14 +1,8 @@
-# קבצי המדיה שהגיעו מהוורדפרס לעולם לא משתנים בשם - הם ניתנים לקאשינג לצמיתות.
-# בלי זה מבקר חוזר מוריד מחדש את כל 5 המגה של עמוד הבית.
 /wp/*
-  cache-control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=31536000, immutable
 
-# מונע הטמעה של האתר במסגרת באתר זר (clickjacking על טופס הבקשה ועמוד התרומה)
 /*
   X-Frame-Options: SAMEORIGIN
-  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
   Cross-Origin-Opener-Policy: same-origin-allow-popups
-
-# CSP במצב דיווח בלבד: הדפדפן מדווח על הפרות בקונסול אך לא חוסם דבר, כך שאי
-# אפשר להלבין את האתר בטעות. מעבר לאכיפה רק אחרי שהדיווחים נקיים.
   Content-Security-Policy-Report-Only: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https://www.googletagmanager.com https://www.google-analytics.com; media-src 'self'; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://player.vimeo.com; upgrade-insecure-requests
