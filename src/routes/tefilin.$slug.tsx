@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
 import { StoryShell } from "@/components/StoryShell";
 import { stories } from "@/data/stories";
-import { readStories } from "@/lib/content";
+import { readStories, type DbStory } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
 
 

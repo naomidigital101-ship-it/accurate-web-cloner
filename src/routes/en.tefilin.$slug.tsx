@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { StoryShell } from "@/components/StoryShell";
 import { PageShell } from "@/components/PageShell";
 import { enStories } from "@/data/en-stories";
-import { readStories } from "@/lib/content";
+import { readStories, type DbStory } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/en/tefilin/$slug")({
