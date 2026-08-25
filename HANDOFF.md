@@ -15,12 +15,12 @@
 
 | | |
 |---|---|
-| אתר חי | https://accurate-web-cloner.lovable.app |
-| אדמין | https://accurate-web-cloner.lovable.app/admin |
+| אתר חי | https://or-hadash.org.il |
+| אדמין | https://or-hadash.org.il/admin |
 | פרויקט Lovable | `167f27e2-2714-4390-92ec-a8678508fc95` |
 | ריפו | `naomidigital101-ship-it/accurate-web-cloner` (ענף `main`) |
 | Supabase | `ndrsficegioyptrbbuxu.supabase.co` (Lovable Cloud) |
-| **האתר הישן** | `tefilin.or-hadash.org.il` - **עדיין חי!** ראה §7 |
+| **הדומיין הישן** | `tefilin.or-hadash.org.il` - מצביע לאתר הזה ומחזיר 301/410 בלבד. ראה §7 |
 
 **סטאק:** TanStack Start (SSR) + React + Supabase. עברית RTL, אנגלית תחת `/en`.
 
@@ -202,16 +202,23 @@ const list = fromDb && fromDb.length > 0 ? fromDb.map(...) : codeArray;
 מדיניות פרטיות · תקנון · באנר עוגיות אוכף · פוטר עם `NGO` schema · **לידים נשמרים** ·
 מערכת ניהול מלאה · hreflang · sitemap עם 83 כתובות.
 
-### 🔴 סעיף 7 - הדבר הגדול שנשאר
-1. `tefilin.or-hadash.org.il` **חי, מחזיר 200, canonical לעצמו, בלי noindex** → כפילות תוכן
-2. `or-hadash.org.il` **מפנה חזרה לאתר הישן** - והלוגו בהדר שלנו מקשר לשם
-3. האתר החדש עדיין על `accurate-web-cloner.lovable.app`
+### ✅ סעיף 7 - המעבר לדומיין (הושלם 25.8.26)
+האתר חי על `or-hadash.org.il`. `tefilin.or-hadash.org.il` מצביע לאותה תשתית
+ומגיש הפניות בלבד - הוורדפרס מנותק מהרשת ואין כפילות תוכן.
 
-**סדר הפעולות הנכון:**
-א. להעביר לדומיין → לשנות `SITE_URL` ב-`src/lib/site.ts` (**שורה אחת**)
-ב. `node scripts/gen-sitemap.mjs`
-ג. להקים 301 מכל כתובת ישנה לחדשה
-ד. **רק אז** לכבות את האתר הישן
+**איך זה בנוי:** לאבבל מפנה בעצמו כל דומיין משני לראשי ב-302 ששומר על הנתיב,
+לפני שהבקשה מגיעה ל-`src/server.ts`. לכן כללי ההפניה חלים על **כל** בקשה,
+ועל הדומיין הראשי פועלים רק כשהיעד שונה מהנתיב. המפה: `src/lib/legacy-redirects.ts`.
+שרשרת בפועל: `302` (לאבבל) → `301` (שלנו) → `200`.
+
+**שני דברים שקל ליפול בהם אם עורכים את המפה:**
+- כל הכתובות הישנות נכתבו עם סלאש סוגר. הראוטר מנרמל אותו ב-307 זמני, ולכן
+  אנחנו מנרמלים בעצמנו ב-301 - בלי זה 75 כתובות לא מקבלות 301 בכלל.
+- באתר הישן `/letters/` הכיל **שני** סוגי תוכן: מכתבי תודה **והסכמות רבנים**.
+  כלל תחילית גורף שולח 17 הסכמות לעמוד הלא נכון.
+
+**מה שנשאר:** לבקש מוונגוס גיבוי מלא של הוורדפרס (SQL + uploads) לפני שהשרת
+הישן מושבת - אין לנו גישה אליו יותר.
 
 **גם:** לשנות את ה-`<title>` של עמוד הבית לפי בקשת הלקוח:
 "קשר של תפילין - מיזם של תרומה וערבות הדדית לכל מי שרוצה להתחיל להניח תפילין" (75 תווים,
@@ -299,8 +306,8 @@ node scripts/gen-sitemap.mjs         # אחרי הוספת סיפור או מע�
 
 **בדיקת פרודקשן** (אל תסמוך על ספירה של מודל - השתמש ב-grep):
 ```bash
-curl -s https://accurate-web-cloner.lovable.app/sitemap.xml | grep -c '<loc>'
-curl -s https://accurate-web-cloner.lovable.app/ | grep -o 'מעל [0-9,]*'
+curl -s https://or-hadash.org.il/sitemap.xml | grep -c '<loc>'
+curl -s https://or-hadash.org.il/ | grep -o 'מעל [0-9,]*'
 ```
 
 **SQL** דרך Lovable MCP `query_database` - **תומך ב-DDL מלא**, מתחבר כ-`postgres`
