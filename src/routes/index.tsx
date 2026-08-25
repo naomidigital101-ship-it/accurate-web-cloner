@@ -72,7 +72,12 @@ export const Route = createFileRoute("/")({
       },
     ],
   }),
-  loader: async () => ({ faqs: await readFaqs("he"), gallery: await readGallery(), stories: await readStories("he") }),
+  // Promise.all ולא שלושה await ברצף: אובייקט מחשב את שדותיו לפי הסדר, ולכן
+  // כל קריאה המתינה לסיום הקודמת - שלוש נסיעות לסופבייס בטור במקום במקביל.
+  loader: async () => {
+    const [faqs, gallery, stories] = await Promise.all([readFaqs("he"), readGallery(), readStories("he")]);
+    return { faqs, gallery, stories };
+  },
   component: Index,
 });
 

@@ -6,14 +6,41 @@ import { publicDb } from "./supabase.server";
  * הכלל בכל הפונקציות כאן: אם ה-DB לא זמין או ריק - מחזירים null, והרכיב
  * מציג את המערך שבקוד. כך מעבר לניהול מה-DB לא יכול להוריד תוכן מהאתר.
  */
+/**
+ * מטמון בזיכרון האיזולט, 60 שניות.
+ *
+ * התוכן הזה נקרא בכל רינדור של כל עמוד, והוא כמעט לא משתנה - מכתבי רבנים,
+ * גלריה, שאלות נפוצות. בלי המטמון כל מבקר שילם נסיעה לסופבייס לפני שיצא
+ * ביט אחד של HTML, וזה היה חלק ניכר מזמן התגובה של השרת.
+ *
+ * שמירה מהאדמין מאפסת את המטמון מיד (invalidateContent), כך שאין המתנה
+ * של דקה כדי לראות שינוי. ה-TTL הוא רק רשת ביטחון.
+ */
+const READ_TTL_MS = 60_000;
+const readCache = new Map<string, { at: number; value: unknown[] | null }>();
+
+/** מאפסת את המטמון אחרי כתיבה מהאדמין. ללא ארגומנט - מאפסת הכל. */
+export function invalidateContent(table?: string) {
+  if (!table) return readCache.clear();
+  for (const k of readCache.keys()) if (k === table || k.startsWith(table + ":")) readCache.delete(k);
+}
+
 async function read<T>(table: string, lang?: "he" | "en"): Promise<T[] | null> {
+  const key = lang ? `${table}:${lang}` : table;
+  const hit = readCache.get(key);
+  if (hit && Date.now() - hit.at < READ_TTL_MS) return hit.value as T[] | null;
+
   try {
     let q = publicDb().from(table).select("*").order("sort_order", { ascending: true });
     if (lang) q = q.eq("lang", lang);
     const { data, error } = await q;
-    if (error || !data || data.length === 0) return null;
-    return data as T[];
+    // כשל או טבלה ריקה נשמרים גם הם, אחרת DB שנפל היה מייצר נסיון חוזר
+    // בכל רינדור ומאט את האתר בדיוק כשהוא הכי שביר. המערך שבקוד מוצג ממילא.
+    const value = error || !data || data.length === 0 ? null : (data as T[]);
+    readCache.set(key, { at: Date.now(), value });
+    return value;
   } catch {
+    readCache.set(key, { at: Date.now(), value: null });
     return null;
   }
 }

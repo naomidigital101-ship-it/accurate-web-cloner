@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
+import { invalidateContent } from "../content";
 import { adminDb, publicDb, requireStaff } from "../supabase.server";
 
 /** רשימה סגורה - שם טבלה מגיע מהלקוח, ובלי זה זו פרצה */
@@ -82,10 +83,12 @@ export const saveRow = createServerFn({ method: "POST" })
     if (data.id) {
       const { error } = await db.from(data.table).update(values).eq("id", data.id);
       if (error) throw new Error(error.message);
+      invalidateContent(data.table);
       return { ok: true as const, id: data.id };
     }
     const { data: row, error } = await db.from(data.table).insert(values).select("id").single();
     if (error) throw new Error(error.message);
+    invalidateContent(data.table);
     return { ok: true as const, id: row.id as string };
   });
 
@@ -96,6 +99,7 @@ export const deleteRow = createServerFn({ method: "POST" })
     if (!staff.isAdmin) throw new Error("admin_only");
     const { error } = await adminDb().from(data.table).delete().eq("id", data.id);
     if (error) throw new Error(error.message);
+    invalidateContent(data.table);
     return { ok: true as const };
   });
 
@@ -114,6 +118,7 @@ export const reorder = createServerFn({ method: "POST" })
     await Promise.all(
       data.ids.map((id, i) => db.from(data.table).update({ sort_order: (i + 1) * 10 }).eq("id", id)),
     );
+    invalidateContent(data.table);
     return { ok: true as const };
   });
 
