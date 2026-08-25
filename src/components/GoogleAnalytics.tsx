@@ -1,6 +1,5 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useRouterState } from "@tanstack/react-router";
-import { useConsent } from "./CookieConsent";
 
 declare global {
   interface Window {
@@ -9,54 +8,22 @@ declare global {
   }
 }
 
-const MEASUREMENT_ID = import.meta.env.VITE_LOVABLE_CONNECTOR_GOOGLE_ANALYTICS_API_KEY;
-
-function loadGtag(measurementId: string) {
-  if (document.getElementById("ga-script")) return;
-  const script = document.createElement("script");
-  script.id = "ga-script";
-  script.async = true;
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
-  document.head.appendChild(script);
-}
-
 /**
- * נטען אך ורק אחרי הסכמה מפורשת בקטגוריית "מדידה וסטטיסטיקה" בבאנר העוגיות.
- * בלי התנאי הזה הסקריפט היה נטען לכל מבקר עוד לפני שנשאל - וזה גם סותר את
- * מה שכתוב בבאנר עצמו.
+ * ה-gtag.js נטען ומאותחל ישירות ב-head של ה-root route עם send_page_view: false,
+ * ולכן כאן נשלח page_view ידני בכל שינוי נתיב - כולל הטעינה הראשונה - בלי ספירה כפולה.
  */
 export function GoogleAnalytics() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const consent = useConsent();
-  const allowed = consent?.analytics === true;
-  const isFirst = useRef(true);
+  const search = useRouterState({ select: (s) => s.location.searchStr });
 
   useEffect(() => {
-    if (!allowed) return;
-    if (!MEASUREMENT_ID) return;
     if (typeof window === "undefined") return;
-
-    loadGtag(MEASUREMENT_ID);
-
-    window.dataLayer = window.dataLayer || [];
-    function gtag(...args: unknown[]) {
-      window.dataLayer.push(args);
-    }
-    window.gtag = gtag;
-
-    gtag("js", new Date());
-    gtag("config", MEASUREMENT_ID);
-  }, [allowed]);
-
-  useEffect(() => {
-    if (!allowed) return;
-    if (!MEASUREMENT_ID) return;
-    if (isFirst.current) {
-      isFirst.current = false;
-      return;
-    }
-    window.gtag?.("event", "page_view", { page_path: pathname });
-  }, [allowed, pathname]);
+    window.gtag?.("event", "page_view", {
+      page_path: `${pathname}${search ?? ""}`,
+      page_location: window.location.href,
+      page_title: document.title,
+    });
+  }, [pathname, search]);
 
   return null;
 }
