@@ -17,11 +17,18 @@ import { THUMB_SIZES } from "@/data/thumb-sizes";
 const THUMB_DIR = "/wp/thumbs/";
 
 export function thumb(url: string | null | undefined): string {
-  if (!url) return "";
-  if (!url.startsWith("/wp/") || url.startsWith(THUMB_DIR)) return url;
+  const t = thumbPath(url);
+  // רק ממוזערת שבאמת נוצרה. בלי הבדיקה הזו כל תמונה קטנה מדי מכדי להצדיק
+  // ממוזערת הייתה מייצרת בקשת 404 מיותרת לפני שה-onError מחזיר את המקור.
+  return t && THUMB_SIZES[t] ? t : (url ?? "");
+}
+
+function thumbPath(url: string | null | undefined): string | null {
+  if (!url) return null;
+  if (!url.startsWith("/wp/") || url.startsWith(THUMB_DIR)) return null;
   const rest = url.slice("/wp/".length).split("?")[0];
   const dot = rest.lastIndexOf(".");
-  if (dot < 0) return url;
+  if (dot < 0) return null;
   return THUMB_DIR + rest.slice(0, dot).replaceAll("/", "-") + ".webp";
 }
 
@@ -41,6 +48,6 @@ export function thumbFallback(e: { currentTarget: HTMLImageElement }, full: stri
  * שקרה בגלריה: 28 תמונות שלא ירדו כלל.
  */
 export function thumbSize(url: string | null | undefined): [number, number] | null {
-  const t = thumb(url);
-  return THUMB_SIZES[t] ?? null;
+  const t = thumbPath(url);
+  return (t && THUMB_SIZES[t]) ?? null;
 }
