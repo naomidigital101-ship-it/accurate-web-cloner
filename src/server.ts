@@ -83,15 +83,56 @@ function handleLegacyHost(request: Request): Response | null {
   });
 }
 
+/**
+ * מדיניות תוכן במצב דיווח בלבד: הדפדפן מדווח על הפרות בקונסול ולא חוסם דבר,
+ * כך שאי אפשר להלבין את האתר בטעות. מעבר לאכיפה רק אחרי שהדיווחים נקיים.
+ */
+const CSP_REPORT_ONLY = [
+  "default-src 'self'",
+  "base-uri 'self'",
+  "object-src 'none'",
+  "frame-ancestors 'self'",
+  "form-action 'self'",
+  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com",
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "font-src 'self' data: https://fonts.gstatic.com",
+  "img-src 'self' data: blob: https://www.googletagmanager.com https://www.google-analytics.com",
+  "media-src 'self'",
+  "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com",
+  "frame-src https://www.youtube.com https://www.youtube-nocookie.com https://player.vimeo.com",
+  "upgrade-insecure-requests",
+].join("; ");
+
+/**
+ * כותרות האבטחה נקבעות כאן ולא בקובץ _headers, כי לאבבל בונה את הקובץ הזה
+ * בעצמה בפריסה ומתעלמת ממה שאנחנו כותבים בו. מה שעובר דרך הוורקר - עובר.
+ *
+ * X-Frame-Options מונע הטמעת עמוד התרומה והטופס במסגרת באתר מתחזה.
+ */
+function withSecurityHeaders(response: Response): Response {
+  const h = new Headers(response.headers);
+  if (!h.has("x-frame-options")) h.set("x-frame-options", "SAMEORIGIN");
+  if (!h.has("permissions-policy")) {
+    h.set("permissions-policy", "camera=(), microphone=(), geolocation=(), payment=(), usb=()");
+  }
+  if (!h.has("cross-origin-opener-policy")) {
+    h.set("cross-origin-opener-policy", "same-origin-allow-popups");
+  }
+  if (!h.has("content-security-policy-report-only")) {
+    h.set("content-security-policy-report-only", CSP_REPORT_ONLY);
+  }
+  return new Response(response.body, { status: response.status, statusText: response.statusText, headers: h });
+}
+
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
       const legacy = handleLegacyHost(request);
-      if (legacy) return legacy;
+      if (legacy) return withSecurityHeaders(legacy);
 
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
-      return await normalizeCatastrophicSsrResponse(response);
+      return withSecurityHeaders(await normalizeCatastrophicSsrResponse(response));
     } catch (error) {
       console.error(error);
       return new Response(renderErrorPage(), {
