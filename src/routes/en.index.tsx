@@ -68,7 +68,20 @@ export const Route = createFileRoute("/en/")({
       { property: "og:type", content: "website" },
       { property: "og:url", content: `${SITE_URL}/en/the-tefillin-tie-initiative` },
     ],
-    links: [{ rel: "canonical", href: `${SITE_URL}/en/the-tefillin-tie-initiative` }],
+    links: [
+      /**
+       * תמונת ה-hero היא ה-LCP, והיא מוגדרת כרקע CSS בתוך style inline. לכן
+       * הדפדפן מגלה אותה רק אחרי שה-CSS וה-JS נטענו - לייטהאוס מדד 2.27 שניות
+       * של "Load Delay", 53% מכל זמן ה-LCP. preload מגלה אותה מיד בסריקת ה-head.
+       */
+      {
+        rel: "preload",
+        as: "image",
+        href: "/wp/assets/jewish-torah-bar-mitzvah-bar-mitzvah-torah-reading-min.webp",
+        fetchPriority: "high",
+      },
+      { rel: "canonical", href: `${SITE_URL}/en/the-tefillin-tie-initiative` },
+    ],
   }),
   loader: enHomeLoader,
   component: EnIndexPage,

@@ -113,9 +113,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico", sizes: "any" },
       { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
       { rel: "manifest", href: "/manifest.json" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&family=Frank+Ruhl+Libre:wght@400;500;700;800;900&display=swap" },
+      // הפונטים מאורחים אצלנו ומוגדרים ב-styles.css. הגיליון של גוגל חסם
+      // רינדור ל-884ms - מקור חיצוני דורש DNS ו-TLS משלו לפני הציור הראשון.
+      { rel: "preload", as: "font", type: "font/woff2", href: "/fonts/Heebo-hebrew.woff2", crossOrigin: "anonymous" },
+      { rel: "preload", as: "font", type: "font/woff2", href: "/fonts/FrankRuhlLibre-hebrew.woff2", crossOrigin: "anonymous" },
     ],
     scripts: [
       { async: true, src: "https://www.googletagmanager.com/gtag/js?id=G-TG5SE28LKK" },

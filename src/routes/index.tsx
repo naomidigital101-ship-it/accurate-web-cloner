@@ -43,7 +43,20 @@ export const Route = createFileRoute("/")({
       { property: "og:type", content: "website" },
       { property: "og:url", content: HOME_URL },
     ],
-    links: [{ rel: "canonical", href: HOME_URL }],
+    links: [
+      /**
+       * תמונת ה-hero היא ה-LCP, והיא מוגדרת כרקע CSS בתוך style inline. לכן
+       * הדפדפן מגלה אותה רק אחרי שה-CSS וה-JS נטענו - לייטהאוס מדד 2.27 שניות
+       * של "Load Delay", 53% מכל זמן ה-LCP. preload מגלה אותה מיד בסריקת ה-head.
+       */
+      {
+        rel: "preload",
+        as: "image",
+        href: "/wp/assets/jewish-torah-bar-mitzvah-bar-mitzvah-torah-reading-min.webp",
+        fetchPriority: "high",
+      },
+      { rel: "canonical", href: HOME_URL },
+    ],
     scripts: [
       {
         type: "application/ld+json",
