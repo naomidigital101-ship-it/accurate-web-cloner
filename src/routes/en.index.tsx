@@ -612,7 +612,7 @@ function EnAbout() {
       <div className="about-imgs">
         <div className="about-photo about-photo-top">
           <div className="about-photo-inner">
-            <img src="/wp/img/פתח-תקוה.jpg" alt="" loading="lazy" />
+            <img src="/wp/img/פתח-תקוה.jpg" alt="Tefillin distribution event in Petah Tikva" loading="lazy" />
           </div>
         </div>
         <div className="about-bigblock" aria-hidden="true">
@@ -620,7 +620,7 @@ function EnAbout() {
         </div>
         <div className="about-photo about-photo-bottom">
           <div className="about-photo-inner2">
-            <img src="/wp/img/קשת-9-min-e1706093310964.webp" alt="" loading="lazy" />
+            <img src="/wp/img/קשת-9-min-e1706093310964.webp" alt="A Jewish man laying tefillin" loading="lazy" />
           </div>
         </div>
       </div>

@@ -46,7 +46,6 @@ export function PageFooter({ en = false }: { en?: boolean } = {}) {
         <a href={en ? "/en/privacy/" : "/privacy/"}>{en ? "Privacy policy" : "מדיניות פרטיות"}</a>
         <a href={en ? "/en/terms/" : "/terms/"}>{en ? "Terms of use" : "תקנון"}</a>
         {!en && <a href="/certificates/">אישורי העמותה</a>}
-        {!en && <a href="/brand-kit/">ערכת מותג</a>}
         <CookieSettingsLink en={en} />
       </nav>
       <img src="/wp/img/קרדיט-45.svg" alt="אפיון, בניה ופיתוח: KAV" className="page-footer-credit" />

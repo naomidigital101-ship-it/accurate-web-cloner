@@ -145,7 +145,6 @@ export function SiteFooter({ en = false }: { en?: boolean } = {}) {
               <a href="/privacy/">מדיניות פרטיות</a>
               <a href="/terms/">תקנון ותנאי שימוש</a>
               <a href="/certificates/">אישורי העמותה</a>
-              <a href="/brand-kit/">ערכת מותג להורדה</a>
               <CookieSettingsLink />
             </div>
             <div>

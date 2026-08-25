@@ -18,6 +18,7 @@ export const LEGACY_HOST = "tefilin.or-hadash.org.il";
 /** נתיבים שאין להם מקבילה ואין להם ערך - עדיף 404 מאשר הפניה מטעה */
 export const GONE: ReadonlySet<string> = new Set([
   "/author/jeremy",
+  "/brand-kit", // הוסר ביוזמת הלקוח 25.8.26; היה בסייטמאפ ולכן 410 ולא 404
   "/category/uncategorized",
   "/comments/feed",
   "/en/comments/feed",

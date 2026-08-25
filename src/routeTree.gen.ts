@@ -22,7 +22,6 @@ import { Route as EnRouteImport } from './routes/en'
 import { Route as DonateRouteImport } from './routes/donate'
 import { Route as CertificatesRouteImport } from './routes/certificates'
 import { Route as BrandingRouteImport } from './routes/branding'
-import { Route as BrandKitRouteImport } from './routes/brand-kit'
 import { Route as AgreementsRouteImport } from './routes/agreements'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AccessibilityRouteImport } from './routes/accessibility'
@@ -122,11 +121,6 @@ const CertificatesRoute = CertificatesRouteImport.update({
 const BrandingRoute = BrandingRouteImport.update({
   id: '/branding',
   path: '/branding',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BrandKitRoute = BrandKitRouteImport.update({
-  id: '/brand-kit',
-  path: '/brand-kit',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AgreementsRoute = AgreementsRouteImport.update({
@@ -297,7 +291,6 @@ export interface FileRoutesByFullPath {
   '/accessibility': typeof AccessibilityRoute
   '/admin': typeof AdminRouteWithChildren
   '/agreements': typeof AgreementsRoute
-  '/brand-kit': typeof BrandKitRoute
   '/branding': typeof BrandingRoute
   '/certificates': typeof CertificatesRoute
   '/donate': typeof DonateRoute
@@ -344,7 +337,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/accessibility': typeof AccessibilityRoute
   '/agreements': typeof AgreementsRoute
-  '/brand-kit': typeof BrandKitRoute
   '/branding': typeof BrandingRoute
   '/certificates': typeof CertificatesRoute
   '/donate': typeof DonateRoute
@@ -392,7 +384,6 @@ export interface FileRoutesById {
   '/accessibility': typeof AccessibilityRoute
   '/admin': typeof AdminRouteWithChildren
   '/agreements': typeof AgreementsRoute
-  '/brand-kit': typeof BrandKitRoute
   '/branding': typeof BrandingRoute
   '/certificates': typeof CertificatesRoute
   '/donate': typeof DonateRoute
@@ -442,7 +433,6 @@ export interface FileRouteTypes {
     | '/accessibility'
     | '/admin'
     | '/agreements'
-    | '/brand-kit'
     | '/branding'
     | '/certificates'
     | '/donate'
@@ -489,7 +479,6 @@ export interface FileRouteTypes {
     | '/'
     | '/accessibility'
     | '/agreements'
-    | '/brand-kit'
     | '/branding'
     | '/certificates'
     | '/donate'
@@ -536,7 +525,6 @@ export interface FileRouteTypes {
     | '/accessibility'
     | '/admin'
     | '/agreements'
-    | '/brand-kit'
     | '/branding'
     | '/certificates'
     | '/donate'
@@ -585,7 +573,6 @@ export interface RootRouteChildren {
   AccessibilityRoute: typeof AccessibilityRoute
   AdminRoute: typeof AdminRouteWithChildren
   AgreementsRoute: typeof AgreementsRoute
-  BrandKitRoute: typeof BrandKitRoute
   BrandingRoute: typeof BrandingRoute
   CertificatesRoute: typeof CertificatesRoute
   DonateRoute: typeof DonateRoute
@@ -693,13 +680,6 @@ declare module '@tanstack/react-router' {
       path: '/branding'
       fullPath: '/branding'
       preLoaderRoute: typeof BrandingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/brand-kit': {
-      id: '/brand-kit'
-      path: '/brand-kit'
-      fullPath: '/brand-kit'
-      preLoaderRoute: typeof BrandKitRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/agreements': {
@@ -1004,7 +984,6 @@ const rootRouteChildren: RootRouteChildren = {
   AccessibilityRoute: AccessibilityRoute,
   AdminRoute: AdminRouteWithChildren,
   AgreementsRoute: AgreementsRoute,
-  BrandKitRoute: BrandKitRoute,
   BrandingRoute: BrandingRoute,
   CertificatesRoute: CertificatesRoute,
   DonateRoute: DonateRoute,

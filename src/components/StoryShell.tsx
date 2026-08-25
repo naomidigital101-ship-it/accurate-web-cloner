@@ -78,7 +78,7 @@ export function StoryShell({
                 dangerouslySetInnerHTML={{ __html: p.replace(/\*\*(.+?)\*\*/g, "<b>$1</b>") }}
               />
             ))}
-            {extraImg && <img src={extraImg} alt="" className="story-extra-img" loading="lazy" />}
+            {extraImg && <img src={extraImg} alt={title} className="story-extra-img" loading="lazy" />}
           </article>
         </div>
 
