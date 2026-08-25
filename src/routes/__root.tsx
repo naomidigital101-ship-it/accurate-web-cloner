@@ -230,6 +230,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <SettingsProvider value={settings ?? {}}>
         <GoogleAnalytics />
+        <AnalyticsLinks />
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
         <Outlet />
       </SettingsProvider>
