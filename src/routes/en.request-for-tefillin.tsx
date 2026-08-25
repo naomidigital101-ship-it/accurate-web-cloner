@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useRef, useState } from "react";
 
 import { submitLead } from "@/lib/api/leads.functions";
+import { track } from "@/lib/analytics";
 import { PageShell } from "@/components/PageShell";
 import { SITE_URL } from "@/lib/site";
 import { HONEYPOT_STYLE } from "@/lib/honeypot";
@@ -78,10 +79,22 @@ function EnRequestForm() {
   const [busy, setBusy] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const { values, capture } = useMultiStepValues();
-  const go = (n: number) => { capture(formRef.current); setStep(n); };
+  const started = useRef(false);
+  const onStart = () => {
+    if (started.current) return;
+    started.current = true;
+    track("form_start", { form_type: "request", lang: "en" });
+  };
+  const go = (n: number) => {
+    capture(formRef.current);
+    setStep(n);
+    track("form_step", { form_type: "request", step: n, lang: "en" });
+  };
   if (sent) return <p className="form-card-sub" role="status">The form has been sent successfully. Thank you!</p>;
   return (
     <form ref={formRef}
+      onFocus={onStart}
+      onInput={onStart}
       onSubmit={async (e) => {
         e.preventDefault();
         capture(formRef.current);
@@ -89,8 +102,17 @@ function EnRequestForm() {
         setErr(null);
         try {
           await submitLead({ data: { kind: "request", lang: "en", ...values.current } });
+          track("lead_request", {
+            form_type: "request",
+            lang: "en",
+            target: values.current.target,
+            hand: values.current.hand,
+            delivery: values.current.delivery,
+            value: 1,
+          });
           setSent(true);
         } catch {
+          track("form_error", { form_type: "request", lang: "en" });
           setErr("Sending failed. Please try again or call +972-54-6713966.");
         } finally {
           setBusy(false);
