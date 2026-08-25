@@ -10,7 +10,7 @@ export function FounderSection() {
   return (
     <section dir="rtl" className="founder-e">
       <div className="founder-photo">
-        <img src="/wp/img/עמיחי-פרופיל-ערוך-min.webp" alt={name} loading="lazy" />
+        <img src="/wp/img/עמיחי-פרופיל-ערוך-min.webp" alt={name} loading="lazy" decoding="async" width="932" height="1400" />
       </div>
       <div className="founder-body">
         <h3 className="founder-role">{role}</h3>

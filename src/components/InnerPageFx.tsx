@@ -65,7 +65,7 @@ export function InnerPageFx() {
     <div className="lb-overlay" onClick={close}>
       <button className="lb-close" onClick={close} aria-label="Close">×</button>
       {gallery.length > 1 && <button className="lb-nav lb-prev" onClick={(e) => { e.stopPropagation(); prev(); }} aria-label="Previous">‹</button>}
-      <img className="lb-img" src={item.src} alt={item.title} onClick={(e) => e.stopPropagation()} />
+      <img className="lb-img" src={item.src} alt={item.title} onClick={(e) => e.stopPropagation()} loading="lazy" decoding="async" />
       {gallery.length > 1 && <button className="lb-nav lb-next" onClick={(e) => { e.stopPropagation(); next(); }} aria-label="Next">›</button>}
     </div>
   );

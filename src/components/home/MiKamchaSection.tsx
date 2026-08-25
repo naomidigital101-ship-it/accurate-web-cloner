@@ -2,7 +2,7 @@ export function MiKamchaSection() {
   return (
     <section dir="rtl" className="mikamcha-e">
       <div className="mikamcha-img">
-        <img src="/wp/img/כותל.jpg" alt="הכותל המערבי" loading="lazy" />
+        <img src="/wp/img/כותל.jpg" alt="הכותל המערבי" loading="lazy" decoding="async" width="1024" height="537" />
       </div>
       <div className="mikamcha-text">
         <h2 className="e-h2-navy">מי כעמך ישראל</h2>

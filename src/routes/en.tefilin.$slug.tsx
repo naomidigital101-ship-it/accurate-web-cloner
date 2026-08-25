@@ -5,6 +5,19 @@ import { enStories } from "@/data/en-stories";
 import { readStories, type DbStory } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
 
+/** תיאור מטא מתוך גוף הסיפור: מצרף פסקאות עד 110 תווים לפחות, וחותך ב-155 */
+function buildDesc(paragraphs: string[] | undefined, fallback: string) {
+  let out = "";
+  for (const p of paragraphs ?? []) {
+    if (out.length >= 110) break;
+    out = out ? `${out} ${p}` : p;
+  }
+  const clean = (out || fallback).replace(/\s+/g, " ").trim();
+  if (clean.length <= 155) return clean;
+  const cut = clean.slice(0, 155);
+  return `${cut.slice(0, cut.lastIndexOf(" ") > 100 ? cut.lastIndexOf(" ") : 155)}...`;
+}
+
 export const Route = createFileRoute("/en/tefilin/$slug")({
   head: ({ params }) => {
     const story = enStories.find((s) => s.slug === params.slug);
@@ -17,7 +30,7 @@ export const Route = createFileRoute("/en/tefilin/$slug")({
       };
     }
     const url = `${SITE_URL}/en/tefilin/${params.slug}`;
-    const desc = (story.paragraphs?.[0] ?? story.title).replace(/\s+/g, " ").slice(0, 155);
+    const desc = buildDesc(story.paragraphs, story.title);
     const title = `${story.title} | The Tefillin Tie Initiative`;
     const image = story.img.startsWith("http") ? story.img : `${SITE_URL}${story.img}`;
     return {
@@ -32,6 +45,39 @@ export const Route = createFileRoute("/en/tefilin/$slug")({
         { name: "twitter:image", content: image },
       ],
       links: [{ rel: "canonical", href: url }],
+      scripts: [
+        {
+          // Article + BreadcrumbList - היו קיימים רק בעמודי הסיפור בעברית
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: story.title,
+            description: desc,
+            image,
+            inLanguage: "en",
+            author: { "@type": "Person", name: story.name || "Ohr Chadash" },
+            publisher: {
+              "@type": "Organization",
+              name: "Ohr Chadash",
+              logo: { "@type": "ImageObject", url: `${SITE_URL}/wp/img/אור-חדש-לוגו-01.svg` },
+            },
+            mainEntityOfPage: url,
+          }),
+        },
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "The Tefillin Tie Initiative", item: `${SITE_URL}/en/the-tefillin-tie-initiative` },
+              { "@type": "ListItem", position: 2, name: "Stories", item: `${SITE_URL}/en/stories-2` },
+              { "@type": "ListItem", position: 3, name: story.title, item: url },
+            ],
+          }),
+        },
+      ],
     };
   },
   /**

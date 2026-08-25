@@ -60,7 +60,7 @@ export function HowItWorksSection() {
             <h2 className="how-step-title">{s.title}</h2>
             <p className="how-step-text">{s.text}</p>
             {i < steps.length - 1 && (
-              <img src="/wp/img/חוצץ-משולש.png" alt="" className="how-divider" loading="lazy" />
+              <img src="/wp/img/חוצץ-משולש.png" alt="" className="how-divider" loading="lazy" decoding="async" width="229" height="50" />
             )}
           </div>
         ))}
@@ -82,11 +82,11 @@ export function HowItWorksSection() {
           </div>
           <div className="how-ba">
             <figure className="how-ba-before">
-              <img src={encodeURI("/wp/img/לפני-1-min-225x300.webp")} alt="תפילין לפני חידוש" loading="lazy" />
+              <img src={encodeURI("/wp/img/לפני-1-min-225x300.webp")} alt="תפילין לפני חידוש" loading="lazy" decoding="async" />
               <figcaption>לפני</figcaption>
             </figure>
             <figure className="how-ba-after">
-              <img src={encodeURI("/wp/img/אחרי-1-min-225x300.webp")} alt="תפילין אחרי חידוש" loading="lazy" />
+              <img src={encodeURI("/wp/img/אחרי-1-min-225x300.webp")} alt="תפילין אחרי חידוש" loading="lazy" decoding="async" />
               <figcaption>אחרי</figcaption>
             </figure>
           </div>

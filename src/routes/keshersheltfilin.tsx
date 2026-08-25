@@ -37,8 +37,7 @@ function Landing() {
           src="/wp/uploads/2024/01/תמונת-רתק-300x300.png"
           alt="קשר של תפילין"
           width={300}
-          height={300}
-        />
+          height={300} decoding="async" />
 
         <h1 className="lp-title">בשנה האחרונה חילקנו בס&quot;ד 500 זוגות תפילין עבור חיילים ומתחזקים!</h1>
 

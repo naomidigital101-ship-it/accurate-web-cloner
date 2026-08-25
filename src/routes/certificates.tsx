@@ -81,7 +81,7 @@ function CertificatesPage() {
                 <article key={c.id} className="cert-item">
                   {c.thumb_url && (
                     <a href={c.file_url ?? c.thumb_url} target="_blank" rel="noopener" className="cert-thumb">
-                      <img src={c.thumb_url} alt={c.title} loading="lazy" />
+                      <img src={c.thumb_url} alt={c.title} loading="lazy" decoding="async" />
                     </a>
                   )}
                   <div className="cert-body">

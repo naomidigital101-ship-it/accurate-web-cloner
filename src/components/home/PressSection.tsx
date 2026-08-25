@@ -66,7 +66,7 @@ const quotes: Quote[] = [
 const letterImages: Record<string, string> = {
   "א.|מחריש": "/wp/img/glitter-min.webp",
   "ג.|מבאר שבע": "/wp/img/midsection-woman-with-tape-rolled-hand-holding-book-min.webp",
-  "ת.|מבית שמש": "/wp/img/לפני-1-min.webp",
+  "ת.|מבית שמש": "/wp/uploads/2024/01/לפני-1-min.webp",
   "ע.|מירושלים": "/wp/img/cropped-hand-wrapped-tefillin-min.webp",
   "א.|מפרדסיה": "/wp/img/AdobeStock_229166376-min.webp",
   "ב.|מתל אביב": "/wp/uploads/2024/01/tallit-tefillin-white-background-min.webp",

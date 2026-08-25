@@ -25,7 +25,7 @@ export function PageFooter({ en = false }: { en?: boolean } = {}) {
   return (
     <footer dir="rtl" className="page-footer">
       <a href="/" aria-label="אור חדש">
-        <img src="/wp/img/אור-חדש-לוגו-13.svg" alt="אור חדש" className="page-footer-logo" />
+        <img src="/wp/img/אור-חדש-לוגו-13.svg" alt="אור חדש" className="page-footer-logo" loading="lazy" decoding="async" />
       </a>
       <p className="page-footer-tagline">
         {tagline}<br />
@@ -48,7 +48,7 @@ export function PageFooter({ en = false }: { en?: boolean } = {}) {
         {!en && <a href="/certificates">אישורי העמותה</a>}
         <CookieSettingsLink en={en} />
       </nav>
-      <img src="/wp/img/קרדיט-45.svg" alt="אפיון, בניה ופיתוח: KAV" className="page-footer-credit" />
+      <img src="/wp/img/קרדיט-45.svg" alt="אפיון, בניה ופיתוח: KAV" className="page-footer-credit" loading="lazy" decoding="async" />
       <a
         href="https://move-geo.ai/"
         target="_blank"
@@ -58,7 +58,7 @@ export function PageFooter({ en = false }: { en?: boolean } = {}) {
         aria-label="Built for AI Search — by MOVE"
       >
         <span>Built for AI Search — by </span>
-        <img src="/branding/move-logo.png" alt="MOVE" />
+        <img src="/branding/move-logo.png" alt="MOVE" loading="lazy" decoding="async" width="551" height="173" />
       </a>
     </footer>
   );

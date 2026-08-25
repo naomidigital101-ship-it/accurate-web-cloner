@@ -35,8 +35,7 @@ export function FeatureCards() {
               src={c.img}
               alt={c.title}
               loading="lazy"
-              className="absolute -left-6 -bottom-6 h-[130%] w-auto object-contain drop-shadow-2xl rotate-[8deg] group-hover:rotate-[4deg] transition-transform duration-500"
-            />
+              className="absolute -left-6 -bottom-6 h-[130%] w-auto object-contain drop-shadow-2xl rotate-[8deg] group-hover:rotate-[4deg] transition-transform duration-500" decoding="async" />
           </a>
         ))}
       </div>

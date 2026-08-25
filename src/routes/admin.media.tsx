@@ -186,7 +186,7 @@ function MediaPage() {
             return (
               <figure key={m.id} className="adm-media-item">
                 {isImg ? (
-                  <img src={m.url} alt={m.alt ?? ""} loading="lazy" />
+                  <img src={m.url} alt={m.alt ?? ""} loading="lazy" decoding="async" />
                 ) : (
                   <span className="adm-media-file">{(m.file_name ?? "").split(".").pop()?.toUpperCase() || "קובץ"}</span>
                 )}

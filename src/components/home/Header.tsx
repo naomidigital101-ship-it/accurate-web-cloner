@@ -150,11 +150,11 @@ export function Header({ en = false, dark = false }: { en?: boolean; dark?: bool
         {/* עמודת לוגואים - 30%, מוצמדת לשמאל */}
         <div className="flex flex-row justify-end items-start" style={{ width: "30%" }}>
           <a href="https://or-hadash.org.il/" aria-label="אור חדש" className="logo-or hidden md:block">
-            <img src={dark ? "/wp/img/אור-חדש-לוגו-01.svg" : "/wp/img/אור-חדש-לוגו-13.svg"} alt="אור חדש" width={444} height={113} />
+            <img src={dark ? "/wp/img/אור-חדש-לוגו-01.svg" : "/wp/img/אור-חדש-לוגו-13.svg"} alt="אור חדש" width={444} height={113} decoding="async" />
           </a>
           <a href={homeHref} aria-label={en ? "The Tefillin Tie Initiative - Home" : "קשר של תפילין - דף הבית"} className="logo-badge">
             <span className="logo-badge-box">
-              <img src="/wp/img/לוגו-קשר-של-תפילין-01.svg" alt="קשר של תפילין" width={100} height={100} />
+              <img src="/wp/img/לוגו-קשר-של-תפילין-01.svg" alt="קשר של תפילין" width={100} height={100} decoding="async" />
             </span>
           </a>
         </div>

@@ -166,7 +166,7 @@ export function ContentManager({ table, title, subtitle, fields, columns, defaul
                   {columns.map((c) => (
                     <td key={c.key}>
                       {c.key.endsWith("_url") || c.key === "img" || c.key === "logo_url" ? (
-                        r[c.key] ? <img src={String(r[c.key])} alt="" className="adm-thumb" loading="lazy" /> : EMPTY
+                        r[c.key] ? <img src={String(r[c.key])} alt="" className="adm-thumb" loading="lazy" decoding="async" /> : EMPTY
                       ) : (
                         <span className="adm-clip">{String(r[c.key] ?? EMPTY)}</span>
                       )}
@@ -244,7 +244,7 @@ export function ContentManager({ table, title, subtitle, fields, columns, defaul
                     />
                   )}
                   {(f.type === "image" || f.key.endsWith("_url")) && draft[f.key] ? (
-                    <img src={String(draft[f.key])} alt="" className="adm-preview" />
+                    <img src={String(draft[f.key])} alt="" className="adm-preview" loading="lazy" decoding="async" />
                   ) : null}
                 </label>
               ))}

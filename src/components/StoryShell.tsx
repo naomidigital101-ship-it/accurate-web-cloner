@@ -57,8 +57,7 @@ export function StoryShell({
               width={50}
               height={50}
               className="story-hero-star"
-              aria-hidden="true"
-            />
+              aria-hidden="true" decoding="async" />
           </div>
         </div>
         <svg className="story-hero-curve" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
@@ -88,7 +87,7 @@ export function StoryShell({
                 dangerouslySetInnerHTML={{ __html: p.replace(/\*\*(.+?)\*\*/g, "<b>$1</b>") }}
               />
             ))}
-            {extraImg && <img src={extraImg} alt={title} className="story-extra-img" loading="lazy" />}
+            {extraImg && <img src={extraImg} alt={title} className="story-extra-img" loading="lazy" decoding="async" />}
           </article>
         </div>
 

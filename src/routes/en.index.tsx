@@ -423,8 +423,7 @@ function EnInterview() {
             <img
               src="/wp/img/מכתב-הסכמה-מהרב-זילברשטיין-212x300.webp"
               alt="Rabbis agreements"
-              loading="lazy"
-            />
+              loading="lazy" decoding="async" width="212" height="300" />
           </span>
           <h2 className="iv-card-title">Rabbis agreements</h2>
         </a>
@@ -434,8 +433,7 @@ function EnInterview() {
             <img
               src="/wp/img/-תודה-אמא-לחייל-e1712736869916-218x300.webp"
               alt="Thank you letters"
-              loading="lazy"
-            />
+              loading="lazy" decoding="async" width="218" height="300" />
           </span>
           <h2 className="iv-card-title">Thank you letters</h2>
         </a>
@@ -612,7 +610,7 @@ function EnAbout() {
       <div className="about-imgs">
         <div className="about-photo about-photo-top">
           <div className="about-photo-inner">
-            <img src="/wp/img/פתח-תקוה.jpg" alt="Tefillin distribution event in Petah Tikva" loading="lazy" />
+            <img src="/wp/img/פתח-תקוה.jpg" alt="Tefillin distribution event in Petah Tikva" loading="lazy" decoding="async" width="1200" height="1600" />
           </div>
         </div>
         <div className="about-bigblock" aria-hidden="true">
@@ -620,7 +618,7 @@ function EnAbout() {
         </div>
         <div className="about-photo about-photo-bottom">
           <div className="about-photo-inner2">
-            <img src="/wp/img/קשת-9-min-e1706093310964.webp" alt="A Jewish man laying tefillin" loading="lazy" />
+            <img src="/wp/img/קשת-9-min-e1706093310964.webp" alt="A Jewish man laying tefillin" loading="lazy" decoding="async" width="1050" height="1010" />
           </div>
         </div>
       </div>
@@ -681,7 +679,7 @@ function EnHowItWorks() {
             <h3 className="how-step-title">{s.title}</h3>
             <p className="how-step-text">{s.text}</p>
             {i < enSteps.length - 1 && (
-              <img src="/wp/img/חוצץ-משולש.png" alt="" className="how-divider" loading="lazy" />
+              <img src="/wp/img/חוצץ-משולש.png" alt="" className="how-divider" loading="lazy" decoding="async" width="229" height="50" />
             )}
           </div>
         ))}
@@ -699,11 +697,11 @@ function EnHowItWorks() {
         </div>
         <div className="how-ba">
           <figure className="how-ba-before">
-            <img src="/wp/img/לפני-1-min.webp" alt="Before" loading="lazy" />
+            <img src="/wp/img/לפני-1-min.webp" alt="Before" loading="lazy" decoding="async" width="1050" height="1400" />
             <figcaption>Before</figcaption>
           </figure>
           <figure className="how-ba-after">
-            <img src="/wp/img/אחרי-1-min.webp" alt="after" loading="lazy" />
+            <img src="/wp/img/אחרי-1-min.webp" alt="after" loading="lazy" decoding="async" width="1050" height="1400" />
             <figcaption>after</figcaption>
           </figure>
         </div>
@@ -741,7 +739,7 @@ function EnAboutMitzva() {
         </a>
       </div>
       <div className="mitzva-img">
-        <img src="/wp/img/תפילין-4-חתוך-min-1.webp" alt="Tefillin" loading="lazy" />
+        <img src="/wp/img/תפילין-4-חתוך-min-1.webp" alt="Tefillin" loading="lazy" decoding="async" width="1400" height="1050" />
       </div>
     </section>
   );
@@ -754,7 +752,7 @@ function EnMiKamcha() {
   return (
     <section dir="ltr" className="mikamcha-e">
       <div className="mikamcha-img">
-        <img src="/wp/img/כותל.jpg" alt="The Western Wall" loading="lazy" />
+        <img src="/wp/img/כותל.jpg" alt="The Western Wall" loading="lazy" decoding="async" width="1024" height="537" />
       </div>
       <div className="mikamcha-text">
         <h2 className="e-h2-navy">Who is Like Your Nation Israel?</h2>
@@ -816,7 +814,7 @@ function EnFounder() {
   return (
     <section dir="ltr" className="founder-e">
       <div className="founder-photo">
-        <img src="/wp/img/עמיחי-פרופיל-ערוך-min.webp" alt="Rabbi Amichai Eyal" loading="lazy" />
+        <img src="/wp/img/עמיחי-פרופיל-ערוך-min.webp" alt="Rabbi Amichai Eyal" loading="lazy" decoding="async" width="932" height="1400" />
       </div>
       <div className="founder-body">
         <h3 className="founder-role">The Founder and Chairman of the "Ohr Chadash" Organization</h3>

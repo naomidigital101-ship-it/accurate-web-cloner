@@ -3,7 +3,7 @@
  * הרצה:  node scripts/gen-sitemap.mjs
  * להריץ אחרי כל הוספה/הסרה של סיפור, ואחרי מעבר לדומיין (עדכון SITE_URL).
  */
-import { readFileSync, writeFileSync } from "node:fs";
+import { readFileSync, statSync, writeFileSync } from "node:fs";
 
 // מקור אמת יחיד - נקרא מ-src/lib/site.ts כדי שלא יהיו שתי כתובות שונות
 const ORIGIN = (readFileSync("src/lib/site.ts", "utf8").match(/SITE_URL = "([^"]+)"/) ?? [])[1];
@@ -51,13 +51,22 @@ const rows = [
   ...en.map((p) => [p, "monthly", "0.5"]),
 ];
 
+/**
+ * lastmod ולא changefreq/priority: גוגל הודיע ב-2023 שהוא מתעלם משני האחרונים
+ * לחלוטין ומשתמש רק ב-lastmod כדי להחליט מה כדאי לסרוק מחדש. התאריך נגזר
+ * ממועד השינוי של קובץ הנתונים עצמו, ולכן הוא לא "משקר" בכל בנייה מחדש.
+ */
+const stamp = (f) => statSync(f).mtime.toISOString().slice(0, 10);
+const DATA_HE = stamp("src/data/stories.ts");
+const DATA_EN = stamp("src/data/en-stories.ts");
+const SITE = stamp("src/routes/index.tsx");
+const lastmodOf = (p) =>
+  p.startsWith("/en/tefilin/") ? DATA_EN : p.startsWith("/tefilin/") ? DATA_HE : SITE;
+
 const xml =
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
   rows
-    .map(
-      ([p, cf, pr]) =>
-        `  <url><loc>${ORIGIN}${enc(p)}</loc><changefreq>${cf}</changefreq><priority>${pr}</priority></url>`,
-    )
+    .map(([p]) => `  <url><loc>${ORIGIN}${enc(p)}</loc><lastmod>${lastmodOf(p)}</lastmod></url>`)
     .join("\n") +
   `\n</urlset>\n`;
 

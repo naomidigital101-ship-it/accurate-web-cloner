@@ -16,7 +16,7 @@ export function AboutMitzvaSection() {
         <a href="/request" className="e-btn-white">לבקשת תפילין</a>
       </div>
       <div className="mitzva-img">
-        <img src="/wp/img/תפילין-4-חתוך-min-1.webp" alt="תפילין" loading="lazy" />
+        <img src="/wp/img/תפילין-4-חתוך-min-1.webp" alt="תפילין" loading="lazy" decoding="async" width="1400" height="1050" />
       </div>
     </section>
   );

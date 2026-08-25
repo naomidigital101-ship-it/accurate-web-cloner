@@ -108,6 +108,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "icon", type: "image/svg+xml", href: "/wp/img/כוכבית-כחולה-16.svg" },
+      // favicon.ico נחוץ בנפרד: סורקים וקוראי RSS ישנים פונים לשורש ישירות
+      // ולא קוראים את התגית, ובלעדיו הם מקבלים 404
+      { rel: "icon", type: "image/x-icon", href: "/favicon.ico", sizes: "any" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
+      { rel: "manifest", href: "/manifest.json" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&family=Frank+Ruhl+Libre:wght@400;500;700;800;900&display=swap" },

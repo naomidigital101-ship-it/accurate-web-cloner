@@ -72,7 +72,7 @@ function AdminShell() {
     <div className="adm" dir="rtl">
       <aside className="adm-side">
         <div className="adm-brand">
-          <img src="/wp/img/לוגו-קשר-של-תפילין-01.svg" alt="" width={36} height={36} />
+          <img src="/wp/img/לוגו-קשר-של-תפילין-01.svg" alt="" width={36} height={36} decoding="async" />
           <div>
             <b>ניהול האתר</b>
             <span>קשר של תפילין</span>
@@ -155,7 +155,7 @@ function LoginScreen({ onDone }: { onDone: () => Promise<void> }) {
   return (
     <div className="adm-login" dir="rtl">
       <form className="adm-login-card" onSubmit={submit}>
-        <img src="/wp/img/לוגו-קשר-של-תפילין-01.svg" alt="קשר של תפילין" width={64} height={64} />
+        <img src="/wp/img/לוגו-קשר-של-תפילין-01.svg" alt="קשר של תפילין" width={64} height={64} decoding="async" />
         <h1>ניהול האתר</h1>
         <p className="adm-login-sub">
           {mode === "login" ? "התחברו כדי לנהל את תוכן האתר והפניות." : "יצירת חשבון למי שהורשה מראש."}

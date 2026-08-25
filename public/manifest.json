@@ -1,0 +1,16 @@
+{
+  "name": "קשר של תפילין - עמותת אור חדש",
+  "short_name": "קשר של תפילין",
+  "description": "מיזם שמחבר בין יהודים שברשותם תפילין שאינן בשימוש לבין יהודים שרוצים להתחיל להניח.",
+  "lang": "he",
+  "dir": "rtl",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#009fe3",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

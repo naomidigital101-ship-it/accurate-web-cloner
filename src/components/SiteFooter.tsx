@@ -38,7 +38,7 @@ export function SiteFooter({ en = false }: { en?: boolean } = {}) {
   return (
     <footer dir={en ? "ltr" : "rtl"} className="footer-e footer-brand-only">
       <a href={en ? "/en/the-tefillin-tie-initiative" : "/"} aria-label={en ? "Ohr Chadash - home" : "אור חדש - דף הבית"} className="footer-brand-logo">
-        <img src="/wp/img/אור-חדש-לוגו-13.svg" alt={en ? "Ohr Chadash" : "אור חדש"} />
+        <img src="/wp/img/אור-חדש-לוגו-13.svg" alt={en ? "Ohr Chadash" : "אור חדש"} loading="lazy" decoding="async" />
       </a>
       <h2 className="footer-tagline">
         {en ? "Advancing and empowering baalei teshuva and those drawing closer to Judaism" : tagline}
@@ -169,7 +169,7 @@ export function SiteFooter({ en = false }: { en?: boolean } = {}) {
         </a>
       </div>
       <a href="https://kavnekuda.com" target="_blank" rel="noopener" aria-label="אפיון, בניה ופיתוח: KAV" className="footer-credit-link">
-        <img src="/wp/img/קרדיט-45.svg" alt="אפיון, בניה ופיתוח: KAV" />
+        <img src="/wp/img/קרדיט-45.svg" alt="אפיון, בניה ופיתוח: KAV" loading="lazy" decoding="async" />
       </a>
       <a
         href="https://move-geo.ai/"
@@ -181,7 +181,7 @@ export function SiteFooter({ en = false }: { en?: boolean } = {}) {
       >
         <span>Built for AI Search — by </span>
         <span className="move-credit-chip">
-          <img src="/branding/move-logo.png" alt="MOVE" />
+          <img src="/branding/move-logo.png" alt="MOVE" loading="lazy" decoding="async" width="551" height="173" />
         </span>
       </a>
     </footer>
