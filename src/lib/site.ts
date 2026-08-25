@@ -5,7 +5,7 @@
  * זו השורה היחידה שצריך לשנות בקוד (ובנוסף להריץ scripts/gen-sitemap.mjs).
  * בלי זה גוגל ממשיך לייחס את הערך לדומיין הזמני.
  */
-export const SITE_URL = "https://accurate-web-cloner.lovable.app";
+export const SITE_URL = "https://or-hadash.org.il";
 
 /**
  * בונה כתובת מוחלטת מנתיב יחסי, **בלי** סלאש סוגר.

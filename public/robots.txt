@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin
 
-Sitemap: https://accurate-web-cloner.lovable.app/sitemap.xml
+Sitemap: https://or-hadash.org.il/sitemap.xml
