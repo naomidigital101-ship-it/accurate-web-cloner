@@ -1,3 +1,5 @@
+import { track } from "@/lib/analytics";
+
 type FaqItem = { q: string; a: string; subtitle?: string };
 
 export const faqs: FaqItem[] = [
