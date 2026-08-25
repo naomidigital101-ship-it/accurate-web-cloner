@@ -1,7 +1,19 @@
 import { useRef, useState } from "react";
 
 import { submitLead } from "@/lib/api/leads.functions";
+import { track } from "@/lib/analytics";
 import { HONEYPOT_STYLE } from "@/lib/honeypot";
+
+/** form_start נשלח פעם אחת בלבד לכל טופס, במגע הראשון של המשתמש בשדה */
+function useFormStart(formType: "request" | "donate", lang: "he" | "en") {
+  const fired = useRef(false);
+  return () => {
+    if (fired.current) return;
+    fired.current = true;
+    track("form_start", { form_type: formType, lang });
+  };
+}
+
 
 /**
  * הטפסים רב-שלביים ומסירים שדות מה-DOM בין שלבים, ולכן FormData בשליחה
