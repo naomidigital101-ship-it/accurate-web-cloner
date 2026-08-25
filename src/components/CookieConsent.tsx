@@ -10,7 +10,6 @@ export type Consent = {
   necessary: true;
   functional: boolean;
   embeds: boolean;
-  analytics: boolean;
   decidedAt: string;
 };
 
@@ -80,7 +79,6 @@ export function CookieConsent({ en = false }: { en?: boolean } = {}) {
   const [custom, setCustom] = useState(false);
   const [functional, setFunctional] = useState(true);
   const [embeds, setEmbeds] = useState(false);
-  const [analytics, setAnalytics] = useState(false);
 
   const t = (he: string, eng: string) => (en ? eng : he);
 
@@ -90,7 +88,6 @@ export function CookieConsent({ en = false }: { en?: boolean } = {}) {
       const c = readConsent();
       setFunctional(c?.functional ?? true);
       setEmbeds(c?.embeds ?? false);
-      setAnalytics(c?.analytics ?? false);
       setCustom(true);
       setShow(true);
     };
@@ -99,10 +96,10 @@ export function CookieConsent({ en = false }: { en?: boolean } = {}) {
   }, []);
 
   const decide = useCallback(
-    (f: boolean, e: boolean, a: boolean) => {
+    (f: boolean, e: boolean) => {
     // דחייה חייבת גם למחוק מה שכבר נשמר, לא רק למנוע טעינה עתידית
     if (!f) purgeNonEssential();
-    write({ necessary: true, functional: f, embeds: e, analytics: a, decidedAt: new Date().toISOString() });
+    write({ necessary: true, functional: f, embeds: e, decidedAt: new Date().toISOString() });
     setShow(false);
     setCustom(false);
   }, []);
@@ -164,24 +161,20 @@ export function CookieConsent({ en = false }: { en?: boolean } = {}) {
               </p>
             </div>
 
+            {/*
+              מתג ולא הצהרה יהיה שקר: Google Analytics נטען בכל עמוד ואינו מותנה
+              בבחירה כאן. מתג שלא שולט בכלום גרוע יותר מהיעדר מתג, ולכן הקטגוריה
+              מוצגת כמידע - בדיוק כמו העוגיות ההכרחיות.
+            */}
             <div className="cc-cat">
               <div className="cc-cat-head">
                 <b>{t("מדידה וסטטיסטיקה", "Analytics")}</b>
-                <label className={`cc-switch${analytics ? " on" : ""}`}>
-                  <input
-                    type="checkbox"
-                    checked={analytics}
-                    onChange={(e) => setAnalytics(e.target.checked)}
-                    aria-label={t("הפעלת עוגיות מדידה", "Enable analytics cookies")}
-                  />
-                  <span />
-                  <em>{analytics ? t("פעיל", "On") : t("כבוי", "Off")}</em>
-                </label>
+                <span className="cc-always">{t("תמיד פעיל", "Always on")}</span>
               </div>
               <p>
                 {t(
-                  "Google Analytics, לספירת מבקרים והבנת אילו עמודים מעניינים. אם לא תאשרו, הסקריפט לא נטען כלל ולא מועבר מידע לגוגל.",
-                  "Google Analytics, to count visitors and understand which pages are of interest. If you decline, the script is not loaded at all and no data is sent to Google.",
+                  "Google Analytics סופר כניסות ומראה לנו אילו עמודים מעניינים. לא נשמרים שם, טלפון או כתובת - רק נתונים סטטיסטיים על השימוש באתר.",
+                  "Google Analytics counts visits and shows us which pages draw interest. No name, phone number or address is stored - only statistics about how the site is used.",
                 )}
               </p>
             </div>
@@ -211,10 +204,10 @@ export function CookieConsent({ en = false }: { en?: boolean } = {}) {
         )}
 
         <div className="cc-btns">
-          <button type="button" className="cc-btn cc-accept" onClick={() => decide(true, true, true)}>
+          <button type="button" className="cc-btn cc-accept" onClick={() => decide(true, true)}>
             {t("אישור הכל", "Accept all")}
           </button>
-          <button type="button" className="cc-btn cc-reject" onClick={() => decide(false, false, false)}>
+          <button type="button" className="cc-btn cc-reject" onClick={() => decide(false, false)}>
             {t("דחיית הכל", "Reject all")}
           </button>
           {!custom ? (
@@ -222,7 +215,7 @@ export function CookieConsent({ en = false }: { en?: boolean } = {}) {
               {t("התאמה אישית", "Customise")}
             </button>
           ) : (
-            <button type="button" className="cc-btn cc-custom" onClick={() => decide(functional, embeds, analytics)}>
+            <button type="button" className="cc-btn cc-custom" onClick={() => decide(functional, embeds)}>
               {t("שמירת הבחירה", "Save my choice")}
             </button>
           )}
