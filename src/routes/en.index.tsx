@@ -993,7 +993,7 @@ export function EnPage({ data }: { data?: Partial<EnPageData> } = {}) {
     href: x.href ?? undefined,
   }));
   const storyCards = enDbStories?.slice(0, 5).map((x) => ({
-    title: x.title, href: `/en/tefilin/${encodeURIComponent(x.slug)}/`, img: x.img ?? "",
+    title: x.title, href: `/en/tefilin/${encodeURIComponent(x.slug)}`, img: x.img ?? "",
   }));
   return (
     <div dir="ltr" lang="en" className="min-h-screen bg-background en-ltr">

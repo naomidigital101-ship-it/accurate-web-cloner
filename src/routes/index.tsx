@@ -67,7 +67,7 @@ function Index() {
   const { faqs: dbFaqs, gallery, stories: dbStories } = Route.useLoaderData();
   const storyCards = dbStories
     ?.slice(0, 5)
-    .map((s) => ({ title: s.title, href: `/tefilin/${encodeURIComponent(s.slug)}/`, img: s.img ?? "" }));
+    .map((s) => ({ title: s.title, href: `/tefilin/${encodeURIComponent(s.slug)}`, img: s.img ?? "" }));
   const faqItems = dbFaqs?.map((f) => ({ q: f.question, a: f.answer }));
   return (
     <div dir="rtl" lang="he" className="min-h-screen bg-background">
