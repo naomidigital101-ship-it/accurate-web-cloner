@@ -2,6 +2,9 @@ import { Header } from "@/components/home/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { InnerPageFx } from "@/components/InnerPageFx";
 import { Link } from "@tanstack/react-router";
+import { useEffect } from "react";
+
+import { track } from "@/lib/analytics";
 
 type NavItem = { slug: string; title: string };
 
@@ -31,6 +34,13 @@ export function StoryShell({
   en = false,
 }: StoryShellProps) {
   const linkTo = en ? "/en/tefilin/$slug" : "/tefilin/$slug";
+
+  // כניסה לעמוד סיפור - הסלאג נלקח מהכתובת כדי לא לשנות את חוזה הפרופס
+  useEffect(() => {
+    const parts = window.location.pathname.replace(/\/+$/, "").split("/");
+    const slug = decodeURIComponent(parts[parts.length - 1] ?? "");
+    if (slug) track("story_read", { slug });
+  }, [title]);
   return (
     <div dir={en ? "ltr" : "rtl"} lang={en ? "en" : "he"} className={en ? "story-shell story-shell-en" : "story-shell"}>
       <Header en={en} dark />
