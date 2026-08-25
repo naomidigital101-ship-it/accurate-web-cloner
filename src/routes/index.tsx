@@ -22,7 +22,7 @@ import { MobileDonateFab } from "@/components/home/MobileDonateFab";
 import { readFaqs, readGallery, readStories } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
 
-const HOME_TITLE = "קשר של תפילין - תרומה והשאלת תפילין לכל יהודי | אור חדש";
+const HOME_TITLE = "קשר של תפילין - תרומה וחלוקת תפילין לכל יהודי | אור חדש";
 const HOME_DESC = "מיזם קשר של תפילין של עמותת אור חדש מחבר בין תורמי תפילין שאינן בשימוש ליהודים שרוצים להתחיל להניח. מעל 1,300 זוגות חולקו - בקשו או תרמו תפילין עוד היום.";
 const HOME_URL = `${SITE_URL}/`;
 
