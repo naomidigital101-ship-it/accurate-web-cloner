@@ -63,7 +63,7 @@ export const enStories: EnStory[] = [
     title: "THE COOPERATIVE FATHER – TO A POINT",
     name: "Y.",
     place: "",
-    img: "/wp/uploads/2024/05/הבן-של-י.png",
+    img: "/wp/uploads/2024/05/הבן-של-י.webp",
     paragraphs: [
       "One day a man named Y. called me up and told me: \"We are a secular family living in Kibbutz Regavim, and we provide our children with a liberal-secular education, nothing to do with Judaism. I don't know why, but our son, 16 years old, has been saying for a while that he wants to start putting on tefillin – and he would like us to help him find a pair.\" Y. wished to make it quite clear: \"This did not come from us, it's not our style at all.\"",
       "I asked him: \"So what happened to cause him to want to wear tefillin?\" Yoav answered, \"I don't really know, and even my son doesn't know exactly; he just says that he has an inner voice calling him to wear tefillin…\"",
@@ -122,7 +122,7 @@ export const enStories: EnStory[] = [
     title: "FROM KIBBUTZ TO WESTERN WALL",
     name: "Ronen",
     place: "מEin Carmel",
-    img: "/wp/uploads/2024/05/רונן-min-300x225-1.png",
+    img: "/wp/uploads/2024/05/רונן-min-300x225-1.webp",
     paragraphs: [
       "R. was born and raised in secular Kibbutz Ein Carmel, at the foot of Mt. Carmel, near the sea. Having had no particular connection with Judaism, he did not receive an Aliyah to the Torah when he became Bar Mitzvah at age 13, nor did he put on tefillin. In fact, the first time in his life he ever wore tefillin was when he was 25 years old, in a Beit Chabad in Los Angeles, after his grandfather passed away.",
       "About a year ago, he felt a desire to learn more about his Jewish heritage and roots, and to be more connected to Judaism – but he never translated this desire into action. But when the war in Gaza broke out in October 2023, the yen for Judaism reawakened – and this time, R. did something with it. He decided that he needed to study Torah regularly, and to wear tefillin as well. The rabbi with whom he started to learn turned to me, asking if I could get tefillin for him. I got to work right away and was soon able to find a pair of high-quality tefillin, which was personally delivered to R. in the kibbutz. When he called me with great excitement to thank me, he revealed that he had never before visited the Western Wall – and invited me to come along with him on his first visit there ever.",
@@ -170,7 +170,7 @@ export const enStories: EnStory[] = [
     title: "The story of G. from Kiryat Gat",
     name: "G.",
     place: "מKiryat Gat",
-    img: "/wp/uploads/2024/01/גלעד-178x300-1.png",
+    img: "/wp/uploads/2024/01/גלעד-178x300-1.webp",
     subtitle: "My son will get to put on tefillin at his Bar Mitzvah, unlike his father.",
     paragraphs: [
       "G. is a reservist who is fighting in Gaza. He grew up in a family that was very far from anything related to Yiddishkeit, neither keeping kashrus nor Shabbos or holidays. At the age of 13 he did not get to celebrate his Bar Mitzvah nor put on tefillin. Even before the war broke out he became interested in Yiddishkeit, but when the war began, a real desire arose in him to put on tefillin.",
@@ -194,7 +194,7 @@ export const enStories: EnStory[] = [
     title: "The story of I. from Rosh Ha'Ayin",
     name: "I",
     place: "מRosh Ha'ayin",
-    img: "/wp/uploads/2024/01/קשת-2-min-225x300-1.png",
+    img: "/wp/uploads/2024/01/קשת-2-min-225x300-1.webp",
     paragraphs: [
       "I. grew up in a deeply religious family, but already in his youth he distanced himself from Torah and mitzvah observance. This was very painful for his whole family. Today he is married and has children. After the war broke out, he was drafted into the reserves and arrived at the Tze'elim base for training. There the desire arose in him to wear tefillin so he started using his friend's. He then asked his sister to try to get him a pair, because he no longer had the old ones from his Bar Mitzvah… The family was very moved by I. 's religious awakening and his desire to resume observing the mitzva of tefillin. His sister turned to me and B\"H I was able to obtain a pair of tefillin mehudaros (high-quality), but I didn't know how to get them over to I. in the remote Tze'elim base. The next day, his sister found out that my neighbor, who is an army doctor, was going to the Tze'elim base, so I immediately gave him the tefillin plus a note with a personal blessing, which reached I. that same day. Itai's sister sent me a picture of him adorned with tefillin and wrote in the message: \"Thank you so very much! There are just not enough words to thank you… my whole family was touched. You have an enormous zechus (merit). May you be blessed from Shamayim (Heaven).\" A few days later, Itai sent me another picture of himself wearing the tefillin and wrote in the message: \"To Rabbi Amichai, thank you very much. I appreciate what you've done. You thrilled me with your note. For a long time I hadn't put on tefillin and thanks to your gift I am able to start again. May Hashem bless you with many more mitzvot.\"",
     ],

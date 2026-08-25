@@ -34,7 +34,7 @@ function Landing() {
       <div className="lp-inner">
         <img
           className="lp-logo"
-          src="/wp/uploads/2024/01/תמונת-רתק-300x300.png"
+          src="/wp/uploads/2024/01/תמונת-רתק-300x300.webp"
           alt="קשר של תפילין"
           width={300}
           height={300} decoding="async" />

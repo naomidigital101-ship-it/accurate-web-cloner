@@ -24,12 +24,12 @@ const stories: Story[] = [
   {
     title: "שלוחי מצווה",
     href: "/tefilin/%d7%a9%d7%9c%d7%95%d7%97%d7%99-%d7%9e%d7%a6%d7%95%d7%95%d7%94",
-    img: "/wp/img/6-1.png",
+    img: "/wp/img/6-1.webp",
   },
   {
     title: "סוף סוף יש לי תפילין! סוף סוף אני יודע להניח תפילין",
     href: "/tefilin/%d7%a1%d7%95%d7%a3-%d7%a1%d7%95%d7%a3-%d7%99%d7%a9-%d7%9c%d7%99-%d7%aa%d7%a4%d7%99%d7%9c%d7%99%d7%9f-%d7%a1%d7%95%d7%a3-%d7%a1%d7%95%d7%a3-%d7%90%d7%a0%d7%99-%d7%99%d7%95%d7%93%d7%a2-%d7%9c%d7%94",
-    img: "/wp/img/5.png",
+    img: "/wp/img/5.webp",
   },
 ];
 

@@ -477,7 +477,7 @@ export const enStories = [
   {
     title: "THE COOPERATIVE FATHER – TO A POINT",
     href: "/en/tefilin/the-cooperative-father-to-a-point",
-    img: "/wp/img/7-225x300-1.png",
+    img: "/wp/img/7-225x300-1.webp",
   },
   {
     title: "THE WHISPERED REQUEST",
