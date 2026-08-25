@@ -1,3 +1,4 @@
+import { thumb, thumbFallback } from "@/lib/thumb";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
 import { SITE_URL } from "@/lib/site";
@@ -57,7 +58,7 @@ export function LettersPage({ items }: { items?: Letter[] | null } = {}) {
         {list.map((l, i) => (
           <div key={i} className="doc-card doc-card-natural">
             <a href={l.img} target="_blank" rel="noopener" className="doc-card-letter">
-              <img src={l.img} alt={l.title} loading="lazy" decoding="async" />
+              <img src={thumb(l.img)} onError={(e) => thumbFallback(e, l.img)} alt={l.title} loading="lazy" decoding="async" />
             </a>
             <h3 className="doc-card-name">{l.title}</h3>
             {l.sub && <p className="doc-card-role">{l.sub}</p>}

@@ -1,3 +1,5 @@
+import { thumb, thumbFallback } from "@/lib/thumb";
+
 /**
  * גלריית התמונות שמעל הפוטר. הופרדה מהפוטר עצמו כדי שהפוטר יוכל לרוץ בכל האתר
  * בלי לגרור 28 תמונות לכל עמוד. מוצגת בעמודי הבית בלבד, כפי שהיה מאז ומעולם.
@@ -18,7 +20,9 @@ export function FooterGallery({ images }: { images?: { url: string; alt: string 
         {(images ?? gallery.map((g) => ({ url: `/wp/uploads/gallery/${g}`, alt: null }))).map((g) => (
           <img
             key={g.url}
-            src={g.url}
+            src={thumb(g.url)}
+            data-full={g.url}
+            onError={(e) => thumbFallback(e, g.url)}
             alt={g.alt ?? "רגעים ממיזם קשר של תפילין"}
             className="footer-gallery-img"
             loading="lazy"

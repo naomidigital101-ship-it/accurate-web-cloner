@@ -1,3 +1,4 @@
+import { thumb, thumbFallback } from "@/lib/thumb";
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
 import { readRabbis } from "@/lib/content";
@@ -47,9 +48,9 @@ function Page() {
         {list.map((r) => (
           <div key={r.name} className="doc-card">
             <a href={r.letter} target="_blank" rel="noopener" className="doc-card-letter">
-              <img src={r.letter} alt={`Letter of approval - ${r.name}`} loading="lazy" decoding="async" />
+              <img src={thumb(r.letter)} onError={(e) => thumbFallback(e, r.letter)} alt={`Letter of approval - ${r.name}`} loading="lazy" decoding="async" />
             </a>
-            <img src={r.portrait} alt={r.name} loading="lazy" className="doc-card-portrait" decoding="async" />
+            <img src={thumb(r.portrait)} onError={(e) => thumbFallback(e, r.portrait)} alt={r.name} loading="lazy" className="doc-card-portrait" decoding="async" />
             <h3 className="doc-card-name">{r.name}</h3>
             <p className="doc-card-role">{r.role}</p>
           </div>

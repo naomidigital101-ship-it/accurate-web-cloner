@@ -21,7 +21,9 @@ export function InnerPageFx() {
       if (!g) return;
       e.preventDefault();
       const imgs = Array.from(document.querySelectorAll("img.footer-gallery-img")) as HTMLImageElement[];
-      setGallery(imgs.map((i) => ({ src: i.currentSrc || i.src, title: i.alt })));
+            // data-full הוא התמונה המלאה. ה-src עצמו הוא הממוזערת של הרשת,
+      // ופתיחה שלה בלייטבוקס הייתה מציגה תמונה מטושטשת.
+      setGallery(imgs.map((i) => ({ src: i.dataset.full || i.currentSrc || i.src, title: i.alt })));
       setIndex(imgs.indexOf(g));
     };
     document.addEventListener("click", onClick);
