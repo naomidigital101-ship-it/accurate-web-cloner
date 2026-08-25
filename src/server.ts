@@ -100,7 +100,8 @@ const CSP_REPORT_ONLY = [
   "media-src 'self'",
   "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com",
   "frame-src https://www.youtube.com https://www.youtube-nocookie.com https://player.vimeo.com",
-  "upgrade-insecure-requests",
+  // upgrade-insecure-requests הושמט בכוונה: הדפדפן מתעלם ממנו במצב דיווח
+  // ומדפיס שגיאה בקונסול. יתווסף כשנעבור לאכיפה.
 ].join("; ");
 
 /**
