@@ -194,14 +194,21 @@ export function DonateForm() {
   const [busy, setBusy] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const { values, capture } = useMultiStepValues();
+  const onStart = useFormStart("donate", "he");
 
-  const go = (n: number) => { capture(formRef.current); setStep(n); };
+  const go = (n: number) => {
+    capture(formRef.current);
+    setStep(n);
+    track("form_step", { form_type: "donate", step: n, lang: "he" });
+  };
 
   if (sent) return <p className="form-card-sub" role="status">הטופס נשלח בהצלחה. תודה רבה!</p>;
   return (
     <form
       ref={formRef}
       className="donate-form"
+      onFocus={onStart}
+      onInput={onStart}
       onSubmit={async (e) => {
         e.preventDefault();
         capture(formRef.current);
@@ -209,8 +216,15 @@ export function DonateForm() {
         setErr(null);
         try {
           await submitLead({ data: { kind: "donate", lang: "he", ...values.current } });
+          track("lead_donate_tefilin", {
+            form_type: "donate",
+            lang: "he",
+            condition: values.current.condition,
+            value: 1,
+          });
           setSent(true);
         } catch {
+          track("form_error", { form_type: "donate", lang: "he" });
           setErr("השליחה נכשלה. אפשר לנסות שוב או להתקשר 054-6713966.");
         } finally {
           setBusy(false);
@@ -218,6 +232,7 @@ export function DonateForm() {
       }}
     >
       <HoneyPot />
+
       <div className="e-form-fields">
         {step === 1 && (
           <>
