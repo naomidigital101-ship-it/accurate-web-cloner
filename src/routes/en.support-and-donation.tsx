@@ -61,7 +61,7 @@ function Page() {
         <div className="donate-card donate-card-recurring">
           <span className="donate-card-icon"><CardIcon /></span>
           <h2>For tax purposes in the USA</h2>
-          <a href={recurring} target="_blank" rel="noopener" className="btn-donate">donate</a>
+          <a href={recurring} target="_blank" rel="noopener" className="btn-donate">Donate</a>
         </div>
       </div>
     </PageShell>
