@@ -42,11 +42,12 @@ export const submitLead = createServerFn({ method: "POST" })
       [lead.first_name, lead.last_name].filter(Boolean).join(" ").trim() ||
       null;
 
-    const { error } = await adminDb().from("leads").insert({
-      ...lead,
-      full_name: fullName,
-      status: "new",
-    });
+    // מזהה השורה נדרש כמפתח ייחודיות למייל ההתראה
+    const { data: row, error } = await adminDb()
+      .from("leads")
+      .insert({ ...lead, full_name: fullName, status: "new" })
+      .select("id")
+      .single();
     if (error) throw new Error("save_failed");
 
     /**
@@ -63,7 +64,7 @@ export const submitLead = createServerFn({ method: "POST" })
      * חשובה יותר ממייל שיצא.
      */
     try {
-      await notifyNewLead({ ...lead, full_name: fullName });
+      await notifyNewLead({ ...lead, full_name: fullName, id: row?.id });
     } catch (e) {
       await mailLog("notify", "threw", e instanceof Error ? `${e.name}: ${e.message}` : String(e));
     }
@@ -244,6 +245,7 @@ async function notifyNewLead(lead: Record<string, unknown>): Promise<void> {
     text: leadEmailText(payload),
     // תשובה למייל תגיע ישירות לפונה, אם השאיר כתובת
     replyTo: (lead.email as string) || undefined,
+    idempotencyKey: `lead:${String(lead.id ?? "")}`,
   });
 
   await mailLog("send", res.sent ? "sent" : "failed", res.error ?? res.skipped, to);

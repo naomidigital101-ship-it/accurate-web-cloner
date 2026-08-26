@@ -33,6 +33,15 @@ export type MailInput = {
   html: string;
   text?: string;
   replyTo?: string;
+  /**
+   * מזהה ייחודי להודעה. ה-API דורש אותו למיילים אפליקטיביים יחד עם
+   * purpose=transactional, ובלעדיו מחזיר missing_parameter ולא שולח כלום.
+   *
+   * מעבר לדרישה הפורמלית הוא גם המנגנון שמונע כפילות: שתי שליחות עם אותו
+   * מפתח נחשבות לאותה הודעה. לכן הוא נגזר ממזהה הפנייה - טופס שנשלח פעמיים
+   * בטעות לא יפיק שתי התראות זהות.
+   */
+  idempotencyKey?: string;
 };
 
 export type MailResult = { sent: boolean; skipped?: string; error?: string };
@@ -72,6 +81,9 @@ export async function sendMail(input: MailInput): Promise<MailResult> {
   // ה-API המנוהל שולח לנמען אחד בכל קריאה, ולכן נשלחת קריאה לכל מורשה.
   for (const to of recipients) {
     try {
+      // המפתח כולל את הנמען: אותה התראה לשני מורשים היא שתי הודעות נפרדות,
+      // ומפתח משותף היה גורם לשנייה להיבלע בתור כפילות.
+      const key = `${input.idempotencyKey ?? crypto.randomUUID()}:${to}`;
       const res = await sendLovableEmail(
         {
           to,
@@ -80,9 +92,11 @@ export async function sendMail(input: MailInput): Promise<MailResult> {
           subject: input.subject,
           html: input.html,
           text,
+          purpose: "transactional",
+          idempotency_key: key,
           ...(input.replyTo ? { reply_to: input.replyTo } : {}),
         },
-        { apiKey },
+        { apiKey, idempotencyKey: key },
       );
       if (res.success) sentAny = true;
       else lastError = res.status || "send_failed";
