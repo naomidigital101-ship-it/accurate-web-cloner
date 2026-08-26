@@ -88,12 +88,13 @@ export async function sendMail(input: MailInput): Promise<MailResult> {
       else lastError = res.status || "send_failed";
     } catch (e) {
       if (e instanceof EmailAPIError) {
-        // נמען חסום או הגבלת קצב הם מצב צפוי, לא תקלה שצריך להפיל עליה בקשה
+        // נמען חסום או הגבלת קצב הם מצב צפוי, לא תקלה שצריך להפיל עליה בקשה.
+        // ההודעה נשמרת ולא רק הקוד - "missing_parameter" לבדו לא אומר איזה שדה.
         console.error(`[mail] שליחה נדחתה (${e.code ?? "error"}): ${e.message}`);
-        lastError = e.code ?? "api_error";
+        lastError = `${e.status} ${e.code ?? "api_error"}: ${e.message}`;
       } else {
         console.error("[mail] שליחה נכשלה", e);
-        lastError = "network";
+        lastError = e instanceof Error ? `${e.name}: ${e.message}` : String(e);
       }
     }
   }
