@@ -10,11 +10,19 @@
  *   2. בלי הגדרות - לא נשלח כלום, ונרשם לוג. אין קריסה ואין שגיאה לגולש.
  */
 
+import process from "node:process";
+
 import { EmailAPIError, sendLovableEmail } from "@lovable.dev/email-js";
 
 const SENDER_DOMAIN = "notify.or-hadash.org.il";
 const DEFAULT_FROM = `קשר של תפילין <no-reply@${SENDER_DOMAIN}>`;
 
+/**
+ * חובה לייבא את process מ-node:process ולא להסתמך על גלובל.
+ * ב-Cloudflare Workers אין `process` גלובלי, וכל גישה אליו זורקת ReferenceError -
+ * מה שהפיל את mailConfigured() בשקט וגרם לכך שאף מייל לא נשלח.
+ * זו בדיוק ההערה שכבר קיימת ב-supabase.server.ts, ופה היא פוספסה.
+ */
 function env(name: string): string | undefined {
   return process.env?.[name] || undefined;
 }

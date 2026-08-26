@@ -51,7 +51,11 @@ export const submitLead = createServerFn({ method: "POST" })
 
     // ההתראה נשלחת אחרי השמירה ולעולם לא חוסמת אותה. פנייה שנשמרה היא
     // הדבר החשוב; מייל שנכשל הוא אי-נוחות, לא אובדן ליד.
-    void notifyNewLead({ ...lead, full_name: fullName }).catch(() => {});
+    // השליחה לא מעכבת את התשובה לגולש. שגיאה נרשמת ולא מפילה את הפנייה -
+    // פנייה שנשמרה חשובה יותר ממייל שנשלח.
+    void notifyNewLead({ ...lead, full_name: fullName }).catch((e) =>
+      mailLog("notify", "threw", e instanceof Error ? `${e.name}: ${e.message}` : String(e)),
+    );
 
     return { ok: true as const };
   });
@@ -157,8 +161,26 @@ export const updateLead = createServerFn({ method: "POST" })
  * היעד נלקח מהגדרות האתר (lead_notify_to) ואם הוא ריק - מרשימת המורשים,
  * כך שההתראה לא נעלמת רק בגלל שדה שלא מולא.
  */
+/**
+ * רושם שלב בשליחה ל-mail_log.
+ *
+ * בלי זה כשל שליחה נעלם לחלוטין: ההתראה רצה מחוץ למחזור החיים של הבקשה
+ * (כדי שלא תעכב את הגולש), ולוגים של קונסולה בוורקר לא נשמרים בשום מקום
+ * שאפשר להסתכל בו אחר כך. הטבלה מוגנת ב-RLS בלי מדיניות - רק service_role.
+ */
+async function mailLog(stage: string, status: string, detail?: string, recipient?: string) {
+  try {
+    await adminDb().from("mail_log").insert({ stage, status, detail: detail?.slice(0, 500), recipient });
+  } catch {
+    /* יומן שנכשל לא יפיל שליחה */
+  }
+}
+
 async function notifyNewLead(lead: Record<string, unknown>): Promise<void> {
-  if (!mailConfigured()) return;
+  if (!mailConfigured()) {
+    await mailLog("config", "skipped", "mailConfigured() החזיר false - מפתח ה-API לא נראה בזמן ריצה");
+    return;
+  }
 
   const db = adminDb();
   const { data: setting } = await db
@@ -172,7 +194,10 @@ async function notifyNewLead(lead: Record<string, unknown>): Promise<void> {
     const { data: admins } = await db.from("admin_allowlist").select("email");
     to = (admins ?? []).map((a) => a.email as string).filter(Boolean).join(",");
   }
-  if (!to) return;
+  if (!to) {
+    await mailLog("recipient", "skipped", "אין נמען: גם lead_notify_to וגם admin_allowlist ריקים");
+    return;
+  }
 
   const phone = String(lead.phone ?? "").trim();
   let repeatCount = 1;
@@ -201,7 +226,7 @@ async function notifyNewLead(lead: Record<string, unknown>): Promise<void> {
     repeatCount,
   };
 
-  await sendMail({
+  const res = await sendMail({
     to: to.split(",").map((x) => x.trim()).filter(Boolean),
     subject: leadSubject(payload),
     html: leadEmailHtml(payload),
@@ -209,4 +234,6 @@ async function notifyNewLead(lead: Record<string, unknown>): Promise<void> {
     // תשובה למייל תגיע ישירות לפונה, אם השאיר כתובת
     replyTo: (lead.email as string) || undefined,
   });
+
+  await mailLog("send", res.sent ? "sent" : "failed", res.error ?? res.skipped, to);
 }
