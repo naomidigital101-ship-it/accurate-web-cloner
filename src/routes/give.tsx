@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
 import { DonateForm } from "@/components/home/FormTabsSection";
@@ -19,13 +20,14 @@ export const Route = createFileRoute("/give")({
 
 
 function GivePage() {
+  const [sent, setSent] = useState(false);
   return (
     <PageShell title="מסירת/תרומת תפילין">
       <div className="formpage-wrap">
         <div className="form-card">
           <h2 className="form-card-title">יש לך תפילין מיותרות?</h2>
-          <p className="form-card-sub">אנא מלא את הטופס כדי שתוכל לקיים בהם מצוה חשובה וזיכוי הרבים!</p>
-          <DonateForm />
+          {!sent && <p className="form-card-sub">אנא מלא את הטופס כדי שתוכל לקיים בהם מצוה חשובה וזיכוי הרבים!</p>}
+          <DonateForm onSent={() => setSent(true)} />
         </div>
       </div>
     </PageShell>

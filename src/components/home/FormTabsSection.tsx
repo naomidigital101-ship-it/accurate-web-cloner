@@ -108,7 +108,14 @@ function PrevNextRow({ onPrev, onNext, submitLabel }: { onPrev: () => void; onNe
   );
 }
 
-export function RequestForm() {
+/**
+ * onSent מדווח להורה שהטופס נשלח.
+ *
+ * מצב ה"נשלח" הוא פנימי לטופס, אבל הכותרת ומשפט ההנחיה ("אנא מלא את
+ * הטופס...") יושבים בעמוד שמעליו. בלי הדיווח הזה ההנחיה נשארה על המסך
+ * מתחת להודעת ההצלחה, כלומר ביקשנו מהגולש למלא טופס שהוא כבר מילא.
+ */
+export function RequestForm({ onSent }: { onSent?: () => void }) {
   const [step, setStep] = useState(1);
   const [sent, setSent] = useState(false);
   const [err, setErr] = useState<string | null>(null);
@@ -145,6 +152,7 @@ export function RequestForm() {
             value: 1,
           });
           setSent(true);
+          onSent?.();
         } catch {
           track("form_error", { form_type: "request", lang: "he" });
           setErr("השליחה נכשלה. אפשר לנסות שוב או להתקשר 054-6713966.");
@@ -187,7 +195,7 @@ export function RequestForm() {
   );
 }
 
-export function DonateForm() {
+export function DonateForm({ onSent }: { onSent?: () => void }) {
   const [step, setStep] = useState(1);
   const [sent, setSent] = useState(false);
   const [err, setErr] = useState<string | null>(null);
@@ -223,6 +231,7 @@ export function DonateForm() {
             value: 1,
           });
           setSent(true);
+          onSent?.();
         } catch {
           track("form_error", { form_type: "donate", lang: "he" });
           setErr("השליחה נכשלה. אפשר לנסות שוב או להתקשר 054-6713966.");
@@ -259,6 +268,9 @@ export function DonateForm() {
 
 export function FormTabsSection() {
   const [tab, setTab] = useState<"request" | "donate">("request");
+  // מצב נפרד לכל לשונית: מי ששלח בקשה ועבר ללשונית התרומה עדיין צריך הנחיה
+  const [requestSent, setRequestSent] = useState(false);
+  const [donateSent, setDonateSent] = useState(false);
   return (
     <section id="form" dir="rtl" className="forms-e forms-tabbed">
       <div className="form-tabs" role="tablist" aria-label="בחירת טופס">
@@ -288,14 +300,18 @@ export function FormTabsSection() {
         {tab === "request" ? (
           <div className="form-card" role="tabpanel" aria-label="רוצה להניח תפילין משלך?">
             <h2 className="form-card-title">רוצה להניח תפילין משלך?</h2>
-            <p className="form-card-sub">אנא מלא את הטופס המצורף כדי שנוכל לעזור לך לקבל תפילין משלך!</p>
-            <RequestForm />
+            {!requestSent && (
+              <p className="form-card-sub">אנא מלא את הטופס המצורף כדי שנוכל לעזור לך לקבל תפילין משלך!</p>
+            )}
+            <RequestForm onSent={() => setRequestSent(true)} />
           </div>
         ) : (
           <div className="form-card" role="tabpanel" aria-label="יש לך תפילין מיותרות?">
             <h2 className="form-card-title">יש לך תפילין מיותרות?</h2>
-            <p className="form-card-sub">אנא מלא את הטופס כדי שתוכל לקיים בהם מצוה חשובה וזיכוי הרבים!</p>
-            <DonateForm />
+            {!donateSent && (
+              <p className="form-card-sub">אנא מלא את הטופס כדי שתוכל לקיים בהם מצוה חשובה וזיכוי הרבים!</p>
+            )}
+            <DonateForm onSent={() => setDonateSent(true)} />
           </div>
         )}
       </div>
