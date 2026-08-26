@@ -37,8 +37,12 @@ function CardIcon() {
 }
 
 function Page() {
-  // התרומה החד-פעמית בעמוד הזה חוזרת לערוץ הישראלי לפי בקשת הלקוחה.
-  // ערוץ קרן נאמן (מוכר לצרכי מס בארה"ב ובקנדה) נשאר בכפתורי עמוד הבית האנגלי.
+  /**
+   * שני הכרטיסים בעמוד האנגלי אינם "חד פעמי מול הוראת קבע" אלא שני ערוצי
+   * סליקה בשתי מדינות: הכרטיס עם הלב מוביל לערוץ הישראלי, והשני לקרן נאמן
+   * שהיא עמותה אמריקאית. לכן הכותרות מציינות את המדינה שבה התרומה מוכרת
+   * לצרכי מס - זה ההבדל שמעניין את התורם, וזה גם מה שקורה בפועל בקישורים.
+   */
   const onetime = useSetting("donate_onetime_url");
   const recurring = useDonateUrl("recurring", true);
   return (
@@ -50,13 +54,13 @@ function Page() {
       <div className="donate-cards">
         <div className="donate-card donate-card-onetime">
           <span className="donate-card-icon"><HeartIcon /></span>
-          <h2>One time donation</h2>
+          <h2>For tax purposes in Israel</h2>
           <p>Donations are tax-deductible</p>
           <a href={onetime} target="_blank" rel="noopener" className="btn-donate">Donate</a>
         </div>
         <div className="donate-card donate-card-recurring">
           <span className="donate-card-icon"><CardIcon /></span>
-          <h2>Donation by direct debit</h2>
+          <h2>For tax purposes in the USA</h2>
           <a href={recurring} target="_blank" rel="noopener" className="btn-donate">donate</a>
         </div>
       </div>
