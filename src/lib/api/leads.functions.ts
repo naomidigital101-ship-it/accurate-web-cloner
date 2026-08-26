@@ -49,13 +49,24 @@ export const submitLead = createServerFn({ method: "POST" })
     });
     if (error) throw new Error("save_failed");
 
-    // ההתראה נשלחת אחרי השמירה ולעולם לא חוסמת אותה. פנייה שנשמרה היא
-    // הדבר החשוב; מייל שנכשל הוא אי-נוחות, לא אובדן ליד.
-    // השליחה לא מעכבת את התשובה לגולש. שגיאה נרשמת ולא מפילה את הפנייה -
-    // פנייה שנשמרה חשובה יותר ממייל שנשלח.
-    void notifyNewLead({ ...lead, full_name: fullName }).catch((e) =>
-      mailLog("notify", "threw", e instanceof Error ? `${e.name}: ${e.message}` : String(e)),
-    );
+    /**
+     * ממתינים להתראה, לא שולחים אותה ברקע.
+     *
+     * ב-Cloudflare Workers כל עבודה אסינכרונית שלא ממתינים לה נהרגת ברגע
+     * שהתשובה נשלחת - האיזולט פשוט מפסיק לרוץ. הגרסה הקודמת השתמשה ב-void
+     * ולכן ההתראה מעולם לא הספיקה לרוץ: הפנייה נשמרה, ובטבלת היומן לא הופיעה
+     * אפילו שורה אחת. ctx.waitUntil היה הפתרון הנכון אילו היה לנו גישה ל-ctx
+     * בתוך server function, ואין.
+     *
+     * המחיר הוא כמה מאות מילישניות בשליחת הטופס. זה עדיף על אובדן כל ההתראות.
+     * שגיאה בשליחה נרשמת ביומן ולעולם לא מפילה את הפנייה - פנייה שנשמרה
+     * חשובה יותר ממייל שיצא.
+     */
+    try {
+      await notifyNewLead({ ...lead, full_name: fullName });
+    } catch (e) {
+      await mailLog("notify", "threw", e instanceof Error ? `${e.name}: ${e.message}` : String(e));
+    }
 
     return { ok: true as const };
   });
