@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { leadSource } from "@/lib/lead-source";
 
 import { submitLead } from "@/lib/api/leads.functions";
 import { track } from "@/lib/analytics";
@@ -142,7 +143,7 @@ export function RequestForm({ onSent }: { onSent?: () => void }) {
         setBusy(true);
         setErr(null);
         try {
-          await submitLead({ data: { kind: "request", lang: "he", ...values.current } });
+          await submitLead({ data: { kind: "request", lang: "he", ...values.current, ...leadSource() } });
           track("lead_request", {
             form_type: "request",
             lang: "he",
@@ -223,7 +224,7 @@ export function DonateForm({ onSent }: { onSent?: () => void }) {
         setBusy(true);
         setErr(null);
         try {
-          await submitLead({ data: { kind: "donate", lang: "he", ...values.current } });
+          await submitLead({ data: { kind: "donate", lang: "he", ...values.current, ...leadSource() } });
           track("lead_donate_tefilin", {
             form_type: "donate",
             lang: "he",

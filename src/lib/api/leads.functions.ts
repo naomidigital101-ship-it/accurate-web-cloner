@@ -22,6 +22,15 @@ const LeadInput = z.object({
   dedication: z.string().trim().max(2000).optional(),
   // מלכודת לבוטים: שדה מוסתר שאדם לעולם לא ימלא
   website: z.string().max(200).optional(),
+  /**
+   * מאיפה הגיעה הפנייה. שתי מדידות שונות שאסור לערבב:
+   *   form_page - העמוד באתר שבו מולא הטופס (/request, /, /en/...).
+   *               עונה על "איזה עמוד מייצר פניות".
+   *   referer   - מאיפה הגולש הגיע לאתר מלכתחילה (google, chatgpt, פייסבוק).
+   *               עונה על "איזה ערוץ שיווקי עובד".
+   */
+  form_page: z.string().trim().max(300).optional(),
+  referer: z.string().trim().max(200).optional(),
 });
 
 /**

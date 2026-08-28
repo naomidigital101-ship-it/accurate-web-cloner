@@ -27,9 +27,35 @@ type Lead = {
   supplied_at: string | null;
   repeat_count: number;
   created_at: string;
+  /** העמוד באתר שבו מולא הטופס */
+  form_page: string | null;
+  /** הערוץ שממנו הגיע הגולש לאתר */
+  referer: string | null;
 };
 
 type Counts = { requestsNew: number; donationsNew: number; requests: number; donations: number };
+
+/**
+ * שם קריא לעמוד שבו מולא הטופס.
+ *
+ * "/" הוא הטופס בלשוניות שבעמוד הבית, ולא עמוד ייעודי - וזו בדיוק ההשוואה
+ * שמעניינת: האם הטופס בעמוד הבית מייצר יותר פניות מהעמוד הייעודי.
+ */
+const PAGE_LABEL: Record<string, string> = {
+  "/": "עמוד הבית",
+  "/request": "בקשת תפילין",
+  "/give": "מסירת תפילין",
+  "/donate": "תרומה",
+  "/en": "עמוד הבית באנגלית",
+  "/en/request-for-tefillin": "בקשה - אנגלית",
+  "/en/request-to-donate-tefillin": "מסירה - אנגלית",
+};
+
+function pageLabel(p: string | null): string {
+  if (!p) return "";
+  const clean = p.split("?")[0].replace(/\/$/, "") || "/";
+  return PAGE_LABEL[clean] ?? clean;
+}
 
 const STATUS: Record<Lead["status"], string> = {
   new: "ממתינה לטיפול",
@@ -80,6 +106,8 @@ const CSV_COLUMNS: [string, (r: Lead) => string][] = [
   ["הקדשה", (r) => r.dedication ?? ""],
   ["סופק", (r) => (r.supplied_at ? "כן" : "")],
   ["מספר פניות מאותו טלפון", (r) => String(r.repeat_count)],
+  ["עמוד הפנייה", (r) => pageLabel(r.form_page)],
+  ["ערוץ הגעה", (r) => r.referer ?? ""],
 ];
 
 /** אקסל בעברית קורא UTF-8 רק עם BOM, ובלעדיו כל הטקסט יוצא ג'יבריש */
@@ -310,6 +338,8 @@ function LeadsPage() {
                               ["מצב התפילין", r.condition],
                               ["הקדשה", r.dedication],
                               ["סופק בתאריך", r.supplied_at ? fmt(r.supplied_at) : null],
+                              ["עמוד הפנייה", pageLabel(r.form_page)],
+                              ["ערוץ הגעה", r.referer],
                             ] as const)
                               .filter(([, v]) => v)
                               .map(([k, v]) => (

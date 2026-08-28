@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { leadSource } from "@/lib/lead-source";
 import { useRef, useState } from "react";
 
 import { submitLead } from "@/lib/api/leads.functions";
@@ -101,7 +102,7 @@ function EnRequestForm() {
         setBusy(true);
         setErr(null);
         try {
-          await submitLead({ data: { kind: "request", lang: "en", ...values.current } });
+          await submitLead({ data: { kind: "request", lang: "en", ...values.current, ...leadSource() } });
           track("lead_request", {
             form_type: "request",
             lang: "en",
