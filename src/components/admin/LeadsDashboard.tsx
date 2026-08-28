@@ -1,6 +1,8 @@
 import { useState } from "react";
 
 import type { LeadStats } from "@/lib/api/stats.functions";
+import type { TimelineEvent } from "@/lib/api/timeline.functions";
+import { CAT_LABEL, TimelineEvents } from "./TimelineEvents";
 
 const MONTHS_HE = ["ינו", "פבר", "מרץ", "אפר", "מאי", "יוני", "יולי", "אוג", "ספט", "אוק", "נוב", "דצמ"];
 
@@ -31,12 +33,25 @@ export function LeadsDashboard({
   stats,
   months,
   onMonthsChange,
+  events,
+  onEventsChanged,
 }: {
   stats: LeadStats;
   months: number;
   onMonthsChange: (m: number) => void;
+  events: TimelineEvent[];
+  onEventsChanged: () => void;
 }) {
   const [series, setSeries] = useState<SeriesKey>("all");
+
+  // ציוני הדרך מקובצים לפי חודש, כדי לתלות אותם מתחת לעמודה הנכונה
+  const byMonth = new Map<string, TimelineEvent[]>();
+  for (const e of events) {
+    const ym = e.event_date.slice(0, 7);
+    const list = byMonth.get(ym);
+    if (list) list.push(e);
+    else byMonth.set(ym, [e]);
+  }
 
   const value = (m: LeadStats["monthly"][number]) =>
     series === "request" ? m.requests : series === "donate" ? m.donations : m.requests + m.donations;
@@ -137,10 +152,27 @@ export function LeadsDashboard({
                   <span className="dash-bar-request" style={{ flexBasis: `${t ? ((t - donatePart) / t) * 100 : 100}%` }} />
                 </div>
                 <span className="dash-bar-lbl">{label(m.month)}</span>
+                {/* ציוני הדרך של אותו חודש. הכיתוב המלא ב-title, כי מתחת
+                    לעמודה צרה אין מקום ליותר מנקודה. */}
+                {(byMonth.get(m.month) ?? []).length > 0 && (
+                  <span className="dash-bar-marks">
+                    {(byMonth.get(m.month) ?? []).map((e) => (
+                      <span
+                        key={e.id}
+                        className={`tl-dot tl-dot-${e.category}`}
+                        title={`${new Date(e.event_date).toLocaleDateString("he-IL")} · ${CAT_LABEL[e.category] ?? ""}
+${e.title}${e.note ? `
+${e.note}` : ""}`}
+                      />
+                    ))}
+                  </span>
+                )}
               </div>
             );
           })}
         </div>
+
+        <TimelineEvents events={events} onChanged={onEventsChanged} />
       </section>
 
       <div className="dash-cols">

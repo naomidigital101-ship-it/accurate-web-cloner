@@ -5,6 +5,7 @@ import { getAccessToken } from "@/lib/supabase-browser";
 import { getAdminOverview } from "@/lib/api/admin.functions";
 import { getLeadStats, type LeadStats } from "@/lib/api/stats.functions";
 import { LeadsDashboard } from "@/components/admin/LeadsDashboard";
+import { listTimelineEvents, type TimelineEvent } from "@/lib/api/timeline.functions";
 
 export const Route = createFileRoute("/admin/")({ component: Overview });
 
@@ -25,23 +26,28 @@ function Overview() {
   const [counts, setCounts] = useState<Counts | null>(null);
   const [stats, setStats] = useState<LeadStats | null>(null);
   const [months, setMonths] = useState(12);
+  const [events, setEvents] = useState<TimelineEvent[]>([]);
+  // מונה שמאלץ טעינה מחדש של ציוני הדרך אחרי הוספה, עריכה או מחיקה
+  const [eventsNonce, setEventsNonce] = useState(0);
   const [err, setErr] = useState<string | null>(null);
 
   useEffect(() => {
     (async () => {
       try {
         const token = await getAccessToken();
-        const [c, s2] = await Promise.all([
+        const [c, s2, ev] = await Promise.all([
           getAdminOverview({ data: { accessToken: token } }),
           getLeadStats({ data: { accessToken: token, months } }),
+          listTimelineEvents({ data: { accessToken: token } }),
         ]);
         setCounts(c);
         setStats(s2 as LeadStats);
+        setEvents(ev as TimelineEvent[]);
       } catch {
         setErr("לא הצלחנו לטעון את הנתונים.");
       }
     })();
-  }, [months]);
+  }, [months, eventsNonce]);
 
   return (
     <>
@@ -52,7 +58,15 @@ function Overview() {
 
       {err && <p className="adm-err">{err}</p>}
 
-      {stats && <LeadsDashboard stats={stats} months={months} onMonthsChange={setMonths} />}
+      {stats && (
+        <LeadsDashboard
+          stats={stats}
+          months={months}
+          onMonthsChange={setMonths}
+          events={events}
+          onEventsChanged={() => setEventsNonce((n) => n + 1)}
+        />
+      )}
 
       <h2 className="dash-h2">התוכן באתר</h2>
 

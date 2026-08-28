@@ -3060,3 +3060,44 @@ html.a11y-hc-light body :is(section, div, article, header, footer, main, aside):
   .lp-sub { font-size: 16px; }
   .lp-cta { padding: 14px 34px; font-size: 17px; }
 }
+
+/* --- ציוני דרך על ציר הזמן --- */
+/* צבע לכל סוג אירוע. הנקודה מתחת לעמודה היא הרמז היחיד שיש למקום צר כזה,
+   ולכן ההבחנה חייבת להיות בצבע ולא בטקסט. הכיתוב המלא יושב ב-title. */
+.tl-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; flex: 0 0 auto; }
+.tl-dot-site { background: #2d2e83; }
+.tl-dot-marketing { background: #009fe3; }
+.tl-dot-media { background: #b06ab3; }
+.tl-dot-business { background: #e08a00; }
+.tl-dot-external { background: #8a8f9e; }
+.tl-dot-other { background: #c2c7d4; }
+
+.dash-bar-marks { display: flex; gap: 3px; justify-content: center; flex-wrap: wrap; max-width: 42px; min-height: 9px; cursor: help; }
+
+.tl-wrap { margin-top: 22px; border-top: 1px solid #eef0f7; padding-top: 16px; }
+.tl-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.tl-head h3 { margin: 0; font-size: 16px; font-weight: 700; color: #2d2e83; }
+.tl-intro { font-size: 13px; margin: 6px 0 12px; line-height: 1.6; }
+
+.tl-form { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 12px; background: #f6f7fb; border-radius: 12px; padding: 14px; margin-bottom: 14px; }
+.tl-form-wide { grid-column: 1 / -1; }
+.tl-form label { display: flex; flex-direction: column; gap: 4px; font-size: 13px; }
+.tl-form label span { font-weight: 700; opacity: 0.7; }
+.tl-form input, .tl-form select, .tl-form textarea { font: inherit; font-size: 14px; padding: 9px 10px; border: 1px solid #dfe3ee; border-radius: 8px; background: #fff; }
+.tl-form textarea { resize: vertical; }
+.tl-form-actions { display: flex; align-items: center; gap: 14px; }
+
+.tl-list { list-style: none; margin: 0; padding: 0; }
+.tl-list li { display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; border-bottom: 1px solid #f2f3f9; }
+.tl-list li:last-child { border-bottom: 0; }
+.tl-list .tl-dot { margin-top: 6px; }
+.tl-list-main { display: flex; flex-direction: column; gap: 2px; flex: 1 1 auto; min-width: 0; }
+.tl-list-main b { font-size: 14px; color: #1c1e2b; }
+.tl-meta { font-size: 12px; opacity: 0.6; }
+.tl-note { font-size: 13px; opacity: 0.8; line-height: 1.5; }
+.tl-list-actions { display: flex; gap: 12px; flex: 0 0 auto; }
+
+@media (max-width: 700px) {
+  .tl-form { grid-template-columns: 1fr; }
+  .tl-list li { flex-wrap: wrap; }
+}
