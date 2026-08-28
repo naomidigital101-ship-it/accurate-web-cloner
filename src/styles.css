@@ -3086,6 +3086,8 @@ html.a11y-hc-light body :is(section, div, article, header, footer, main, aside):
 .tl-form input, .tl-form select, .tl-form textarea { font: inherit; font-size: 14px; padding: 9px 10px; border: 1px solid #dfe3ee; border-radius: 8px; background: #fff; }
 .tl-form textarea { resize: vertical; }
 .tl-form-actions { display: flex; align-items: center; gap: 14px; }
+/* adm-primary הוא width:100% כברירת מחדל, וברצף כפתורים הוא היה נמתח על כל השורה */
+.tl-form-actions .adm-primary { max-width: 170px; height: 42px; }
 
 .tl-list { list-style: none; margin: 0; padding: 0; }
 .tl-list li { display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; border-bottom: 1px solid #f2f3f9; }

@@ -155,7 +155,7 @@ export function TimelineEvents({
           </label>
           {err && <p className="adm-err tl-form-wide">{err}</p>}
           <div className="tl-form-actions tl-form-wide">
-            <button type="submit" className="adm-btn" disabled={busy}>
+            <button type="submit" className="adm-primary" disabled={busy}>
               {busy ? "שומר…" : editing ? "עדכון" : "הוספה"}
             </button>
             {editing && (
