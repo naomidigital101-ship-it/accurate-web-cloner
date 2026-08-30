@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492RouteImport } from './routes/מכתבי-תודה'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as StoriesRouteImport } from './routes/stories'
+import { Route as StartRouteImport } from './routes/start'
 import { Route as RequestRouteImport } from './routes/request'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as LettersRouteImport } from './routes/letters'
@@ -72,6 +73,11 @@ const TermsRoute = TermsRouteImport.update({
 const StoriesRoute = StoriesRouteImport.update({
   id: '/stories',
   path: '/stories',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StartRoute = StartRouteImport.update({
+  id: '/start',
+  path: '/start',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RequestRoute = RequestRouteImport.update({
@@ -308,6 +314,7 @@ export interface FileRoutesByFullPath {
   '/letters': typeof LettersRoute
   '/privacy': typeof PrivacyRoute
   '/request': typeof RequestRoute
+  '/start': typeof StartRoute
   '/stories': typeof StoriesRoute
   '/terms': typeof TermsRoute
   '/מכתבי-תודה': typeof Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route
@@ -354,6 +361,7 @@ export interface FileRoutesByTo {
   '/letters': typeof LettersRoute
   '/privacy': typeof PrivacyRoute
   '/request': typeof RequestRoute
+  '/start': typeof StartRoute
   '/stories': typeof StoriesRoute
   '/terms': typeof TermsRoute
   '/מכתבי-תודה': typeof Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route
@@ -403,6 +411,7 @@ export interface FileRoutesById {
   '/letters': typeof LettersRoute
   '/privacy': typeof PrivacyRoute
   '/request': typeof RequestRoute
+  '/start': typeof StartRoute
   '/stories': typeof StoriesRoute
   '/terms': typeof TermsRoute
   '/מכתבי-תודה': typeof Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route
@@ -453,6 +462,7 @@ export interface FileRouteTypes {
     | '/letters'
     | '/privacy'
     | '/request'
+    | '/start'
     | '/stories'
     | '/terms'
     | '/מכתבי-תודה'
@@ -499,6 +509,7 @@ export interface FileRouteTypes {
     | '/letters'
     | '/privacy'
     | '/request'
+    | '/start'
     | '/stories'
     | '/terms'
     | '/מכתבי-תודה'
@@ -547,6 +558,7 @@ export interface FileRouteTypes {
     | '/letters'
     | '/privacy'
     | '/request'
+    | '/start'
     | '/stories'
     | '/terms'
     | '/מכתבי-תודה'
@@ -596,6 +608,7 @@ export interface RootRouteChildren {
   LettersRoute: typeof LettersRoute
   PrivacyRoute: typeof PrivacyRoute
   RequestRoute: typeof RequestRoute
+  StartRoute: typeof StartRoute
   StoriesRoute: typeof StoriesRoute
   TermsRoute: typeof TermsRoute
   Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route: typeof Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route
@@ -623,6 +636,13 @@ declare module '@tanstack/react-router' {
       path: '/stories'
       fullPath: '/stories'
       preLoaderRoute: typeof StoriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/start': {
+      id: '/start'
+      path: '/start'
+      fullPath: '/start'
+      preLoaderRoute: typeof StartRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/request': {
@@ -1015,6 +1035,7 @@ const rootRouteChildren: RootRouteChildren = {
   LettersRoute: LettersRoute,
   PrivacyRoute: PrivacyRoute,
   RequestRoute: RequestRoute,
+  StartRoute: StartRoute,
   StoriesRoute: StoriesRoute,
   TermsRoute: TermsRoute,
   Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route:
