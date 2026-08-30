@@ -10,10 +10,31 @@ export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "14.15"
+    PostgrestVersion: "14.5"
   }
   public: {
     Tables: {
+      _bak_png_to_webp_20260826: {
+        Row: {
+          c: string | null
+          id: string | null
+          t: string | null
+          v: string | null
+        }
+        Insert: {
+          c?: string | null
+          id?: string | null
+          t?: string | null
+          v?: string | null
+        }
+        Update: {
+          c?: string | null
+          id?: string | null
+          t?: string | null
+          v?: string | null
+        }
+        Relationships: []
+      }
       admin_allowlist: {
         Row: {
           created_at: string
@@ -153,6 +174,7 @@ export type Database = {
           delivery: string | null
           email: string | null
           first_name: string | null
+          form_page: string | null
           full_name: string | null
           hand: string | null
           id: string
@@ -181,6 +203,7 @@ export type Database = {
           delivery?: string | null
           email?: string | null
           first_name?: string | null
+          form_page?: string | null
           full_name?: string | null
           hand?: string | null
           id?: string
@@ -209,6 +232,7 @@ export type Database = {
           delivery?: string | null
           email?: string | null
           first_name?: string | null
+          form_page?: string | null
           full_name?: string | null
           hand?: string | null
           id?: string
@@ -227,6 +251,33 @@ export type Database = {
           target?: string | null
           updated_at?: string
           user_agent?: string | null
+        }
+        Relationships: []
+      }
+      mail_log: {
+        Row: {
+          created_at: string
+          detail: string | null
+          id: string
+          recipient: string | null
+          stage: string
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          detail?: string | null
+          id?: string
+          recipient?: string | null
+          stage: string
+          status: string
+        }
+        Update: {
+          created_at?: string
+          detail?: string | null
+          id?: string
+          recipient?: string | null
+          stage?: string
+          status?: string
         }
         Relationships: []
       }
@@ -551,6 +602,36 @@ export type Database = {
         }
         Relationships: []
       }
+      timeline_events: {
+        Row: {
+          category: string
+          created_at: string
+          event_date: string
+          id: string
+          note: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          event_date: string
+          id?: string
+          note?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          event_date?: string
+          id?: string
+          note?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -584,6 +665,7 @@ export type Database = {
           delivery: string | null
           email: string | null
           first_name: string | null
+          form_page: string | null
           full_name: string | null
           hand: string | null
           id: string | null
