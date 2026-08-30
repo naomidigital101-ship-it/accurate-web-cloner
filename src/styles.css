@@ -3103,3 +3103,205 @@ html.a11y-hc-light body :is(section, div, article, header, footer, main, aside):
   .tl-form { grid-template-columns: 1fr; }
   .tl-list li { flex-wrap: wrap; }
 }
+
+/* ===== Book sales page (/book) ===== */
+.book-hero {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 40px;
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 2% 20px 4%;
+}
+.book-hero-text {
+  flex: 1 1 55%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+}
+.book-hero-tagline {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.5em;
+  color: #2d2e83;
+  margin: 0;
+}
+.book-hero-price {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 42px;
+  font-weight: 900;
+  line-height: 1em;
+  color: #e65a38;
+  margin: 0;
+}
+.book-hero-cta {
+  margin-top: 8px;
+}
+.book-hero-media {
+  flex: 1 1 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.book-cover-placeholder {
+  aspect-ratio: 2 / 3;
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #eef6ff 0%, #c3e7f6 100%);
+  color: #2d2e83;
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4em;
+  box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.15);
+  border: 2px dashed #009fe3;
+}
+
+.book-section {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 3% 20px;
+}
+.book-section h2 {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 36px;
+  font-weight: 900;
+  line-height: 1.1em;
+  color: #2d2e83;
+  margin: 0 0 20px;
+}
+.book-section p {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.6em;
+  color: #060633;
+  margin: 0 0 16px;
+}
+.book-section p:last-child { margin-bottom: 0; }
+
+.book-details {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.book-details li {
+  background: #f4f7fb;
+  border-radius: 12px;
+  padding: 18px;
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #2d2e83;
+  text-align: center;
+}
+.book-details li span {
+  display: block;
+  font-size: 14px;
+  font-weight: 400;
+  color: #5a5b8f;
+  margin-bottom: 6px;
+}
+
+.book-testimonials {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.book-testimonial {
+  margin: 0;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-top: 4px solid #67ffd1;
+}
+.book-testimonial p {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.6em;
+  color: #060633;
+  margin: 0 0 18px;
+}
+.book-testimonial footer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.book-testimonial footer strong {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #2d2e83;
+}
+.book-testimonial footer span {
+  font-family: "Maadim", "Maadim OS", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #5a5b8f;
+}
+
+.book-cta-band {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 3% 20px 4%;
+  text-align: center;
+}
+
+.book-contact {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+}
+.book-contact p { margin-bottom: 8px; }
+.book-contact a {
+  color: #009fe3;
+  font-weight: 700;
+  text-decoration: none;
+}
+.book-contact a:hover,
+.book-contact a:focus { text-decoration: underline; }
+
+@media (max-width: 1024px) {
+  .book-hero { gap: 28px; }
+  .book-cover-placeholder { max-width: 260px; }
+  .book-testimonials { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 767px) {
+  .book-hero {
+    flex-direction: column-reverse;
+    align-items: stretch;
+    padding: 4% 16px 6%;
+    gap: 28px;
+  }
+  .book-hero-text { align-items: center; text-align: center; }
+  .book-hero-tagline { font-size: 18px; }
+  .book-hero-price { font-size: 34px; }
+  .book-hero-cta { width: 100%; max-width: 320px; }
+  .book-cover-placeholder { max-width: 220px; margin: 0 auto; }
+  .book-section { padding: 6% 16px; }
+  .book-section h2 { font-size: 28px; }
+  .book-section p { font-size: 16px; }
+  .book-details { grid-template-columns: 1fr; }
+  .book-testimonials { grid-template-columns: 1fr; }
+}

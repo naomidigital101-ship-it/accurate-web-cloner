@@ -17,6 +17,7 @@ const STATIC = [
   ["/in-news", "monthly", "0.7"],
   ["/request", "monthly", "0.8"],
   ["/give", "monthly", "0.8"],
+  ["/book", "monthly", "0.7"],
   ["/donate", "monthly", "0.8"],
   ["/en/the-tefillin-tie-initiative", "monthly", "0.6"],
   ["/en/articles-in-the-media", "monthly", "0.5"],
