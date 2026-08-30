@@ -20,6 +20,7 @@ const navItems: NavItem[] = [
   },
   { label: "בקשת תפילין", href: "/request" },
   { label: "מסירת/תרומת תפילין", href: "/give" },
+  { label: "הספר", href: "/book" },
   { label: "תרומה", href: "/donate" },
 ];
 
