@@ -71,8 +71,33 @@ function sourcesOf(path) {
  * שנשען על הגיט משתנה רק כשהתוכן באמת השתנה, וזה מה שגורם לגוגל לחזור
  * ולסרוק את מה שכדאי.
  */
+/**
+ * ההיסטוריה חייבת להיות עמוקה כדי שהתאריכים יהיו אמיתיים.
+ *
+ * סביבת הבנייה משכפלת את הריפו בעומק קומיט אחד, ואז git log מחזיר לכל קובץ
+ * את אותו קומיט - כלומר את יום הפרסום. זה בדיוק התסמין שבאנו לתקן, רק
+ * במסווה. הפעם הראשונה שהרצתי את זה בפרודקשן ייצרה 83 תאריכים זהים של היום.
+ * לכן בודקים מראש שיש היסטוריה, ואם אין - לא נוגעים בתאריכים שכבר פורסמו.
+ */
+function historyIsDeep() {
+  try {
+    const n = Number(
+      execFileSync("git", ["rev-list", "--count", "HEAD"], {
+        encoding: "utf8",
+        stdio: ["ignore", "pipe", "ignore"],
+      }).trim(),
+    );
+    return Number.isFinite(n) && n > 20;
+  } catch {
+    return false;
+  }
+}
+
+const DEEP = historyIsDeep();
+
 const gitCache = new Map();
 function gitDate(file) {
+  if (!DEEP) return null;
   if (gitCache.has(file)) return gitCache.get(file);
   let out = null;
   try {
@@ -108,9 +133,10 @@ const mtime = (f) => (existsSync(f) ? statSync(f).mtime.toISOString().slice(0, 1
 
 function lastmodOf(path) {
   const src = sourcesOf(path);
+  const prev = previous.get(`${ORIGIN}${enc(path)}`);
   const dates = src.map(gitDate).filter(Boolean);
   if (dates.length) return dates.sort().at(-1);
-  const prev = previous.get(`${ORIGIN}${enc(path)}`);
+  // בלי היסטוריה - התאריך שכבר פורסם עדיף על תאריך מומצא
   if (prev) return prev;
   return src.map(mtime).filter(Boolean).sort().at(-1) ?? new Date().toISOString().slice(0, 10);
 }
@@ -138,10 +164,11 @@ const xml =
 writeFileSync("public/sitemap.xml", xml);
 
 const uniqueDates = new Set(paths.map(lastmodOf)).size;
-const gitOk = [...gitCache.values()].some(Boolean);
 console.log(
   `sitemap.xml: ${paths.length} כתובות, ${uniqueDates} תאריכי עדכון שונים` +
-    (gitOk ? " (מקור: היסטוריית הגיט)" : " (אזהרה: הגיט לא זמין - נשמרו התאריכים הקודמים)"),
+    (DEEP
+      ? " (מקור: היסטוריית הגיט)"
+      : " (אין היסטוריית גיט בסביבה הזו - נשמרו התאריכים שכבר פורסמו)"),
 );
 
 // robots.txt נגזר מאותו ORIGIN. הנחיית Sitemap מחייבת כתובת מוחלטת לפי התקן,
