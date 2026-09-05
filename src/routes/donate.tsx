@@ -6,9 +6,9 @@ import { SITE_URL } from "@/lib/site";
 export const Route = createFileRoute("/donate")({
   head: () => ({
     meta: [
-      { title: "תרומה למיזם קשר של תפילין | אור חדש" },
+      { title: "תרומה למיזם | קשר של תפילין" },
       { name: "description", content: "היו שותפים במיזם קשר של תפילין - תרומה חד-פעמית או בהוראת קבע. עלויות חידוש וחלוקת התפילין גבוהות וכל תרומה מזכה יהודי במצווה." },
-      { property: "og:title", content: "תרומה למיזם קשר של תפילין | אור חדש" },
+      { property: "og:title", content: "תרומה למיזם | קשר של תפילין" },
       { property: "og:description", content: "היו שותפים במיזם קשר של תפילין - תרומה חד-פעמית או בהוראת קבע. עלויות חידוש וחלוקת התפילין גבוהות וכל תרומה מזכה יהודי במצווה." },
       { property: "og:url", content: `${SITE_URL}/donate` },
     ],
