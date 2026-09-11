@@ -1299,3 +1299,33 @@
     justify-content: flex-start;
   }
 }
+@media (max-width: 680px) {
+  .kb .kb-hero {
+    grid-template-columns: 1.2fr 1fr;
+    gap: 16px;
+  }
+  .kb .kb-hero h1 {
+    font-size: 38px;
+  }
+  .kb .kb-hero .kb-cover {
+    max-width: 150px;
+  }
+  .kb .kb-hero .kb-cover-frame {
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+  }
+  .kb .kb-hero-specs {
+    margin: 8px 0;
+    justify-content: center;
+  }
+  .kb .kb-hero-price {
+    justify-content: center;
+  }
+  .kb .kb-opening .kb-intro {
+    margin-top: 0 !important;
+  }
+  .kb .kb-hero .kb-button {
+    width: 100%;
+  }
+}
