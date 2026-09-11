@@ -87,29 +87,46 @@ function BookNewPage() {
           <div className="kb-opening">
             <section className="kb-hero kb-wrap" aria-labelledby="kb-title">
               <div className="kb-hero-copy">
-                <p className="kb-kicker">23 סיפורים מהחיים · עמיחי איל</p>
-                <h1 id="kb-title">
-                  קשר של <br />
-                  <span>תפילין</span>
-                </h1>
+                <p className="kb-kicker">הספר של עמיחי איל</p>
+                <h1 id="kb-title">קשר של תפילין</h1>
                 <p className="kb-subtitle">
-                  סיפורים מהחיים על הנחת תפילין <br />
-                  והתחלה של קשר
+                  23 סיפורים על האנשים שמאחורי התפילין
                 </p>
                 <p className="kb-intro">
-                  מה מביא אדם להתחיל להניח תפילין? עמיחי איל שאל את האנשים שפנו
-                  אליו לקבל זוג. בספר הזה הוא מביא את הסיפורים ששמע מהם.
+                  מה מביא אדם להתחיל להניח תפילין? בספר ״קשר של תפילין״ מובאים
+                  סיפוריהם של אנשים שפנו למיזם של עמיחי איל: זיכרונות מהבית,
+                  מפגשים לא צפויים והבחירה להתחיל להניח.
                 </p>
+                <dl className="kb-hero-specs">
+                  <div>
+                    <dt>עמודים</dt>
+                    <dd>184</dd>
+                  </div>
+                  <div>
+                    <dt>כריכה</dt>
+                    <dd>רכה</dd>
+                  </div>
+                  <div>
+                    <dt>שפה</dt>
+                    <dd>עברית</dd>
+                  </div>
+                </dl>
+                <div className="kb-hero-price">
+                  <strong>78 ₪</strong>
+                  <span>לעותק · לא כולל משלוח</span>
+                </div>
                 <div className="kb-actions">
                   <a href="#kb-order" className="kb-button">
-                    אני רוצה להזמין עותק{" "}
+                    מחירים ואפשרויות הזמנה{" "}
                     <ArrowLeft size={19} aria-hidden="true" />
                   </a>
                   <a href="#kb-sample" className="kb-text-link">
                     <BookOpen size={19} aria-hidden="true" /> לקריאת קטע מהספר
                   </a>
                 </div>
-                <p className="kb-small">184 עמודים · כריכה רכה · עותק ב־78 ₪</p>
+                <p className="kb-small">
+                  איסוף עצמי בבית אל או משלוח עד הבית · מארזים עם הקדשה אישית
+                </p>
               </div>
               <figure className="kb-cover">
                 <div className="kb-cover-frame">
@@ -121,7 +138,6 @@ function BookNewPage() {
                     fetchPriority="high"
                   />
                 </div>
-                <figcaption>אפשר לקנות לעצמכם. אפשר לתת למישהו יקר.</figcaption>
               </figure>
             </section>
           </div>
@@ -236,11 +252,7 @@ function BookNewPage() {
             aria-labelledby="kb-audience-title"
           >
             <p className="kb-kicker">למי הספר מתאים</p>
-            <h2 id="kb-audience-title">
-              אוהבים לקרוא על אנשים?
-              <br />
-              זה מקום טוב להתחיל.
-            </h2>
+            <h2 id="kb-audience-title">למי מתאים הספר?</h2>
             <p className="kb-section-lead">
               בכל סיפור מכירים אדם אחר ואת מה שעבר עליו לפני שפנה לקבל תפילין.
               אפשר לקרוא סיפור אחד בשבת, לפתוח יחד עם בן משפחה, או לתת את הספר
@@ -679,15 +691,6 @@ function BookNewPage() {
             </div>
           </section>
         </main>
-
-        <div className="kb-mobile-bar">
-          <span>
-            קשר של תפילין <small>החל מ־78 ₪</small>
-          </span>
-          <a href="#kb-order" className="kb-button">
-            מחירים והזמנה <ArrowLeft size={16} aria-hidden="true" />
-          </a>
-        </div>
       </div>
       <SiteFooter />
     </div>
