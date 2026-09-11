@@ -1329,3 +1329,85 @@
     width: 100%;
   }
 }
+
+/* Shared light internal-page treatment for the organic book page. */
+.kb .kb-opening {
+  background: linear-gradient(125deg, #f6fbfd, #e8f5fa);
+  border: 0;
+  border-radius: 0 0 50% 50% / 0 0 28px 28px;
+}
+.kb .kb-page-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+  padding-block: 28px;
+  font-size: 15px;
+  border-bottom: 1px solid #dce8ef;
+}
+.kb .kb-page-nav strong {
+  color: var(--brand);
+}
+.kb .kb-page-nav a {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-color: #a5c4d7;
+}
+.kb .kb-page-nav a:hover {
+  color: #007bab;
+}
+.kb .kb-contents {
+  background: white;
+  padding-block: 45px;
+}
+.kb .kb-about {
+  background: #edf7fb;
+  color: var(--ink);
+  padding-block: 45px;
+}
+.kb .kb-about h2,
+.kb .kb-about .kb-kicker {
+  color: var(--brand);
+}
+.kb .kb-about p {
+  color: var(--ink);
+}
+.kb .kb-about .kb-small {
+  color: var(--muted);
+}
+.kb .kb-about h2 {
+  font-size: 36px;
+}
+.kb .kb-sample {
+  padding-block: 50px;
+}
+.kb .kb-author,
+.kb .kb-trust,
+.kb .kb-faq {
+  padding-block: 50px;
+}
+.kb .kb-order {
+  background: #f2f8fc;
+}
+.kb .kb-book-facts dd {
+  font-size: 19px;
+}
+@media (max-width: 680px) {
+  .kb .kb-page-nav {
+    gap: 12px 20px;
+    padding-block: 25px;
+  }
+  .kb .kb-page-nav strong {
+    width: 100%;
+  }
+  .kb .kb-contents,
+  .kb .kb-about,
+  .kb .kb-author,
+  .kb .kb-trust,
+  .kb .kb-faq {
+    padding-block: 32px;
+  }
+  .kb .kb-about h2 {
+    font-size: 30px;
+  }
+}

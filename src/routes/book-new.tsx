@@ -84,6 +84,26 @@ function BookNewPage() {
           דילוג לתוכן
         </a>
         <main id="content">
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Book",
+                name: "קשר של תפילין",
+                author: [
+                  { "@type": "Person", name: "עמיחי איל" },
+                  { "@type": "Person", name: "שמעון חי בן־שחר" },
+                ],
+                inLanguage: "he",
+                numberOfPages: 184,
+                bookFormat: "https://schema.org/Paperback",
+                description: "23 סיפורים מהחיים על הנחת תפילין והתחלה של קשר.",
+                image: `${SITE_URL}/book/kesher-cover.jpeg`,
+                url: `${SITE_URL}/book-new`,
+              }),
+            }}
+          />
           <div className="kb-opening">
             <section className="kb-hero kb-wrap" aria-labelledby="kb-title">
               <div className="kb-hero-copy">
@@ -141,52 +161,81 @@ function BookNewPage() {
               </figure>
             </section>
           </div>
-          <section className="kb-stories" aria-labelledby="kb-stories-title">
+          <nav className="kb-page-nav kb-wrap" aria-label="תוכן העניינים בעמוד">
+            <strong>בעמוד הזה</strong>
+            <a href="#kb-contents">תוכן הספר ופרטים</a>
+            <a href="#kb-sample">קטע לקריאה</a>
+            <a href="#kb-author">על עמיחי איל</a>
+            <a href="#kb-trust">ברכות הרבנים</a>
+            <a href="#kb-order">מחיר ומשלוח</a>
+            <a href="#kb-faq">שאלות ותשובות</a>
+          </nav>
+          <section
+            id="kb-contents"
+            className="kb-contents"
+            aria-labelledby="kb-contents-title"
+          >
             <div className="kb-wrap">
               <div className="kb-section-heading">
-                <p className="kb-kicker">מתוך 23 הסיפורים בספר</p>
-                <h2 id="kb-stories-title">את מי תפגשו בין הדפים?</h2>
+                <p className="kb-kicker">מה יש בספר</p>
+                <h2 id="kb-contents-title">תוכן העניינים ופרטי הספר</h2>
+                <p>
+                  הסיפורים נעים בין הבית והעבודה, השירות הצבאי והטיול בחו״ל. בכל
+                  אחד מהם הנחת התפילין מקבלת מקום בתוך חייו של אדם מסוים.
+                </p>
               </div>
-              <div className="kb-story-grid">
-                <article>
-                  <span className="kb-number">01</span>
-                  <h3>
-                    יורי, שכמעט הגיע לגיל תשעים <br />
-                    בלי לחגוג בר מצווה
-                  </h3>
-                  <p>
-                    הוא מתנדב ב״יד שרה״ כבר שנים. שיחה עם מתנדב אחר מגלה פרט שאף
-                    אחד מסביבו לא ידע — ומולידה רעיון לחגיגה.
-                  </p>
-                  <a href="#kb-sample">
-                    קראו קטע מהסיפור <ArrowLeft size={16} aria-hidden="true" />
-                  </a>
-                </article>
-                <article>
-                  <span className="kb-number">02</span>
-                  <h3>
-                    אורי, שביקש קשר <br />
-                    כמו של סבא
-                  </h3>
-                  <p>
-                    אורי לא הכיר את סבו. כשהוא מבקש תפילין, יש לו בקשה אחת מאוד
-                    מסוימת: שהקשר יהיה כמו זה שהיה בתפילין של סבא.
-                  </p>
-                  <span className="kb-story-name">מתוך ״משמעות חדשה לקשר״</span>
-                </article>
-                <article>
-                  <span className="kb-number">03</span>
-                  <h3>
-                    גלי, שנסע לגלוש <br />
-                    בסרי לנקה
-                  </h3>
-                  <p>
-                    בין הגלים הוא פוגש את יובל, ששרד את מסיבת הנובה. המפגש
-                    ביניהם מוביל לרגע שבו גלי מניח את הגלשן בצד ומניח תפילין.
-                  </p>
-                  <span className="kb-story-name">מתוך ״חוף מבטחים״</span>
-                </article>
-              </div>
+              <details className="kb-toc" open>
+                <summary>
+                  23 הסיפורים בספר <span aria-hidden="true">+</span>
+                </summary>
+                <ol>
+                  {[
+                    "הזכות להציל חיים",
+                    "יש שכר לפעולתך",
+                    "חוליה בשרשרת",
+                    "רק תגיד אני רוצה",
+                    "עוד שלב במסע",
+                    "יותר טוב מאספרסו",
+                    "על הניסים ועל הנפלא אות",
+                    "אף פעם לא מאוחר",
+                    "מפגש חלומי",
+                    "לא השאיר לי ברירה",
+                    "משמעות חדשה לקשר",
+                    "אחד ועוד אחד",
+                    "מצאת תאמין",
+                    "תיתן אמת ליעקב",
+                    "ברית עולם",
+                    "עסקה כפולה",
+                    "מנגינת חיי",
+                    "חוף מבטחים",
+                    "מגלגלים זכות",
+                    "טוב לי תורת פיך מהאלפים",
+                    "זירוז מגן עדן",
+                    "סימן שהמשיח בפתח",
+                    "פתח לנו שער",
+                  ].map((title) => (
+                    <li key={title}>{title}</li>
+                  ))}
+                </ol>
+              </details>
+              <dl className="kb-book-facts">
+                <div>
+                  <dt>מספר עמודים</dt>
+                  <dd>184</dd>
+                </div>
+                <div>
+                  <dt>כריכה</dt>
+                  <dd>רכה</dd>
+                </div>
+                <div>
+                  <dt>שפה</dt>
+                  <dd>עברית</dd>
+                </div>
+                <div>
+                  <dt>כתיבה</dt>
+                  <dd>שמעון חי בן־שחר ועמיחי איל</dd>
+                </div>
+              </dl>
             </div>
           </section>
 
@@ -247,123 +296,11 @@ function BookNewPage() {
             </div>
           </section>
 
-          <section
-            className="kb-audience kb-wrap"
-            aria-labelledby="kb-audience-title"
-          >
-            <p className="kb-kicker">למי הספר מתאים</p>
-            <h2 id="kb-audience-title">למי מתאים הספר?</h2>
-            <p className="kb-section-lead">
-              בכל סיפור מכירים אדם אחר ואת מה שעבר עליו לפני שפנה לקבל תפילין.
-              אפשר לקרוא סיפור אחד בשבת, לפתוח יחד עם בן משפחה, או לתת את הספר
-              למישהו שאוהב סיפורים על אמונה ועל החיים.
-            </p>
-            <div className="kb-audience-grid">
-              <article>
-                <span>לקריאה בבית</span>
-                <h3>סיפורים שאפשר לדבר עליהם גם אחר כך</h3>
-                <p>
-                  סבא שלא זכינו להכיר, אבא שמנסה להבין את הבחירה של בנו, או חבר
-                  שמקשיב ברגע הנכון. אלה נושאים שמוכרים גם למי שחייו שונים מחיי
-                  המספרים.
-                </p>
-              </article>
-              <article>
-                <span>למתנה אישית</span>
-                <h3>למישהו שהייתם רוצים לתת לו ספר</h3>
-                <p>
-                  לבן משפחה, לחבר, למורה או לאדם שאתם מוקירים. במארזים של שניים
-                  ושלושה עותקים אפשר לקבל הקדשה אישית מעמיחי.
-                </p>
-              </article>
-              <article>
-                <span>להורים ולמחנכים</span>
-                <h3>לקראת בר מצווה ולשיחה על תפילין</h3>
-                <p>
-                  אפשר לבחור סיפור ולקרוא אותו יחד. כדאי לעיין מראש: הספר כולל
-                  גם סיפורי מלחמה, אובדן והתמודדויות משפחתיות, ולא נכתב כספר
-                  ילדים.
-                </p>
-              </article>
-            </div>
-            <a className="kb-button" href="#kb-order">
-              לבחירת עותק או מארז <ArrowLeft size={18} aria-hidden="true" />
-            </a>
-          </section>
-
-          <section className="kb-contents" aria-labelledby="kb-contents-title">
-            <div className="kb-wrap">
-              <div className="kb-section-heading">
-                <p className="kb-kicker">מה יש בספר</p>
-                <h2 id="kb-contents-title">23 סיפורים, 184 עמודים</h2>
-                <p>
-                  הסיפורים נעים בין הבית והעבודה, השירות הצבאי והטיול בחו״ל. בכל
-                  אחד מהם הנחת התפילין מקבלת מקום בתוך חייו של אדם מסוים.
-                </p>
-              </div>
-              <details className="kb-toc">
-                <summary>
-                  לכל שמות הסיפורים בספר <span aria-hidden="true">+</span>
-                </summary>
-                <ol>
-                  {[
-                    "הזכות להציל חיים",
-                    "יש שכר לפעולתך",
-                    "חוליה בשרשרת",
-                    "רק תגיד אני רוצה",
-                    "עוד שלב במסע",
-                    "יותר טוב מאספרסו",
-                    "על הניסים ועל הנפלא אות",
-                    "אף פעם לא מאוחר",
-                    "מפגש חלומי",
-                    "לא השאיר לי ברירה",
-                    "משמעות חדשה לקשר",
-                    "אחד ועוד אחד",
-                    "מצאת תאמין",
-                    "תיתן אמת ליעקב",
-                    "ברית עולם",
-                    "עסקה כפולה",
-                    "מנגינת חיי",
-                    "חוף מבטחים",
-                    "מגלגלים זכות",
-                    "טוב לי תורת פיך מהאלפים",
-                    "זירוז מגן עדן",
-                    "סימן שהמשיח בפתח",
-                    "פתח לנו שער",
-                  ].map((title) => (
-                    <li key={title}>{title}</li>
-                  ))}
-                </ol>
-              </details>
-              <dl className="kb-book-facts">
-                <div>
-                  <dt>מספר עמודים</dt>
-                  <dd>184</dd>
-                </div>
-                <div>
-                  <dt>כריכה</dt>
-                  <dd>רכה</dd>
-                </div>
-                <div>
-                  <dt>שפה</dt>
-                  <dd>עברית</dd>
-                </div>
-                <div>
-                  <dt>כתיבה</dt>
-                  <dd>שמעון חי בן־שחר ועמיחי איל</dd>
-                </div>
-              </dl>
-            </div>
-          </section>
-
-          <section className="kb-about">
+          <section className="kb-about" aria-labelledby="kb-about-title">
             <div className="kb-wrap kb-about-grid">
               <div>
                 <p className="kb-kicker">איך נולד הספר</p>
-                <h2>
-                  בהתחלה אנשים ביקשו תפילין. <br />
-                  אחר כך הם סיפרו למה.
-                </h2>
+                <h2 id="kb-about-title">על הספר והמיזם</h2>
               </div>
               <div>
                 <p>
@@ -376,12 +313,19 @@ function BookNewPage() {
                   ההחלטה להתחיל להניח. חלק מהשמות והפרטים שונו לשמירה על פרטיות
                   המספרים.
                 </p>
+                <p>
+                  הספר מיועד לקוראים המתעניינים בסיפורים אישיים על אמונה, משפחה
+                  והקשר למסורת. הורים ומחנכים יכולים לבחור מתוכו סיפור לקריאה
+                  משותפת לקראת בר מצווה. כדאי לעיין מראש: הספר כולל גם סיפורי
+                  מלחמה, אובדן והתמודדויות משפחתיות, ולא נכתב כספר ילדים.
+                </p>
                 <p className="kb-small">כתיבה: שמעון חי בן־שחר ועמיחי איל</p>
               </div>
             </div>
           </section>
 
           <section
+            id="kb-author"
             className="kb-author kb-wrap"
             aria-labelledby="kb-author-title"
           >
@@ -418,6 +362,7 @@ function BookNewPage() {
           </section>
 
           <section
+            id="kb-trust"
             className="kb-trust kb-wrap"
             aria-labelledby="kb-trust-title"
           >
@@ -462,7 +407,7 @@ function BookNewPage() {
             <div className="kb-wrap">
               <div className="kb-section-heading">
                 <p className="kb-kicker">לעצמכם, למשפחה או למתנה</p>
-                <h2 id="kb-order-title">כמה עותקים תרצו?</h2>
+                <h2 id="kb-order-title">מחירים, משלוח ואיסוף עצמי</h2>
                 <p>אפשר לבחור גם זוג או שלישייה עם הקדשה אישית מעמיחי.</p>
               </div>
               <fieldset className="kb-bundles">
@@ -574,9 +519,13 @@ function BookNewPage() {
               </div>
             </div>
           </section>
-          <section className="kb-faq kb-wrap" aria-labelledby="kb-faq-title">
+          <section
+            id="kb-faq"
+            className="kb-faq kb-wrap"
+            aria-labelledby="kb-faq-title"
+          >
             <p className="kb-kicker">לפני שמזמינים</p>
-            <h2 id="kb-faq-title">עוד כמה דברים שכדאי לדעת</h2>
+            <h2 id="kb-faq-title">שאלות על הספר וההזמנה</h2>
             {[
               [
                 "האם זה ספר הלכה או מדריך להנחת תפילין?",
@@ -620,7 +569,11 @@ function BookNewPage() {
               </details>
             ))}
           </section>
-          <section className="kb-faq kb-wrap" aria-labelledby="kb-cancel-title">
+          <section
+            id="kb-cancellation"
+            className="kb-faq kb-wrap"
+            aria-labelledby="kb-cancel-title"
+          >
             <h2 id="kb-cancel-title">ביטול והחזרת הזמנה</h2>
             <details>
               <summary>
@@ -654,41 +607,6 @@ function BookNewPage() {
                 מידע נוסף במועצה הישראלית לצרכנות ↗
               </a>
             </details>
-          </section>
-          <section className="kb-partner">
-            <div className="kb-wrap">
-              <p className="kb-kicker">רוצים להכיר גם את המיזם?</p>
-              <h2>יש עוד דרכים לקחת חלק</h2>
-              <p>
-                אם יש לכם תפילין שאינן בשימוש, אם תרצו לתרום לפעילות או לעזור
-                בהתנדבות — נשמח לשמוע מכם. הפנייה למיזם נפרדת מהזמנת הספר.
-              </p>
-              <div className="kb-partner-links">
-                <a href="/give">
-                  יש לי תפילין למסירה <ArrowLeft size={17} aria-hidden="true" />
-                </a>
-                <a href="/donate">
-                  אני רוצה לתרום לפעילות{" "}
-                  <ArrowLeft size={17} aria-hidden="true" />
-                </a>
-                <a
-                  href="https://wa.me/972546713966?text=%D7%A9%D7%9C%D7%95%D7%9D%20%D7%A2%D7%9E%D7%99%D7%97%D7%99%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%90%D7%A4%D7%A9%D7%A8%D7%95%D7%99%D7%95%D7%AA%20%D7%94%D7%94%D7%AA%D7%A0%D7%93%D7%91%D7%95%D7%AA%20%D7%91%D7%9E%D7%99%D7%96%D7%9D"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  אשמח להתנדב או להציע עזרה{" "}
-                  <ArrowLeft size={17} aria-hidden="true" />
-                </a>
-              </div>
-              <a
-                className="kb-text-link"
-                href="https://wa.me/972546713966"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                יש לכם שאלה או משהו שתרצו לומר לעמיחי? כתבו לו
-              </a>
-            </div>
           </section>
         </main>
       </div>
