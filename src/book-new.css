@@ -42,10 +42,22 @@
   box-sizing: border-box;
 }
 .kb-opening {
+  padding-top: 90px;
   background: var(--gradient-hero);
   color: white;
   border-radius: 0 0 50% 50% / 0 0 55px 55px;
   padding-bottom: 25px;
+}
+.book-organic #content {
+  scroll-margin-top: 90px;
+}
+@media (max-width: 680px) {
+  .book-organic {
+    padding-bottom: 78px;
+  }
+  .book-organic .kb {
+    padding-bottom: 0;
+  }
 }
 .kb-opening .kb-top {
   border-color: #ffffff30;
