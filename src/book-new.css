@@ -1,17 +1,81 @@
+@font-face {
+  font-family: "Kesher Maadim";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/book/fonts/Maadim-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Kesher Maadim";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/book/fonts/Maadim-SemiBold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Kesher Maadim";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/book/fonts/Maadim-Bold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Kesher Maadim";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("/book/fonts/Maadim-Black.woff2") format("woff2");
+}
 .kb {
-  --ink: #27212e;
-  --purple: #4408b9;
-  --paper: #f8f6f1;
-  --muted: #68616d;
+  --ink: var(--e-text);
+  --brand: var(--e-secondary);
+  --paper: var(--e-white);
+  --muted: #5a5b8f;
   direction: rtl;
   background: var(--paper);
   color: var(--ink);
-  font-family: "Heebo", Arial, sans-serif;
+  font-family: "Kesher Maadim", "Maadim", sans-serif;
   font-size: 17px;
   line-height: 1.8;
 }
 .kb * {
   box-sizing: border-box;
+}
+.kb-opening {
+  background: var(--gradient-hero);
+  color: white;
+  border-radius: 0 0 50% 50% / 0 0 55px 55px;
+  padding-bottom: 25px;
+}
+.kb-opening .kb-top {
+  border-color: #ffffff30;
+}
+.kb-opening .kb-wordmark span,
+.kb-opening .kb-intro,
+.kb-opening .kb-small,
+.kb-opening .kb-cover figcaption {
+  color: #d5eafb;
+}
+.kb-opening .kb-kicker {
+  color: var(--e-accent);
+}
+.kb-opening .kb-text-link {
+  border-color: #67ffd180;
+}
+.kb-opening .kb-top-link {
+  color: var(--e-accent);
+}
+.kb .kb-opening h1 span {
+  color: var(--e-accent);
+}
+.kb h1,
+.kb h2,
+.kb h3 {
+  letter-spacing: 0;
+}
+.kb-footer-logo {
+  display: block;
+  margin-bottom: 12px;
 }
 .kb h1,
 .kb h2,
@@ -22,12 +86,12 @@
 }
 .kb h1,
 .kb h2 {
-  font-family: "Frank Ruhl Libre", Georgia, serif;
+  font-family: "Kesher Maadim", "Maadim", sans-serif;
 }
 .kb h2 {
   font-size: 42px;
   line-height: 1.2;
-  font-weight: 600;
+  font-weight: 900;
 }
 .kb h3 {
   font-family: inherit;
@@ -46,7 +110,7 @@
 .kb a:focus-visible,
 .kb input:focus-visible,
 .kb summary:focus-visible {
-  outline: 3px solid #8044e6;
+  outline: 3px solid #009fe3;
   outline-offset: 6px;
 }
 .kb-wrap {
@@ -61,7 +125,7 @@
   justify-content: space-between;
   align-items: center;
   padding-block: 24px;
-  border-bottom: 1px solid #ddd7e1;
+  border-bottom: 1px solid #d5e7f0;
 }
 .kb-wordmark {
   font-size: 21px;
@@ -89,16 +153,16 @@
 .kb-kicker {
   font-size: 13px;
   font-weight: 500;
-  color: var(--purple);
+  color: var(--brand);
   margin-bottom: 18px !important;
 }
 .kb h1 {
   font-size: 102px;
   line-height: 0.99;
-  font-weight: 600;
+  font-weight: 900;
 }
 .kb h1 span {
-  color: var(--purple);
+  color: var(--brand);
 }
 .kb-subtitle {
   font-size: 24px;
@@ -110,7 +174,7 @@
   line-height: 1.95;
   max-width: 450px;
   margin-top: 22px !important;
-  color: #534c58;
+  color: #36375f;
 }
 .kb-actions {
   display: flex;
@@ -120,28 +184,29 @@
   margin-top: 30px;
 }
 .kb-button {
-  background: var(--purple);
-  color: white !important;
+  background: var(--e-accent);
+  color: var(--e-text) !important;
   min-height: 54px;
   padding: 13px 23px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 16px;
-  font-size: 15px;
-  font-weight: 600;
-  border-radius: 4px;
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px #06063324;
   transition: background 0.2s;
 }
 .kb-button:hover {
-  background: #310883;
+  background: #bdffeb;
 }
 .kb-text-link {
   display: inline-flex;
   align-items: center;
   gap: 9px;
   font-size: 14px;
-  border-bottom: 1px solid #b9acc9;
+  border-bottom: 1px solid #9ecfe4;
   padding-block: 5px;
 }
 .kb-small {
@@ -157,7 +222,7 @@
 }
 .kb-cover-frame {
   background: #f7f7f7;
-  border-radius: 50% 50% 3px 3px;
+  border-radius: 24px;
   padding: 25px 40px 12px;
 }
 .kb-cover img {
@@ -175,7 +240,7 @@
 }
 .kb-stories {
   padding-block: 58px 65px;
-  background: #eee9f2;
+  background: #eef6ff;
 }
 .kb-section-heading {
   margin-bottom: 32px;
@@ -190,25 +255,26 @@
   gap: 38px;
 }
 .kb-story-grid article {
-  border-top: 1px solid #cec3da;
+  border-top: 1px solid #b6d9ea;
   padding-top: 18px;
 }
 .kb-number {
-  font-family: "Frank Ruhl Libre", serif;
+  font-family: "Kesher Maadim", "Maadim", sans-serif;
   font-size: 30px;
-  color: #846d99;
+  color: #009fe3;
+  font-weight: 900;
 }
 .kb-story-grid h3 {
   margin-block: 12px;
 }
 .kb-story-grid p {
   font-size: 15px;
-  color: #5a5262;
+  color: #36375f;
 }
 .kb-story-grid a,
 .kb-story-name {
   font-size: 12px;
-  color: var(--purple);
+  color: var(--brand);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -230,15 +296,16 @@
   max-width: 280px;
 }
 .kb-paper {
-  background: #fffdf9;
-  border: 1px solid #e2ded4;
-  border-right: 5px solid #d8cdb7;
-  box-shadow: 0 16px 40px #3f344009;
+  background: #ffffff;
+  border: 1px solid #d5e7f0;
+  border-right: 5px solid #67ffd1;
+  box-shadow: 0 16px 40px #2d2e830d;
   padding: 36px 48px;
+  border-radius: 16px;
 }
 .kb-paper-label {
   display: block;
-  border-bottom: 1px solid #e4ded5;
+  border-bottom: 1px solid #d5e7f0;
   padding-bottom: 17px;
   margin-bottom: 25px;
   font-size: 11px;
@@ -246,7 +313,7 @@
 }
 .kb-paper blockquote {
   margin: 0;
-  font-family: "Frank Ruhl Libre", Georgia, serif;
+  font-family: "Kesher Maadim", "Maadim", sans-serif;
   font-size: 23px;
   line-height: 1.75;
 }
@@ -254,15 +321,15 @@
   margin-bottom: 13px;
 }
 .kb details summary {
-  font-family: "Heebo", sans-serif;
+  font-family: "Kesher Maadim", "Maadim", sans-serif;
   font-size: 14px;
-  color: var(--purple);
+  color: var(--brand);
   padding-block: 15px;
   cursor: pointer;
   list-style: none;
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid #e4ded5;
+  border-top: 1px solid #d5e7f0;
   margin-top: 23px;
 }
 .kb details summary::-webkit-details-marker {
@@ -273,7 +340,7 @@
 }
 .kb-about {
   padding-block: 65px;
-  background: #30223f;
+  background: #060633;
   color: #fff;
 }
 .kb-about-grid {
@@ -282,7 +349,7 @@
   gap: 80px;
 }
 .kb-about .kb-kicker {
-  color: #d9c6f5;
+  color: #67ffd1;
 }
 .kb-about h2 {
   font-size: 36px;
@@ -290,12 +357,12 @@
 }
 .kb-about p:not(.kb-kicker) {
   font-size: 16px;
-  color: #eee7f4;
+  color: #eef6ff;
   margin-bottom: 14px;
 }
 .kb-about .kb-small {
   font-size: 12px !important;
-  color: #cbb9da !important;
+  color: #c3e7f6 !important;
 }
 .kb-trust {
   padding-block: 65px;
@@ -334,7 +401,7 @@
   color: var(--muted);
 }
 .kb-order {
-  background: #eeebe4;
+  background: #eef6ff;
   padding-block: 65px;
 }
 .kb-bundles {
@@ -348,15 +415,15 @@
 .kb-bundle {
   position: relative;
   padding: 25px;
-  background: #faf8f3;
-  border: 1px solid #cec8bf;
-  border-radius: 5px;
+  background: #ffffff;
+  border: 1px solid #c3e7f6;
+  border-radius: 16px;
   cursor: pointer;
 }
 .kb-bundle.is-selected {
-  border: 2px solid var(--purple);
+  border: 2px solid var(--brand);
   padding: 24px;
-  background: #fff;
+  background: #effff9;
 }
 .kb-bundle input {
   position: absolute;
@@ -368,7 +435,7 @@
   margin: 0;
 }
 .kb-bundle:focus-within {
-  outline: 3px solid #8044e6;
+  outline: 3px solid #009fe3;
   outline-offset: 4px;
 }
 .kb-bundle-top {
@@ -379,19 +446,19 @@
 .kb-radio {
   height: 21px;
   width: 21px;
-  border: 1px solid #b8b1be;
+  border: 1px solid #8c9fbe;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .is-selected .kb-radio {
-  background: var(--purple);
+  background: var(--brand);
   color: white;
-  border-color: var(--purple);
+  border-color: var(--brand);
 }
 .kb-bundle strong {
-  font-family: "Frank Ruhl Libre", serif;
+  font-family: "Kesher Maadim", "Maadim", sans-serif;
   font-size: 53px;
   font-weight: 500;
   display: block;
@@ -436,7 +503,7 @@
   cursor: pointer;
 }
 .kb-delivery-options input {
-  accent-color: var(--purple);
+  accent-color: var(--brand);
   width: 17px;
   height: 17px;
 }
@@ -447,7 +514,7 @@
   margin-top: 15px !important;
 }
 .kb-total {
-  border-right: 1px solid #cfc8be;
+  border-right: 1px solid #c3e7f6;
   padding-right: 35px;
 }
 .kb-total > div {
@@ -462,7 +529,7 @@
 .kb-total p {
   font-size: 13px;
   margin-block: 10px 18px;
-  color: #5d5662;
+  color: #36375f;
 }
 .kb-total .kb-button {
   width: 100%;
@@ -474,7 +541,7 @@
 .kb-group {
   margin-top: 45px;
   padding-top: 30px;
-  border-top: 1px solid #cfc8be;
+  border-top: 1px solid #c3e7f6;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -497,7 +564,7 @@
   gap: 20px;
 }
 .kb-footer strong {
-  font-family: "Frank Ruhl Libre", serif;
+  font-family: "Kesher Maadim", "Maadim", sans-serif;
   font-size: 25px;
 }
 .kb-footer p {
@@ -511,7 +578,7 @@
 }
 .kb-draft {
   width: 100%;
-  border-top: 1px solid #ded8df;
+  border-top: 1px solid #c3e7f6;
   padding-top: 18px;
 }
 .kb-mobile-bar {
@@ -786,7 +853,7 @@
   }
   .kb-total {
     border-right: 0;
-    border-top: 1px solid #cfc8be;
+    border-top: 1px solid #c3e7f6;
     padding: 22px 0 0;
   }
   .kb-group {
@@ -809,8 +876,8 @@
     inset-inline: 0;
     bottom: 0;
     z-index: 40;
-    background: #fffdf9;
-    border-top: 1px solid #ddd6e2;
+    background: #ffffff;
+    border-top: 1px solid #c3e7f6;
     padding: 10px 20px max(10px, env(safe-area-inset-bottom));
     align-items: center;
     justify-content: space-between;
@@ -854,7 +921,7 @@
   .kb-hero-copy > h1 {
     grid-column: 1;
     grid-row: 2;
-    font-size: 56px;
+    font-size: 48px;
     text-align: right;
     align-self: center;
   }
@@ -864,9 +931,9 @@
     max-width: 155px;
   }
   .kb-hero .kb-cover-frame {
-    padding: 0;
-    border-radius: 0;
-    background: transparent;
+    padding: 4px;
+    border-radius: 12px;
+    background: #f7f7f7;
   }
   .kb-hero .kb-cover figcaption {
     display: none;
@@ -876,6 +943,10 @@
   .kb-hero .kb-actions,
   .kb-hero-copy > .kb-small {
     margin-top: 0 !important;
+  }
+  .kb-opening {
+    border-radius: 0 0 36px 36px;
+    padding-bottom: 12px;
   }
 }
 @media (prefers-reduced-motion: reduce) {

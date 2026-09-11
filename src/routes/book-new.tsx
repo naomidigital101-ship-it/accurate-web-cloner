@@ -79,54 +79,56 @@ function BookNewPage() {
       <a className="kb-skip" href="#content">
         דילוג לתוכן
       </a>
-      <header className="kb-top kb-wrap">
-        <a href="#content" className="kb-wordmark">
-          קשר של תפילין <span>הספר של עמיחי איל</span>
-        </a>
-        <a className="kb-top-link" href="#kb-order">
-          מחירים והזמנה <ArrowLeft size={16} aria-hidden="true" />
-        </a>
-      </header>
       <main id="content">
-        <section className="kb-hero kb-wrap" aria-labelledby="kb-title">
-          <div className="kb-hero-copy">
-            <p className="kb-kicker">23 סיפורים מהחיים · עמיחי איל</p>
-            <h1 id="kb-title">
-              קשר של <br />
-              <span>תפילין</span>
-            </h1>
-            <p className="kb-subtitle">
-              סיפורים מהחיים על הנחת תפילין <br />
-              והתחלה של קשר
-            </p>
-            <p className="kb-intro">
-              מה מביא אדם להתחיל להניח תפילין? עמיחי איל שאל את האנשים שפנו אליו
-              לקבל זוג. בספר הזה הוא מביא את הסיפורים ששמע מהם.
-            </p>
-            <div className="kb-actions">
-              <a href="#kb-order" className="kb-button">
-                אני רוצה להזמין עותק <ArrowLeft size={19} aria-hidden="true" />
-              </a>
-              <a href="#kb-sample" className="kb-text-link">
-                <BookOpen size={19} aria-hidden="true" /> לקריאת קטע מהספר
-              </a>
+        <div className="kb-opening">
+          <header className="kb-top kb-wrap">
+            <a href="#content" className="kb-wordmark">
+              קשר של תפילין <span>הספר של עמיחי איל</span>
+            </a>
+            <a className="kb-top-link" href="#kb-order">
+              מחירים והזמנה <ArrowLeft size={16} aria-hidden="true" />
+            </a>
+          </header>
+          <section className="kb-hero kb-wrap" aria-labelledby="kb-title">
+            <div className="kb-hero-copy">
+              <p className="kb-kicker">23 סיפורים מהחיים · עמיחי איל</p>
+              <h1 id="kb-title">
+                קשר של <br />
+                <span>תפילין</span>
+              </h1>
+              <p className="kb-subtitle">
+                סיפורים מהחיים על הנחת תפילין <br />
+                והתחלה של קשר
+              </p>
+              <p className="kb-intro">
+                מה מביא אדם להתחיל להניח תפילין? עמיחי איל שאל את האנשים שפנו
+                אליו לקבל זוג. בספר הזה הוא מביא את הסיפורים ששמע מהם.
+              </p>
+              <div className="kb-actions">
+                <a href="#kb-order" className="kb-button">
+                  אני רוצה להזמין עותק{" "}
+                  <ArrowLeft size={19} aria-hidden="true" />
+                </a>
+                <a href="#kb-sample" className="kb-text-link">
+                  <BookOpen size={19} aria-hidden="true" /> לקריאת קטע מהספר
+                </a>
+              </div>
+              <p className="kb-small">184 עמודים · כריכה רכה · עותק ב־78 ₪</p>
             </div>
-            <p className="kb-small">184 עמודים · כריכה רכה · עותק ב־78 ₪</p>
-          </div>
-          <figure className="kb-cover">
-            <div className="kb-cover-frame">
-              <img
-                src="/book/kesher-cover.jpeg"
-                alt="כריכת הספר קשר של תפילין מאת עמיחי איל"
-                width="1021"
-                height="1600"
-                fetchPriority="high"
-              />
-            </div>
-            <figcaption>אפשר לקנות לעצמכם. אפשר לתת למישהו יקר.</figcaption>
-          </figure>
-        </section>
-
+            <figure className="kb-cover">
+              <div className="kb-cover-frame">
+                <img
+                  src="/book/kesher-cover.jpeg"
+                  alt="כריכת הספר קשר של תפילין מאת עמיחי איל"
+                  width="1021"
+                  height="1600"
+                  fetchPriority="high"
+                />
+              </div>
+              <figcaption>אפשר לקנות לעצמכם. אפשר לתת למישהו יקר.</figcaption>
+            </figure>
+          </section>
+        </div>
         <section className="kb-stories" aria-labelledby="kb-stories-title">
           <div className="kb-wrap">
             <div className="kb-section-heading">
@@ -412,7 +414,14 @@ function BookNewPage() {
       </main>
       <footer className="kb-footer kb-wrap">
         <div>
-          <strong>קשר של תפילין</strong>
+          <img
+            className="kb-footer-logo"
+            src="/wp/img/לוגו-קשר-של-תפילין-01.svg"
+            alt="קשר של תפילין"
+            width="86"
+            height="86"
+            loading="lazy"
+          />
           <p>מיזם של עמותת אור חדש · ע״ר 580703965</p>
         </div>
         <nav aria-label="קישורים בתחתית עמוד הספר">
