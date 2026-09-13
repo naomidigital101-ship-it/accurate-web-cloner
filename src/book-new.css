@@ -1467,3 +1467,20 @@
     font-size: 29px;
   }
 }
+
+.kb .kb-hero .kb-subtitle {
+  font-size: 21px;
+  line-height: 1.75;
+  max-width: 540px;
+}
+.kb .kb-sample-intro h2 {
+  font-size: 36px;
+}
+@media (max-width: 680px) {
+  .kb .kb-hero .kb-subtitle {
+    font-size: 18px;
+  }
+  .kb .kb-sample-intro h2 {
+    font-size: 30px;
+  }
+}
