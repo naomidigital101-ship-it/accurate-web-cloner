@@ -93,7 +93,13 @@ function BookNewPage() {
     : delivery === "pickup"
       ? "באיסוף עצמי"
       : "במשלוח עד הבית";
-  const message = `שלום עמיחי, אשמח לברר על הזמנת ${quantity} עותקים מהספר קשר של תפילין, ${deliveryText}. הסכום שמוצג בעמוד: ${total} ש״ח.`;
+  // קישורי רכישה אמיתיים לפי המארז — זהים לאזור הרכישה בעמוד הבית.
+  const purchaseLinks: Record<number, string> = {
+    1: "https://grow.link/MTA1NDQ5~49262f78c08b742d6ad21b74b49de3e5-Mzk4OTY3OA",
+    2: "https://grow.link/MTA1NDQ5~ec72d87f8af24e604ef10150073d2b54-Mzk4OTcwNw",
+    3: "https://grow.link/MTA1NDQ5~a1922e39c4975492fad2f1321d3c42ee-Mzk5MDI4NA",
+  };
+  const purchaseUrl = purchaseLinks[quantity] ?? purchaseLinks[1]!;
 
   return (
     <div className="book-organic" dir="rtl">
