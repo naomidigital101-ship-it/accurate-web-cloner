@@ -37,20 +37,32 @@ export const Route = createFileRoute("/book-new")({
 });
 
 const bundles = [
-  { quantity: 1, title: "עותק אחד", price: 78, detail: "לעצמכם או למתנה" },
+  {
+    quantity: 1,
+    title: "עותק אחד",
+    price: 78,
+    detail: "לעצמכם או למתנה · לא כולל משלוח",
+  },
   {
     quantity: 2,
     title: "שני עותקים",
-    price: 140,
-    detail: "כולל הקדשה אישית מעמיחי",
+    price: 143,
+    detail: "כולל משלוח עד הבית · הקדשה אישית מעמיחי",
   },
   {
     quantity: 3,
     title: "שלושה עותקים",
-    price: 190,
-    detail: "כולל הקדשה אישית מעמיחי",
+    price: 199,
+    detail: "כולל משלוח עד הבית · הקדשה אישית מעמיחי",
   },
 ];
+
+/** מחיר ליחידה מחושב מהמחיר של כל מארז, לא מקודד ידנית. */
+function unitPriceLabel(price: number, quantity: number): string {
+  if (quantity === 1) return "מחיר בסיס";
+  return `${(price / quantity).toFixed(1)} ₪ לעותק`;
+}
+
 const letters = [
   {
     name: "הרב דוד יוסף",
@@ -73,8 +85,15 @@ function BookNewPage() {
   const [quantity, setQuantity] = useState(2);
   const [delivery, setDelivery] = useState<"pickup" | "shipping">("pickup");
   const bundle = bundles.find((item) => item.quantity === quantity)!;
-  const total = bundle.price + (delivery === "shipping" ? 40 : 0);
-  const message = `שלום עמיחי, אשמח לברר על הזמנת ${quantity} עותקים מהספר קשר של תפילין, ב${delivery === "pickup" ? "איסוף עצמי" : "משלוח עד הבית"}. הסכום שמוצג בעמוד: ${total} ש״ח.`;
+  const shippingIncluded = quantity > 1;
+  const total =
+    bundle.price + (!shippingIncluded && delivery === "shipping" ? 40 : 0);
+  const deliveryText = shippingIncluded
+    ? "כולל משלוח עד הבית"
+    : delivery === "pickup"
+      ? "באיסוף עצמי"
+      : "במשלוח עד הבית";
+  const message = `שלום עמיחי, אשמח לברר על הזמנת ${quantity} עותקים מהספר קשר של תפילין, ${deliveryText}. הסכום שמוצג בעמוד: ${total} ש״ח.`;
 
   return (
     <div className="book-organic" dir="rtl">
@@ -109,42 +128,33 @@ function BookNewPage() {
               <div className="kb-hero-copy">
                 <p className="kb-kicker">״קשר של תפילין״ · הספר של עמיחי איל</p>
                 <h1 id="kb-title">
-                  23 סיפורים מהחיים על אמונה, השגחה והבחירה להניח תפילין
+                  23 סיפורים אמיתיים על רגעי התעוררות, השגחה והבחירה להניח
+                  תפילין
                 </h1>
                 <p className="kb-subtitle">
-                  בספר ״קשר של תפילין״ עמיחי איל מביא את סיפוריהם של אנשים
-                  מהעוטף, ממסיבת הנובה וממקומות נוספים בארץ ובעולם. לקריאה
-                  אישית, למתנה ולשיחה על הקשר למסורת.
+                  אנשים מהעוטף, ממסיבת הנובה ומכל הארץ מספרים מה הביא אותם
+                  להתחיל להניח. לקריאה אישית, למתנה לבר מצווה ולשיחה משפחתית על
+                  הקשר למסורת.
                 </p>
-                <dl className="kb-hero-specs">
-                  <div>
-                    <dt>עמודים</dt>
-                    <dd>184</dd>
-                  </div>
-                  <div>
-                    <dt>כריכה</dt>
-                    <dd>רכה</dd>
-                  </div>
-                  <div>
-                    <dt>שפה</dt>
-                    <dd>עברית</dd>
-                  </div>
-                </dl>
                 <div className="kb-hero-price">
                   <strong>78 ₪</strong>
-                  <span>לעותק · לא כולל משלוח</span>
+                  <span>
+                    לעותק · מארז 2 עותקים ב־143 ₪ כולל משלוח עד הבית והקדשה
+                    אישית מעמיחי
+                  </span>
                 </div>
                 <div className="kb-actions">
                   <a href="#kb-order" className="kb-button">
-                    מחירים ואפשרויות הזמנה{" "}
-                    <ArrowLeft size={19} aria-hidden="true" />
+                    לבחירת מארז והזמנה <ArrowLeft size={19} aria-hidden="true" />
                   </a>
                   <a href="#kb-sample" className="kb-text-link">
-                    <BookOpen size={19} aria-hidden="true" /> לקריאת קטע מהספר
+                    <BookOpen size={19} aria-hidden="true" /> קראו קודם קטע
+                    מהספר
                   </a>
                 </div>
                 <p className="kb-small">
-                  איסוף עצמי בבית אל או משלוח עד הבית · מארזים עם הקדשה אישית
+                  איסוף עצמי בבית אל ללא עלות · משלוח עד הבית 40 ₪ · ביטול עד 14
+                  יום לפי חוק
                 </p>
               </div>
               <figure className="kb-cover">
@@ -159,7 +169,100 @@ function BookNewPage() {
                 </div>
               </figure>
             </section>
+            <dl className="kb-trustbar kb-wrap">
+              <div>
+                <dt>זוגות תפילין שחולקו במיזם</dt>
+                <dd>מעל 1,300</dd>
+              </div>
+              <div>
+                <dt>הסכמות מגדולי הרבנים למיזם</dt>
+                <dd>9</dd>
+              </div>
+              <div>
+                <dt>סיפורים בספר</dt>
+                <dd>23</dd>
+              </div>
+              <div>
+                <dt>עמודים · כריכה רכה · עברית</dt>
+                <dd>184</dd>
+              </div>
+            </dl>
           </div>
+          <section id="kb-hook" className="kb-hook" aria-labelledby="kb-hook-title">
+            <div className="kb-wrap kb-hook-grid">
+              <div className="kb-hook-copy">
+                <p className="kb-kicker">הסיפור שפותח את הספר</p>
+                <h2 id="kb-hook-title">
+                  ״ומה אני יכול לעשות כדי להודות שהצילו אותי?״
+                </h2>
+                <p>
+                  יזהר וילדיו ניצלו בשבעה באוקטובר. חברים מהקיבוץ נרצחו ונחטפו.
+                  בתוך הכאב הוא חיפש דרך להודות — ושאל רב מה הוא יכול לעשות.
+                  התשובה הייתה מילה אחת.
+                </p>
+                <a href="#kb-sample" className="kb-text-link">
+                  להמשך הסיפור בקטע לקריאה{" "}
+                  <ArrowLeft size={16} aria-hidden="true" />
+                </a>
+              </div>
+              <div>
+                <blockquote className="kb-hook-quote">
+                  ״תפילין. תתחיל להניח תפילין!״ ענה הרב ישירות.
+                  <small className="kb-small">
+                    מתוך הסיפור ״על הניסים ועל הנפלא־אות״
+                  </small>
+                </blockquote>
+              </div>
+            </div>
+          </section>
+          <section id="kb-trust" className="kb-trust" aria-labelledby="kb-trust-title">
+            <div className="kb-wrap">
+              <p className="kb-kicker">המיזם שמאחורי הספר</p>
+              <h2 id="kb-trust-title">ברכות הרבנים למיזם ״קשר של תפילין״</h2>
+              <p className="kb-trust-note">
+                המכתבים ניתנו למיזם ולפעילותו. הם אינם ביקורות על הספר.
+              </p>
+              <div className="kb-rabbis">
+                {letters.map((rabbi) => (
+                  <a
+                    key={rabbi.name}
+                    href={rabbi.letter}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src={rabbi.image}
+                      alt=""
+                      width="76"
+                      height="76"
+                      loading="lazy"
+                    />
+                    <div>
+                      <h3>{rabbi.name}</h3>
+                      <span>לקריאת מכתב הברכה ↗</span>
+                    </div>
+                  </a>
+                ))}
+              </div>
+              <div className="kb-trust-links">
+                <a
+                  href="https://www.youtube.com/watch?v=aQYiyBfycrc"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  הראיון עם עמיחי בערוץ 7 ↗
+                </a>
+                <a href="/in-news">
+                  כתבות על המיזם בתקשורת{" "}
+                  <ArrowLeft size={15} aria-hidden="true" />
+                </a>
+                <a href="/מכתבי-תודה">
+                  מכתבי תודה מאנשים שקיבלו תפילין{" "}
+                  <ArrowLeft size={15} aria-hidden="true" />
+                </a>
+              </div>
+            </div>
+          </section>
           <section
             className="kb-featured kb-wrap"
             aria-labelledby="kb-featured-title"
@@ -201,11 +304,56 @@ function BookNewPage() {
               לשמירה על פרטיות המספרים.
             </p>
           </section>
+          <section
+            id="kb-sample"
+            className="kb-sample kb-wrap"
+            aria-labelledby="kb-sample-title"
+          >
+            <div className="kb-sample-intro">
+              <p className="kb-kicker">קטע לקריאה מתוך הספר</p>
+              <h2 id="kb-sample-title">על הניסים ועל הנפלא־אות</h2>
+              <p>
+                יזהר וילדיו ניצלו בשבעה באוקטובר. לצד הכאב על חבריו מהקיבוץ, הוא
+                מבקש דרך להודות על חיי משפחתו ופונה לרב דוד. זהו קטע מהסיפור.
+              </p>
+              <a href="#kb-order" className="kb-button">
+                להזמנת הספר <ArrowLeft size={18} aria-hidden="true" />
+              </a>
+            </div>
+            <div className="kb-paper">
+              <span className="kb-paper-label">
+                קשר של תפילין / על הניסים ועל הנפלא־אות
+              </span>
+              <blockquote>
+                <p>
+                  &quot;ומה אני יכול לעשות כדי להודות לאלוקים שהציל אותי ונתן לי
+                  את החיים במתנה?&quot; שאל יזהר.
+                </p>
+                <p>&quot;תפילין. תתחיל להניח תפילין!&quot; ענה הרב ישירות.</p>
+                <p>
+                  הרב הסביר לְיזהר על המצווה, ואמר שע&quot;י הנחת תפילין וקריאת
+                  שמע בכל יום דבר שלא מצריך הרבה זמן – הוא מחבר את עצמו לה&#x27;
+                  באופן פנימי ועמוק מאד. יזהר הקשיב והרעיון מצא חן בעיניו. לפני
+                  שנפרדו, הרב דוד בירך את יזהר בחום. &quot;לחיים טובים ומאושרים,
+                  מעכשיו ועד מאה עשרים!&quot;, ונתן לו את המספר של הרב עמיחי.
+                  &quot;תתקשר אליו, הוא יעזור לך וידאג להביא לך תפילין&quot;.
+                </p>
+                <p>
+                  מאז שיזהר פגש את הרב דוד עברו כמה שבועות, אבל הדברים ששמע מהרב
+                  המשיכו להדהד בראשו. גם עכשיו, תוך כדי הטיול עם הכלב, הוא נזכר
+                  בדברי הרב על הניסים ועל התפילין, והחליט שהגיע הזמן להוציא אל
+                  הפועל את הרעיון. הוא החל לפסוע בחזרה הביתה בצעדים מהירים. אחרי
+                  שנכנס לדירה הקטנה, פתח את המגירה, הוציא ממנה את הפתק שעליו כתב
+                  הרב דוד את המספר והתקשר.
+                </p>
+              </blockquote>
+            </div>
+          </section>
           <nav className="kb-page-nav kb-wrap" aria-label="תוכן העניינים בעמוד">
             <strong>בעמוד הזה</strong>
-            <a href="#kb-contents">תוכן הספר ופרטים</a>
             <a href="#kb-sample">קטע לקריאה</a>
-            <a href="#kb-author">על עמיחי איל</a>
+            <a href="#kb-contents">תוכן הספר</a>
+            <a href="#kb-author">על עמיחי</a>
             <a href="#kb-trust">ברכות הרבנים</a>
             <a href="#kb-order">מחיר ומשלוח</a>
             <a href="#kb-faq">שאלות ותשובות</a>
@@ -280,77 +428,6 @@ function BookNewPage() {
           </section>
 
           <section
-            id="kb-sample"
-            className="kb-sample kb-wrap"
-            aria-labelledby="kb-sample-title"
-          >
-            <div className="kb-sample-intro">
-              <p className="kb-kicker">קטע לקריאה מתוך הספר</p>
-              <h2 id="kb-sample-title">על הניסים ועל הנפלא־אות</h2>
-              <p>
-                יזהר וילדיו ניצלו בשבעה באוקטובר. לצד הכאב על חבריו מהקיבוץ, הוא
-                מבקש דרך להודות על חיי משפחתו ופונה לרב דוד. זהו קטע מהסיפור.
-              </p>
-            </div>
-            <div className="kb-paper">
-              <span className="kb-paper-label">
-                קשר של תפילין / על הניסים ועל הנפלא־אות
-              </span>
-              <blockquote>
-                <p>
-                  &quot;ומה אני יכול לעשות כדי להודות לאלוקים שהציל אותי ונתן לי
-                  את החיים במתנה?&quot; שאל יזהר.
-                </p>
-                <p>&quot;תפילין. תתחיל להניח תפילין!&quot; ענה הרב ישירות.</p>
-                <p>
-                  הרב הסביר לְיזהר על המצווה, ואמר שע&quot;י הנחת תפילין וקריאת
-                  שמע בכל יום דבר שלא מצריך הרבה זמן – הוא מחבר את עצמו לה&#x27;
-                  באופן פנימי ועמוק מאד. יזהר הקשיב והרעיון מצא חן בעיניו. לפני
-                  שנפרדו, הרב דוד בירך את יזהר בחום. &quot;לחיים טובים ומאושרים,
-                  מעכשיו ועד מאה עשרים!&quot;, ונתן לו את המספר של הרב עמיחי.
-                  &quot;תתקשר אליו, הוא יעזור לך וידאג להביא לך תפילין&quot;.
-                </p>
-                <p>
-                  מאז שיזהר פגש את הרב דוד עברו כמה שבועות, אבל הדברים ששמע מהרב
-                  המשיכו להדהד בראשו. גם עכשיו, תוך כדי הטיול עם הכלב, הוא נזכר
-                  בדברי הרב על הניסים ועל התפילין, והחליט שהגיע הזמן להוציא אל
-                  הפועל את הרעיון. הוא החל לפסוע בחזרה הביתה בצעדים מהירים. אחרי
-                  שנכנס לדירה הקטנה, פתח את המגירה, הוציא ממנה את הפתק שעליו כתב
-                  הרב דוד את המספר והתקשר.
-                </p>
-              </blockquote>
-            </div>
-          </section>
-
-          <section className="kb-about" aria-labelledby="kb-about-title">
-            <div className="kb-wrap kb-about-grid">
-              <div>
-                <p className="kb-kicker">איך נולד הספר</p>
-                <h2 id="kb-about-title">על הספר והמיזם</h2>
-              </div>
-              <div>
-                <p>
-                  במיזם ״קשר של תפילין״ עמיחי איל מחבר בין אנשים שיש להם תפילין
-                  שאינן בשימוש לבין מי שרוצים להתחיל להניח. עם הזמן, לצד הבקשות
-                  לתפילין, הצטברו גם הסיפורים.
-                </p>
-                <p>
-                  23 מהם מובאים בספר: על משפחה, על זיכרונות מהבית, על אמונה ועל
-                  ההחלטה להתחיל להניח. חלק מהשמות והפרטים שונו לשמירה על פרטיות
-                  המספרים.
-                </p>
-                <p>
-                  הספר מיועד לקוראים המתעניינים בסיפורים אישיים על אמונה, משפחה
-                  והקשר למסורת. הורים ומחנכים יכולים לבחור מתוכו סיפור לקריאה
-                  משותפת לקראת בר מצווה. כדאי לעיין מראש: הספר כולל גם סיפורי
-                  מלחמה, אובדן והתמודדויות משפחתיות, ולא נכתב כספר ילדים.
-                </p>
-                <p className="kb-small">כתיבה: שמעון חי בן־שחר ועמיחי איל</p>
-              </div>
-            </div>
-          </section>
-
-          <section
             id="kb-author"
             className="kb-author kb-wrap"
             aria-labelledby="kb-author-title"
@@ -366,14 +443,14 @@ function BookNewPage() {
               <p className="kb-kicker">האיש ששמע את הסיפורים</p>
               <h2 id="kb-author-title">נעים להכיר, עמיחי איל</h2>
               <p>
-                עמיחי, תושב בית אל, הקים ומנהל את מיזם ״קשר של תפילין״. הוא עסק
-                בהוראה בישיבות ובניהול ארגון ״נהורא״, ומלווה בעלי תשובה ומתקרבים
-                ליהדות.
+                עמיחי, תושב בית אל, הקים ומנהל את מיזם ״קשר של תפילין״: מעל
+                1,300 זוגות תפילין שאינן בשימוש נבדקו, חודשו ונמסרו למי שרצה
+                להתחיל להניח. הוא עסק בהוראה בישיבות ובניהול ארגון ״נהורא״.
               </p>
               <p>
-                דרך המיזם הוא פוגש את שני הצדדים: אנשים שמוסרים תפילין שאינן
-                בשימוש, ואנשים שמבקשים זוג משלהם. הספר נולד מההיכרות עם האנשים
-                ומהרצון להביא את סיפוריהם לקוראים נוספים.
+                בכל מסירה כזו התחיל סיפור. 23 מהם מגיעים עכשיו לספר — כולל
+                סיפורי מלחמה, אובדן והתמודדויות משפחתיות. זה לא ספר ילדים, וכדאי
+                לעיין בו לפני שמעבירים לנער.
               </p>
               <a
                 className="kb-text-link"
@@ -383,46 +460,8 @@ function BookNewPage() {
               >
                 לראיון עם עמיחי על המיזם בערוץ 7 ↗
               </a>
-              <p className="kb-small">הראיון עוסק במיזם ובפעילותו.</p>
+              <p className="kb-small">כתיבה: שמעון חי בן־שחר ועמיחי איל</p>
             </div>
-          </section>
-
-          <section
-            id="kb-trust"
-            className="kb-trust kb-wrap"
-            aria-labelledby="kb-trust-title"
-          >
-            <p className="kb-kicker">המיזם שמאחורי הספר</p>
-            <h2 id="kb-trust-title">ברכות הרבנים למיזם ״קשר של תפילין״</h2>
-            <p className="kb-trust-note">
-              המכתבים ניתנו למיזם ולפעילותו. הם אינם ביקורות על הספר.
-            </p>
-            <div className="kb-rabbis">
-              {letters.map((rabbi) => (
-                <a
-                  key={rabbi.name}
-                  href={rabbi.letter}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img
-                    src={rabbi.image}
-                    alt=""
-                    width="76"
-                    height="76"
-                    loading="lazy"
-                  />
-                  <div>
-                    <h3>{rabbi.name}</h3>
-                    <span>לקריאת מכתב הברכה ↗</span>
-                  </div>
-                </a>
-              ))}
-            </div>
-            <a className="kb-text-link" href="/מכתבי-תודה">
-              למכתבי התודה מאנשים שקיבלו תפילין{" "}
-              <ArrowLeft size={17} aria-hidden="true" />
-            </a>
           </section>
 
           <section
@@ -432,9 +471,14 @@ function BookNewPage() {
           >
             <div className="kb-wrap">
               <div className="kb-section-heading">
-                <p className="kb-kicker">לעצמכם, למשפחה או למתנה</p>
-                <h2 id="kb-order-title">מחירים, משלוח ואיסוף עצמי</h2>
-                <p>אפשר לבחור גם זוג או שלישייה עם הקדשה אישית מעמיחי.</p>
+                <p className="kb-kicker">לרגל הוצאת הספר</p>
+                <h2 id="kb-order-title">
+                  בחרו מארז — ועמיחי יסגור איתכם את ההזמנה
+                </h2>
+                <p>
+                  במארז של שני עותקים ומעלה מצורפת הקדשה אישית מעמיחי — אחד
+                  לכם ואחד לתת.
+                </p>
               </div>
               <fieldset className="kb-bundles">
                 <legend className="kb-sr-only">בחירת מספר עותקים</legend>
@@ -461,55 +505,71 @@ function BookNewPage() {
                       <small> ₪</small>
                     </strong>
                     <p>{item.detail}</p>
+                    <p className="kb-unit-price">
+                      {unitPriceLabel(item.price, item.quantity)}
+                    </p>
                   </label>
                 ))}
               </fieldset>
               <div className="kb-order-bottom">
                 <div className="kb-delivery">
-                  <fieldset>
-                    <legend>איך תרצו לקבל את הספרים?</legend>
-                    <div className="kb-delivery-options">
-                      <label>
-                        <input
-                          type="radio"
-                          name="book-delivery"
-                          checked={delivery === "pickup"}
-                          onChange={() => setDelivery("pickup")}
-                        />
-                        <MapPin size={18} aria-hidden="true" /> איסוף עצמי · ללא
-                        עלות
-                      </label>
-                      <label>
-                        <input
-                          type="radio"
-                          name="book-delivery"
-                          checked={delivery === "shipping"}
-                          onChange={() => setDelivery("shipping")}
-                        />
-                        <Truck size={18} aria-hidden="true" /> משלוח עד הבית ·
-                        40 ₪
-                      </label>
+                  {quantity === 1 ? (
+                    <fieldset>
+                      <legend>איך תרצו לקבל את הספר?</legend>
+                      <div className="kb-delivery-options">
+                        <label>
+                          <input
+                            type="radio"
+                            name="book-delivery"
+                            checked={delivery === "pickup"}
+                            onChange={() => setDelivery("pickup")}
+                          />
+                          <MapPin size={18} aria-hidden="true" /> איסוף עצמי ·
+                          ללא עלות
+                        </label>
+                        <label>
+                          <input
+                            type="radio"
+                            name="book-delivery"
+                            checked={delivery === "shipping"}
+                            onChange={() => setDelivery("shipping")}
+                          />
+                          <Truck size={18} aria-hidden="true" /> משלוח עד הבית ·
+                          40 ₪
+                        </label>
+                      </div>
+                      <p className="kb-delivery-detail" aria-live="polite">
+                        {delivery === "pickup"
+                          ? "איסוף מארץ חמדה 33, בית אל. מתאים גם לתושבי יישובי בנימין."
+                          : "משלוח של עד 5 ספרים: 40 ₪. עד 8 ימי עסקים."}
+                      </p>
+                    </fieldset>
+                  ) : (
+                    <div>
+                      <p className="kb-delivery-included">
+                        <Truck size={18} aria-hidden="true" /> משלוח עד הבית
+                        כלול במחיר המארז
+                      </p>
+                      <p className="kb-delivery-detail" aria-live="polite">
+                        המשלוח עד הבית כלול כבר במחיר המארז, עד 8 ימי עסקים.
+                        אפשר גם לתאם עם עמיחי איסוף עצמי.
+                      </p>
                     </div>
-                  </fieldset>
-                  <p className="kb-delivery-detail" aria-live="polite">
-                    {delivery === "pickup"
-                      ? "איסוף מארץ חמדה 33, בית אל. מתאים גם לתושבי יישובי בנימין."
-                      : "משלוח של עד 5 ספרים: 40 ₪. עד 8 ימי עסקים."}
-                  </p>
+                  )}
                 </div>
                 <div className="kb-total">
                   <div aria-live="polite">
                     <span>
                       סה״כ
-                      {delivery === "shipping"
+                      {quantity === 1 && delivery === "shipping"
                         ? ", כולל משלוח"
-                        : ", באיסוף עצמי"}
+                        : ""}
                     </span>
                     <strong>{total} ₪</strong>
                   </div>
                   <p>
-                    התשלום באתר עדיין לא נפתח. אפשר לברר עם עמיחי על ההזמנה
-                    בוואטסאפ.
+                    התשלום באתר עדיין לא נפתח. שליחת הפרטים בוואטסאפ שומרת לכם
+                    את ההזמנה, ועמיחי חוזר עם אישור ותיאום.
                   </p>
                   <a
                     href={`https://wa.me/972546713966?text=${encodeURIComponent(message)}`}
@@ -517,11 +577,12 @@ function BookNewPage() {
                     rel="noopener noreferrer"
                     className="kb-button"
                   >
-                    לבירור הזמנה עם עמיחי{" "}
+                    שליחת ההזמנה לעמיחי בוואטסאפ{" "}
                     <ArrowLeft size={18} aria-hidden="true" />
                   </a>
                   <span className="kb-small">
-                    הבחירה כאן אינה מבצעת הזמנה או חיוב.
+                    הבחירה בעמוד אינה מבצעת חיוב. ביטול עסקה עד 14 יום לפי חוק
+                    הגנת הצרכן.
                   </span>
                 </div>
               </div>
@@ -635,6 +696,21 @@ function BookNewPage() {
             </details>
           </section>
         </main>
+        <div className="kb-mobile-bar">
+          <div>
+            <span>
+              {bundle.title} · {total} ₪
+            </span>
+            <small>
+              {shippingIncluded
+                ? "כולל משלוח עד הבית · הקדשה אישית מעמיחי"
+                : "איסוף עצמי ללא עלות · משלוח עד הבית 40 ₪"}
+            </small>
+          </div>
+          <a className="kb-button" href="#kb-order">
+            להזמנה <ArrowLeft size={16} aria-hidden="true" />
+          </a>
+        </div>
       </div>
       <SiteFooter />
     </div>
