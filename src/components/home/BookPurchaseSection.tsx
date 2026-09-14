@@ -1,8 +1,8 @@
 const PURCHASE_ID = "kb-purchase";
 
-const GROW_SINGLE = "https://grow.link/MTA1NDQ5~49262f78c08b742d6ad21b74b49de3e5-Mzk4OTY3OA";
-const GROW_PAIR = "https://grow.link/MTA1NDQ5~ec72d87f8af24e604ef10150073d2b54-Mzk4OTcwNw";
-const GROW_TRIPLE = "https://grow.link/MTA1NDQ5~a1922e39c4975492fad2f1321d3c42ee-Mzk5MDI4NA";
+const GROW_SINGLE = "https://pay.grow.link/MTA1NDQ5~49262f78c08b742d6ad21b74b49de3e5-Mzk4OTY3OA";
+const GROW_PAIR = "https://pay.grow.link/MTA1NDQ5~ec72d87f8af24e604ef10150073d2b54-Mzk4OTcwNw";
+const GROW_TRIPLE = "https://pay.grow.link/MTA1NDQ5~a1922e39c4975492fad2f1321d3c42ee-Mzk5MDI4NA";
 
 const offers = [
   {
