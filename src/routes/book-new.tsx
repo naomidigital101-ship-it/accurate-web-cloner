@@ -354,7 +354,7 @@ function BookNewPage() {
           <nav className="kb-page-nav kb-wrap" aria-label="תוכן העניינים בעמוד">
             <strong>בעמוד הזה</strong>
             <a href="#kb-sample">קטע לקריאה</a>
-            <a href="#kb-contents">תוכן הספר</a>
+            <a href="#kb-contents">פרטי הספר</a>
             <a href="#kb-author">על עמיחי</a>
             <a href="#kb-trust">ברכות הרבנים</a>
             <a href="#kb-order">מחיר ומשלוח</a>
