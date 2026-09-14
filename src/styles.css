@@ -3306,7 +3306,7 @@ html.a11y-hc-light body :is(section, div, article, header, footer, main, aside):
   .book-testimonials { grid-template-columns: 1fr; }
 }
 
-// ===== לרגל הוצאת הספר — אזור רכישה בעמוד הבית =====
+/* ===== לרגל הוצאת הספר — אזור רכישה בעמוד הבית ===== */
 @layer components {
   .kb-shop {
     background: #eef6ff;
