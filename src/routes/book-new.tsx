@@ -88,12 +88,13 @@ function BookNewPage() {
   const shippingIncluded = quantity > 1;
   const total =
     bundle.price + (!shippingIncluded && delivery === "shipping" ? 40 : 0);
-  const deliveryText = shippingIncluded
-    ? "כולל משלוח עד הבית"
-    : delivery === "pickup"
-      ? "באיסוף עצמי"
-      : "במשלוח עד הבית";
-  const message = `שלום עמיחי, אשמח לברר על הזמנת ${quantity} עותקים מהספר קשר של תפילין, ${deliveryText}. הסכום שמוצג בעמוד: ${total} ש״ח.`;
+  // קישורי רכישה אמיתיים לפי המארז — זהים לאזור הרכישה בעמוד הבית.
+  const purchaseLinks: Record<number, string> = {
+    1: "https://grow.link/MTA1NDQ5~49262f78c08b742d6ad21b74b49de3e5-Mzk4OTY3OA",
+    2: "https://grow.link/MTA1NDQ5~ec72d87f8af24e604ef10150073d2b54-Mzk4OTcwNw",
+    3: "https://grow.link/MTA1NDQ5~a1922e39c4975492fad2f1321d3c42ee-Mzk5MDI4NA",
+  };
+  const purchaseUrl = purchaseLinks[quantity] ?? purchaseLinks[1]!;
 
   return (
     <div className="book-organic" dir="rtl">
@@ -536,22 +537,17 @@ function BookNewPage() {
                     <strong>{total} ₪</strong>
                   </div>
                   <p>
-                    התשלום באתר עדיין לא נפתח. שליחת הפרטים בוואטסאפ שומרת לכם
-                    את ההזמנה, ועמיחי חוזר עם אישור ותיאום.
+                    הרכישה מתבצעת במסך תשלום מאובטח. לאחר ההזמנה עמיחי חוזר
+                    אליכם לתיאום המשלוח וההקדשה.
                   </p>
                   <a
-                    href={`https://wa.me/972546713966?text=${encodeURIComponent(message)}`}
+                    href={purchaseUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="kb-button"
                   >
-                    שליחת ההזמנה לעמיחי בוואטסאפ{" "}
-                    <ArrowLeft size={18} aria-hidden="true" />
+                    לרכישה מאובטחת <ArrowLeft size={18} aria-hidden="true" />
                   </a>
-                  <span className="kb-small">
-                    הבחירה בעמוד אינה מבצעת חיוב. ביטול עסקה עד 14 יום לפי חוק
-                    הגנת הצרכן.
-                  </span>
                 </div>
               </div>
               <div className="kb-group">
@@ -610,10 +606,10 @@ function BookNewPage() {
                 "אפשר להזמין כמות לכיתה או לעובדים?",
                 "כן. שלחו לעמיחי את מספר העותקים, המועד שבו אתם צריכים אותם והאם תרצו הקדשות. המחיר ותנאי האספקה להזמנה קבוצתית ייקבעו בתיאום אישי.",
               ],
-              [
-                "אפשר לשלם כבר בעמוד?",
-                "מערכת התשלום עבור הספר עדיין אינה מחוברת. בחירת המארז והמשלוח בעמוד מציגה את הסכום, והכפתור פותח פנייה לעמיחי בוואטסאפ. בחירה בעמוד אינה הזמנה מאושרת או חיוב.",
-              ],
+                [
+                  "אפשר לשלם כבר בעמוד?",
+                  "כן. כפתור הרכישה בסוף העמוד פותח מסך תשלום מאובטח לפי המארז שבחרתם. לאחר הרכישה עמיחי חוזר אליכם לתיאום המשלוח וההקדשה.",
+                ],
             ].map(([question, answer]) => (
               <details key={question}>
                 <summary>
