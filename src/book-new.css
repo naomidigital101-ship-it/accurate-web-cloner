@@ -1648,3 +1648,10 @@
     width: 100%;
   }
 }
+
+/* פתיח: שורת הכוונון לגלילה */
+.kb .kb-scroll-cue {
+  margin-top: 18px;
+  font-weight: 600;
+  color: #2d2e83;
+}
