@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SITE_URL } from "@/lib/site";
+import { useDonateUrl, useWhatsAppLink } from "@/lib/settings";
 
 export const Route = createFileRoute("/start")({
   head: () => ({
@@ -14,6 +15,11 @@ export const Route = createFileRoute("/start")({
 });
 
 function StartPage() {
+  // Same donation channel the "For tax purposes in the USA" card uses site-wide.
+  const usDonateUrl = useDonateUrl("recurring", true);
+  // Same WhatsApp contact link used across the site (e.g. accessibility page).
+  const whatsappUrl = useWhatsAppLink();
+
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col items-center px-5 py-10">
       <img
@@ -27,30 +33,30 @@ function StartPage() {
         תודה שקראתם
       </h1>
       <nav className="w-full max-w-md flex flex-col gap-4" aria-label="קישורים מהירים">
-        {/* destination to be filled in later */}
         <a
-          href="#"
+          href="/#kb-purchase"
           className="btn-e btn-mint-solid flex w-full justify-center py-5 text-lg md:text-xl"
         >
           להזמנת עותקים נוספים
         </a>
-        {/* destination to be filled in later */}
         <a
-          href="#"
+          href="/donate"
           className="btn-e btn-mint-solid flex w-full justify-center py-5 text-lg md:text-xl"
         >
           לתרומה לעמותה
         </a>
-        {/* destination to be filled in later */}
         <a
-          href="#"
+          href={usDonateUrl}
+          target="_blank"
+          rel="noopener"
           className="btn-e btn-mint-solid flex w-full justify-center py-5 text-lg md:text-xl"
         >
           Donate (US tax purposes)
         </a>
-        {/* destination to be filled in later */}
         <a
-          href="#"
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener"
           className="btn-e btn-mint-solid flex w-full justify-center py-5 text-lg md:text-xl"
         >
           ליצירת קשר
