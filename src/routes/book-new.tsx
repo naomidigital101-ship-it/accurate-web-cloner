@@ -368,7 +368,7 @@ function BookNewPage() {
             <div className="kb-wrap">
               <div className="kb-section-heading">
                 <p className="kb-kicker">מה יש בספר</p>
-                <h2 id="kb-contents-title">תוכן העניינים ופרטי הספר</h2>
+                <h2 id="kb-contents-title">פרטי הספר</h2>
                 <p>
                   הסיפורים נעים בין הבית והעבודה, השירות הצבאי והטיול בחו״ל. בכל
                   אחד מהם הנחת התפילין מקבלת מקום בתוך חייו של אדם מסוים.
