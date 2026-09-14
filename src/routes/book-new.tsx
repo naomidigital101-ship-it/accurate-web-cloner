@@ -90,9 +90,9 @@ function BookNewPage() {
     bundle.price + (!shippingIncluded && delivery === "shipping" ? 40 : 0);
   // קישורי רכישה אמיתיים לפי המארז — זהים לאזור הרכישה בעמוד הבית.
   const purchaseLinks: Record<number, string> = {
-    1: "https://grow.link/MTA1NDQ5~49262f78c08b742d6ad21b74b49de3e5-Mzk4OTY3OA",
-    2: "https://grow.link/MTA1NDQ5~ec72d87f8af24e604ef10150073d2b54-Mzk4OTcwNw",
-    3: "https://grow.link/MTA1NDQ5~a1922e39c4975492fad2f1321d3c42ee-Mzk5MDI4NA",
+    1: "https://pay.grow.link/MTA1NDQ5~49262f78c08b742d6ad21b74b49de3e5-Mzk4OTY3OA",
+    2: "https://pay.grow.link/MTA1NDQ5~ec72d87f8af24e604ef10150073d2b54-Mzk4OTcwNw",
+    3: "https://pay.grow.link/MTA1NDQ5~a1922e39c4975492fad2f1321d3c42ee-Mzk5MDI4NA",
   };
   const purchaseUrl = purchaseLinks[quantity] ?? purchaseLinks[1]!;
 
