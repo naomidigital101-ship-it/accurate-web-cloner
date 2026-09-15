@@ -18,7 +18,6 @@ import { InterviewSection } from "@/components/home/InterviewSection";
 import { FaqSection } from "@/components/home/FaqSection";
 import { FounderSection } from "@/components/home/FounderSection";
 import { ServicesSection } from "@/components/home/ServicesSection";
-import { BookPurchaseSection } from "@/components/home/BookPurchaseSection";
 import { MobileDonateFab } from "@/components/home/MobileDonateFab";
 import { readFaqs, readGallery, readStories } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
@@ -112,7 +111,6 @@ function Index() {
         <FounderSection />
         <FaqSection items={faqItems} />
         <ServicesSection />
-        <BookPurchaseSection />
       </main>
       <Footer images={gallery ?? undefined} />
       <MobileDonateFab />

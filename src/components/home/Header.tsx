@@ -21,8 +21,6 @@ const navItems: NavItem[] = [
   { label: "בקשת תפילין", href: "/request" },
   { label: "מסירת/תרומת תפילין", href: "/give" },
   { label: "תרומה", href: "/donate" },
-  // עוגן לאזור הרכישה של הספר בעמוד הבית
-  { label: "לרכישת הספר", href: "/#kb-purchase" },
 ];
 
 function CaretDown() {
