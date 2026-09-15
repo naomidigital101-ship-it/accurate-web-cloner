@@ -35,7 +35,7 @@ function useCountUp(to: number, duration = 2000) {
 }
 
 export function HeroSection() {
-  const counter = useCountUp(1300, 2000);
+  const counter = useCountUp(1500, 2000);
   const [videoOn, setVideoOn] = useState(false);
   const [interacted, setInteracted] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);

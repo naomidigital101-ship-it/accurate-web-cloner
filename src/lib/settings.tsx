@@ -31,7 +31,7 @@ export const SETTING_DEFAULTS = {
   // ערוצי תרומה לעמודים באנגלית. ריק = ליפול חזרה לערוץ הישראלי.
   donate_onetime_url_en: "",
   donate_recurring_url_en: "",
-  pairs_delivered: "1,300",
+  pairs_delivered: "1,500",
   rabbi_letters_count: "9",
 } as const;
 
@@ -48,6 +48,10 @@ export function SettingsProvider({ value, children }: { value: Settings; childre
 export function useSetting(key: SettingKey): string {
   const s = useContext(Ctx);
   const v = s[key];
+  // The previous stored count must not override the published September update.
+  if (key === "pairs_delivered" && v?.replace(/\D/g, "") === "1300") {
+    return SETTING_DEFAULTS.pairs_delivered;
+  }
   return v && v.trim() !== "" ? v : SETTING_DEFAULTS[key];
 }
 

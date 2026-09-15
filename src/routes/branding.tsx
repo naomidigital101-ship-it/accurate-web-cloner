@@ -50,7 +50,7 @@ const SHADOWS = [
 
 const GRADIENTS = [
   { name: "Hero overlay (multiply)", css: "radial-gradient(at top left, #67FFD1 0%, #009FE3 100%)", note: "סקשן הירו — overlay על הוידאו, blend mode: multiply" },
-  { name: "Badge מספרי", css: "linear-gradient(135deg, #F9B233 0%, #E65A38 100%)", note: "באדג' פיל לסטטיסטיקה (1,300 זוגות)" },
+  { name: "Badge מספרי", css: "linear-gradient(135deg, #F9B233 0%, #E65A38 100%)", note: "באדג' פיל לסטטיסטיקה (1,500 זוגות)" },
   { name: "Overlay כהה לתמונה", css: "linear-gradient(180deg, #060633B5 0%, #06063300 100%)", note: "כיסוי כותרת על תמונת רקע" },
   { name: "Page transition", css: "radial-gradient(at center center, #FFFFFF 50%, #C3E7F6 100%)", note: "מעבר בין עמודים" },
   { name: "Section נייבי", css: "linear-gradient(180deg, #009FE300 0%, #2D2E83 100%)", note: "מעבר משמיים לנייבי" },
@@ -159,7 +159,7 @@ color: #2D2E83; /* secondary */`}</Code>
 
           <Row label="Text — טקסט גוף">
             <p className="text-[18px] leading-[1.4em] font-normal text-[#060633] max-w-prose">
-              מיזם של ערבות הדדית וזיכוי הרבים. עד היום חילקנו מעל 1,300 זוגות תפילין ליהודים בכל הארץ.
+              מיזם של ערבות הדדית וזיכוי הרבים. עד היום חילקנו מעל 1,500 זוגות תפילין ליהודים בכל הארץ.
             </p>
             <Code>{`font-family: "Maadim OS", Sans-serif;
 font-size: 18px;
@@ -293,7 +293,7 @@ font: 700 16px "Maadim OS";
 
           <Row label='באדג&apos; סטטיסטיקה (פיל מגרדיאנט)'>
             <div className="inline-block px-6 py-2.5 text-white font-normal text-base" style={{ background: `linear-gradient(135deg, ${KIT.primary} 0%, ${KIT.badgeOrangeEnd} 100%)`, borderRadius: 1000 }}>
-              1,300 זוגות תפילין חולקו
+              1,500 זוגות תפילין חולקו
             </div>
             <Code>{`background: linear-gradient(135deg, #F9B233 0%, #E65A38 100%);
 border-radius: 1000px;
