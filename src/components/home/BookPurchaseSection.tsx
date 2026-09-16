@@ -34,7 +34,7 @@ export function BookPurchaseSection() {
       <div className="kb-shop-inner">
         <h2 id="kb-shop-title" className="kb-shop-title">לרגל הוצאת הספר</h2>
         <p className="kb-shop-sub">
-          הספר ״קשר של תפילין״ — 23 סיפורים אמיתיים על רגעי התעוררות והשגחה. במארז של שני עותקים ומעלה מצורפת הקדשה אישית מעמיחי.
+          הספר ״קשר של תפילין״ — 23 סיפורים אמיתיים על רגעי התעוררות והשגחה. במארז של שני עותקים ומעלה המשלוח עד הבית כלול במחיר.
         </p>
         <div className="kb-shop-cards">
           {offers.map((o) => (

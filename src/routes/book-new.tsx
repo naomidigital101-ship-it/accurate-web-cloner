@@ -9,14 +9,17 @@ import bookCss from "@/book-new.css?url";
 export const Route = createFileRoute("/book-new")({
   head: () => ({
     meta: [
-      { title: "קשר של תפילין — הספר של עמיחי איל" },
+      { title: "קשר של תפילין — הספר של הרב עמיחי איל" },
       {
         name: "description",
         content:
-          "23 סיפורים מהחיים על הנחת תפילין והתחלה של קשר. הכירו את הספר של עמיחי איל וקראו קטע מתוכו.",
+          "23 סיפורים מהחיים על הנחת תפילין והתחלה של קשר. הכירו את הספר של הרב עמיחי איל וקראו קטע מתוכו.",
       },
       { name: "robots", content: "noindex, nofollow" },
-      { property: "og:title", content: "קשר של תפילין — הספר של עמיחי איל" },
+      {
+        property: "og:title",
+        content: "קשר של תפילין — הספר של הרב עמיחי איל",
+      },
       {
         property: "og:description",
         content: "23 סיפורים מהחיים על הנחת תפילין והתחלה של קשר.",
@@ -47,13 +50,13 @@ const bundles = [
     quantity: 2,
     title: "שני עותקים",
     price: 143,
-    detail: "כולל משלוח עד הבית · הקדשה אישית מעמיחי",
+    detail: "כולל משלוח עד הבית · אחד לכם ואחד לתת",
   },
   {
     quantity: 3,
     title: "שלושה עותקים",
     price: 199,
-    detail: "כולל משלוח עד הבית · הקדשה אישית מעמיחי",
+    detail: "כולל משלוח עד הבית · אחד לכם ושניים לתת",
   },
 ];
 
@@ -112,7 +115,7 @@ function BookNewPage() {
                 "@type": "Book",
                 name: "קשר של תפילין",
                 author: [
-                  { "@type": "Person", name: "עמיחי איל" },
+                  { "@type": "Person", name: "הרב עמיחי איל" },
                   { "@type": "Person", name: "שמעון חי בן־שחר" },
                 ],
                 inLanguage: "he",
@@ -127,7 +130,9 @@ function BookNewPage() {
           <div className="kb-opening">
             <section className="kb-hero kb-wrap" aria-labelledby="kb-title">
               <div className="kb-hero-copy">
-                <p className="kb-kicker">״קשר של תפילין״ · הספר של עמיחי איל</p>
+                <p className="kb-kicker">
+                  ״קשר של תפילין״ · הספר של הרב עמיחי איל
+                </p>
                 <h1 id="kb-title">
                   23 סיפורים מרגשים ואמיתיים על רגעים שבהם השמיים נפתחו, והחיים
                   השתנו מקצה לקצה
@@ -138,10 +143,7 @@ function BookNewPage() {
                 </p>
                 <div className="kb-hero-price">
                   <strong>78 ₪</strong>
-                  <span>
-                    לעותק · מארז 2 עותקים ב־143 ₪ כולל משלוח עד הבית והקדשה
-                    אישית מעמיחי
-                  </span>
+                  <span>לעותק · מארז 2 עותקים ב־143 ₪ כולל משלוח עד הבית</span>
                 </div>
                 <div className="kb-actions">
                   <a href="#kb-order" className="kb-button">
@@ -155,16 +157,35 @@ function BookNewPage() {
                 <p className="kb-scroll-cue">
                   גלול למטה לקריאת סיפור מיוחד מתוך הספר ולבחירת המארז שלך 👇
                 </p>
-                <p className="kb-small">
-                  איסוף עצמי בבית אל ללא עלות · משלוח עד הבית 40 ₪ · ביטול עד 14
-                  יום לפי חוק
-                </p>
+                <ul className="kb-orderinfo">
+                  <li>
+                    <Truck size={18} aria-hidden="true" />
+                    <span>
+                      <strong>משלוח עד הבית · 40 ₪</strong>
+                      עד 5 ספרים באותו משלוח, מגיע תוך עד 8 ימי עסקים
+                    </span>
+                  </li>
+                  <li>
+                    <MapPin size={18} aria-hidden="true" />
+                    <span>
+                      <strong>איסוף עצמי · ללא עלות</strong>
+                      ארץ חמדה 33, בית אל — בתיאום מראש
+                    </span>
+                  </li>
+                  <li>
+                    <Check size={18} aria-hidden="true" />
+                    <span>
+                      <strong>ביטול עד 14 יום</strong>
+                      מקבלת הספר, לפי חוק הגנת הצרכן
+                    </span>
+                  </li>
+                </ul>
               </div>
               <figure className="kb-cover">
                 <div className="kb-cover-frame">
                   <img
                     src="/book/kesher-cover.jpeg"
-                    alt="כריכת הספר קשר של תפילין מאת עמיחי איל"
+                    alt="כריכת הספר קשר של תפילין מאת הרב עמיחי איל"
                     width="1021"
                     height="1600"
                     fetchPriority="high"
@@ -174,121 +195,33 @@ function BookNewPage() {
             </section>
             <dl className="kb-trustbar kb-wrap">
               <div>
-                <dt>זוגות תפילין שחולקו במיזם</dt>
-                <dd>מעל 1,500</dd>
-              </div>
-              <div>
-                <dt>הסכמות מגדולי הרבנים למיזם</dt>
-                <dd>9</dd>
-              </div>
-              <div>
                 <dt>סיפורים בספר</dt>
                 <dd>23</dd>
               </div>
               <div>
-                <dt>עמודים · כריכה רכה · עברית</dt>
+                <dt>עמודים</dt>
                 <dd>184</dd>
+              </div>
+              <div>
+                <dt>כריכה רכה · עברית</dt>
+                <dd>מהדורה ראשונה</dd>
               </div>
             </dl>
           </div>
-          <section id="kb-hook" className="kb-hook" aria-labelledby="kb-hook-title">
-            <div className="kb-wrap kb-hook-grid">
-              <div className="kb-hook-copy">
-                <p className="kb-kicker">הסיפור שפותח את הספר</p>
-                <h2 id="kb-hook-title">
-                  ״ומה אני יכול לעשות כדי להודות שהצילו אותי?״
-                </h2>
-                <p>
-                  יזהר וילדיו ניצלו בשבעה באוקטובר. חברים מהקיבוץ נרצחו ונחטפו.
-                  בתוך הכאב הוא חיפש דרך להודות — ושאל רב מה הוא יכול לעשות.
-                  התשובה הייתה מילה אחת.
-                </p>
-                <a href="#kb-sample" className="kb-text-link">
-                  להמשך הסיפור בקטע לקריאה{" "}
-                  <ArrowLeft size={16} aria-hidden="true" />
-                </a>
-              </div>
-              <div>
-                <blockquote className="kb-hook-quote">
-                  ״תפילין. תתחיל להניח תפילין!״ ענה הרב ישירות.
-                  <small className="kb-small">
-                    מתוך הסיפור ״על הניסים ועל הנפלא־אות״
-                  </small>
-                </blockquote>
-              </div>
-            </div>
-          </section>
-          <section id="kb-trust" className="kb-trust" aria-labelledby="kb-trust-title">
-            <div className="kb-wrap">
-              <p className="kb-kicker">המיזם שמאחורי הספר</p>
-              <h2 id="kb-trust-title">ברכות הרבנים למיזם ״קשר של תפילין״</h2>
-              <p className="kb-trust-note">
-                המכתבים ניתנו למיזם ולפעילותו. הם אינם ביקורות על הספר.
-              </p>
-              <div className="kb-rabbis">
-                {letters.map((rabbi) => (
-                  <a
-                    key={rabbi.name}
-                    href={rabbi.letter}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <img
-                      src={rabbi.image}
-                      alt=""
-                      width="76"
-                      height="76"
-                      loading="lazy"
-                    />
-                    <div>
-                      <h3>{rabbi.name}</h3>
-                      <span>לקריאת מכתב הברכה ↗</span>
-                    </div>
-                  </a>
-                ))}
-              </div>
-              <div className="kb-trust-links">
-                <a
-                  href="https://www.youtube.com/watch?v=aQYiyBfycrc"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  הראיון עם עמיחי בערוץ 7 ↗
-                </a>
-                <a href="/in-news">
-                  כתבות על המיזם בתקשורת{" "}
-                  <ArrowLeft size={15} aria-hidden="true" />
-                </a>
-                <a href="/מכתבי-תודה">
-                  מכתבי תודה מאנשים שקיבלו תפילין{" "}
-                  <ArrowLeft size={15} aria-hidden="true" />
-                </a>
-              </div>
-            </div>
-          </section>
           <section
             className="kb-featured kb-wrap"
             aria-labelledby="kb-featured-title"
             id="kb-featured"
           >
-            <p className="kb-kicker">שלושה מהסיפורים שבספר</p>
+            <p className="kb-kicker">שניים מהסיפורים שבספר</p>
             <h2 id="kb-featured-title">מאחורי הבקשה לתפילין</h2>
             <div className="kb-featured-grid">
-              <article>
-                <h3>אב מהעוטף, אחרי שבעה באוקטובר</h3>
-                <p>
-                  יזהר וילדיו ניצלו, אבל חברים מהקיבוץ נרצחו ונחטפו. לצד הכאב
-                  הוא מרגיש צורך להודות על חיי משפחתו. בשיחה עם רב הוא שואל מה
-                  הוא יכול לעשות, ומחליט להתחיל להניח תפילין.
-                </p>
-                <small>מתוך ״על הניסים ועל הנפלא־אות״</small>
-              </article>
               <article>
                 <h3>ההבטחה של נעם, ששרד את הנובה</h3>
                 <p>
                   ברגעי הסכנה נעם הבטיח להניח תפילין אם יֵצא בחיים. הוא ניצל, אך
                   ההבטחה נשארה איתו גם כשחזר לשגרה. הסיפור עוקב אחר הדרך שעבר עד
-                  שפנה לעמיחי.
+                  שפנה להרב עמיחי.
                 </p>
                 <small>מתוך ״לא השאיר לי ברירה״</small>
               </article>
@@ -352,87 +285,6 @@ function BookNewPage() {
               </blockquote>
             </div>
           </section>
-          <nav className="kb-page-nav kb-wrap" aria-label="תוכן העניינים בעמוד">
-            <strong>בעמוד הזה</strong>
-            <a href="#kb-sample">קטע לקריאה</a>
-            <a href="#kb-contents">פרטי הספר</a>
-            <a href="#kb-author">על עמיחי</a>
-            <a href="#kb-trust">ברכות הרבנים</a>
-            <a href="#kb-order">מחיר ומשלוח</a>
-            <a href="#kb-faq">שאלות ותשובות</a>
-          </nav>
-          <section
-            id="kb-contents"
-            className="kb-contents"
-            aria-labelledby="kb-contents-title"
-          >
-            <div className="kb-wrap">
-              <div className="kb-section-heading">
-                <p className="kb-kicker">מה יש בספר</p>
-                <h2 id="kb-contents-title">פרטי הספר</h2>
-                <p>
-                  הסיפורים נעים בין הבית והעבודה, השירות הצבאי והטיול בחו״ל. בכל
-                  אחד מהם הנחת התפילין מקבלת מקום בתוך חייו של אדם מסוים.
-                </p>
-              </div>
-              <dl className="kb-book-facts">
-                <div>
-                  <dt>מספר עמודים</dt>
-                  <dd>184</dd>
-                </div>
-                <div>
-                  <dt>כריכה</dt>
-                  <dd>רכה</dd>
-                </div>
-                <div>
-                  <dt>שפה</dt>
-                  <dd>עברית</dd>
-                </div>
-                <div>
-                  <dt>כתיבה</dt>
-                  <dd>שמעון חי בן־שחר ועמיחי איל</dd>
-                </div>
-              </dl>
-            </div>
-          </section>
-
-          <section
-            id="kb-author"
-            className="kb-author kb-wrap"
-            aria-labelledby="kb-author-title"
-          >
-            <img
-              src="/wp/img/עמיחי-פרופיל-ערוך-min.webp"
-              alt="הרב עמיחי איל"
-              width="932"
-              height="1400"
-              loading="lazy"
-            />
-            <div>
-              <p className="kb-kicker">האיש ששמע את הסיפורים</p>
-              <h2 id="kb-author-title">נעים להכיר, עמיחי איל</h2>
-              <p>
-                עמיחי, תושב בית אל, הקים ומנהל את מיזם ״קשר של תפילין״: מעל
-                1,500 זוגות תפילין שאינן בשימוש נבדקו, חודשו ונמסרו למי שרצה
-                להתחיל להניח. הוא עסק בהוראה בישיבות ובניהול ארגון ״נהורא״.
-              </p>
-              <p>
-                בכל מסירה כזו התחיל סיפור. 23 מהם מגיעים עכשיו לספר — כולל
-                סיפורי מלחמה, אובדן והתמודדויות משפחתיות. זה לא ספר ילדים, וכדאי
-                לעיין בו לפני שמעבירים לנער.
-              </p>
-              <a
-                className="kb-text-link"
-                href="https://www.youtube.com/watch?v=aQYiyBfycrc"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                לראיון עם עמיחי על המיזם בערוץ 7 ↗
-              </a>
-              <p className="kb-small">כתיבה: שמעון חי בן־שחר ועמיחי איל</p>
-            </div>
-          </section>
-
           <section
             id="kb-order"
             className="kb-order"
@@ -441,12 +293,10 @@ function BookNewPage() {
             <div className="kb-wrap">
               <div className="kb-section-heading">
                 <p className="kb-kicker">לרגל הוצאת הספר</p>
-                <h2 id="kb-order-title">
-                  בחרו מארז — ועמיחי יסגור איתכם את ההזמנה
-                </h2>
+                <h2 id="kb-order-title">בחרו את המארז שלכם</h2>
                 <p>
-                  במארז של שני עותקים ומעלה מצורפת הקדשה אישית מעמיחי — אחד
-                  לכם ואחד לתת.
+                  מארז של שני עותקים ומעלה כולל משלוח עד הבית — אחד לכם ואחד
+                  לתת.
                 </p>
               </div>
               <fieldset className="kb-bundles">
@@ -509,8 +359,8 @@ function BookNewPage() {
                       </div>
                       <p className="kb-delivery-detail" aria-live="polite">
                         {delivery === "pickup"
-                          ? "איסוף מארץ חמדה 33, בית אל. מתאים גם לתושבי יישובי בנימין."
-                          : "משלוח של עד 5 ספרים: 40 ₪. עד 8 ימי עסקים."}
+                          ? "איסוף מארץ חמדה 33, בית אל, בתיאום מראש. מתאים גם לתושבי יישובי בנימין."
+                          : "משלוח של עד 5 ספרים: 40 ₪. מגיע תוך עד 8 ימי עסקים."}
                       </p>
                     </fieldset>
                   ) : (
@@ -520,8 +370,8 @@ function BookNewPage() {
                         כלול במחיר המארז
                       </p>
                       <p className="kb-delivery-detail" aria-live="polite">
-                        המשלוח עד הבית כלול כבר במחיר המארז, עד 8 ימי עסקים.
-                        אפשר גם לתאם עם עמיחי איסוף עצמי.
+                        המשלוח עד הבית כלול כבר במחיר המארז, מגיע תוך עד 8 ימי
+                        עסקים. אפשר גם לתאם איסוף עצמי מארץ חמדה 33, בית אל.
                       </p>
                     </div>
                   )}
@@ -537,8 +387,8 @@ function BookNewPage() {
                     <strong>{total} ₪</strong>
                   </div>
                   <p>
-                    הרכישה מתבצעת במסך תשלום מאובטח. לאחר ההזמנה עמיחי חוזר
-                    אליכם לתיאום המשלוח וההקדשה.
+                    הרכישה מתבצעת במסך תשלום מאובטח. הספר יישלח לכתובת שתמלאו
+                    בתשלום, תוך עד 8 ימי עסקים.
                   </p>
                   <a
                     href={purchaseUrl}
@@ -548,13 +398,17 @@ function BookNewPage() {
                   >
                     לרכישה מאובטחת <ArrowLeft size={18} aria-hidden="true" />
                   </a>
+                  <p className="kb-dedication-note">
+                    * רוצים הקדשה אישית מהרב עמיחי? כתבו לנו בוואטסאפ אחרי
+                    ההזמנה ונשתדל לסדר.
+                  </p>
                 </div>
               </div>
               <div className="kb-group">
                 <div>
                   <h3>רוצים להזמין לכיתה, לעובדים או לאירוע משפחתי?</h3>
                   <p>
-                    פנו לעמיחי עם מספר העותקים והמועד הרצוי, כדי לתאם הזמנה
+                    פנו להרב עמיחי עם מספר העותקים והמועד הרצוי, כדי לתאם הזמנה
                     קבוצתית.
                   </p>
                 </div>
@@ -570,6 +424,130 @@ function BookNewPage() {
               </div>
             </div>
           </section>
+          <nav className="kb-page-nav kb-wrap" aria-label="תוכן העניינים בעמוד">
+            <strong>בעמוד הזה</strong>
+            <a href="#kb-sample">קטע לקריאה</a>
+            <a href="#kb-order">מחיר והזמנה</a>
+            <a href="#kb-contents">פרטי הספר</a>
+            <a href="#kb-author">על הרב עמיחי</a>
+            <a href="#kb-trust">ברכות הרבנים</a>
+            <a href="#kb-faq">שאלות ותשובות</a>
+          </nav>
+          <section
+            id="kb-contents"
+            className="kb-contents"
+            aria-labelledby="kb-contents-title"
+          >
+            <div className="kb-wrap">
+              <div className="kb-section-heading">
+                <p className="kb-kicker">מה יש בספר</p>
+                <h2 id="kb-contents-title">פרטי הספר</h2>
+                <p>
+                  הסיפורים נעים בין הבית והעבודה, השירות הצבאי והטיול בחו״ל. בכל
+                  אחד מהם הנחת התפילין מקבלת מקום בתוך חייו של אדם מסוים.
+                </p>
+              </div>
+              <dl className="kb-book-facts">
+                <div>
+                  <dt>מספר עמודים</dt>
+                  <dd>184</dd>
+                </div>
+                <div>
+                  <dt>כריכה</dt>
+                  <dd>רכה</dd>
+                </div>
+                <div>
+                  <dt>שפה</dt>
+                  <dd>עברית</dd>
+                </div>
+                <div>
+                  <dt>כתיבה</dt>
+                  <dd>שמעון חי בן־שחר והרב עמיחי איל</dd>
+                </div>
+              </dl>
+            </div>
+          </section>
+
+          <section
+            id="kb-author"
+            className="kb-author kb-wrap"
+            aria-labelledby="kb-author-title"
+          >
+            <img
+              src="/wp/img/עמיחי-פרופיל-ערוך-min.webp"
+              alt="הרב עמיחי איל"
+              width="932"
+              height="1400"
+              loading="lazy"
+            />
+            <div>
+              <p className="kb-kicker">האיש ששמע את הסיפורים</p>
+              <h2 id="kb-author-title">נעים להכיר, הרב עמיחי איל</h2>
+              <p>
+                הרב עמיחי איל, תושב בית אל, הקים ומנהל את מיזם ״קשר של תפילין״,
+                עסק בהוראה בישיבות ובניהול ארגון ״נהורא״. לאורך השנים הוא שמע
+                מאות סיפורים מאנשים שהתחילו להניח תפילין.
+              </p>
+              <p>
+                23 מהם מגיעים עכשיו לספר — כולל סיפורי מלחמה, אובדן והתמודדויות
+                משפחתיות.
+              </p>
+              <a
+                className="kb-text-link"
+                href="https://www.youtube.com/watch?v=aQYiyBfycrc"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                לראיון עם הרב עמיחי על המיזם בערוץ 7 ↗
+              </a>
+              <p className="kb-small">כתיבה: שמעון חי בן־שחר והרב עמיחי איל</p>
+            </div>
+          </section>
+          <section id="kb-trust" className="kb-trust" aria-labelledby="kb-trust-title">
+            <div className="kb-wrap">
+              <p className="kb-kicker">המיזם שמאחורי הספר</p>
+              <h2 id="kb-trust-title">ברכות הרבנים למיזם ״קשר של תפילין״</h2>
+              <p className="kb-trust-note">
+                המכתבים ניתנו למיזם ולפעילותו. הם אינם ביקורות על הספר.
+              </p>
+              <div className="kb-rabbis">
+                {letters.map((rabbi) => (
+                  <a
+                    key={rabbi.name}
+                    href={rabbi.letter}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src={rabbi.image}
+                      alt=""
+                      width="76"
+                      height="76"
+                      loading="lazy"
+                    />
+                    <div>
+                      <h3>{rabbi.name}</h3>
+                      <span>לקריאת מכתב הברכה ↗</span>
+                    </div>
+                  </a>
+                ))}
+              </div>
+              <div className="kb-trust-links">
+                <a
+                  href="https://www.youtube.com/watch?v=aQYiyBfycrc"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  הראיון עם הרב עמיחי בערוץ 7 ↗
+                </a>
+                <a href="/in-news">
+                  כתבות על המיזם בתקשורת{" "}
+                  <ArrowLeft size={15} aria-hidden="true" />
+                </a>
+              </div>
+            </div>
+          </section>
+
           <section
             id="kb-faq"
             className="kb-faq kb-wrap"
@@ -584,19 +562,15 @@ function BookNewPage() {
               ],
               [
                 "הסיפורים מבוססים על אנשים אמיתיים?",
-                "הסיפורים מבוססים על סיפורים שהגיעו לעמיחי במסגרת המיזם ונכתבו לספר. חלק מהשמות והפרטים המזהים שונו כדי לשמור על פרטיות המספרים.",
+                "הסיפורים מבוססים על סיפורים שהגיעו להרב עמיחי במסגרת המיזם ונכתבו לספר. חלק מהשמות והפרטים המזהים שונו כדי לשמור על פרטיות המספרים.",
               ],
               [
-                "אפשר לתת את הספר לנער בר מצווה?",
-                "אפשר לשלב אותו במתנה ולבחור סיפורים לקריאה משותפת. מומלץ שהורה או מחנך יעיינו קודם, משום שבחלק מהסיפורים יש תיאורי מלחמה והתמודדויות שאינם מתאימים לכל גיל.",
-              ],
-              [
-                "איך מקבלים הקדשה אישית?",
-                "הקדשה אישית מעמיחי כלולה במארז של שני עותקים או שלושה עותקים. כשמתאמים את ההזמנה, מציינים למי ההקדשה מיועדת.",
+                "האם הספר מתאים לנער בר מצווה?",
+                "בוודאי. זו מתנה נהדרת לבר מצווה — סיפורים אמיתיים על אנשים שהתחילו להניח תפילין. מומלץ לקרוא את הספר יחד, או שהורה או מחנך יעיינו בו קודם ויבחרו סיפורים לקריאה משותפת, כי בחלק מהסיפורים יש תיאורי מלחמה והתמודדויות שמתאימים יותר לגיל מבוגר.",
               ],
               [
                 "איפה אוספים את הספר?",
-                "האיסוף העצמי הוא מארץ חמדה 33, בית אל, בתיאום עם עמיחי. אין תוספת תשלום לאיסוף. בשלב זה זו נקודת האיסוף המאושרת.",
+                "האיסוף העצמי הוא מארץ חמדה 33, בית אל, בתיאום מראש. אין תוספת תשלום לאיסוף. בשלב זה זו נקודת האיסוף המאושרת.",
               ],
               [
                 "כמה עולה המשלוח ומתי הוא מגיע?",
@@ -604,12 +578,12 @@ function BookNewPage() {
               ],
               [
                 "אפשר להזמין כמות לכיתה או לעובדים?",
-                "כן. שלחו לעמיחי את מספר העותקים, המועד שבו אתם צריכים אותם והאם תרצו הקדשות. המחיר ותנאי האספקה להזמנה קבוצתית ייקבעו בתיאום אישי.",
+                "כן. שלחו להרב עמיחי את מספר העותקים והמועד שבו אתם צריכים אותם. המחיר ותנאי האספקה להזמנה קבוצתית ייקבעו בתיאום אישי.",
               ],
-                [
-                  "אפשר לשלם כבר בעמוד?",
-                  "כן. כפתור הרכישה בסוף העמוד פותח מסך תשלום מאובטח לפי המארז שבחרתם. לאחר הרכישה עמיחי חוזר אליכם לתיאום המשלוח וההקדשה.",
-                ],
+              [
+                "אפשר לשלם כבר בעמוד?",
+                "כן. כפתור הרכישה פותח מסך תשלום מאובטח לפי המארז שבחרתם, והספר נשלח לכתובת שתמלאו — אין צורך בשיחה נוספת.",
+              ],
             ].map(([question, answer]) => (
               <details key={question}>
                 <summary>
@@ -667,7 +641,7 @@ function BookNewPage() {
             </span>
             <small>
               {shippingIncluded
-                ? "כולל משלוח עד הבית · הקדשה אישית מעמיחי"
+                ? "כולל משלוח עד הבית · אחד לכם ואחד לתת"
                 : "איסוף עצמי ללא עלות · משלוח עד הבית 40 ₪"}
             </small>
           </div>

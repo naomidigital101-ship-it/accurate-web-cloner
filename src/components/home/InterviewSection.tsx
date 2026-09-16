@@ -59,7 +59,7 @@ export function InterviewSection() {
         <div className="iv-video">
           <ConsentedYouTube
             src="https://www.youtube.com/embed/aQYiyBfycrc"
-            title='הרב עמיחי אייל מציג את המיזם "קשר של תפילין" - ערוץ 7'
+            title='הרב עמיחי איל מציג את המיזם "קשר של תפילין" - ערוץ 7'
           />
         </div>
       </div>
