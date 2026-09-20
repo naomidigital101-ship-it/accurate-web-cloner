@@ -262,6 +262,45 @@ function BookNewPage() {
             </p>
           </section>
           <section
+            id="kb-audience"
+            className="kb-audience kb-wrap"
+            aria-labelledby="kb-audience-title"
+          >
+            <p className="kb-kicker">לפני שבוחרים עותק</p>
+            <h2 id="kb-audience-title">למי הספר מתאים?</h2>
+            <p className="kb-section-lead">
+              הספר נכתב לקוראים שרוצים לפגוש את מצוות התפילין דרך האנשים שבחרו
+              להכניס אותה לחייהם, בלי צורך בידע מוקדם.
+            </p>
+            <div className="kb-audience-grid">
+              <article>
+                <span>לקריאה אישית</span>
+                <h3>למי שאוהב סיפורים אמיתיים</h3>
+                <p>
+                  כל פרק מביא אדם אחר, נסיבות אחרות והשאלות שעלו בדרך להנחת
+                  תפילין. אפשר לקרוא סיפור אחד בכל פעם או להמשיך ברצף.
+                </p>
+              </article>
+              <article>
+                <span>לתחילתו של קשר</span>
+                <h3>למי שמתחיל להניח תפילין או חוזר אליהן</h3>
+                <p>
+                  הסיפורים נותנים מקום גם להחלטה עצמה וגם למה שמסביבה: המשפחה,
+                  השגרה, החששות והשיחות שמלוות את השינוי.
+                </p>
+              </article>
+              <article>
+                <span>כמתנה או לקריאה משותפת</span>
+                <h3>להורים, למחנכים ולאדם קרוב</h3>
+                <p>
+                  אפשר לתת את הספר לקראת בר מצווה, לקרוא ממנו יחד או להשתמש
+                  בסיפור כפתיחה לשיחה. חלק מהסיפורים עוסקים במלחמה ובאובדן, ולכן
+                  כדאי לבחור מראש מה מתאים לקוראים צעירים.
+                </p>
+              </article>
+            </div>
+          </section>
+          <section
             id="kb-sample"
             className="kb-sample kb-wrap"
             aria-labelledby="kb-sample-title"
