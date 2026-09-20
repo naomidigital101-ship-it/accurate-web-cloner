@@ -28,12 +28,12 @@ export const Route = createFileRoute("/book-new")({
       { property: "og:image:width", content: "1021" },
       { property: "og:image:height", content: "1600" },
       { property: "og:image:type", content: "image/jpeg" },
-      { property: "og:url", content: `${SITE_URL}/book-new` },
+      { property: "og:url", content: `${SITE_URL}/book` },
       { name: "twitter:image", content: `${SITE_URL}/book/kesher-cover.jpeg` },
     ],
     links: [
       { rel: "stylesheet", href: bookCss },
-      { rel: "canonical", href: `${SITE_URL}/book-new` },
+      { rel: "canonical", href: `${SITE_URL}/book` },
     ],
   }),
   component: BookNewPage,
@@ -84,7 +84,7 @@ const letters = [
   },
 ];
 
-function BookNewPage() {
+export function BookNewPage() {
   const [quantity, setQuantity] = useState(2);
   const [delivery, setDelivery] = useState<"pickup" | "shipping">("pickup");
   const bundle = bundles.find((item) => item.quantity === quantity)!;
@@ -123,7 +123,7 @@ function BookNewPage() {
                 bookFormat: "https://schema.org/Paperback",
                 description: "23 סיפורים מהחיים על הנחת תפילין והתחלה של קשר.",
                 image: `${SITE_URL}/book/kesher-cover.jpeg`,
-                url: `${SITE_URL}/book-new`,
+                url: `${SITE_URL}/book`,
               }),
             }}
           />
