@@ -1699,3 +1699,193 @@
     padding: 14px 15px;
   }
 }
+
+/* Progressive disclosure keeps the sales page calm without removing content. */
+.kb .kb-scroll-cue {
+  display: none;
+}
+
+.kb .kb-hero-intro-disclosure {
+  max-width: 540px;
+  margin-top: 16px;
+}
+
+.kb .kb-hero-intro-disclosure > summary {
+  width: fit-content;
+  margin: 0;
+  padding: 5px 0;
+  border: 0;
+  border-bottom: 1px solid #9eb5c7;
+  color: var(--brand);
+  font-size: 14px;
+  font-weight: 700;
+  gap: 12px;
+}
+
+.kb .kb-hero-intro-disclosure > p {
+  margin-top: 12px;
+  color: #454667;
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.kb .kb-hero-intro-disclosure > summary span {
+  transition: transform 0.2s ease;
+}
+
+.kb .kb-hero-intro-disclosure[open] > summary span {
+  transform: rotate(45deg);
+}
+
+.kb .kb-orderinfo-disclosure {
+  max-width: 560px;
+  margin-top: 22px;
+}
+
+.kb .kb-orderinfo-disclosure > summary {
+  width: fit-content;
+  margin: 0;
+  padding: 10px 14px;
+  border: 1px solid #cbdce6;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.75);
+  color: var(--brand);
+  font-size: 14px;
+  font-weight: 700;
+  gap: 18px;
+}
+
+.kb .kb-orderinfo-disclosure > summary span,
+.kb .kb-featured-story > summary > span:last-child,
+.kb .kb-sample-disclosure > summary span {
+  transition: transform 0.2s ease;
+}
+
+.kb .kb-orderinfo-disclosure[open] > summary span,
+.kb .kb-featured-story[open] > summary > span:last-child,
+.kb .kb-sample-disclosure[open] > summary span {
+  transform: rotate(45deg);
+}
+
+.kb .kb-orderinfo-disclosure .kb-orderinfo {
+  margin-top: 10px;
+}
+
+.kb .kb-featured-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.kb .kb-featured-story {
+  border: 1px solid #d5e7f0;
+  border-top: 3px solid var(--e-accent);
+  border-radius: 12px;
+  background: #fff;
+}
+
+.kb .kb-featured-story > summary {
+  min-height: 118px;
+  margin: 0;
+  padding: 22px;
+  border: 0;
+  color: var(--brand);
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.kb .kb-featured-story > summary > span:first-child {
+  display: grid;
+  gap: 8px;
+}
+
+.kb .kb-featured-story > summary strong {
+  font-size: 20px;
+  line-height: 1.45;
+}
+
+.kb .kb-featured-story > summary small {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.kb .kb-featured-story > summary > span:last-child {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border: 1px solid #a9bed0;
+  border-radius: 50%;
+  font-size: 19px;
+  line-height: 1;
+}
+
+.kb .kb-featured-story > p {
+  padding: 0 22px 22px;
+  color: #454667;
+  font-size: 16px;
+}
+
+.kb .kb-sample-disclosure > summary {
+  min-height: 54px;
+  margin: 0;
+  padding: 13px 18px;
+  border: 1px solid var(--brand);
+  border-radius: 10px;
+  background: var(--brand);
+  color: #fff;
+  font-size: 17px;
+  font-weight: 700;
+  align-items: center;
+}
+
+.kb .kb-sample-disclosure > summary span {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.kb .kb-sample-disclosure .kb-paper {
+  margin-top: 16px;
+}
+
+@media (max-width: 680px) {
+  .kb .kb-orderinfo-disclosure {
+    margin-top: 17px;
+  }
+
+  .kb .kb-orderinfo-disclosure > summary {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .kb .kb-orderinfo-disclosure .kb-orderinfo {
+    padding: 13px 14px;
+  }
+
+  .kb .kb-featured-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .kb .kb-featured-story > summary {
+    min-height: 0;
+    padding: 18px;
+  }
+
+  .kb .kb-featured-story > summary strong {
+    font-size: 18px;
+  }
+
+  .kb .kb-featured-story > p {
+    padding: 0 18px 18px;
+  }
+
+  .kb .kb-page-nav {
+    display: none;
+  }
+
+  .kb .kb-sample-disclosure > summary {
+    width: 100%;
+  }
+}
