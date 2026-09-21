@@ -48,7 +48,7 @@ const bundles = [
     quantity: 2,
     title: "שני עותקים",
     price: 143,
-    detail: "משלוח עד הבית כלול",
+    detail: "איסוף עצמי ללא עלות, או משלוח ב־20 ₪",
     badge: "הבחירה המשתלמת",
   },
   {
@@ -69,9 +69,10 @@ function BookOrderPage() {
   const [quantity, setQuantity] = useState(2);
   const [delivery, setDelivery] = useState<"pickup" | "shipping">("pickup");
   const bundle = bundles.find((item) => item.quantity === quantity)!;
-  const shippingIncluded = quantity > 1;
+  const shippingIncluded = quantity === 3;
+  const shippingPrice = quantity === 1 ? 40 : quantity === 2 ? 20 : 0;
   const total =
-    bundle.price + (!shippingIncluded && delivery === "shipping" ? 40 : 0);
+    bundle.price + (delivery === "shipping" ? shippingPrice : 0);
   const purchaseUrl = purchaseLinks[quantity] ?? purchaseLinks[1]!;
 
   const trackCheckout = () => {
@@ -121,8 +122,8 @@ function BookOrderPage() {
                 עברית
               </li>
               <li>
-                <Check size={18} aria-hidden="true" /> משלוח עד הבית כלול משני
-                עותקים
+                <Check size={18} aria-hidden="true" /> משלוח עד הבית כלול במארז
+                שלושה עותקים
               </li>
             </ul>
             <div className="ko-hero-price">
@@ -254,7 +255,7 @@ function BookOrderPage() {
             <div className="ko-section-head">
               <p className="ko-eyebrow">הזמנה ישירה</p>
               <h2 id="ko-order-title">בחרו את המארז שלכם</h2>
-              <p>שני עותקים ומעלה נשלחים עד הבית ללא תוספת תשלום.</p>
+              <p>משלוח ב־40 ₪ לעותק אחד, ב־20 ₪ לזוג וכלול במחיר השלישייה.</p>
             </div>
             <fieldset className="ko-bundles">
               <legend className="ko-sr-only">בחירת מספר עותקים</legend>
@@ -289,9 +290,8 @@ function BookOrderPage() {
               ))}
             </fieldset>
 
-            {quantity === 1 && (
               <fieldset className="ko-delivery">
-                <legend>איך תרצו לקבל את הספר?</legend>
+                <legend>חישוב מחיר לפי אופן קבלת הספר</legend>
                 <label>
                   <input
                     type="radio"
@@ -308,19 +308,17 @@ function BookOrderPage() {
                     checked={delivery === "shipping"}
                     onChange={() => setDelivery("shipping")}
                   />{" "}
-                  משלוח עד הבית · 40 ₪
+                  משלוח עד הבית · {shippingIncluded ? "כלול במחיר" : `${shippingPrice} ₪`}
                 </label>
               </fieldset>
-            )}
+            <p>במסך התשלום בוחרים משלוח או איסוף עצמי וממלאים את פרטי ההזמנה.</p>
 
             <div className="ko-checkout">
               <div>
                 <span>סה״כ לתשלום</span>
                 <strong>{total} ₪</strong>
                 <small>
-                  {shippingIncluded
-                    ? "משלוח עד הבית כלול"
-                    : delivery === "shipping"
+                  {delivery === "shipping"
                       ? "כולל משלוח עד הבית"
                       : "איסוף עצמי בתיאום מראש"}
                 </small>
@@ -434,9 +432,7 @@ function BookOrderPage() {
             {bundle.title} · {total} ₪
           </strong>
           <small>
-            {shippingIncluded
-              ? "המשלוח כלול"
-              : delivery === "shipping"
+            {delivery === "shipping"
                 ? "כולל משלוח"
                 : "איסוף עצמי"}
           </small>

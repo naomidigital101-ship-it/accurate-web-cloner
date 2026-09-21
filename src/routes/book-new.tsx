@@ -50,7 +50,7 @@ const bundles = [
     quantity: 2,
     title: "שני עותקים",
     price: 143,
-    detail: "משלוח עד הבית כלול",
+    detail: "איסוף עצמי ללא עלות, או משלוח ב־20 ₪",
   },
   {
     quantity: 3,
@@ -88,9 +88,10 @@ export function BookNewPage() {
   const [quantity, setQuantity] = useState(2);
   const [delivery, setDelivery] = useState<"pickup" | "shipping">("pickup");
   const bundle = bundles.find((item) => item.quantity === quantity)!;
-  const shippingIncluded = quantity > 1;
+  const shippingIncluded = quantity === 3;
+  const shippingPrice = quantity === 1 ? 40 : quantity === 2 ? 20 : 0;
   const total =
-    bundle.price + (!shippingIncluded && delivery === "shipping" ? 40 : 0);
+    bundle.price + (delivery === "shipping" ? shippingPrice : 0);
   // קישורי רכישה אמיתיים לפי המארז — זהים לאזור הרכישה בעמוד הבית.
   const purchaseLinks: Record<number, string> = {
     1: "https://pay.grow.link/MTA1NDQ5~49262f78c08b742d6ad21b74b49de3e5-Mzk4OTY3OA",
@@ -141,7 +142,7 @@ export function BookNewPage() {
                 </p>
                 <div className="kb-hero-price">
                   <strong>78 ₪</strong>
-                  <span>לעותק · מארז 2 עותקים ב־143 ₪ כולל משלוח עד הבית</span>
+                  <span>לעותק · מארז 2 עותקים ב־143 ₪, משלוח בתוספת 20 ₪</span>
                 </div>
                 <div className="kb-actions">
                   <a href="#kb-order" className="kb-button">
@@ -170,8 +171,8 @@ export function BookNewPage() {
                     <li>
                       <Truck size={18} aria-hidden="true" />
                       <span>
-                        <strong>משלוח עד הבית · 40 ₪</strong>
-                        עד 5 ספרים באותו משלוח, מגיע תוך עד 8 ימי עסקים
+                        <strong>משלוח עד הבית · עד 8 ימי עסקים</strong>
+                        40 ₪ לעותק אחד, 20 ₪ לזוג, כלול במחיר השלישייה
                       </span>
                     </li>
                     <li>
@@ -317,8 +318,7 @@ export function BookNewPage() {
                 <p className="kb-kicker">לרגל הוצאת הספר</p>
                 <h2 id="kb-order-title">בחרו כמה עותקים להזמין</h2>
                 <p>
-                  מארז של שני עותקים ומעלה כולל משלוח עד הבית — אחד לכם ואחד
-                  לתת.
+                  משלוח ב־40 ₪ לעותק אחד, ב־20 ₪ לזוג וכלול במחיר השלישייה.
                 </p>
               </div>
               <fieldset className="kb-bundles">
@@ -354,9 +354,8 @@ export function BookNewPage() {
               </fieldset>
               <div className="kb-order-bottom">
                 <div className="kb-delivery">
-                  {quantity === 1 ? (
                     <fieldset>
-                      <legend>איך תרצו לקבל את הספר?</legend>
+                      <legend>חישוב מחיר לפי אופן קבלת הספר</legend>
                       <div className="kb-delivery-options">
                         <label>
                           <input
@@ -376,7 +375,7 @@ export function BookNewPage() {
                             onChange={() => setDelivery("shipping")}
                           />
                           <Truck size={18} aria-hidden="true" /> משלוח עד הבית ·
-                          40 ₪
+                          {shippingIncluded ? "כלול במחיר" : `${shippingPrice} ₪`}
                         </label>
                       </div>
                       <p className="kb-delivery-detail" aria-live="polite">
@@ -385,32 +384,19 @@ export function BookNewPage() {
                           : "משלוח עד הבית: עד 8 ימי עסקים."}
                       </p>
                     </fieldset>
-                  ) : (
-                    <div>
-                      <p className="kb-delivery-included">
-                        <Truck size={18} aria-hidden="true" /> משלוח עד הבית
-                        כלול במחיר המארז
-                      </p>
-                      <p className="kb-delivery-detail" aria-live="polite">
-                        משלוח עד הבית: עד 8 ימי עסקים.
-                        <br />
-                        איסוף עצמי: ארץ חמדה 33, בית אל, בתיאום מראש.
-                      </p>
-                    </div>
-                  )}
                 </div>
                 <div className="kb-total">
                   <div aria-live="polite">
                     <span>
                       סה״כ
-                      {quantity === 1 && delivery === "shipping"
+                      {delivery === "shipping"
                         ? ", כולל משלוח"
                         : ""}
                     </span>
                     <strong>{total} ₪</strong>
                   </div>
                   <p>
-                    לאחר בחירת המארז תוכלו להמשיך למסך התשלום.
+                    במסך התשלום בוחרים משלוח או איסוף עצמי וממלאים את פרטי ההזמנה.
                   </p>
                   <a
                     href={purchaseUrl}
@@ -594,7 +580,7 @@ export function BookNewPage() {
               ],
               [
                 "כמה עולה המשלוח ומתי הוא מגיע?",
-                "משלוח עד הבית עולה 40 ש״ח עבור עד חמישה ספרים, בנוסף למחיר הספרים. זמן האספקה הוא עד שמונה ימי עסקים. להזמנה גדולה יותר מתאמים מראש את אופן המשלוח והעלות.",
+                "משלוח עד הבית עולה 40 ₪ לעותק אחד ו־20 ₪ לזוג עותקים. במארז של שלושה עותקים המשלוח כלול במחיר. זמן האספקה הוא עד שמונה ימי עסקים. איסוף עצמי מבית אל הוא ללא תוספת תשלום. את אופן הקבלה בוחרים במסך התשלום. להזמנה גדולה יותר מתאמים מראש את אופן המשלוח והעלות.",
               ],
               [
                 "אפשר להזמין כמות לכיתה או לעובדים?",
@@ -660,9 +646,9 @@ export function BookNewPage() {
               {bundle.title} · {total} ₪
             </span>
             <small>
-              {shippingIncluded
-                ? "כולל משלוח עד הבית · אחד לכם ואחד לתת"
-                : "איסוף עצמי ללא עלות · משלוח עד הבית 40 ₪"}
+              {delivery === "shipping"
+                ? "כולל משלוח עד הבית"
+                : "איסוף עצמי ללא עלות"}
             </small>
           </div>
           <a className="kb-button" href="#kb-order">
