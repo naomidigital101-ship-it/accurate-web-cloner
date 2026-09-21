@@ -336,7 +336,7 @@ export function BookNewPage() {
                       onChange={() => setQuantity(item.quantity)}
                     />
                     {item.quantity === 2 && (
-                      <span className="kb-bundle-badge">עותק בשבילכם, עותק למתנה</span>
+                      <span className="kb-bundle-badge">הבחירה המומלצת</span>
                     )}
                     <div className="kb-bundle-top">
                       <h3>{item.title}</h3>
@@ -349,6 +349,7 @@ export function BookNewPage() {
                       <small> ₪</small>
                     </strong>
                     <p>{delivery === "shipping" ? "מחיר סופי כולל משלוח עד הבית" : "מחיר סופי באיסוף עצמי"}</p>
+                    <p>{item.quantity === 3 ? "משלוח עד הבית כלול במחיר" : `משלוח עד הבית: ${item.quantity === 1 ? 40 : 20} ₪`}</p>
                     {item.quantity === 2 && (
                       <div className="kb-bundle-saving">
                         <span><s>{156 + (delivery === "shipping" ? 20 : 0)} ₪</s> <b>חוסכים 13 ₪ על הספרים</b></span>
