@@ -25,11 +25,13 @@ function Orders() {
     const interval = setInterval(() => { if (!document.hidden) void refresh(); }, 15000);
     return () => clearInterval(interval);
   }, [refresh]);
-  return <section dir="rtl">
+  return <section dir="rtl" style={{ lineHeight: 1.8 }}>
+    <header className="adm-head">
     <h1>רכישות ותשלומים</h1>
     <p>תשלומים שהתקבלו מ־Grow. הרשימה מתעדכנת אוטומטית כל 15 שניות. סטטוס הטיפול מתייחס להכנת ההזמנה ואספקתה.</p>
+    </header>
     <p>החיבור מתעד רכישות חדשות ממועד הפעלתו; עסקאות קודמות והחזרים אינם מיובאים אוטומטית.</p>
-    <button type="button" onClick={() => void refresh()}>רענון רכישות</button>
+    <button type="button" style={{ padding: "8px 20px", border: "1px solid #2d2e83", borderRadius: 8, color: "#2d2e83", minHeight: 44 }} onClick={() => void refresh()}>רענון רכישות</button>
     <p aria-live="polite">{loading ? "טוען רכישות…" : `${count} תשלומים התקבלו`}</p>
     {last && <p>דיווח אחרון התקבל: {new Date(last).toLocaleString("he-IL", { timeZone: "Asia/Jerusalem" })}</p>}
     {error && <p role="alert">{error}</p>}
@@ -44,7 +46,7 @@ function Orders() {
         <p>טלפון: <bdi>{order.phone || "לא נמסר"}</bdi> · מייל: <bdi>{order.email || "לא נמסר"}</bdi></p>
         <p>כתובת: {order.address || "לא נמסרה"}</p>
         <p><strong>{order.shipping_method || "אופן קבלה לא נמסר"}</strong> · דמי משלוח: {order.shipping_agorot === null ? "לא נמסרו בנפרד" : money(order.shipping_agorot)} (כלולים בסכום ששולם)</p>
-        <label>טיפול בהזמנה <select value={order.fulfillment} disabled={saving === order.id} onChange={async e => {
+        <label>טיפול בהזמנה <select style={{ border: "1px solid #d5dce8", borderRadius: 8, padding: "8px 12px", minHeight: 44, marginInlineStart: 8 }} value={order.fulfillment} disabled={saving === order.id} onChange={async e => {
           const fulfillment = e.target.value as BookOrder["fulfillment"];
           setSaving(order.id);
           try { await updateOrder({ data: { accessToken: await getAccessToken() ?? undefined, id: order.id, fulfillment } }); await refresh(); }
