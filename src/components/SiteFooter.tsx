@@ -85,7 +85,7 @@ export function SiteFooter({ en = false }: { en?: boolean } = {}) {
           </>
         ) : (
           <>
-            <li><b>מעל {pairs}</b><span>זוגות תפילין חולקו</span></li>
+            <li><b>{pairs}</b><span>זוגות תפילין חולקו</span></li>
             <li><b>{rabbisCount}</b><span>הסכמות מגדולי הרבנים</span></li>
             <li><b>כל הארץ</b><span>איסוף, חידוש ומסירה</span></li>
           </>
