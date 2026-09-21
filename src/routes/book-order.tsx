@@ -90,10 +90,10 @@ function BookOrderPage() {
       </a>
       <header className="ko-header" aria-label="קשר של תפילין">
         <img
-          src="/wp/img/אור-חדש-לוגו-01.svg"
+          src="/wp/img/לוגו-קשר-של-תפילין-01.svg"
           alt="קשר של תפילין"
-          width="168"
-          height="64"
+          width="100"
+          height="100"
         />
         <div>
           <ShieldCheck size={18} aria-hidden="true" /> תשלום מאובטח

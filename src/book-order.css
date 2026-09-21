@@ -1,16 +1,47 @@
+@font-face {
+  font-family: "Kesher Maadim";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/book/fonts/Maadim-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Kesher Maadim";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/book/fonts/Maadim-SemiBold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Kesher Maadim";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/book/fonts/Maadim-Bold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Kesher Maadim";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("/book/fonts/Maadim-Black.woff2") format("woff2");
+}
+
 .ko {
-  --ko-ink: #171347;
-  --ko-muted: #625f76;
-  --ko-paper: #fffdf8;
-  --ko-soft: #edf8f5;
-  --ko-mint: #5ce9c3;
-  --ko-mint-dark: #087760;
-  --ko-line: #dedbea;
+  --ko-ink: #060633;
+  --ko-muted: #50517a;
+  --ko-paper: #ffffff;
+  --ko-soft: #eefcff;
+  --ko-mint: #67ffd1;
+  --ko-mint-dark: #147d70;
+  --ko-blue: #009fe3;
+  --ko-brand: #2d2e83;
+  --ko-line: #dfe5ef;
   min-height: 100vh;
   overflow-x: hidden;
   background: var(--ko-paper);
   color: var(--ko-ink);
-  font-family: Heebo, Arial, sans-serif;
+  font-family: "Kesher Maadim", "Maadim", Arial, sans-serif;
 }
 
 .ko *,
@@ -27,7 +58,8 @@
 .ko h1,
 .ko h2,
 .ko h3 {
-  font-family: "Frank Ruhl Libre", Heebo, serif;
+  font-family: "Kesher Maadim", "Maadim", Arial, sans-serif;
+  font-weight: 700;
 }
 .ko-wrap {
   width: min(1160px, calc(100% - 40px));
@@ -53,17 +85,19 @@
 }
 
 .ko-header {
-  height: 78px;
+  height: 92px;
   padding-inline: max(22px, calc((100vw - 1160px) / 2));
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(23, 19, 71, 0.09);
-  background: rgba(255, 253, 248, 0.94);
+  border-bottom: 1px solid rgba(45, 46, 131, 0.1);
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
 }
 .ko-header img {
-  width: 142px;
-  height: auto;
+  width: 78px;
+  height: 78px;
+  object-fit: contain;
 }
 .ko-header div {
   display: flex;
@@ -74,12 +108,12 @@
 }
 
 .ko-hero {
-  min-height: calc(100vh - 78px);
+  min-height: calc(100vh - 92px);
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
   align-items: center;
-  gap: 80px;
-  padding-block: 58px 70px;
+  gap: 88px;
+  padding-block: 72px 82px;
 }
 .ko-hero-copy {
   max-width: 630px;
@@ -99,7 +133,7 @@
 .ko-lead {
   max-width: 590px;
   margin-bottom: 23px;
-  color: #3e3a59;
+  color: #373864;
   font-size: 21px;
   line-height: 1.7;
 }
@@ -141,7 +175,7 @@
   gap: 10px;
   padding: 13px 24px;
   border: 1px solid var(--ko-mint-dark);
-  border-radius: 9px;
+  border-radius: 20px;
   background: var(--ko-mint);
   color: #092d27;
   font-weight: 800;
@@ -154,7 +188,7 @@
 }
 .ko-button:hover {
   transform: translateY(-2px);
-  background: #70f0cf;
+  background: #7effda;
   box-shadow: 0 14px 30px rgba(8, 119, 96, 0.18);
 }
 .ko-cover {
@@ -169,7 +203,7 @@
   aspect-ratio: 1;
   top: 13%;
   border-radius: 50%;
-  background: #d8f5ed;
+  background: linear-gradient(145deg, rgba(103, 255, 209, 0.34), rgba(0, 159, 227, 0.18));
   filter: blur(2px);
 }
 .ko-cover img {
@@ -213,7 +247,7 @@
 }
 
 .ko-section {
-  padding-block: 104px;
+  padding-block: 112px;
 }
 .ko-section > h2,
 .ko-section-head h2,
@@ -246,7 +280,7 @@
 }
 
 .ko-stories {
-  padding-block: 100px;
+  padding-block: 108px;
   background: var(--ko-ink);
   color: #fff;
 }
@@ -261,7 +295,7 @@
 .ko-story-grid article {
   padding: 34px;
   border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 16px;
+  border-radius: 20px;
   background: rgba(255, 255, 255, 0.06);
 }
 .ko-story-grid svg {
@@ -301,7 +335,7 @@
   max-height: 520px;
   object-fit: cover;
   object-position: 50% 22%;
-  border-radius: 18px;
+  border-radius: 20px;
 }
 .ko-author h2 {
   margin-bottom: 20px;
@@ -321,8 +355,8 @@
 }
 
 .ko-order {
-  padding-block: 100px;
-  background: #effaf7;
+  padding-block: 108px;
+  background: linear-gradient(180deg, #eefcff 0%, #f5fffc 100%);
 }
 .ko-order .ko-section-head {
   text-align: center;
@@ -349,7 +383,7 @@
   min-height: 230px;
   padding: 27px;
   border: 1px solid #c8dfd8;
-  border-radius: 14px;
+  border-radius: 20px;
   background: #fff;
   cursor: pointer;
   transition:
@@ -423,7 +457,7 @@
   margin: 24px auto 0;
   padding: 19px;
   border: 1px solid #c8dfd8;
-  border-radius: 12px;
+  border-radius: 20px;
   background: white;
 }
 .ko-delivery legend {
@@ -441,7 +475,7 @@
   max-width: 970px;
   margin: 24px auto 0;
   padding: 26px 30px;
-  border-radius: 15px;
+  border-radius: 20px;
   background: var(--ko-ink);
   color: #fff;
 }
@@ -515,8 +549,8 @@
 }
 
 .ko-final {
-  padding-block: 70px;
-  background: #f1eee8;
+  padding-block: 78px;
+  background: #eefcff;
 }
 .ko-final .ko-wrap {
   display: grid;
@@ -543,7 +577,7 @@
   justify-content: center;
   gap: 30px;
   padding: 25px 20px 95px;
-  background: #171347;
+  background: var(--ko-ink);
   color: #c9c5d8;
   font-size: 13px;
 }
@@ -574,11 +608,12 @@
     width: min(100% - 32px, 620px);
   }
   .ko-header {
-    height: 66px;
+    height: 72px;
     padding-inline: 16px;
   }
   .ko-header img {
-    width: 118px;
+    width: 62px;
+    height: 62px;
   }
   .ko-header div {
     font-size: 12px;
@@ -587,7 +622,7 @@
     min-height: auto;
     grid-template-columns: 1fr;
     gap: 38px;
-    padding-block: 42px 50px;
+    padding-block: 48px 58px;
   }
   .ko h1 {
     font-size: 42px;
