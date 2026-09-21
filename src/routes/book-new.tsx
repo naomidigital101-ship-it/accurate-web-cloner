@@ -219,49 +219,6 @@ export function BookNewPage() {
             </dl>
           </div>
           <section
-            className="kb-featured kb-wrap"
-            aria-labelledby="kb-featured-title"
-            id="kb-featured"
-          >
-            <p className="kb-kicker">שניים מהסיפורים שבספר</p>
-            <h2 id="kb-featured-title">מה תפגשו בין העמודים?</h2>
-            <p>
-              מאחורי כל בקשה לתפילין יש אדם וסיפור. לפעמים ההחלטה מגיעה בעקבות אירוע מטלטל, ולפעמים היא מתגבשת בתוך חיי היומיום.
-            </p>
-            <p>
-              הספר מביא את הסיפורים שהגיעו לרב עמיחי איל במסגרת מיזם ״קשר של תפילין״: מה עבר על האנשים שפנו אליו, מה גרם להם לרצות להניח תפילין ואילו שאלות ליוו אותם בדרך.
-            </p>
-            <div className="kb-featured-grid">
-              <details className="kb-featured-story">
-                <summary>
-                  <span>
-                    <strong>ההבטחה שנעם לקח איתו מהנובה</strong>
-                    <small>מתוך ״לא השאיר לי ברירה״</small>
-                  </span>
-                  <span aria-hidden="true">+</span>
-                </summary>
-                <p>
-                  ברגעי הסכנה נעם הבטיח שאם יֵצא בחיים, יתחיל להניח תפילין. הוא ניצל, אבל גם כשחזר לשגרה ההבטחה נשארה איתו. הסיפור ״לא השאיר לי ברירה״ מתאר את הדרך שעבר עד שפנה לרב עמיחי.
-                </p>
-              </details>
-              <details className="kb-featured-story">
-                <summary>
-                  <span>
-                    <strong>ההחלטה להתחיל להניח תפילין בברלין</strong>
-                    <small>מתוך ״יותר טוב מאספרסו״</small>
-                  </span>
-                  <span aria-hidden="true">+</span>
-                </summary>
-                <p>
-                  ישראלי שחי בברלין מחליט להכניס את הנחת התפילין לשגרת הבוקר שלו. אביו חושש מהשינוי, והוא מנסה למצוא דרך לקיים את הבחירה שלו ולשמור על הקִרבה ביניהם. זהו הסיפור ״יותר טוב מאספרסו״.
-                </p>
-              </details>
-            </div>
-            <p className="kb-small">
-              חלק מהשמות והפרטים המזהים שונו בספר כדי לשמור על פרטיות המספרים.
-            </p>
-          </section>
-          <section
             id="kb-audience"
             className="kb-audience kb-wrap"
             aria-labelledby="kb-audience-title"
