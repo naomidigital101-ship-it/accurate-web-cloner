@@ -25,7 +25,6 @@ import { Route as CertificatesRouteImport } from './routes/certificates'
 import { Route as BrandingRouteImport } from './routes/branding'
 import { Route as BookOrderRouteImport } from './routes/book-order'
 import { Route as BookNewRouteImport } from './routes/book-new'
-import { Route as BookRouteImport } from './routes/book'
 import { Route as AgreementsRouteImport } from './routes/agreements'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AccessibilityRouteImport } from './routes/accessibility'
@@ -140,11 +139,6 @@ const BookOrderRoute = BookOrderRouteImport.update({
 const BookNewRoute = BookNewRouteImport.update({
   id: '/book-new',
   path: '/book-new',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BookRoute = BookRouteImport.update({
-  id: '/book',
-  path: '/book',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AgreementsRoute = AgreementsRouteImport.update({
@@ -315,7 +309,6 @@ export interface FileRoutesByFullPath {
   '/accessibility': typeof AccessibilityRoute
   '/admin': typeof AdminRouteWithChildren
   '/agreements': typeof AgreementsRoute
-  '/book': typeof BookRoute
   '/book-new': typeof BookNewRoute
   '/book-order': typeof BookOrderRoute
   '/branding': typeof BrandingRoute
@@ -365,7 +358,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/accessibility': typeof AccessibilityRoute
   '/agreements': typeof AgreementsRoute
-  '/book': typeof BookRoute
   '/book-new': typeof BookNewRoute
   '/book-order': typeof BookOrderRoute
   '/branding': typeof BrandingRoute
@@ -416,7 +408,6 @@ export interface FileRoutesById {
   '/accessibility': typeof AccessibilityRoute
   '/admin': typeof AdminRouteWithChildren
   '/agreements': typeof AgreementsRoute
-  '/book': typeof BookRoute
   '/book-new': typeof BookNewRoute
   '/book-order': typeof BookOrderRoute
   '/branding': typeof BrandingRoute
@@ -469,7 +460,6 @@ export interface FileRouteTypes {
     | '/accessibility'
     | '/admin'
     | '/agreements'
-    | '/book'
     | '/book-new'
     | '/book-order'
     | '/branding'
@@ -519,7 +509,6 @@ export interface FileRouteTypes {
     | '/'
     | '/accessibility'
     | '/agreements'
-    | '/book'
     | '/book-new'
     | '/book-order'
     | '/branding'
@@ -569,7 +558,6 @@ export interface FileRouteTypes {
     | '/accessibility'
     | '/admin'
     | '/agreements'
-    | '/book'
     | '/book-new'
     | '/book-order'
     | '/branding'
@@ -621,7 +609,6 @@ export interface RootRouteChildren {
   AccessibilityRoute: typeof AccessibilityRoute
   AdminRoute: typeof AdminRouteWithChildren
   AgreementsRoute: typeof AgreementsRoute
-  BookRoute: typeof BookRoute
   BookNewRoute: typeof BookNewRoute
   BookOrderRoute: typeof BookOrderRoute
   BrandingRoute: typeof BrandingRoute
@@ -753,13 +740,6 @@ declare module '@tanstack/react-router' {
       path: '/book-new'
       fullPath: '/book-new'
       preLoaderRoute: typeof BookNewRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/book': {
-      id: '/book'
-      path: '/book'
-      fullPath: '/book'
-      preLoaderRoute: typeof BookRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/agreements': {
@@ -1064,7 +1044,6 @@ const rootRouteChildren: RootRouteChildren = {
   AccessibilityRoute: AccessibilityRoute,
   AdminRoute: AdminRouteWithChildren,
   AgreementsRoute: AgreementsRoute,
-  BookRoute: BookRoute,
   BookNewRoute: BookNewRoute,
   BookOrderRoute: BookOrderRoute,
   BrandingRoute: BrandingRoute,

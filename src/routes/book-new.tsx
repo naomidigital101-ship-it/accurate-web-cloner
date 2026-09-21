@@ -15,7 +15,7 @@ export const Route = createFileRoute("/book-new")({
         content:
           "23 סיפורים מהחיים על הנחת תפילין והתחלה של קשר. הכירו את הספר של הרב עמיחי איל וקראו קטע מתוכו.",
       },
-      { name: "robots", content: "noindex, nofollow" },
+      { name: "robots", content: "index, follow" },
       {
         property: "og:title",
         content: "קשר של תפילין — הספר של הרב עמיחי איל",
@@ -28,12 +28,12 @@ export const Route = createFileRoute("/book-new")({
       { property: "og:image:width", content: "1021" },
       { property: "og:image:height", content: "1600" },
       { property: "og:image:type", content: "image/jpeg" },
-      { property: "og:url", content: `${SITE_URL}/book` },
+      { property: "og:url", content: `${SITE_URL}/book-new` },
       { name: "twitter:image", content: `${SITE_URL}/book/kesher-cover.jpeg` },
     ],
     links: [
       { rel: "stylesheet", href: bookCss },
-      { rel: "canonical", href: `${SITE_URL}/book` },
+      { rel: "canonical", href: `${SITE_URL}/book-new` },
     ],
   }),
   component: BookNewPage,
