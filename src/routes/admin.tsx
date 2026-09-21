@@ -16,6 +16,7 @@ type Staff = { id: string; email: string | null; roles: string[]; isAdmin: boole
 const NAV = [
   { to: "/admin", label: "סקירה", exact: true },
   { to: "/admin/leads", label: "פניות" },
+  { to: "/admin/orders", label: "רכישות ותשלומים" },
   { to: "/admin/stories", label: "סיפורים" },
   { to: "/admin/rabbis", label: "הסכמות רבנים" },
   { to: "/admin/press", label: "כתבות בתקשורת" },

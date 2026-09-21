@@ -43,12 +43,14 @@ import { Route as EnRabbisAgreementsRouteImport } from './routes/en.rabbis-agree
 import { Route as EnPrivacyRouteImport } from './routes/en.privacy'
 import { Route as EnArticlesInTheMediaRouteImport } from './routes/en.articles-in-the-media'
 import { Route as EnAccessibilityRouteImport } from './routes/en.accessibility'
+import { Route as ApiGrowWebhookRouteImport } from './routes/api.grow-webhook'
 import { Route as AdminThankYouLettersRouteImport } from './routes/admin.thank-you-letters'
 import { Route as AdminStoriesRouteImport } from './routes/admin.stories'
 import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
 import { Route as AdminServicesRouteImport } from './routes/admin.services'
 import { Route as AdminRabbisRouteImport } from './routes/admin.rabbis'
 import { Route as AdminPressRouteImport } from './routes/admin.press'
+import { Route as AdminOrdersRouteImport } from './routes/admin.orders'
 import { Route as AdminMigrateRouteImport } from './routes/admin.migrate'
 import { Route as AdminMediaRouteImport } from './routes/admin.media'
 import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
@@ -233,6 +235,11 @@ const EnAccessibilityRoute = EnAccessibilityRouteImport.update({
   path: '/accessibility',
   getParentRoute: () => EnRoute,
 } as any)
+const ApiGrowWebhookRoute = ApiGrowWebhookRouteImport.update({
+  id: '/api/grow-webhook',
+  path: '/api/grow-webhook',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminThankYouLettersRoute = AdminThankYouLettersRouteImport.update({
   id: '/thank-you-letters',
   path: '/thank-you-letters',
@@ -261,6 +268,11 @@ const AdminRabbisRoute = AdminRabbisRouteImport.update({
 const AdminPressRoute = AdminPressRouteImport.update({
   id: '/press',
   path: '/press',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminOrdersRoute = AdminOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminMigrateRoute = AdminMigrateRouteImport.update({
@@ -332,12 +344,14 @@ export interface FileRoutesByFullPath {
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/media': typeof AdminMediaRoute
   '/admin/migrate': typeof AdminMigrateRoute
+  '/admin/orders': typeof AdminOrdersRoute
   '/admin/press': typeof AdminPressRoute
   '/admin/rabbis': typeof AdminRabbisRoute
   '/admin/services': typeof AdminServicesRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/stories': typeof AdminStoriesRoute
   '/admin/thank-you-letters': typeof AdminThankYouLettersRoute
+  '/api/grow-webhook': typeof ApiGrowWebhookRoute
   '/en/accessibility': typeof EnAccessibilityRoute
   '/en/articles-in-the-media': typeof EnArticlesInTheMediaRoute
   '/en/privacy': typeof EnPrivacyRoute
@@ -380,12 +394,14 @@ export interface FileRoutesByTo {
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/media': typeof AdminMediaRoute
   '/admin/migrate': typeof AdminMigrateRoute
+  '/admin/orders': typeof AdminOrdersRoute
   '/admin/press': typeof AdminPressRoute
   '/admin/rabbis': typeof AdminRabbisRoute
   '/admin/services': typeof AdminServicesRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/stories': typeof AdminStoriesRoute
   '/admin/thank-you-letters': typeof AdminThankYouLettersRoute
+  '/api/grow-webhook': typeof ApiGrowWebhookRoute
   '/en/accessibility': typeof EnAccessibilityRoute
   '/en/articles-in-the-media': typeof EnArticlesInTheMediaRoute
   '/en/privacy': typeof EnPrivacyRoute
@@ -431,12 +447,14 @@ export interface FileRoutesById {
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/media': typeof AdminMediaRoute
   '/admin/migrate': typeof AdminMigrateRoute
+  '/admin/orders': typeof AdminOrdersRoute
   '/admin/press': typeof AdminPressRoute
   '/admin/rabbis': typeof AdminRabbisRoute
   '/admin/services': typeof AdminServicesRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/stories': typeof AdminStoriesRoute
   '/admin/thank-you-letters': typeof AdminThankYouLettersRoute
+  '/api/grow-webhook': typeof ApiGrowWebhookRoute
   '/en/accessibility': typeof EnAccessibilityRoute
   '/en/articles-in-the-media': typeof EnArticlesInTheMediaRoute
   '/en/privacy': typeof EnPrivacyRoute
@@ -483,12 +501,14 @@ export interface FileRouteTypes {
     | '/admin/leads'
     | '/admin/media'
     | '/admin/migrate'
+    | '/admin/orders'
     | '/admin/press'
     | '/admin/rabbis'
     | '/admin/services'
     | '/admin/settings'
     | '/admin/stories'
     | '/admin/thank-you-letters'
+    | '/api/grow-webhook'
     | '/en/accessibility'
     | '/en/articles-in-the-media'
     | '/en/privacy'
@@ -531,12 +551,14 @@ export interface FileRouteTypes {
     | '/admin/leads'
     | '/admin/media'
     | '/admin/migrate'
+    | '/admin/orders'
     | '/admin/press'
     | '/admin/rabbis'
     | '/admin/services'
     | '/admin/settings'
     | '/admin/stories'
     | '/admin/thank-you-letters'
+    | '/api/grow-webhook'
     | '/en/accessibility'
     | '/en/articles-in-the-media'
     | '/en/privacy'
@@ -581,12 +603,14 @@ export interface FileRouteTypes {
     | '/admin/leads'
     | '/admin/media'
     | '/admin/migrate'
+    | '/admin/orders'
     | '/admin/press'
     | '/admin/rabbis'
     | '/admin/services'
     | '/admin/settings'
     | '/admin/stories'
     | '/admin/thank-you-letters'
+    | '/api/grow-webhook'
     | '/en/accessibility'
     | '/en/articles-in-the-media'
     | '/en/privacy'
@@ -625,6 +649,7 @@ export interface RootRouteChildren {
   StoriesRoute: typeof StoriesRoute
   TermsRoute: typeof TermsRoute
   Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route: typeof Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route
+  ApiGrowWebhookRoute: typeof ApiGrowWebhookRoute
   TefilinSlugRoute: typeof TefilinSlugRoute
 }
 
@@ -868,6 +893,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnAccessibilityRouteImport
       parentRoute: typeof EnRoute
     }
+    '/api/grow-webhook': {
+      id: '/api/grow-webhook'
+      path: '/api/grow-webhook'
+      fullPath: '/api/grow-webhook'
+      preLoaderRoute: typeof ApiGrowWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/thank-you-letters': {
       id: '/admin/thank-you-letters'
       path: '/thank-you-letters'
@@ -908,6 +940,13 @@ declare module '@tanstack/react-router' {
       path: '/press'
       fullPath: '/admin/press'
       preLoaderRoute: typeof AdminPressRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/orders': {
+      id: '/admin/orders'
+      path: '/orders'
+      fullPath: '/admin/orders'
+      preLoaderRoute: typeof AdminOrdersRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/migrate': {
@@ -977,6 +1016,7 @@ interface AdminRouteChildren {
   AdminLeadsRoute: typeof AdminLeadsRoute
   AdminMediaRoute: typeof AdminMediaRoute
   AdminMigrateRoute: typeof AdminMigrateRoute
+  AdminOrdersRoute: typeof AdminOrdersRoute
   AdminPressRoute: typeof AdminPressRoute
   AdminRabbisRoute: typeof AdminRabbisRoute
   AdminServicesRoute: typeof AdminServicesRoute
@@ -994,6 +1034,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminLeadsRoute: AdminLeadsRoute,
   AdminMediaRoute: AdminMediaRoute,
   AdminMigrateRoute: AdminMigrateRoute,
+  AdminOrdersRoute: AdminOrdersRoute,
   AdminPressRoute: AdminPressRoute,
   AdminRabbisRoute: AdminRabbisRoute,
   AdminServicesRoute: AdminServicesRoute,
@@ -1061,6 +1102,7 @@ const rootRouteChildren: RootRouteChildren = {
   TermsRoute: TermsRoute,
   Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route:
     Char1502Char1499Char1514Char1489Char1497Char1514Char1493Char1491Char1492Route,
+  ApiGrowWebhookRoute: ApiGrowWebhookRoute,
   TefilinSlugRoute: TefilinSlugRoute,
 }
 export const routeTree = rootRouteImport
