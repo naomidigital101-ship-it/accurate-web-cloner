@@ -347,7 +347,7 @@
 .kb details summary::-webkit-details-marker {
   display: none;
 }
-.kb details[open] summary span {
+.kb details[open] summary > span:last-child {
   transform: rotate(45deg);
 }
 .kb-about {
