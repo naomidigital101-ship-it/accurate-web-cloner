@@ -325,7 +325,7 @@ export function BookNewPage() {
                 <legend className="kb-sr-only">בחירת מספר עותקים</legend>
                 {bundles.map((item) => (
                   <label
-                    className={`kb-bundle ${quantity === item.quantity ? "is-selected" : ""}`}
+                    className={`kb-bundle ${item.quantity === 2 ? "kb-bundle-recommended" : ""} ${quantity === item.quantity ? "is-selected" : ""}`}
                     key={item.quantity}
                   >
                     <input
@@ -335,6 +335,9 @@ export function BookNewPage() {
                       checked={quantity === item.quantity}
                       onChange={() => setQuantity(item.quantity)}
                     />
+                    {item.quantity === 2 && (
+                      <span className="kb-bundle-badge">עותק בשבילכם, עותק למתנה</span>
+                    )}
                     <div className="kb-bundle-top">
                       <h3>{item.title}</h3>
                       <span className="kb-radio" aria-hidden="true">
@@ -342,10 +345,16 @@ export function BookNewPage() {
                       </span>
                     </div>
                     <strong>
-                      {item.price}
+                      {item.price + (delivery === "shipping" ? item.quantity === 1 ? 40 : item.quantity === 2 ? 20 : 0 : 0)}
                       <small> ₪</small>
                     </strong>
-                    <p>{item.detail}</p>
+                    <p>{delivery === "shipping" ? "מחיר סופי כולל משלוח עד הבית" : "מחיר סופי באיסוף עצמי"}</p>
+                    {item.quantity === 2 && (
+                      <div className="kb-bundle-saving">
+                        <span><s>{156 + (delivery === "shipping" ? 20 : 0)} ₪</s> <b>חוסכים 13 ₪ על הספרים</b></span>
+                        <small>בהשוואה ל־2 עותקים במחיר יחיד של 78 ₪{delivery === "shipping" ? ", בתוספת אותם דמי משלוח (20 ₪)" : ""}.</small>
+                      </div>
+                    )}
                     <p className="kb-unit-price">
                       {unitPriceLabel(item.price, item.quantity)}
                     </p>

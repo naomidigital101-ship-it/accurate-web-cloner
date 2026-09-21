@@ -1977,3 +1977,30 @@
     width: 100%;
   }
 }
+
+/* Keep the pair offer visible independently of the selected radio. */
+.kb .kb-bundle-recommended {
+  border-color: var(--brand);
+  box-shadow: 0 8px 24px #2d2e8312;
+}
+.kb .kb-bundle-badge {
+  display: block;
+  width: fit-content;
+  padding: 5px 12px;
+  margin-bottom: 14px;
+  border-radius: 8px;
+  background: var(--brand);
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+.kb .kb-bundle-saving { margin-top: 12px; font-size: 14px; line-height: 1.6; }
+.kb .kb-bundle-saving s { color: var(--muted); margin-inline-end: 8px; }
+.kb .kb-bundle-saving b { color: var(--brand); }
+.kb .kb-bundle-saving small { display: block; font-size: 12px; color: var(--muted); margin-top: 4px; }
+@media (max-width: 680px) {
+  .kb .kb-bundle-recommended { display: block; }
+  .kb .kb-bundle-recommended > strong { margin-top: 8px; }
+  .kb .kb-bundle-badge { margin-bottom: 10px; font-size: 13px; }
+}
