@@ -1,9 +1,44 @@
 import { adminDb } from "./supabase.server";
 import { parseGrowPayment } from "./grow-payment";
+import { mailConfigured, sendMail } from "./email/send.server";
+import { orderEmailHtml, orderEmailSubject, orderEmailText } from "./order-communication";
 
 const reply = (status: number, result: string) => Response.json({ result }, {
   status, headers: { "Cache-Control": "no-store", "X-Robots-Tag": "noindex, nofollow" },
 });
+
+async function mailLog(stage: string, status: string, detail?: string, recipient?: string) {
+  try { await adminDb().from("mail_log").insert({ stage, status, detail: detail?.slice(0, 500), recipient }); } catch { /* logging must not break payment recording */ }
+}
+
+async function notifyOrder(payment: ReturnType<typeof parseGrowPayment>): Promise<boolean> {
+  if (!payment) return false;
+  const stage = `order:${payment.provider_transaction_id}`;
+  const db = adminDb();
+  if (!mailConfigured()) { await mailLog(stage, "failed", "LOVABLE_API_KEY חסר"); return false; }
+  const { data: setting } = await db.from("site_settings").select("value").eq("key", "lead_notify_to").maybeSingle();
+  let recipients = String(setting?.value ?? "").split(",").map((x) => x.trim()).filter(Boolean);
+  if (!recipients.length) {
+    const { data: admins } = await db.from("admin_allowlist").select("email");
+    recipients = (admins ?? []).map((x) => String(x.email ?? "")).filter(Boolean);
+  }
+  if (!recipients.length) { await mailLog(stage, "failed", "לא הוגדר נמען"); return false; }
+  let sentToAll = true;
+  for (const recipient of recipients) {
+    const { data: alreadySent } = await db.from("mail_log").select("id")
+      .eq("stage", stage).eq("status", "sent").eq("recipient", recipient).limit(1).maybeSingle();
+    if (alreadySent) continue;
+    const result = await sendMail({
+      to: recipient,
+      subject: orderEmailSubject(payment), html: orderEmailHtml(payment), text: orderEmailText(payment),
+      replyTo: payment.email || undefined,
+      idempotencyKey: stage,
+    });
+    await mailLog(stage, result.sent ? "sent" : "failed", result.error ?? result.skipped, recipient);
+    if (!result.sent) sentToAll = false;
+  }
+  return sentToAll;
+}
 
 export async function handleGrowWebhook(request: Request): Promise<Response> {
   if (request.method !== "POST") return reply(405, "method_not_allowed");
@@ -43,6 +78,9 @@ export async function handleGrowWebhook(request: Request): Promise<Response> {
     });
     if (insertError) return reply(503, "temporarily_unavailable");
     await db.from("payment_webhook_config").update({ last_received_at: new Date().toISOString() }).eq("id", "grow");
+    // A failed email returns 503 so Grow retries. The saved order is safe, and mail_log plus
+    // the provider idempotency key prevent duplicate notifications when the retry arrives.
+    if (!await notifyOrder(payment)) return reply(503, "notification_pending");
     return reply(200, "ok");
   } catch {
     // Do not log the URL (bearer credential) or the customer's payload.
