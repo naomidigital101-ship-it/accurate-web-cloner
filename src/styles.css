@@ -2900,6 +2900,20 @@ html.a11y-hc-light body :is(section, div, article, header, footer, main, aside):
 .adm-detail-actions { display: flex; flex-wrap: wrap; gap: 10px; }
 .adm-detail-actions a { background: #67ffd1; color: #2d2e83; border-radius: 10px; padding: 8px 14px; font-size: 13.5px; font-weight: 700; text-decoration: none; }
 .adm-detail-actions a:hover { background: #bdffeb; }
+.adm-order-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; margin: -3px 0 8px; color: #5a5a78; font-size: 13px; }
+.adm-orders-note { margin: 0 0 14px; font-size: 12.5px; color: #6a6a82; }
+.adm-orders-table td > small { display: block; margin-top: 3px; color: #6a6a82; direction: ltr; text-align: right; }
+.adm-order-product { display: block; max-width: 320px; line-height: 1.45; }
+.adm-orders-pages { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 18px; }
+.adm-orders-pages button { border: 2px solid #dcdcea; background: #fff; border-radius: 999px; padding: 6px 16px; font: inherit; cursor: pointer; }
+.adm-orders-pages button:disabled { opacity: 0.4; cursor: default; }
+.adm-orders-pages span { font-size: 13px; color: #5a5a78; }
+@media (max-width: 700px) {
+  .adm-orders-table th:nth-child(3), .adm-orders-table td:nth-child(3),
+  .adm-orders-table th:nth-child(5), .adm-orders-table td:nth-child(5) { display: none; }
+  .adm-orders-table th, .adm-orders-table td { padding: 10px 9px; }
+  .adm-orders-table { min-width: 610px; }
+}
 
 /* --- מנהל תוכן: סרגל, טופס, מודאל --- */
 .adm-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }

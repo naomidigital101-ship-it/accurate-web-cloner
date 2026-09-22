@@ -1,64 +1,95 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useCallback, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import { getAccessToken } from "@/lib/supabase-browser";
-import { listOrders, updateOrder, type BookOrder } from "@/lib/api/orders.functions";
+import { listOrders, orderCounts, updateOrder, type BookOrder, type OrderStatus } from "@/lib/api/orders.functions";
 
-export const Route = createFileRoute("/admin/orders")({ component: Orders });
-const money = (n: number) => new Intl.NumberFormat("he-IL", { style: "currency", currency: "ILS" }).format(n / 100);
-function Orders() {
-  const [orders, setOrders] = useState<BookOrder[]>([]);
-  const [count, setCount] = useState(0);
-  const [page, setPage] = useState(0);
-  const [last, setLast] = useState<string | null>(null);
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState<string | null>(null);
-  const refresh = useCallback(async () => {
+export const Route = createFileRoute("/admin/orders")({ component: OrdersPage });
+const STATUS: Record<OrderStatus, string> = { new: "חדש", processing: "בטיפול", fulfilled: "נשלח / נאסף" };
+type Filter = OrderStatus | "all";
+type Counts = Record<Filter, number>;
+const money = (n: number) => new Intl.NumberFormat("he-IL", { style: "currency", currency: "ILS", maximumFractionDigits: 2 }).format(n / 100);
+const fmt = (iso: string) => new Date(iso).toLocaleString("he-IL", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit", timeZone: "Asia/Jerusalem" });
+const productLabel = (o: BookOrder) => o.products.length ? o.products.map((p) => `${p.name}${p.quantity ? ` × ${p.quantity}` : ""}`).join(", ") : o.description || "פרטי המוצר לא נמסרו";
+
+const CSV: [string, (o: BookOrder) => string][] = [
+  ["נקלט בתאריך", (o) => fmt(o.received_at)], ["תאריך תשלום ב-Grow", (o) => o.provider_payment_date],
+  ["סטטוס טיפול", (o) => STATUS[o.fulfillment]], ["שם", (o) => o.full_name], ["טלפון", (o) => o.phone],
+  ["אימייל", (o) => o.email], ["כתובת", (o) => o.address], ["מוצרים", productLabel],
+  ["סכום ששולם", (o) => (o.amount_agorot / 100).toFixed(2)], ["אופן קבלה", (o) => o.shipping_method],
+  ["דמי משלוח", (o) => o.shipping_agorot === null ? "" : (o.shipping_agorot / 100).toFixed(2)],
+  ["אסמכתת עסקה", (o) => o.provider_transaction_id],
+];
+function csv(rows: BookOrder[]) {
+  const esc = (v: string) => `"${v.replace(/"/g, '""')}"`;
+  return "﻿" + [CSV.map(([h]) => esc(h)).join(","), ...rows.map((r) => CSV.map(([, f]) => esc(f(r))).join(","))].join("\r\n");
+}
+
+function OrdersPage() {
+  const [orders, setOrders] = useState<BookOrder[] | null>(null);
+  const [counts, setCounts] = useState<Counts | null>(null);
+  const [status, setStatus] = useState<Filter>("new");
+  const [search, setSearch] = useState(""); const [term, setTerm] = useState("");
+  const [page, setPage] = useState(0); const [count, setCount] = useState(0);
+  const [open, setOpen] = useState<string | null>(null); const [last, setLast] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false); const [error, setError] = useState("");
+
+  const load = useCallback(async () => {
+    setError("");
     try {
-      const data = await listOrders({ data: { accessToken: await getAccessToken() ?? undefined, page } });
-      setOrders(data.orders); setCount(data.count); setLast(data.lastReceived); setError("");
-    } catch { setError("לא ניתן לטעון את הרכישות. נסו לרענן או להתחבר מחדש."); }
-    finally { setLoading(false); }
-  }, [page]);
+      const accessToken = await getAccessToken() ?? undefined;
+      const [result, totals] = await Promise.all([
+        listOrders({ data: { accessToken, page, status, search: term || undefined } }), orderCounts({ data: { accessToken } }),
+      ]);
+      setOrders(result.orders); setCount(result.count); setLast(result.lastReceived); setCounts(totals);
+    } catch { setError("טעינת הרכישות נכשלה. נסו לרענן או להתחבר מחדש."); }
+  }, [page, status, term]);
   useEffect(() => {
-    setLoading(true); void refresh();
-    const interval = setInterval(() => { if (!document.hidden) void refresh(); }, 15000);
-    return () => clearInterval(interval);
-  }, [refresh]);
-  return <section dir="rtl" style={{ lineHeight: 1.8 }}>
-    <header className="adm-head">
-    <h1>רכישות ותשלומים</h1>
-    <p>תשלומים שהתקבלו מ־Grow. הרשימה מתעדכנת אוטומטית כל 15 שניות. סטטוס הטיפול מתייחס להכנת ההזמנה ואספקתה.</p>
-    </header>
-    <p>החיבור מתעד רכישות חדשות ממועד הפעלתו; עסקאות קודמות והחזרים אינם מיובאים אוטומטית.</p>
-    <button type="button" style={{ padding: "8px 20px", border: "1px solid #2d2e83", borderRadius: 8, color: "#2d2e83", minHeight: 44 }} onClick={() => void refresh()}>רענון רכישות</button>
-    <p aria-live="polite">{loading ? "טוען רכישות…" : `${count} תשלומים התקבלו`}</p>
-    {last && <p>דיווח אחרון התקבל: {new Date(last).toLocaleString("he-IL", { timeZone: "Asia/Jerusalem" })}</p>}
-    {error && <p role="alert">{error}</p>}
-    {!loading && !error && !orders.length && <p>טרם התקבלו רכישות. תשלום חדש שידווח מ־Grow יופיע כאן.</p>}
-    <div style={{ display: "grid", gap: 16 }}>
-      {orders.map(order => <article key={order.id} style={{ border: "1px solid #d5dce8", borderRadius: 16, padding: 20, background: "white", overflowWrap: "anywhere" }}>
-        <h2 style={{ fontSize: 20 }}>{order.full_name || "שם לא נמסר"} · {money(order.amount_agorot)}</h2>
-        <p><strong>שולם ב־Grow</strong> · אסמכתת עסקה: <bdi>{order.provider_transaction_id}</bdi></p>
-        <p>תאריך תשלום: {order.provider_payment_date || "לא נמסר"} · נקלט באתר: {new Date(order.received_at).toLocaleString("he-IL", { timeZone: "Asia/Jerusalem" })}</p>
-        {order.description && <p>{order.description}</p>}
-        {order.products.length > 0 && <ul>{order.products.map((p, i) => <li key={i}>{p.name} · כמות: {p.quantity || "לא נמסרה"}</li>)}</ul>}
-        <p>טלפון: <bdi>{order.phone || "לא נמסר"}</bdi> · מייל: <bdi>{order.email || "לא נמסר"}</bdi></p>
-        <p>כתובת: {order.address || "לא נמסרה"}</p>
-        <p><strong>{order.shipping_method || "אופן קבלה לא נמסר"}</strong> · דמי משלוח: {order.shipping_agorot === null ? "לא נמסרו בנפרד" : money(order.shipping_agorot)} (כלולים בסכום ששולם)</p>
-        <label>טיפול בהזמנה <select style={{ border: "1px solid #d5dce8", borderRadius: 8, padding: "8px 12px", minHeight: 44, marginInlineStart: 8 }} value={order.fulfillment} disabled={saving === order.id} onChange={async e => {
-          const fulfillment = e.target.value as BookOrder["fulfillment"];
-          setSaving(order.id);
-          try { await updateOrder({ data: { accessToken: await getAccessToken() ?? undefined, id: order.id, fulfillment } }); await refresh(); }
-          catch { setError("לא ניתן לשמור את סטטוס הטיפול. נסו שוב."); }
-          finally { setSaving(null); }
-        }}><option value="new">חדש</option><option value="processing">בטיפול</option><option value="fulfilled">נשלח / נאסף</option></select></label>
-      </article>)}
+    setOrders(null); void load();
+    const timer = setInterval(() => { if (!document.hidden) void load(); }, 15000);
+    return () => clearInterval(timer);
+  }, [load]);
+
+  const choose = (next: Filter) => { setStatus(next); setPage(0); setOpen(null); };
+  const patch = async (id: string, fulfillment: OrderStatus) => {
+    setBusy(true);
+    try { await updateOrder({ data: { accessToken: await getAccessToken() ?? undefined, id, fulfillment } }); await load(); }
+    catch { setError("שמירת סטטוס הטיפול נכשלה."); } finally { setBusy(false); }
+  };
+  const exportCsv = async () => {
+    setBusy(true);
+    try {
+      const result = await listOrders({ data: { accessToken: await getAccessToken() ?? undefined, page: 0, status, search: term || undefined, limit: 20000 } });
+      const url = URL.createObjectURL(new Blob([csv(result.orders)], { type: "text/csv;charset=utf-8" }));
+      const a = document.createElement("a"); a.href = url; a.download = `רכישות-${new Date().toISOString().slice(0, 10)}.csv`; a.click(); URL.revokeObjectURL(url);
+    } catch { setError("ייצוא הרכישות נכשל."); } finally { setBusy(false); }
+  };
+
+  return <>
+    <header className="adm-head"><h1>רכישות ותשלומים</h1><p>כל תשלום חדש שמתקבל מ־Grow נכנס לכאן. ברירת המחדל היא הזמנות חדשות שממתינות לטיפול.</p></header>
+    <div className="adm-queues">{(["new", "processing", "fulfilled", "all"] as Filter[]).map((item) =>
+      <button key={item} type="button" className={status === item ? "on" : ""} onClick={() => choose(item)}>
+        {item === "all" ? "כל הרכישות" : STATUS[item]}<span className="adm-qnum">{counts?.[item] ?? "–"}</span>
+      </button>)}</div>
+    <div className="adm-filters">
+      <div className="adm-search"><input type="search" value={search} placeholder="חיפוש שם, טלפון, מייל או אסמכתה" onChange={(e) => setSearch(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter") { setTerm(search.trim()); setPage(0); } }} />
+        <button type="button" onClick={() => { setTerm(search.trim()); setPage(0); }}>חיפוש</button>
+        {term && <button type="button" onClick={() => { setSearch(""); setTerm(""); setPage(0); }}>ניקוי</button>}</div>
+      <div><button type="button" disabled={busy || !orders?.length} onClick={() => void exportCsv()}>ייצוא לאקסל</button><button type="button" disabled={busy} onClick={() => void load()}>רענון</button></div>
     </div>
-    <nav aria-label="עמודי רכישות" style={{ display: "flex", gap: 16, marginTop: 20 }}>
-      <button disabled={page === 0} onClick={() => setPage(p => p - 1)}>הקודם</button>
-      <span>עמוד {page + 1}</span>
-      <button disabled={(page + 1) * 50 >= count} onClick={() => setPage(p => p + 1)}>הבא</button>
-    </nav>
-  </section>;
+    <div className="adm-order-meta" aria-live="polite"><span>{orders === null ? "טוען רכישות…" : `${count} רכישות בסינון הנוכחי`}</span>{last && <span>דיווח אחרון מ־Grow: {fmt(last)}</span>}</div>
+    <p className="adm-orders-note">החיבור מתעד רכישות חדשות ממועד הפעלתו. עסקאות קודמות והחזרים אינם מיובאים אוטומטית.</p>
+    {error && <p className="adm-err" role="alert">{error}</p>}
+    {orders === null ? <p className="adm-muted">טוען…</p> : orders.length === 0 ? <div className="adm-empty"><b>{status === "new" && !term ? "אין כרגע הזמנות חדשות" : "לא נמצאו רכישות"}</b><p>{status === "new" && !term ? "רכישה חדשה מ־Grow תופיע כאן אוטומטית." : "אפשר לשנות את הסטטוס או לנקות את החיפוש."}</p></div> :
+      <div className="adm-table-wrap"><table className="adm-table adm-orders-table"><thead><tr><th>תאריך</th><th>לקוח</th><th>הזמנה</th><th>סכום</th><th>קבלה</th><th>סטטוס</th><th /></tr></thead><tbody>
+        {orders.map((o) => <Fragment key={o.id}><tr className={o.fulfillment === "new" ? "is-new" : undefined}>
+          <td className="adm-nowrap">{fmt(o.received_at)}</td><td><b>{o.full_name || "ללא שם"}</b>{o.phone && <small>{o.phone}</small>}</td>
+          <td><span className="adm-order-product">{productLabel(o)}</span></td><td className="adm-nowrap"><b>{money(o.amount_agorot)}</b></td><td>{o.shipping_method || "לא נמסר"}</td>
+          <td><select value={o.fulfillment} disabled={busy} onChange={(e) => void patch(o.id, e.target.value as OrderStatus)}>{(Object.keys(STATUS) as OrderStatus[]).map((key) => <option key={key} value={key}>{STATUS[key]}</option>)}</select></td>
+          <td><button type="button" className="adm-linkbtn" onClick={() => setOpen(open === o.id ? null : o.id)}>{open === o.id ? "סגירה" : "פרטים"}</button></td>
+        </tr>{open === o.id && <tr className="adm-detail"><td colSpan={7}><dl>
+          {([["טלפון", o.phone], ["אימייל", o.email], ["כתובת", o.address], ["מוצרים", productLabel(o)], ["סכום ששולם", money(o.amount_agorot)], ["אופן קבלה", o.shipping_method || "לא נמסר"], ["דמי משלוח", o.shipping_agorot === null ? "לא נמסרו בנפרד" : money(o.shipping_agorot)], ["תאריך תשלום ב־Grow", o.provider_payment_date || "לא נמסר"], ["אסמכתת עסקה", o.provider_transaction_id], ["תיאור", o.description]] as const).filter(([, v]) => v).map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}
+        </dl><div className="adm-detail-actions">{o.phone && <a href={`https://wa.me/${o.phone.replace(/\D/g, "").replace(/^0/, "972")}`} target="_blank" rel="noopener">פתיחת שיחה בוואטסאפ</a>}{o.phone && <a href={`tel:${o.phone}`}>חיוג ללקוח</a>}{o.email && <a href={`mailto:${o.email}`}>שליחת מייל</a>}</div></td></tr>}</Fragment>)}
+      </tbody></table></div>}
+    <nav className="adm-orders-pages" aria-label="עמודי רכישות"><button disabled={page === 0} onClick={() => { setPage((p) => p - 1); setOpen(null); }}>הקודם</button><span>עמוד {page + 1}</span><button disabled={(page + 1) * 50 >= count} onClick={() => { setPage((p) => p + 1); setOpen(null); }}>הבא</button></nav>
+  </>;
 }
