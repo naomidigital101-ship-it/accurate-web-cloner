@@ -4,9 +4,9 @@ import { ArrowLeft, BookOpen, Check, MapPin, Truck } from "lucide-react";
 import { SITE_URL } from "@/lib/site";
 import { Header } from "@/components/home/Header";
 import { SiteFooter } from "@/components/SiteFooter";
-import bookCss from "@/book-new.css?url";
+import bookCss from "@/book.css?url";
 
-export const Route = createFileRoute("/book-new")({
+export const Route = createFileRoute("/book")({
   head: () => ({
     meta: [
       { title: "קשר של תפילין — הספר של הרב עמיחי איל" },
@@ -28,15 +28,15 @@ export const Route = createFileRoute("/book-new")({
       { property: "og:image:width", content: "1021" },
       { property: "og:image:height", content: "1600" },
       { property: "og:image:type", content: "image/jpeg" },
-      { property: "og:url", content: `${SITE_URL}/book-new` },
+      { property: "og:url", content: `${SITE_URL}/book` },
       { name: "twitter:image", content: `${SITE_URL}/book/kesher-cover.jpeg` },
     ],
     links: [
       { rel: "stylesheet", href: bookCss },
-      { rel: "canonical", href: `${SITE_URL}/book-new` },
+      { rel: "canonical", href: `${SITE_URL}/book` },
     ],
   }),
-  component: BookNewPage,
+  component: BookPage,
 });
 
 const bundles = [
@@ -84,7 +84,7 @@ const letters = [
   },
 ];
 
-export function BookNewPage() {
+export function BookPage() {
   const [quantity, setQuantity] = useState(2);
   const [delivery, setDelivery] = useState<"pickup" | "shipping">("pickup");
   const bundle = bundles.find((item) => item.quantity === quantity)!;

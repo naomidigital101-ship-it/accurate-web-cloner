@@ -129,12 +129,12 @@ export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
       const url = new URL(request.url);
-      if (normalizePath(url.pathname) === "/book") {
+      if (normalizePath(url.pathname) === "/book-new") {
         return withSecurityHeaders(
           new Response(null, {
             status: 301,
             headers: {
-              location: `${SITE_URL}/book-new${url.search}`,
+              location: `${SITE_URL}/book${url.search}`,
               "cache-control": "public, max-age=3600",
             },
           }),

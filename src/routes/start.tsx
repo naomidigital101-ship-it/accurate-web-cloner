@@ -34,7 +34,7 @@ function StartPage() {
       </h1>
       <nav className="w-full max-w-md flex flex-col gap-4" aria-label="קישורים מהירים">
         <a
-          href="/book-new#kb-order"
+          href="/book#kb-order"
           className="btn-e btn-mint-solid flex w-full justify-center py-5 text-lg md:text-xl"
         >
           להזמנת עותקים נוספים

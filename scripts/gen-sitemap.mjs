@@ -20,7 +20,7 @@ const STATIC = [
   "/in-news",
   "/request",
   "/give",
-  "/book-new",
+  "/book",
   "/donate",
   "/certificates",
   "/accessibility",
