@@ -1,13 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
-import {
-  ArrowLeft,
-  BookOpen,
-  Check,
-  PackageCheck,
-  ShieldCheck,
-  Truck,
-} from "lucide-react";
+import { useEffect, useState } from "react";
 import { SITE_URL } from "@/lib/site";
 import { track } from "@/lib/analytics";
 import campaignCss from "@/book-order.css?url";
@@ -15,432 +7,104 @@ import campaignCss from "@/book-order.css?url";
 export const Route = createFileRoute("/book-order")({
   head: () => ({
     meta: [
-      { title: "קשר של תפילין — בחירת מארז והזמנה" },
-      {
-        name: "description",
-        content:
-          "23 סיפורים מהחיים על הנחת תפילין והתחלה של קשר. בחרו מארז והמשיכו לתשלום מאובטח.",
-      },
+      { title: "קשר של תפילין — 23 סיפורים מהחיים" },
+      { name: "description", content: "23 סיפורים אמיתיים על אנשים שהתחילו להניח תפילין. בחרו מארז והמשיכו לתשלום מאובטח." },
       { name: "robots", content: "noindex, nofollow" },
-      {
-        property: "og:title",
-        content: "קשר של תפילין — הספר של הרב עמיחי איל",
-      },
-      { property: "og:image", content: `${SITE_URL}/book/kesher-cover.jpeg` },
+      { property: "og:title", content: "קשר של תפילין — הספר של הרב עמיחי איל" },
+      { property: "og:image", content: `${SITE_URL}/book/mock-two-copies.webp` },
       { property: "og:url", content: `${SITE_URL}/book-order` },
     ],
-    links: [
-      { rel: "stylesheet", href: campaignCss },
-      { rel: "canonical", href: `${SITE_URL}/book-order` },
-    ],
+    links: [{ rel: "stylesheet", href: campaignCss }, { rel: "canonical", href: `${SITE_URL}/book-order` }],
   }),
   component: BookOrderPage,
 });
 
+type Delivery = "pickup" | "shipping";
 const bundles = [
-  {
-    quantity: 1,
-    title: "עותק אחד",
-    price: 78,
-    detail: "איסוף עצמי ללא עלות, או משלוח ב־40 ₪",
-  },
-  {
-    quantity: 2,
-    title: "שני עותקים",
-    price: 143,
-    detail: "איסוף עצמי ללא עלות, או משלוח ב־20 ₪",
-    badge: "הבחירה המשתלמת",
-  },
-  {
-    quantity: 3,
-    title: "שלושה עותקים",
-    price: 199,
-    detail: "משלוח עד הבית כלול",
-  },
+  { quantity: 1, title: "עותק אחד", price: 78, shipping: 40, detail: "לקריאה שלכם" },
+  { quantity: 2, title: "שני עותקים", price: 143, shipping: 20, detail: "עותק לקריאה ועותק למתנה", badge: "הבחירה הפופולרית" },
+  { quantity: 3, title: "שלושה עותקים", price: 199, shipping: 0, detail: "מתאים למשפחה ולמתנות", badge: "הכי משתלם" },
 ];
-
 const purchaseLinks: Record<number, string> = {
   1: "https://pay.grow.link/MTA1NDQ5~49262f78c08b742d6ad21b74b49de3e5-Mzk4OTY3OA",
   2: "https://pay.grow.link/MTA1NDQ5~ec72d87f8af24e604ef10150073d2b54-Mzk4OTcwNw",
   3: "https://pay.grow.link/MTA1NDQ5~a1922e39c4975492fad2f1321d3c42ee-Mzk5MDI4NA",
 };
+const audiences = [
+  ["להורים לנער בר מצווה", "מתנה עם תוכן שאפשר לקרוא ממנה יחד ולפתוח שיחה."],
+  ["למי שמחפש מתנה בעלת משמעות", "לחג, לאירוע משפחתי או לאדם קרוב שמתחיל דרך חדשה."],
+  ["למי שמתחיל להניח או חוזר", "סיפורים על אנשים שהיו באותה נקודה, כל אחד מהסיבה שלו."],
+  ["למי שאוהב סיפורים אמיתיים", "23 אנשים, רגעים והחלטות שנכנסו אל תוך חיי היום־יום."],
+];
+const faqs = [
+  ["זה ספר הלכה או מדריך להנחת תפילין?", "זהו ספר סיפורים על האנשים, המפגשים וההחלטות שמאחורי הנחת התפילין. הוא אינו מדריך הלכתי."],
+  ["הסיפורים מבוססים על אנשים אמיתיים?", "כן. הסיפורים הגיעו לרב עמיחי במסגרת מיזם ״קשר של תפילין״ ונכתבו לספר. חלק מהשמות והפרטים המזהים שונו כדי לשמור על פרטיות המספרים."],
+  ["הספר מתאים לנער בר מצווה?", "הספר יכול להתאים כמתנה לבר מצווה ולקריאה משותפת. בחלק מהסיפורים יש נושאים של מלחמה, אובדן והתמודדויות משפחתיות, ולכן לקוראים צעירים מומלץ שהורה או מחנך יבחרו מראש את הסיפורים המתאימים."],
+  ["אפשר לבקש הקדשה אישית?", "לאחר ההזמנה אפשר לפנות בוואטסאפ ולבדוק אפשרות להקדשה אישית מהרב עמיחי, בכפוף לזמינות."],
+  ["כמה זמן לוקח המשלוח?", "משלוח עד הבית מגיע בתוך עד 8 ימי עסקים. עלות המשלוח היא 40 ₪ לעותק אחד, 20 ₪ לשני עותקים וכלולה במחיר של שלושה עותקים. איסוף עצמי מבית אל הוא ללא עלות ובתיאום מראש."],
+  ["איך משלמים?", "אחרי שבוחרים מארז ואופן קבלה, עוברים בקישור מאובטח של Grow. במסך התשלום ממלאים את פרטי ההזמנה ומשלימים את התשלום."],
+  ["אפשר להזמין כמות גדולה?", "כן. להזמנה לכיתה, לצוות או לאירוע אפשר לפנות אלינו ולציין את מספר העותקים ואת המועד הרצוי, ונבדוק מחיר ואפשרויות אספקה."],
+];
 
 function BookOrderPage() {
   const [quantity, setQuantity] = useState(2);
-  const [delivery, setDelivery] = useState<"pickup" | "shipping">("pickup");
+  const [delivery, setDelivery] = useState<Delivery>("pickup");
+  const [showBar, setShowBar] = useState(false);
   const bundle = bundles.find((item) => item.quantity === quantity)!;
-  const shippingIncluded = quantity === 3;
-  const shippingPrice = quantity === 1 ? 40 : quantity === 2 ? 20 : 0;
-  const total =
-    bundle.price + (delivery === "shipping" ? shippingPrice : 0);
-  const purchaseUrl = purchaseLinks[quantity] ?? purchaseLinks[1]!;
+  const total = bundle.price + (delivery === "shipping" ? bundle.shipping : 0);
 
-  const trackCheckout = () => {
-    track("begin_checkout", {
-      currency: "ILS",
-      value: total,
-      items: [{ item_name: "קשר של תפילין", quantity, price: bundle.price }],
-      page_type: "book_campaign",
-    });
-  };
+  useEffect(() => {
+    const onScroll = () => setShowBar(window.scrollY > 520);
+    onScroll(); window.addEventListener("scroll", onScroll, { passive: true });
+    const nodes = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
+    let observer: IntersectionObserver | undefined;
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window) {
+      nodes.forEach((node) => node.classList.add("cb-reveal-ready"));
+      observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
+        if (entry.isIntersecting) { entry.target.classList.add("is-visible"); observer?.unobserve(entry.target); }
+      }), { rootMargin: "0px 0px -10%", threshold: 0.08 });
+      nodes.forEach((node) => observer?.observe(node));
+    }
+    return () => { window.removeEventListener("scroll", onScroll); observer?.disconnect(); };
+  }, []);
 
-  return (
-    <div className="ko" dir="rtl">
-      <a className="ko-skip" href="#ko-content">
-        דילוג לתוכן
-      </a>
-      <header className="ko-header" aria-label="קשר של תפילין">
-        <img
-          src="/wp/img/לוגו-קשר-של-תפילין-01.svg"
-          alt="קשר של תפילין"
-          width="100"
-          height="100"
-        />
-        <div>
-          <ShieldCheck size={18} aria-hidden="true" /> תשלום מאובטח
+  const trackCheckout = () => track("begin_checkout", { currency: "ILS", value: total, items: [{ item_name: "קשר של תפילין", quantity, price: bundle.price }], page_type: "book_campaign" });
+
+  return <div className="cb" dir="rtl">
+    <a className="cb-skip" href="#cb-main">דילוג לתוכן</a>
+    <main id="cb-main">
+      <section className="cb-hero" aria-labelledby="cb-title">
+        <div className="cb-orb cb-orb-one" aria-hidden="true" /><div className="cb-orb cb-orb-two" aria-hidden="true" />
+        <div className="cb-wrap cb-hero-wrap">
+          <div className="cb-topline"><img src="/wp/img/לוגו-קשר-של-תפילין-01.svg" alt="קשר של תפילין" width="112" height="112" /><span>מיזם של עמותת אור חדש · ע״ר 580703965</span></div>
+          <div className="cb-hero-grid">
+            <div className="cb-hero-copy"><p className="cb-kicker">ספר חדש · 23 סיפורים אמיתיים</p><h1 id="cb-title">יש רגע שבו הנחת תפילין הופכת <em>לסיפור אישי.</em></h1><p className="cb-lead">״קשר של תפילין״ מביא 23 סיפורים מהחיים על אנשים שהתחילו להניח תפילין, ועל הרגע, השיחה או ההבטחה שהובילו אותם לכך.</p><a className="cb-button" href="#cb-offer">לבחירת מארז ולהזמנה <span aria-hidden="true">←</span></a><p className="cb-from">עותק אחד ב־78 ₪ · משלוח או איסוף עצמי</p><ul className="cb-hero-checks"><li>✓ תשלום מאובטח</li><li>✓ עד 8 ימי עסקים</li><li>✓ ביטול לפי חוק</li></ul></div>
+            <figure className="cb-hero-book"><div className="cb-book-glow" aria-hidden="true" /><img src="/book/mock-hands.webp" alt="הספר קשר של תפילין מוחזק בידיים" width="900" height="1125" fetchPriority="high" /></figure>
+          </div>
+          <div className="cb-facts"><span><strong>23</strong> סיפורים אמיתיים</span><span><strong>184</strong> עמודים</span><span><strong>עברית</strong> · כריכה רכה</span><span><strong>המיזם של</strong> הרב עמיחי איל</span></div>
         </div>
-      </header>
+      </section>
 
-      <main id="ko-content">
-        <section className="ko-hero ko-wrap" aria-labelledby="ko-title">
-          <div className="ko-hero-copy">
-            <p className="ko-eyebrow">הספר של הרב עמיחי איל</p>
-            <h1 id="ko-title">
-              23 סיפורים מהחיים על הנחת תפילין והתחלה של קשר
-            </h1>
-            <p className="ko-lead">
-              אנשים שלא תכננו להתחיל להניח תפילין — עד שרגע אחד, שיחה אחת או
-              הבטחה אחת שינו את הכיוון.
-            </p>
-            <ul className="ko-checks" aria-label="פרטי הספר">
-              <li>
-                <Check size={18} aria-hidden="true" /> 23 סיפורים המבוססים על
-                אנשים אמיתיים
-              </li>
-              <li>
-                <Check size={18} aria-hidden="true" /> 184 עמודים · כריכה רכה ·
-                עברית
-              </li>
-              <li>
-                <Check size={18} aria-hidden="true" /> משלוח עד הבית כלול במארז
-                שלושה עותקים
-              </li>
-            </ul>
-            <div className="ko-hero-price">
-              <strong>78 ₪</strong>
-              <span>לעותק אחד</span>
-            </div>
-            <a className="ko-button" href="#ko-order">
-              לבחירת מארז ולהזמנה <ArrowLeft size={19} aria-hidden="true" />
-            </a>
-          </div>
-          <figure className="ko-cover">
-            <div className="ko-cover-glow" aria-hidden="true" />
-            <img
-              src="/book/kesher-cover.jpeg"
-              alt="כריכת הספר קשר של תפילין"
-              width="1021"
-              height="1600"
-              fetchPriority="high"
-            />
-            <figcaption>כתיבה: שמעון חי בן־שחר והרב עמיחי איל</figcaption>
-          </figure>
-        </section>
+      <section className="cb-section cb-now" data-reveal><div className="cb-narrow"><p className="cb-eyebrow">למה דווקא עכשיו?</p><h2>לפעמים החלטה גדולה מתחילה מרגע קטן</h2><p>מאחורי כל בקשה לתפילין יש אדם וסיפור. לפעמים ההחלטה מגיעה בעקבות אירוע מטלטל, ולפעמים היא מתגבשת בתוך שיחה משפחתית או בתוך שגרת החיים.</p><p>הספר חוזר אל האנשים שפנו למיזם, אל מה שגרם להם להתחיל, ואל השאלות שליוו אותם בדרך.</p></div></section>
 
-        <div className="ko-proof">
-          <div className="ko-wrap">
-            <span>
-              <strong>23</strong> סיפורים
-            </span>
-            <span>
-              <strong>184</strong> עמודים
-            </span>
-            <span>
-              <strong>8</strong> ימי עסקים לכל היותר
-            </span>
-          </div>
-        </div>
+      <section className="cb-excerpt" data-reveal><div className="cb-wrap"><div className="cb-section-heading"><p className="cb-eyebrow">כך נשמע הספר מבפנים</p><h2>סיפור אחד מתוך 23</h2></div><blockquote><p>״ברגעי הסכנה נעם הבטיח שאם יֵצא בחיים, יתחיל להניח תפילין. הוא ניצל, אבל גם כשחזר לשגרה ההבטחה נשארה איתו.״</p><footer>מתוך הסיפור ״לא השאיר לי ברירה״</footer></blockquote><p className="cb-privacy">חלק מהשמות והפרטים המזהים שונו כדי לשמור על פרטיות המספרים.</p></div></section>
 
-        <section
-          className="ko-section ko-wrap ko-reveal"
-          aria-labelledby="ko-fit-title"
-        >
-          <p className="ko-eyebrow">הספר הזה יכול לפגוש אתכם בכמה מקומות</p>
-          <h2 id="ko-fit-title">למי הוא מתאים?</h2>
-          <div className="ko-fit-grid">
-            <article>
-              <span>01</span>
-              <h3>למי שאוהב סיפורים אמיתיים</h3>
-              <p>כל פרק מביא אדם אחר ואת הרגע שבו הנחת התפילין נכנסה לחייו.</p>
-            </article>
-            <article>
-              <span>02</span>
-              <h3>למי שמתחיל או חוזר</h3>
-              <p>הסיפורים נותנים מקום להחלטה, למשפחה, לחששות ולשגרה החדשה.</p>
-            </article>
-            <article>
-              <span>03</span>
-              <h3>כמתנה שיש בה תוכן</h3>
-              <p>לבר מצווה, לאדם קרוב או לקריאה משותפת שפותחת שיחה.</p>
-            </article>
-          </div>
-        </section>
+      <section className="cb-section" data-reveal><div className="cb-wrap"><div className="cb-section-heading"><p className="cb-eyebrow">מה תפגשו בין העמודים?</p><h2>סיפורים שאפשר להיכנס אליהם בכמה דקות — ולהמשיך לחשוב עליהם אחר כך</h2></div><div className="cb-pillars"><article><span>01</span><h3>אנשים מדברים בקול שלהם</h3><p>הסיפורים מתמקדים ברגע שבו משהו השתנה, בלי להפוך אותו לדרשה.</p></article><article><span>02</span><h3>כל אחד מתחיל ממקום אחר</h3><p>מהנובה, מברלין, מהצבא ומהבית. לכל אחד יש נסיבות ושאלות משלו.</p></article><article><span>03</span><h3>פרק שיכול לפתוח שיחה</h3><p>כל סיפור עומד בפני עצמו ומתאים לקריאה אישית או לשיחה משותפת.</p></article></div></div></section>
 
-        <section
-          className="ko-stories ko-reveal"
-          aria-labelledby="ko-stories-title"
-        >
-          <div className="ko-wrap">
-            <div className="ko-section-head">
-              <p className="ko-eyebrow">שניים מתוך 23 הסיפורים</p>
-              <h2 id="ko-stories-title">אלה האנשים שתפגשו בין העמודים</h2>
-            </div>
-            <div className="ko-story-grid">
-              <article>
-                <BookOpen size={25} aria-hidden="true" />
-                <p className="ko-story-name">״לא השאיר לי ברירה״</p>
-                <h3>ההבטחה שנעם לקח איתו מהנובה</h3>
-                <p>
-                  ברגעי הסכנה נעם הבטיח שאם יֵצא בחיים, יתחיל להניח תפילין. הוא
-                  ניצל, וההבטחה נשארה איתו גם כשחזר לשגרה.
-                </p>
-              </article>
-              <article>
-                <BookOpen size={25} aria-hidden="true" />
-                <p className="ko-story-name">״יותר טוב מאספרסו״</p>
-                <h3>ההחלטה להתחיל להניח תפילין בברלין</h3>
-                <p>
-                  ישראלי שחי בברלין מכניס את הנחת התפילין לבוקר שלו ומנסה לשמור
-                  גם על הבחירה שלו וגם על הקִרבה לאביו.
-                </p>
-              </article>
-            </div>
-            <p className="ko-privacy">
-              חלק מהשמות והפרטים המזהים שונו כדי לשמור על פרטיות המספרים.
-            </p>
-          </div>
-        </section>
+      <section className="cb-audience" data-reveal><div className="cb-wrap cb-audience-grid"><img src="/book/mock-father-son.webp" alt="אב ונער משוחחים ליד הספר קשר של תפילין" width="1200" height="800" loading="lazy" /><div><p className="cb-eyebrow">למי הספר מתאים?</p><h2>למי שמחפש סיפור שאפשר גם לתת במתנה</h2><div className="cb-audience-list">{audiences.map(([title, text]) => <article key={title}><span>✓</span><div><h3>{title}</h3><p>{text}</p></div></article>)}</div></div></div></section>
 
-        <section
-          className="ko-author ko-wrap ko-reveal"
-          aria-labelledby="ko-author-title"
-        >
-          <img
-            src="/wp/img/עמיחי-פרופיל-ערוך-min.webp"
-            alt="הרב עמיחי איל"
-            width="932"
-            height="1400"
-            loading="lazy"
-          />
-          <div>
-            <p className="ko-eyebrow">האיש ששמע את הסיפורים</p>
-            <h2 id="ko-author-title">הרב עמיחי איל</h2>
-            <p>
-              מייסד ומנהל מיזם ״קשר של תפילין״. לאורך השנים הוא שמע מאות סיפורים
-              מאנשים שהתחילו להניח תפילין; 23 מהם עובדו ונכתבו לספר.
-            </p>
-            <p className="ko-note">
-              הספר כולל סיפורי מלחמה, אובדן והתמודדויות משפחתיות. לקוראים צעירים
-              מומלץ לבחור מראש את הסיפורים המתאימים.
-            </p>
-          </div>
-        </section>
+      <section id="cb-offer" className="cb-offer" data-reveal><div className="cb-wrap">
+        <div className="cb-offer-head"><div><p className="cb-eyebrow">הזמנה ישירה</p><h2>בחרו כמה עותקים להזמין</h2><p>המחיר ודמי המשלוח מוצגים מראש. את התשלום משלימים בקישור המאובטח.</p></div><img src="/book/mock-two-copies.webp" alt="שני עותקים של הספר קשר של תפילין" width="1200" height="800" loading="lazy" /></div>
+        <fieldset className="cb-bundles"><legend className="cb-sr-only">בחירת מספר עותקים</legend>{bundles.map((item) => { const selected = item.quantity === quantity; const full = 78 * item.quantity; const saving = full - item.price; return <label className={`cb-bundle ${selected ? "is-selected" : ""}`} key={item.quantity}>{item.badge && <span className="cb-badge">{item.badge}</span>}<input type="radio" name="book-quantity" checked={selected} onChange={() => setQuantity(item.quantity)} /><span className="cb-radio" /><h3>{item.title}</h3><div className="cb-bundle-price"><strong>{item.price} ₪</strong>{saving > 0 && <del>{full} ₪</del>}</div><p>{item.detail}</p><b>{item.shipping === 0 ? "משלוח עד הבית כלול" : `משלוח עד הבית ב־${item.shipping} ₪`}</b>{saving > 0 && <small>חיסכון של {saving} ₪ · {(item.price / item.quantity).toFixed(1)} ₪ לעותק</small>}</label>; })}</fieldset>
+        <div className="cb-order-grid"><fieldset className="cb-delivery"><legend>איך תרצו לקבל את הספרים?</legend><label className={delivery === "pickup" ? "is-selected" : ""}><input type="radio" name="delivery" checked={delivery === "pickup"} onChange={() => setDelivery("pickup")} /><span><strong>איסוף עצמי</strong><small>ארץ חמדה 33, בית אל · בתיאום מראש · ללא עלות</small></span></label><label className={delivery === "shipping" ? "is-selected" : ""}><input type="radio" name="delivery" checked={delivery === "shipping"} onChange={() => setDelivery("shipping")} /><span><strong>משלוח עד הבית</strong><small>{bundle.shipping === 0 ? "כלול במחיר המארז" : `${bundle.shipping} ₪ · עד 8 ימי עסקים`}</small></span></label><ul><li>✓ כריכה רכה, 184 עמודים, עברית</li><li>✓ אפשר לבדוק אפשרות להקדשה לאחר ההזמנה</li><li>✓ ביטול עסקה לפי חוק הגנת הצרכן</li></ul></fieldset><div className="cb-checkout"><div className="cb-total" aria-live="polite"><span>{delivery === "shipping" ? "סה״כ, כולל משלוח" : "סה״כ, באיסוף עצמי"}</span><strong data-testid="order-total">{total} ₪</strong></div><p>במסך התשלום ממלאים את פרטי ההזמנה ומשלימים תשלום מאובטח באמצעות Grow.</p><a className="cb-button" href={purchaseLinks[quantity]} target="_blank" rel="noopener noreferrer" onClick={trackCheckout}>להמשך לתשלום מאובטח <span>←</span></a><small>המחיר הסופי כולל את המארז ואופן הקבלה שבחרתם.</small></div></div>
+      </div></section>
 
-        <section
-          id="ko-order"
-          className="ko-order"
-          aria-labelledby="ko-order-title"
-        >
-          <div className="ko-wrap">
-            <div className="ko-section-head">
-              <p className="ko-eyebrow">הזמנה ישירה</p>
-              <h2 id="ko-order-title">בחרו את המארז שלכם</h2>
-              <p>משלוח ב־40 ₪ לעותק אחד, ב־20 ₪ לזוג וכלול במחיר השלישייה.</p>
-            </div>
-            <fieldset className="ko-bundles">
-              <legend className="ko-sr-only">בחירת מספר עותקים</legend>
-              {bundles.map((item) => (
-                <label
-                  className={`ko-bundle ${quantity === item.quantity ? "is-selected" : ""}`}
-                  key={item.quantity}
-                >
-                  {item.badge && <span className="ko-badge">{item.badge}</span>}
-                  <input
-                    type="radio"
-                    name="campaign-book-quantity"
-                    value={item.quantity}
-                    checked={quantity === item.quantity}
-                    onChange={() => setQuantity(item.quantity)}
-                  />
-                  <span className="ko-radio" aria-hidden="true">
-                    {quantity === item.quantity && <Check size={14} />}
-                  </span>
-                  <h3>{item.title}</h3>
-                  <strong>
-                    {item.price}
-                    <small> ₪</small>
-                  </strong>
-                  <p>{item.detail}</p>
-                  {item.quantity > 1 && (
-                    <small>
-                      {(item.price / item.quantity).toFixed(1)} ₪ לעותק
-                    </small>
-                  )}
-                </label>
-              ))}
-            </fieldset>
+      <section className="cb-trust" data-reveal><div className="cb-wrap"><p className="cb-eyebrow">המיזם שמאחורי הספר</p><h2>רבנים נתנו למיזם את ברכתם</h2><p className="cb-trust-note">המכתבים ניתנו למיזם ולפעילותו ואינם ביקורות על הספר.</p><div className="cb-rabbis"><article><img src="/wp/uploads/2026/05/הרב-דוד-יוסף-min.webp" alt="" width="72" height="72" loading="lazy" /><h3>הרב דוד יוסף</h3></article><article><img src="/wp/uploads/2024/04/רב-זילברמן-3-1.webp" alt="" width="72" height="72" loading="lazy" /><h3>הרב יצחק זילברשטיין</h3></article><article><img src="/wp/uploads/2024/04/הרב-זלמן-מלמד-2.jpeg" alt="" width="72" height="72" loading="lazy" /><h3>הרב זלמן ברוך מלמד</h3></article></div><div className="cb-founder"><img src="/wp/img/עמיחי-פרופיל-ערוך-min.webp" alt="הרב עמיחי איל" width="932" height="1400" loading="lazy" /><div><h3>הרב עמיחי איל</h3><p>מייסד מיזם ״קשר של תפילין״ והאיש שמאחורי הספר</p></div><p>1,500 זוגות תפילין שאינן בשימוש נבדקו, חודשו ונמסרו למי שרצה להתחיל להניח. בכל מסירה כזו התחיל סיפור — 23 מהם מגיעים עכשיו לספר.</p></div></div></section>
 
-              <fieldset className="ko-delivery">
-                <legend>חישוב מחיר לפי אופן קבלת הספר</legend>
-                <label>
-                  <input
-                    type="radio"
-                    name="campaign-delivery"
-                    checked={delivery === "pickup"}
-                    onChange={() => setDelivery("pickup")}
-                  />{" "}
-                  איסוף עצמי מבית אל · ללא עלות
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    name="campaign-delivery"
-                    checked={delivery === "shipping"}
-                    onChange={() => setDelivery("shipping")}
-                  />{" "}
-                  משלוח עד הבית · {shippingIncluded ? "כלול במחיר" : `${shippingPrice} ₪`}
-                </label>
-              </fieldset>
-            <p>במסך התשלום בוחרים משלוח או איסוף עצמי וממלאים את פרטי ההזמנה.</p>
-
-            <div className="ko-checkout">
-              <div>
-                <span>סה״כ לתשלום</span>
-                <strong>{total} ₪</strong>
-                <small>
-                  {delivery === "shipping"
-                      ? "כולל משלוח עד הבית"
-                      : "איסוף עצמי בתיאום מראש"}
-                </small>
-              </div>
-              <a
-                className="ko-button"
-                href={purchaseUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={trackCheckout}
-              >
-                להמשך לתשלום מאובטח <ArrowLeft size={19} aria-hidden="true" />
-              </a>
-            </div>
-            <ul className="ko-order-assurance">
-              <li>
-                <ShieldCheck size={19} aria-hidden="true" /> תשלום מאובטח
-              </li>
-              <li>
-                <Truck size={19} aria-hidden="true" /> אספקה עד 8 ימי עסקים
-              </li>
-              <li>
-                <PackageCheck size={19} aria-hidden="true" /> ביטול לפי חוק הגנת
-                הצרכן
-              </li>
-            </ul>
-          </div>
-        </section>
-
-        <section
-          className="ko-faq ko-wrap ko-reveal"
-          aria-labelledby="ko-faq-title"
-        >
-          <p className="ko-eyebrow">לפני שמזמינים</p>
-          <h2 id="ko-faq-title">כמה תשובות קצרות</h2>
-          <details>
-            <summary>
-              האם זה ספר הלכה או מדריך להנחת תפילין?
-              <span aria-hidden="true">+</span>
-            </summary>
-            <p>
-              זהו ספר סיפורים על האנשים, המפגשים וההחלטות שמאחורי הנחת התפילין.
-              הוא אינו מדריך הלכתי.
-            </p>
-          </details>
-          <details>
-            <summary>
-              הסיפורים מבוססים על אנשים אמיתיים?
-              <span aria-hidden="true">+</span>
-            </summary>
-            <p>
-              כן. הסיפורים הגיעו לרב עמיחי במסגרת המיזם ונכתבו לספר. חלק מהשמות
-              והפרטים המזהים שונו לשמירת הפרטיות.
-            </p>
-          </details>
-          <details>
-            <summary>
-              אפשר לבקש הקדשה אישית?<span aria-hidden="true">+</span>
-            </summary>
-            <p>
-              לאחר ההזמנה אפשר לפנות בוואטסאפ ולבדוק אפשרות להקדשה אישית מהרב
-              עמיחי.
-            </p>
-          </details>
-          <details>
-            <summary>
-              מהי מדיניות הביטול?<span aria-hidden="true">+</span>
-            </summary>
-            <p>
-              בכפוף לחוק הגנת הצרכן, ניתן לבטל בתוך 14 ימים מקבלת הספר או מסמך
-              פרטי העסקה, לפי המאוחר. הודעת ביטול אפשר למסור בטלפון 054-6713966
-              או בוואטסאפ.
-            </p>
-          </details>
-        </section>
-
-        <section
-          className="ko-final ko-reveal"
-          aria-labelledby="ko-final-title"
-        >
-          <div className="ko-wrap">
-            <img
-              src="/book/kesher-cover.jpeg"
-              alt="כריכת קשר של תפילין"
-              width="1021"
-              height="1600"
-              loading="lazy"
-            />
-            <div>
-              <p className="ko-eyebrow">23 אנשים. 23 התחלות.</p>
-              <h2 id="ko-final-title">בחרו את המארז שמתאים לכם</h2>
-              <p>
-                הספר מחכה לכם — לקריאה אישית, למתנה או לשיחה שמתחילה מסיפור אחד.
-              </p>
-              <a className="ko-button" href="#ko-order">
-                לבחירת מארז <ArrowLeft size={19} aria-hidden="true" />
-              </a>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <footer className="ko-footer">
-        <span>עמותת אור חדש (ע״ר 580703965)</span>
-        <span>שירות והזמנות: 054-6713966</span>
-      </footer>
-
-      <div className="ko-mobile-bar">
-        <div>
-          <strong>
-            {bundle.title} · {total} ₪
-          </strong>
-          <small>
-            {delivery === "shipping"
-                ? "כולל משלוח"
-                : "איסוף עצמי"}
-          </small>
-        </div>
-        <a className="ko-button" href="#ko-order">
-          להזמנה <ArrowLeft size={16} aria-hidden="true" />
-        </a>
-      </div>
-    </div>
-  );
+      <section className="cb-faq" data-reveal><div className="cb-narrow"><h2>לפני שמזמינים</h2>{faqs.map(([q, a]) => <details key={q}><summary>{q}<span>+</span></summary><p>{a}</p></details>)}</div></section>
+      <section className="cb-final" data-reveal><div className="cb-narrow"><h2>23 אנשים כבר סיפרו את הרגע שלהם.<br /><em>עכשיו אפשר לקרוא אותו.</em></h2><a className="cb-button" href="#cb-offer">לבחירת מארז ולהזמנה <span>←</span></a><p>איסוף עצמי ללא עלות · משלוח עד הבית בהתאם למארז · ביטול לפי חוק</p></div></section>
+    </main>
+    <footer className="cb-footer"><div className="cb-wrap"><span>עמותת אור חדש · ע״ר 580703965 · ארץ חמדה 33, בית אל · <a href="tel:0546713966">054-6713966</a></span><nav><a href="/accessibility">הצהרת נגישות</a><a href="/privacy">מדיניות פרטיות</a><a href="/terms">תקנון וביטול עסקה</a></nav></div></footer>
+    <div className={`cb-sticky ${showBar ? "is-visible" : ""}`} aria-hidden={!showBar}><div className="cb-wrap"><span><strong>{bundle.title} · {total} ₪</strong><small>{delivery === "shipping" ? "כולל משלוח עד הבית" : "איסוף עצמי ללא עלות"}</small></span><a href="#cb-offer">להזמנה ←</a></div></div>
+  </div>;
 }
