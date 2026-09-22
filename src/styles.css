@@ -2898,8 +2898,12 @@ html.a11y-hc-light body :is(section, div, article, header, footer, main, aside):
 .adm-detail dt { font-size: 12px; font-weight: 700; opacity: 0.6; }
 .adm-detail dd { margin: 2px 0 0; font-size: 14px; }
 .adm-detail-actions { display: flex; flex-wrap: wrap; gap: 10px; }
-.adm-detail-actions a { background: #67ffd1; color: #2d2e83; border-radius: 10px; padding: 8px 14px; font-size: 13.5px; font-weight: 700; text-decoration: none; }
-.adm-detail-actions a:hover { background: #bdffeb; }
+.adm-detail-actions a,
+.adm-detail-actions button { background: #67ffd1; color: #2d2e83; border: 0; border-radius: 10px; padding: 8px 14px; font: inherit; font-size: 13.5px; font-weight: 700; line-height: 1.4; text-decoration: none; cursor: pointer; }
+.adm-detail-actions a:hover,
+.adm-detail-actions button:hover { background: #bdffeb; }
+.adm-detail-actions button:first-child { background: #2d2e83; color: #fff; }
+.adm-detail-actions button:first-child:hover { background: #1f2068; }
 .adm-order-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; margin: -3px 0 8px; color: #5a5a78; font-size: 13px; }
 .adm-orders-note { margin: 0 0 14px; font-size: 12.5px; color: #6a6a82; }
 .adm-orders-table td > small { display: block; margin-top: 3px; color: #6a6a82; direction: ltr; text-align: right; }
