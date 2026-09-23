@@ -6,6 +6,7 @@ import { orderEmailHtml, orderEmailSubject, orderEmailText } from "./order-commu
 const reply = (status: number, result: string) => Response.json({ result }, {
   status, headers: { "Cache-Control": "no-store", "X-Robots-Tag": "noindex, nofollow" },
 });
+const BOOK_ORDER_NOTIFY_DEFAULT = "Ae.nehora@gmail.com";
 
 async function mailLog(stage: string, status: string, detail?: string, recipient?: string) {
   try { await adminDb().from("mail_log").insert({ stage, status, detail: detail?.slice(0, 500), recipient }); } catch { /* logging must not break payment recording */ }
@@ -16,13 +17,10 @@ async function notifyOrder(payment: ReturnType<typeof parseGrowPayment>): Promis
   const stage = `order:${payment.provider_transaction_id}`;
   const db = adminDb();
   if (!mailConfigured()) { await mailLog(stage, "failed", "LOVABLE_API_KEY חסר"); return false; }
-  const { data: setting } = await db.from("site_settings").select("value").eq("key", "lead_notify_to").maybeSingle();
-  let recipients = String(setting?.value ?? "").split(",").map((x) => x.trim()).filter(Boolean);
-  if (!recipients.length) {
-    const { data: admins } = await db.from("admin_allowlist").select("email");
-    recipients = (admins ?? []).map((x) => String(x.email ?? "")).filter(Boolean);
-  }
-  if (!recipients.length) { await mailLog(stage, "failed", "לא הוגדר נמען"); return false; }
+  // Book purchases have their own recipient and must never inherit the address used
+  // for leads or other site forms. A dedicated setting can override this default later.
+  const { data: setting } = await db.from("site_settings").select("value").eq("key", "book_order_notify_to").maybeSingle();
+  const recipients = String(setting?.value ?? BOOK_ORDER_NOTIFY_DEFAULT).split(",").map((x) => x.trim()).filter(Boolean);
   let sentToAll = true;
   for (const recipient of recipients) {
     const { data: alreadySent } = await db.from("mail_log").select("id")
