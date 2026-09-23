@@ -3,6 +3,21 @@
 type RecordValue = Record<string, unknown>;
 const record = (v: unknown): RecordValue => v && typeof v === "object" && !Array.isArray(v) ? v as RecordValue : {};
 const text = (v: unknown, max = 500) => typeof v === "string" || typeof v === "number" ? String(v).slice(0, max) : "";
+
+export function decodeGrowWebhookBody(raw: string): unknown {
+  const trimmed = raw.trim();
+  if (!trimmed) return null;
+  try { return JSON.parse(trimmed); } catch { /* Grow may submit form-encoded payloads. */ }
+
+  const params = new URLSearchParams(trimmed);
+  if (![...params.keys()].length) return null;
+  const body: RecordValue = {};
+  for (const [key, value] of params) body[key] = value;
+  if (typeof body.data === "string") {
+    try { body.data = JSON.parse(body.data); } catch { /* Keep the original value; validation will reject it. */ }
+  }
+  return body;
+}
 export function cents(v: unknown): number | null {
   const s = text(v).trim();
   if (!/^\d+(\.\d{1,2})?$/.test(s)) return null;

@@ -1,5 +1,5 @@
 import { adminDb } from "./supabase.server";
-import { parseGrowPayment } from "./grow-payment";
+import { decodeGrowWebhookBody, parseGrowPayment } from "./grow-payment";
 import { mailConfigured, sendMail } from "./email/send.server";
 import { orderEmailHtml, orderEmailSubject, orderEmailText } from "./order-communication";
 
@@ -52,8 +52,8 @@ export async function handleGrowWebhook(request: Request): Promise<Response> {
       .select("id").eq("id", "grow").eq("secret_hash", hash).maybeSingle();
     if (error) return reply(503, "temporarily_unavailable");
     if (!config) return reply(401, "unauthorized");
-    if (!request.headers.get("content-type")?.includes("application/json")) return reply(415, "json_required");
-    // Bound the stream, including chunked requests without Content-Length.
+    // Bound the stream, including chunked requests without Content-Length. Grow sends the
+    // documented JSON shape, but different dashboard flows may encode it as JSON or form data.
     const reader = request.body?.getReader();
     if (!reader) return reply(400, "empty_body");
     const chunks: Uint8Array[] = [];
@@ -68,9 +68,8 @@ export async function handleGrowWebhook(request: Request): Promise<Response> {
     const bytes = new Uint8Array(length);
     let offset = 0;
     for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.length; }
-    let body: unknown;
-    try { body = JSON.parse(new TextDecoder().decode(bytes)); }
-    catch { return reply(400, "invalid_json"); }
+    const body = decodeGrowWebhookBody(new TextDecoder().decode(bytes));
+    if (!body) return reply(400, "invalid_body");
     const payment = parseGrowPayment(body);
     if (!payment) return reply(422, "not_a_successful_payment");
     const { error: insertError } = await db.from("book_orders").upsert(payment, {

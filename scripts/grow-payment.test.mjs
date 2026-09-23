@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { parseGrowPayment, cents } from '../src/lib/grow-payment.ts';
+import { parseGrowPayment, decodeGrowWebhookBody, cents } from '../src/lib/grow-payment.ts';
 
 const fixture = { status: '1', data: {
   statusCode: '2', transactionId: 'test-123', sum: '163', fullName: 'בדיקת מערכת',
@@ -37,4 +37,12 @@ test('flat Grow transaction format and unknown shipping are preserved', () => {
 test('money is integer agorot and rejects malformed amounts', () => {
   assert.equal(cents('71.50'), 7150);
   for (const v of ['', null, '-1', '1.999', 'NaN', '1e3']) assert.equal(cents(v), null);
+});
+
+test('decodes Grow JSON and form-encoded webhook bodies', () => {
+  const payload = { status: '1', data: { statusCode: '2', transactionId: 'TX123', sum: '163' } };
+  assert.deepEqual(decodeGrowWebhookBody(JSON.stringify(payload)), payload);
+  const encoded = new URLSearchParams({ status: '1', data: JSON.stringify(payload.data) }).toString();
+  assert.deepEqual(decodeGrowWebhookBody(encoded), payload);
+  assert.equal(decodeGrowWebhookBody(''), null);
 });
