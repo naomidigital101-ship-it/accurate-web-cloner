@@ -8,7 +8,7 @@ export const Route = createFileRoute("/book-order")({
   head: () => ({
     meta: [
       { title: "קשר של תפילין — 23 סיפורים מהחיים" },
-      { name: "description", content: "23 סיפורים אמיתיים על אנשים שהתחילו להניח תפילין. בחרו מארז והמשיכו לתשלום מאובטח." },
+      { name: "description", content: "23 סיפורים על אנשים שהחליטו להתחיל להניח תפילין. בחרו מארז והמשיכו לתשלום מאובטח." },
       { name: "robots", content: "noindex, nofollow" },
       { property: "og:title", content: "קשר של תפילין — הספר של הרב עמיחי איל" },
       { property: "og:image", content: `${SITE_URL}/book/mock-two-copies.webp` },
@@ -77,18 +77,18 @@ function BookOrderPage() {
         <div className="cb-wrap cb-hero-wrap">
           <div className="cb-topline"><img src="/wp/img/לוגו-קשר-של-תפילין-01.svg" alt="קשר של תפילין" width="54" height="54" /><span>מיזם של עמותת אור חדש · ע״ר 580703965</span></div>
           <div className="cb-hero-grid">
-            <div className="cb-hero-copy"><p className="cb-kicker">ספר חדש · 23 סיפורים אמיתיים</p><h1 id="cb-title"><em>קשר של תפילין</em> — 23 סיפורים מהחיים על הנחת תפילין והתחלה של קשר</h1><p className="cb-lead">אחד ניצל בשבעה באוקטובר ושאל במה הוא יכול להודות. אדם אחר החליט להתחיל להניח תפילין בברלין. בספר תמצאו עוד 21 סיפורים אמיתיים על הרגע שבו התפילין נכנסו לחיים.</p><div className="cb-hero-actions"><a className="cb-button" href="#cb-offer">אני רוצה את הספר <span aria-hidden="true">←</span></a><span className="cb-from">מ־78 ₪ · שני עותקים ב־143 ₪</span></div><ul className="cb-hero-checks"><li>✓ משלוח עד הבית · עד 8 ימי עסקים</li><li>✓ איסוף עצמי בבית אל ללא עלות, בתיאום מראש</li><li>✓ תשלום מאובטח ב־Grow · ביטול לפי חוק</li></ul></div>
+            <div className="cb-hero-copy"><h1 id="cb-title"><em>קשר של תפילין</em> — 23 סיפורים מהחיים על הנחת תפילין והתחלה של קשר</h1><p className="cb-lead">אחד ניצל בשבעה באוקטובר ושאל במה הוא יכול להודות. אדם אחר החליט להתחיל להניח תפילין בברלין. בספר תמצאו עוד 21 סיפורים על הרגע שבו התפילין נכנסו לחיים.</p><div className="cb-hero-actions"><a className="cb-button" href="#cb-offer">אני רוצה את הספר <span aria-hidden="true">←</span></a><span className="cb-from">מ־78 ₪ · שני עותקים ב־143 ₪</span></div><ul className="cb-hero-checks"><li>✓ משלוח עד הבית · עד 8 ימי עסקים</li><li>✓ איסוף עצמי בבית אל ללא עלות, בתיאום מראש</li><li>✓ תשלום מאובטח ב־Grow · ביטול לפי חוק</li></ul></div>
             <figure className="cb-hero-book"><div className="cb-book-glow" aria-hidden="true" /><img src="/book/mock-hands.webp" alt="הספר קשר של תפילין מוחזק בידיים" width="900" height="1125" fetchPriority="high" /></figure>
           </div>
           <div className="cb-facts"><span><strong>23</strong> סיפורים</span><span><strong>184</strong> עמודים</span><span><strong>כריכה רכה</strong> · עברית</span></div>
         </div>
       </section>
 
-      <section className="cb-section cb-now" data-reveal><div className="cb-narrow"><p className="cb-eyebrow">למה דווקא עכשיו</p><h2>מאז 7 באוקטובר, אנשים רבים מחפשים דרך להתחבר מחדש — ולא תמיד יודעים איפה להתחיל</h2><p>הספר הזה לא מסביר הלכה ולא מטיף. הוא מביא 23 אנשים אמיתיים, כל אחד מנקודת פתיחה אחרת, ומספר מה הוביל אותם לרגע שבו החליטו להניח תפילין.</p></div></section>
+      <section className="cb-section cb-now" data-reveal><div className="cb-narrow"><p className="cb-eyebrow">למה דווקא עכשיו</p><h2>מאז 7 באוקטובר, אנשים רבים מחפשים דרך להתחבר מחדש — ולא תמיד יודעים איפה להתחיל</h2><p>הספר הזה לא מסביר הלכה ולא מטיף. הוא מביא 23 אנשים שונים, כל אחד מנקודת פתיחה אחרת, ומספר מה הוביל אותם לרגע שבו החליטו להניח תפילין.</p></div></section>
 
       <section id="cb-sample" className="cb-excerpt" data-reveal><div className="cb-wrap cb-excerpt-grid"><div className="cb-section-heading"><p className="cb-eyebrow">קטע מתוך הסיפור הראשון</p><h2>כך נשמע הספר מבפנים</h2><p>כמה שורות מתוך הסיפור הפותח. אם הקול הזה מדבר אליכם — שאר 22 הסיפורים כתובים באותה רוח.</p></div><blockquote><footer>קשר של תפילין / על הניסים ועל הנפלא־אות</footer><p>״ומה אני יכול לעשות כדי להודות לאלוקים שהציל אותי ונתן לי את החיים במתנה?״ שאל יזהר.</p><p><strong>״תפילין. תתחיל להניח תפילין!״ ענה הרב ישירות.</strong></p><p>הדברים ששמע המשיכו להדהד בראשו. גם עכשיו, תוך כדי הטיול עם הכלב, הוא נזכר בדברי הרב — והחליט שהגיע הזמן. הוא פסע בחזרה הביתה בצעדים מהירים, פתח את המגירה, הוציא את הפתק עם המספר והתקשר.</p></blockquote></div></section>
 
-      <section className="cb-section" data-reveal><div className="cb-wrap"><div className="cb-section-heading"><p className="cb-eyebrow">מה מחכה לכם בפנים</p><h2>23 סיפורים, 184 עמודים, קול אחד אמיתי</h2></div><div className="cb-pillars"><article><span>01</span><h3>סיפורים, לא הטפה</h3><p>אנשים מספרים בקול שלהם על הרגע שבו החליטו. בלי מוסר השכל בסוף הפרק.</p></article><article><span>02</span><h3>כל אחד מנקודה אחרת</h3><p>מהעוטף, מהנובה, מברלין, מהצבא ומהבית. לכל קורא יש סיפור שהוא מזהה את עצמו בו.</p></article><article><span>03</span><h3>פרק לשיחה משפחתית</h3><p>כל סיפור עומד בפני עצמו בכמה עמודים — מתאים לקריאה בשבת או לשיחה עם נער.</p></article></div></div></section>
+      <section className="cb-section" data-reveal><div className="cb-wrap"><div className="cb-section-heading"><p className="cb-eyebrow">מה מחכה לכם בפנים</p><h2>23 סיפורים, 184 עמודים, וכל סיפור עומד בפני עצמו</h2></div><div className="cb-pillars"><article><span>01</span><h3>סיפורים, לא הטפה</h3><p>אנשים מספרים בקול שלהם על הרגע שבו החליטו. בלי מוסר השכל בסוף הפרק.</p></article><article><span>02</span><h3>כל אחד מנקודה אחרת</h3><p>מהעוטף, מהנובה, מברלין, מהצבא ומהבית. לכל קורא יש סיפור שהוא מזהה את עצמו בו.</p></article><article><span>03</span><h3>פרק לשיחה משפחתית</h3><p>כל סיפור עומד בפני עצמו בכמה עמודים — מתאים לקריאה בשבת או לשיחה עם נער.</p></article></div></div></section>
 
       <section className="cb-audience" data-reveal><div className="cb-wrap cb-audience-grid"><img src="/book/mock-father-son.webp" alt="אב ונער משוחחים ליד הספר קשר של תפילין" width="1200" height="800" loading="lazy" /><div><p className="cb-eyebrow">למי הספר מתאים</p><h2>ספר שפותח שיחה — לא רק ספר שקוראים לבד</h2><div className="cb-audience-list">{audiences.map(([title, text]) => <article key={title}><span>✓</span><div><h3>{title}</h3><p>{text}</p></div></article>)}</div></div></div></section>
 
@@ -107,3 +107,4 @@ function BookOrderPage() {
     <div className={`cb-sticky ${showBar ? "is-visible" : ""}`} aria-hidden={!showBar}><div className="cb-wrap"><span><strong>{bundle.title} · {total} ₪</strong><small>{delivery === "shipping" ? "כולל משלוח עד הבית" : "איסוף עצמי ללא עלות"}</small></span><a href="#cb-offer">להזמנה ←</a></div></div>
   </div>;
 }
+
