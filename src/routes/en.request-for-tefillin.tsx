@@ -111,6 +111,7 @@ function EnRequestForm() {
             delivery: values.current.delivery,
             value: 1,
           });
+          track("generate_lead", { lead_type: "request", lang: "en", value: 1, currency: "ILS" });
           setSent(true);
         } catch {
           track("form_error", { form_type: "request", lang: "en" });

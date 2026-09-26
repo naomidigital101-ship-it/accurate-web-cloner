@@ -4,6 +4,7 @@ import { ArrowLeft, BookOpen, Check, MapPin, Truck } from "lucide-react";
 import { SITE_URL } from "@/lib/site";
 import { Header } from "@/components/home/Header";
 import { SiteFooter } from "@/components/SiteFooter";
+import { track } from "@/lib/analytics";
 import bookCss from "@/book.css?url";
 
 export const Route = createFileRoute("/book")({
@@ -413,6 +414,21 @@ export function BookPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="kb-button"
+                    onClick={() =>
+                      track("begin_checkout", {
+                        currency: "ILS",
+                        value: total,
+                        page_type: "book_organic",
+                        delivery,
+                        items: [
+                          {
+                            item_name: "קשר של תפילין",
+                            quantity,
+                            price: bundle.price,
+                          },
+                        ],
+                      })
+                    }
                   >
                     להזמנת הספר <ArrowLeft size={18} aria-hidden="true" />
                   </a>

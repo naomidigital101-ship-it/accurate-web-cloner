@@ -152,6 +152,7 @@ export function RequestForm({ onSent }: { onSent?: () => void }) {
             delivery: values.current.delivery,
             value: 1,
           });
+          track("generate_lead", { lead_type: "request", lang: "he", value: 1, currency: "ILS" });
           setSent(true);
           onSent?.();
         } catch {
@@ -231,6 +232,7 @@ export function DonateForm({ onSent }: { onSent?: () => void }) {
             condition: values.current.condition,
             value: 1,
           });
+          track("generate_lead", { lead_type: "donate", lang: "he", value: 1, currency: "ILS" });
           setSent(true);
           onSent?.();
         } catch {

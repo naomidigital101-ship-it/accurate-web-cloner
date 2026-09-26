@@ -68,6 +68,7 @@ export const MAP: Readonly<Record<string, string>> = {
   "/letters/3": "/agreements",
   "/letters/ביס-בית-אל-חטיבת-הביניים": "/מכתבי-תודה",
   "/letters/הרב-דוד-יוסף-שליטא": "/agreements",
+  "/letters/הרב-אשר-וייס": "/agreements",
   "/letters/הרב-המקובל-חכם-אהרון-ביטון-שליטא": "/agreements",
   "/letters/הרב-שלמה-יהודה-בארי-הינוקא": "/agreements",
   "/letters/מכתב-ברכה-מהרב-אליקים-לבנון": "/agreements",

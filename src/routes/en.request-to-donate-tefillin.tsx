@@ -109,6 +109,7 @@ function EnDonateForm() {
             condition: values.current.condition,
             value: 1,
           });
+          track("generate_lead", { lead_type: "donate", lang: "en", value: 1, currency: "ILS" });
           setSent(true);
         } catch {
           track("form_error", { form_type: "donate", lang: "en" });
