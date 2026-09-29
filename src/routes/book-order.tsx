@@ -37,7 +37,6 @@ export const Route = createFileRoute("/book-order")({
   component: BookOrderPage,
 });
 
-type Delivery = "pickup" | "shipping";
 type Bundle = { quantity: number; title: string; price: number; shipping: number; badge?: string };
 
 const BUNDLES: Bundle[] = [
@@ -56,7 +55,8 @@ const GROUP_LINK =
     "שלום עמיחי, אשמח לבדוק הזמנה קבוצתית של הספר קשר של תפילין. הספרים מיועדים ל: __. מספר עותקים משוער: __. מועד רצוי: __. יישוב למשלוח או איסוף: __.",
   );
 
-const bundleTotal = (b: Bundle, d: Delivery) => b.price + (d === "shipping" ? b.shipping : 0);
+/** שני המחירים הסופיים של מארז. אופן הקבלה נבחר בדף התשלום של Grow, לא כאן. */
+const withShipping = (b: Bundle) => b.price + b.shipping;
 const perCopy = (n: number) => (Number.isInteger(n) ? `${n}` : `כ־${Math.round(n)}`);
 const ev = (name: string, params: Record<string, unknown> = {}) =>
   track(name, { page_type: "book_campaign", ...params });
@@ -98,7 +98,7 @@ const FAQS: [string, string][] = [
   ["האם הספר מתאים לנער בר מצווה?", "כן, בליווי של מבוגר. אפשר לקרוא את הספר יחד, או שהורה או מחנך יעיינו בו קודם ויבחרו סיפורים לקריאה משותפת, כי בחלק מהסיפורים יש תיאורי מלחמה והתמודדויות שמתאימים יותר לגיל מבוגר."],
   ["כמה עולה המשלוח ומתי הוא מגיע?", "משלוח עד הבית עולה 40 ₪ לעותק אחד ו־20 ₪ לשני עותקים. בשלושה עותקים המשלוח כלול במחיר. הספר מגיע תוך עד 8 ימי עסקים."],
   ["איפה אוספים את הספר?", "מארץ חמדה 33, בית אל, בתיאום מראש וללא תוספת תשלום. בשלב זה זו נקודת האיסוף היחידה."],
-  ["איך משלמים?", "בוחרים כאן מארז ואופן קבלה ולוחצים על כפתור התשלום. נפתח דף תשלום מאובטח של Grow עם המארז שבחרתם, ושם ממלאים את פרטי ההזמנה. אין צורך בשיחה נוספת."],
+  ["איך משלמים?", "בוחרים כאן מארז ולוחצים על כפתור התשלום. נפתח דף תשלום מאובטח של Grow עם המארז שבחרתם, ושם בוחרים איסוף עצמי או משלוח עד הבית וממלאים את פרטי ההזמנה. אין צורך בשיחה נוספת."],
   ["אפשר להזמין כמות לכיתה, לקהילה או לעובדים?", "כן. כתבו לרב עמיחי בוואטסאפ ל־054-6713966 כמה עותקים אתם צריכים ועד מתי. המחיר ותנאי האספקה להזמנה קבוצתית נקבעים בתיאום אישי."],
   ["אפשר לקבל הקדשה מהרב עמיחי?", "אחרי ההזמנה אפשר לכתוב בוואטסאפ ל־054-6713966 ולבדוק. זה תלוי בזמינות, ולא מובטח."],
   ["אפשר לבטל הזמנה?", "כן, תוך 14 יום מקבלת הספר, לפי חוק הגנת הצרכן. הפרטים המלאים בתקנון."],
@@ -106,16 +106,14 @@ const FAQS: [string, string][] = [
 
 function BookOrderPage() {
   const [quantity, setQuantity] = useState(2);
-  const [delivery, setDelivery] = useState<Delivery>("pickup");
   const [excerptOpen, setExcerptOpen] = useState(false);
   const [heroOut, setHeroOut] = useState(false);
   const [summaryIn, setSummaryIn] = useState(false);
-  // אחרי שהקורא בחר מארז או אופן קבלה, הפס הצף מציג את הבחירה והסכום ומוביל ישר לתשלום.
+  // אחרי שהקורא בחר מארז, הפס הצף מציג את הבחירה והסכום ומוביל ישר לתשלום.
   const [picked, setPicked] = useState(false);
   const summaryRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLElement>(null);
   const bundle = BUNDLES.find((b) => b.quantity === quantity)!;
-  const total = bundleTotal(bundle, delivery);
   // הפס הצף מופיע אחרי ההירו. לפני בחירה הוא מוביל לאזור ההזמנה ומוסתר ליד תיבת הסיכום;
   // אחרי בחירה הוא נשאר קבוע עם המארז, הסכום וכפתור תשלום ישיר.
   const barVisible = heroOut && (picked || !summaryIn);
@@ -172,22 +170,16 @@ function BookOrderPage() {
       items: [{ item_id: `kesher-book-${b.quantity}`, item_name: `קשר של תפילין - ${b.title}`, price: b.price, quantity: 1 }],
     });
   };
-  const chooseDelivery = (d: Delivery) => {
-    setDelivery(d);
-    setPicked(true);
-    ev("book_delivery_select", { delivery: d, bundle: quantity });
-  };
   const checkout = (location: string) => () => {
     ev("begin_checkout", {
       currency: "ILS",
-      value: total,
-      delivery,
+      value: bundle.price,
       bundle: quantity,
       location,
-      items: [{ item_id: `kesher-book-${quantity}`, item_name: `קשר של תפילין - ${bundle.title}`, price: total, quantity: 1 }],
+      items: [{ item_id: `kesher-book-${quantity}`, item_name: `קשר של תפילין - ${bundle.title}`, price: bundle.price, quantity: 1 }],
     });
     try {
-      localStorage.setItem(CHECKOUT_STORAGE_KEY, JSON.stringify({ quantity, delivery, total, at: Date.now() }));
+      localStorage.setItem(CHECKOUT_STORAGE_KEY, JSON.stringify({ quantity, delivery: "chosen_in_grow", total: bundle.price, at: Date.now() }));
     } catch {
       /* מצב פרטי או חסימת אחסון - המדידה לא שוברת את התשלום */
     }
@@ -417,57 +409,44 @@ function BookOrderPage() {
           <div className="kb-wrap">
             <div className="kb-order-head">
               <h2 id="kb-order-title">בחרו כמה עותקים</h2>
-              <p>184 עמודים, כריכה רכה. המחיר שמופיע הוא הסכום לתשלום, כולל המשלוח אם בחרתם בו.</p>
+              <p>184 עמודים, כריכה רכה. לכל מארז מופיעים שני מחירים סופיים: באיסוף עצמי מבית אל ובמשלוח עד הבית. איך לקבל את הספר בוחרים בדף התשלום.</p>
             </div>
 
             <fieldset className="kb-bundles">
               <legend className="kb-sr">כמה עותקים</legend>
               {BUNDLES.map((b) => {
                 const selected = b.quantity === quantity;
-                const now = bundleTotal(b, delivery);
                 return (
                   <label key={b.quantity} className={`kb-bundle ${selected ? "is-selected" : ""}`}>
-                    <input type="radio" name="kb-qty" checked={selected} onChange={() => chooseBundle(b)} />
+                    <input type="radio" name="kb-qty" checked={selected} onChange={() => chooseBundle(b)} onClick={() => setPicked(true)} />
                     {b.badge && <span className="kb-badge">{b.badge}</span>}
                     <span className="kb-bundle-title">{b.title}</span>
-                    <span className="kb-bundle-price">{now} ₪</span>
+                    <span className="kb-bundle-price">{b.price} ₪</span>
                     <span className="kb-bundle-rows">
                       {b.shipping === 0 ? (
-                        <span>אותו מחיר באיסוף עצמי ובמשלוח עד הבית</span>
+                        <span>כולל משלוח עד הבית, או איסוף עצמי באותו מחיר</span>
                       ) : (
                         <>
-                          <span>איסוף עצמי: {b.price} ₪</span>
-                          <span>עד הבית: {b.price + b.shipping} ₪</span>
+                          <span>באיסוף עצמי</span>
+                          <span>עם משלוח עד הבית: {withShipping(b)} ₪</span>
                         </>
                       )}
                     </span>
                     {b.quantity > 1 && (
-                      <span className="kb-bundle-unit">{perCopy(now / b.quantity)} ₪ לעותק{delivery === "shipping" ? ", כולל משלוח" : ""}</span>
+                      <span className="kb-bundle-unit">{perCopy(b.price / b.quantity)} ₪ לעותק</span>
                     )}
                   </label>
                 );
               })}
             </fieldset>
 
-            <fieldset className="kb-delivery">
-              <legend>איך תקבלו את הספר?</legend>
-              <label className={delivery === "pickup" ? "is-selected" : ""}>
-                <input type="radio" name="kb-delivery" checked={delivery === "pickup"} onChange={() => chooseDelivery("pickup")} />
-                <span><strong>איסוף עצמי, ללא עלות</strong><small>ארץ חמדה 33, בית אל, בתיאום מראש</small></span>
-              </label>
-              <label className={delivery === "shipping" ? "is-selected" : ""}>
-                <input type="radio" name="kb-delivery" checked={delivery === "shipping"} onChange={() => chooseDelivery("shipping")} />
-                <span>
-                  <strong>משלוח עד הבית, {bundle.shipping === 0 ? "כלול במחיר" : `${bundle.shipping} ₪`}</strong>
-                  <small>מגיע תוך עד 8 ימי עסקים</small>
-                </span>
-              </label>
-            </fieldset>
-
             <div className="kb-summary" ref={summaryRef}>
               <div className="kb-summary-row" aria-live="polite">
-                <span>{bundle.title} · {delivery === "shipping" ? "משלוח עד הבית" : "איסוף עצמי"}</span>
-                <strong data-testid="order-total">{total} ₪</strong>
+                <span>{bundle.title}</span>
+                <dl className="kb-summary-prices">
+                  <div><dt>איסוף עצמי מבית אל</dt><dd data-testid="order-total">{bundle.price} ₪</dd></div>
+                  <div><dt>משלוח עד הבית{bundle.shipping === 0 ? " (כלול)" : ""}</dt><dd>{withShipping(bundle)} ₪</dd></div>
+                </dl>
               </div>
               <a
                 className="kb-btn kb-btn-block"
@@ -480,8 +459,8 @@ function BookOrderPage() {
               </a>
               <ol className="kb-steps">
                 <li>נפתח דף תשלום של Grow עם המארז שבחרתם.</li>
-                <li>בדף של Grow בוחרים שוב ״{delivery === "shipping" ? "משלוח עד הבית" : "איסוף עצמי"}״, ממלאים את פרטי ההזמנה ומשלמים {total} ₪.</li>
-                <li>{delivery === "shipping" ? "הספר מגיע אליכם תוך עד 8 ימי עסקים." : "מתאמים איסוף מבית אל."} שאלות: <a href="tel:0546713966">054-6713966</a></li>
+                <li>שם בוחרים איסוף עצמי או משלוח עד הבית, ממלאים את פרטי ההזמנה ומשלמים.</li>
+                <li>משלוח מגיע תוך עד 8 ימי עסקים. איסוף מארץ חמדה 33, בית אל, בתיאום מראש. שאלות: <a href="tel:0546713966">054-6713966</a></li>
               </ol>
             </div>
 
@@ -542,9 +521,9 @@ function BookOrderPage() {
           {picked ? (
             <>
               <span aria-live="polite">
-                <strong>{bundle.title} · {total} ₪</strong>
+                <strong>{bundle.title} · {bundle.price} ₪</strong>
                 <small>
-                  {delivery === "shipping" ? (bundle.shipping === 0 ? "משלוח עד הבית כלול" : `כולל משלוח עד הבית (${bundle.shipping} ₪)`) : "איסוף עצמי מבית אל, ללא עלות"}
+                  {bundle.shipping === 0 ? "כולל משלוח עד הבית" : `באיסוף עצמי, או ${withShipping(bundle)} ₪ עם משלוח`}
                 </small>
               </span>
               <a href={PURCHASE_LINKS[quantity]} target="_blank" rel="noopener noreferrer" tabIndex={barVisible ? 0 : -1} onClick={checkout("sticky")}>
