@@ -23,6 +23,7 @@ import { Route as EnRouteImport } from './routes/en'
 import { Route as DonateRouteImport } from './routes/donate'
 import { Route as CertificatesRouteImport } from './routes/certificates'
 import { Route as BrandingRouteImport } from './routes/branding'
+import { Route as BookThanksRouteImport } from './routes/book-thanks'
 import { Route as BookOrderRouteImport } from './routes/book-order'
 import { Route as BookRouteImport } from './routes/book'
 import { Route as AgreementsRouteImport } from './routes/agreements'
@@ -131,6 +132,11 @@ const CertificatesRoute = CertificatesRouteImport.update({
 const BrandingRoute = BrandingRouteImport.update({
   id: '/branding',
   path: '/branding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookThanksRoute = BookThanksRouteImport.update({
+  id: '/book-thanks',
+  path: '/book-thanks',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BookOrderRoute = BookOrderRouteImport.update({
@@ -323,6 +329,7 @@ export interface FileRoutesByFullPath {
   '/agreements': typeof AgreementsRoute
   '/book': typeof BookRoute
   '/book-order': typeof BookOrderRoute
+  '/book-thanks': typeof BookThanksRoute
   '/branding': typeof BrandingRoute
   '/certificates': typeof CertificatesRoute
   '/donate': typeof DonateRoute
@@ -374,6 +381,7 @@ export interface FileRoutesByTo {
   '/agreements': typeof AgreementsRoute
   '/book': typeof BookRoute
   '/book-order': typeof BookOrderRoute
+  '/book-thanks': typeof BookThanksRoute
   '/branding': typeof BrandingRoute
   '/certificates': typeof CertificatesRoute
   '/donate': typeof DonateRoute
@@ -426,6 +434,7 @@ export interface FileRoutesById {
   '/agreements': typeof AgreementsRoute
   '/book': typeof BookRoute
   '/book-order': typeof BookOrderRoute
+  '/book-thanks': typeof BookThanksRoute
   '/branding': typeof BrandingRoute
   '/certificates': typeof CertificatesRoute
   '/donate': typeof DonateRoute
@@ -480,6 +489,7 @@ export interface FileRouteTypes {
     | '/agreements'
     | '/book'
     | '/book-order'
+    | '/book-thanks'
     | '/branding'
     | '/certificates'
     | '/donate'
@@ -531,6 +541,7 @@ export interface FileRouteTypes {
     | '/agreements'
     | '/book'
     | '/book-order'
+    | '/book-thanks'
     | '/branding'
     | '/certificates'
     | '/donate'
@@ -582,6 +593,7 @@ export interface FileRouteTypes {
     | '/agreements'
     | '/book'
     | '/book-order'
+    | '/book-thanks'
     | '/branding'
     | '/certificates'
     | '/donate'
@@ -635,6 +647,7 @@ export interface RootRouteChildren {
   AgreementsRoute: typeof AgreementsRoute
   BookRoute: typeof BookRoute
   BookOrderRoute: typeof BookOrderRoute
+  BookThanksRoute: typeof BookThanksRoute
   BrandingRoute: typeof BrandingRoute
   CertificatesRoute: typeof CertificatesRoute
   DonateRoute: typeof DonateRoute
@@ -751,6 +764,13 @@ declare module '@tanstack/react-router' {
       path: '/branding'
       fullPath: '/branding'
       preLoaderRoute: typeof BrandingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/book-thanks': {
+      id: '/book-thanks'
+      path: '/book-thanks'
+      fullPath: '/book-thanks'
+      preLoaderRoute: typeof BookThanksRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/book-order': {
@@ -1087,6 +1107,7 @@ const rootRouteChildren: RootRouteChildren = {
   AgreementsRoute: AgreementsRoute,
   BookRoute: BookRoute,
   BookOrderRoute: BookOrderRoute,
+  BookThanksRoute: BookThanksRoute,
   BrandingRoute: BrandingRoute,
   CertificatesRoute: CertificatesRoute,
   DonateRoute: DonateRoute,
