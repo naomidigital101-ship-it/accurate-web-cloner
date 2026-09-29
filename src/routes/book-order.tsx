@@ -91,11 +91,15 @@ const RABBIS = [
   { name: "הרב יצחק זילברשטיין", img: "/wp/thumbs/uploads-2024-04-רב-זילברמן-3-1.webp", letter: "/wp/uploads/2024/04/מכתב-הסכמה-מהרב-זילברשטיין-scaled.webp" },
   { name: "הרב זלמן ברוך מלמד", img: "/wp/thumbs/uploads-2024-04-הרב-זלמן-מלמד-2.webp", letter: "/wp/uploads/2024/04/מכתב-ברכה-הרב-זלמן-ברוך-מלמד-scaled.webp" },
 ];
+// מיושר לשאלות בעמוד /book, בתוספת הקדשה וביטול. מחירי המשלוח כאן חייבים להתאים ל-BUNDLES.
 const FAQS: [string, string][] = [
-  ["זה ספר הלכה או מדריך להנחת תפילין?", "לא. זה ספר סיפורים. הוא מספר על האנשים ועל ההחלטות שלהם, ולא מלמד איך להניח. לא צריך ידע מוקדם כדי לקרוא אותו."],
-  ["הסיפורים קרו באמת?", "כן. את כל האנשים בספר פגש הרב עמיחי בעצמו, במסגרת מיזם ״קשר של תפילין״, ושמע מהם את הסיפור. שמות ופרטים מזהים שונו כדי לשמור על פרטיותם."],
-  ["הספר מתאים לנער לקראת בר מצווה?", "כן, בליווי של מבוגר. חלק מהסיפורים עוסקים במלחמה, ב־7 באוקטובר ובאובדן. כדאי שהורה יעבור קודם על הספר ויבחר סיפורים לקריאה משותפת."],
-  ["כמה זמן לוקח המשלוח, ומאיפה אוספים?", "משלוח עד הבית מגיע תוך עד 8 ימי עסקים. איסוף עצמי הוא מארץ חמדה 33, בית אל, בתיאום מראש וללא עלות."],
+  ["האם זה ספר הלכה או מדריך להנחת תפילין?", "לא. זה ספר סיפורים על האנשים, המפגשים וההחלטות שמאחורי הנחת התפילין. הוא אינו מלמד איך להניח ואינו תחליף למדריך הלכתי, ולא צריך ידע מוקדם כדי לקרוא אותו."],
+  ["הסיפורים מבוססים על אנשים אמיתיים?", "כן. הסיפורים הגיעו לרב עמיחי במסגרת מיזם ״קשר של תפילין״, והוא פגש בעצמו את האנשים שבספר. חלק מהשמות והפרטים המזהים שונו כדי לשמור על פרטיות המספרים."],
+  ["האם הספר מתאים לנער בר מצווה?", "כן, בליווי של מבוגר. אפשר לקרוא את הספר יחד, או שהורה או מחנך יעיינו בו קודם ויבחרו סיפורים לקריאה משותפת, כי בחלק מהסיפורים יש תיאורי מלחמה והתמודדויות שמתאימים יותר לגיל מבוגר."],
+  ["כמה עולה המשלוח ומתי הוא מגיע?", "משלוח עד הבית עולה 40 ₪ לעותק אחד ו־20 ₪ לשני עותקים. בשלושה עותקים המשלוח כלול במחיר. הספר מגיע תוך עד 8 ימי עסקים."],
+  ["איפה אוספים את הספר?", "מארץ חמדה 33, בית אל, בתיאום מראש וללא תוספת תשלום. בשלב זה זו נקודת האיסוף היחידה."],
+  ["איך משלמים?", "בוחרים כאן מארז ואופן קבלה ולוחצים על כפתור התשלום. נפתח דף תשלום מאובטח של Grow עם המארז שבחרתם, ושם ממלאים את פרטי ההזמנה. אין צורך בשיחה נוספת."],
+  ["אפשר להזמין כמות לכיתה, לקהילה או לעובדים?", "כן. כתבו לרב עמיחי בוואטסאפ ל־054-6713966 כמה עותקים אתם צריכים ועד מתי. המחיר ותנאי האספקה להזמנה קבוצתית נקבעים בתיאום אישי."],
   ["אפשר לקבל הקדשה מהרב עמיחי?", "אחרי ההזמנה אפשר לכתוב בוואטסאפ ל־054-6713966 ולבדוק. זה תלוי בזמינות, ולא מובטח."],
   ["אפשר לבטל הזמנה?", "כן, תוך 14 יום מקבלת הספר, לפי חוק הגנת הצרכן. הפרטים המלאים בתקנון."],
 ];
@@ -104,11 +108,17 @@ function BookOrderPage() {
   const [quantity, setQuantity] = useState(2);
   const [delivery, setDelivery] = useState<Delivery>("pickup");
   const [excerptOpen, setExcerptOpen] = useState(false);
-  const [barVisible, setBarVisible] = useState(false);
+  const [heroOut, setHeroOut] = useState(false);
+  const [summaryIn, setSummaryIn] = useState(false);
+  // אחרי שהקורא בחר מארז או אופן קבלה, הפס הצף מציג את הבחירה והסכום ומוביל ישר לתשלום.
+  const [picked, setPicked] = useState(false);
+  const summaryRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLElement>(null);
-  const orderRef = useRef<HTMLElement>(null);
   const bundle = BUNDLES.find((b) => b.quantity === quantity)!;
   const total = bundleTotal(bundle, delivery);
+  // הפס הצף מופיע אחרי ההירו. לפני בחירה הוא מוביל לאזור ההזמנה ומוסתר ליד תיבת הסיכום;
+  // אחרי בחירה הוא נשאר קבוע עם המארז, הסכום וכפתור תשלום ישיר.
+  const barVisible = heroOut && (picked || !summaryIn);
 
   useEffect(() => {
     ev("view_item", {
@@ -117,19 +127,14 @@ function BookOrderPage() {
       items: [{ item_id: "kesher-book", item_name: "קשר של תפילין", price: 78, quantity: 1 }],
     });
 
-    // הפס הדביק מופיע רק אחרי ההירו ונעלם כשאזור ההזמנה על המסך - אין טעם בשני כפתורים לאותה פעולה.
-    let heroOut = false;
-    let orderIn = false;
-    const sync = () => setBarVisible(heroOut && !orderIn);
     const io = new IntersectionObserver((entries) => {
       for (const e of entries) {
-        if (e.target === heroRef.current) heroOut = !e.isIntersecting;
-        if (e.target === orderRef.current) orderIn = e.isIntersecting;
+        if (e.target === heroRef.current) setHeroOut(!e.isIntersecting);
+        if (e.target === summaryRef.current) setSummaryIn(e.isIntersecting);
       }
-      sync();
     });
     if (heroRef.current) io.observe(heroRef.current);
-    if (orderRef.current) io.observe(orderRef.current);
+    if (summaryRef.current) io.observe(summaryRef.current);
 
     const nodes = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
     let revealIo: IntersectionObserver | undefined;
@@ -160,6 +165,7 @@ function BookOrderPage() {
   };
   const chooseBundle = (b: Bundle) => {
     setQuantity(b.quantity);
+    setPicked(true);
     ev("select_item", {
       item_list_name: "book_bundles",
       bundle: b.quantity,
@@ -168,14 +174,16 @@ function BookOrderPage() {
   };
   const chooseDelivery = (d: Delivery) => {
     setDelivery(d);
+    setPicked(true);
     ev("book_delivery_select", { delivery: d, bundle: quantity });
   };
-  const checkout = () => {
+  const checkout = (location: string) => () => {
     ev("begin_checkout", {
       currency: "ILS",
       value: total,
       delivery,
       bundle: quantity,
+      location,
       items: [{ item_id: `kesher-book-${quantity}`, item_name: `קשר של תפילין - ${bundle.title}`, price: total, quantity: 1 }],
     });
     try {
@@ -405,7 +413,7 @@ function BookOrderPage() {
         </section>
 
         {/* 7-8. מה מקבלים, כמה זה עולה, מה קורה אחרי הלחיצה */}
-        <section id="kb-order" ref={orderRef} className="kb-order" aria-labelledby="kb-order-title">
+        <section id="kb-order" className="kb-order" aria-labelledby="kb-order-title">
           <div className="kb-wrap">
             <div className="kb-order-head">
               <h2 id="kb-order-title">בחרו כמה עותקים</h2>
@@ -456,7 +464,7 @@ function BookOrderPage() {
               </label>
             </fieldset>
 
-            <div className="kb-summary">
+            <div className="kb-summary" ref={summaryRef}>
               <div className="kb-summary-row" aria-live="polite">
                 <span>{bundle.title} · {delivery === "shipping" ? "משלוח עד הבית" : "איסוף עצמי"}</span>
                 <strong data-testid="order-total">{total} ₪</strong>
@@ -466,13 +474,13 @@ function BookOrderPage() {
                 href={PURCHASE_LINKS[quantity]}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={checkout}
+                onClick={checkout("summary")}
               >
                 למעבר לתשלום מאובטח <span aria-hidden="true">←</span>
               </a>
               <ol className="kb-steps">
                 <li>נפתח דף תשלום של Grow עם המארז שבחרתם.</li>
-                <li>שם בוחרים שוב משלוח או איסוף, ממלאים את פרטי ההזמנה ומשלמים.</li>
+                <li>בדף של Grow בוחרים שוב ״{delivery === "shipping" ? "משלוח עד הבית" : "איסוף עצמי"}״, ממלאים את פרטי ההזמנה ומשלמים {total} ₪.</li>
                 <li>{delivery === "shipping" ? "הספר מגיע אליכם תוך עד 8 ימי עסקים." : "מתאמים איסוף מבית אל."} שאלות: <a href="tel:0546713966">054-6713966</a></li>
               </ol>
             </div>
@@ -531,13 +539,29 @@ function BookOrderPage() {
 
       <div className={`kb-bar ${barVisible ? "is-visible" : ""}`} aria-hidden={!barVisible}>
         <div className="kb-bar-in">
-          <span>
-            <strong>קשר של תפילין</strong>
-            <small>23 סיפורים · מ־78 ₪</small>
-          </span>
-          <a href="#kb-order" tabIndex={barVisible ? 0 : -1} onClick={ctaClick("sticky")}>
-            להזמנה
-          </a>
+          {picked ? (
+            <>
+              <span aria-live="polite">
+                <strong>{bundle.title} · {total} ₪</strong>
+                <small>
+                  {delivery === "shipping" ? (bundle.shipping === 0 ? "משלוח עד הבית כלול" : `כולל משלוח עד הבית (${bundle.shipping} ₪)`) : "איסוף עצמי מבית אל, ללא עלות"}
+                </small>
+              </span>
+              <a href={PURCHASE_LINKS[quantity]} target="_blank" rel="noopener noreferrer" tabIndex={barVisible ? 0 : -1} onClick={checkout("sticky")}>
+                לתשלום ←
+              </a>
+            </>
+          ) : (
+            <>
+              <span>
+                <strong>קשר של תפילין</strong>
+                <small>23 סיפורים · מ־78 ₪</small>
+              </span>
+              <a href="#kb-order" tabIndex={barVisible ? 0 : -1} onClick={ctaClick("sticky")}>
+                לבחירת מארז
+              </a>
+            </>
+          )}
         </div>
       </div>
     </div>
