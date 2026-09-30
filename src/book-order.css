@@ -104,6 +104,14 @@
 .kb-excerpt{padding-block:clamp(52px,9vw,96px);background:var(--paper-2);border-block:1px solid var(--line);scroll-margin-top:8px}
 .kb-excerpt h2{font-family:var(--serif);font-weight:700}
 .kb-excerpt-intro{margin-top:12px;font-size:18px;color:var(--text)}
+.kb-tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+.kb-tabs button{display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-height:64px;padding:10px 14px;background:#fff;border:2px solid var(--line);border-radius:12px;font:inherit;text-align:start;cursor:pointer;color:var(--ink)}
+.kb-tabs button strong{font-family:var(--serif);font-size:17px;line-height:1.3}
+.kb-tabs button small{font-size:14px;color:var(--muted)}
+.kb-tabs button.is-active{border-color:var(--violet);box-shadow:0 8px 20px -12px rgba(67,4,196,.5)}
+.kb-page-time{font-family:Maadim,Heebo,sans-serif;font-size:14px;font-weight:700;color:var(--violet);margin-top:14px}
+.kb-excerpt-cta{margin-top:26px;font-size:18px;font-weight:700;color:var(--ink)}
+.kb-excerpt-cta+.kb-btn{margin-top:10px}
 .kb-page{position:relative;margin-top:26px;padding:26px 22px 30px;background:#fff;border:1px solid var(--line);border-radius:4px;box-shadow:0 1px 0 var(--line),0 18px 40px -18px rgba(22,16,74,.25)}
 .kb-page-head{font-size:13px;color:var(--muted);padding-bottom:12px;margin-bottom:18px;border-bottom:1px solid var(--line);text-align:center;letter-spacing:.02em}
 .kb-page-body{font-family:var(--serif);font-size:19px;line-height:1.85;color:#221e3a}

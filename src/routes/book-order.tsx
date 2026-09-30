@@ -86,6 +86,25 @@ const MORE_STARTS = [
   "אב לחמישה שביקש מאלוקים סימן, וקיבל אותו למחרת ברחוב",
   "ישראלי באלפים הצרפתיים שלא הצליח להבין למה מה שקורה בארץ לא נותן לו מנוח",
 ];
+const EXCERPTS = [
+  {
+    id: "beach",
+    quote: "״בוא תניח גם אתה״",
+    place: "חוף בסרי לנקה",
+    story: "חוף מבטחים",
+    intro: "גלי, גולש מבת ים, טס לשלושה שבועות לסרי לנקה בשביל הגלים. הוא פוגש שם את יובל, ישראלי שכמעט לא מדבר.",
+    after: "הסיפור של גלי ממשיך בשיחה עם הרב עמיחי. הוא אמר לו ביושר שהוא לא מתכוון להפסיק לגלוש בשבת, וקיבל תפילין.",
+  },
+  {
+    id: "bank",
+    quote: "״אתה מבין מה קורה פה?״",
+    place: "שתי שיחות בבנק",
+    story: "רק תגיד 'אני רוצה!'",
+    intro: "ב־8:07 מתקשר לוורד מבנק מזרחי ניצן, בנקאי מסניף באר שבע שמשפחתו פונתה מהעוטף. באמצע שיחת עבודה הוא מספר לה שהוא חושב להתחיל להניח תפילין, אבל אין לו. היא מבטיחה לבדוק מה אפשר לעשות. 19 דקות אחר כך הטלפון שלה מצלצל שוב.",
+    after: "באותו יום ניצן התקשר לרב עמיחי. יומיים אחר כך הרב הביא את התפילין לסניף הבנק בירושלים, כדי שיעברו משם לניצן בבאר שבע.",
+  },
+] as const;
+type ExcerptId = (typeof EXCERPTS)[number]["id"];
 const RABBIS = [
   { name: "הרב דוד יוסף", img: "/wp/thumbs/uploads-2026-05-הרב-דוד-יוסף-min.webp", letter: "/wp/uploads/2026/05/מכתב-מהראשלצ.webp" },
   { name: "הרב יצחק זילברשטיין", img: "/wp/thumbs/uploads-2024-04-רב-זילברמן-3-1.webp", letter: "/wp/uploads/2024/04/מכתב-הסכמה-מהרב-זילברשטיין-scaled.webp" },
@@ -107,6 +126,8 @@ const FAQS: [string, string][] = [
 function BookOrderPage() {
   const [quantity, setQuantity] = useState(2);
   const [excerptOpen, setExcerptOpen] = useState(false);
+  const [excerptTab, setExcerptTab] = useState<ExcerptId>("beach");
+  const excerpt = EXCERPTS.find((x) => x.id === excerptTab)!;
   const [heroOut, setHeroOut] = useState(false);
   const [summaryIn, setSummaryIn] = useState(false);
   // אחרי שהקורא בחר מארז, הפס הצף מציג את הבחירה והסכום ומוביל ישר לתשלום.
@@ -160,6 +181,11 @@ function BookOrderPage() {
   const openExcerpt = (location: string) => {
     if (!excerptOpen) ev("book_excerpt_open", { location });
     setExcerptOpen(true);
+  };
+  const chooseExcerpt = (id: ExcerptId) => {
+    setExcerptTab(id);
+    setExcerptOpen(false);
+    ev("book_excerpt_tab", { story: id });
   };
   const chooseBundle = (b: Bundle) => {
     setQuantity(b.quantity);
@@ -278,14 +304,32 @@ function BookOrderPage() {
         {/* 4. הקול של הספר */}
         <section id="kb-excerpt" className="kb-excerpt" aria-labelledby="kb-excerpt-title">
           <div className="kb-narrow">
-            <p className="kb-kicker">קטע מתוך הספר</p>
-            <h2 id="kb-excerpt-title">״בוא תניח גם אתה״</h2>
-            <p className="kb-excerpt-intro">
-              גלי, גולש מבת ים, טס לשלושה שבועות לסרי לנקה בשביל הגלים. הוא פוגש שם את יובל, ישראלי שכמעט לא מדבר.
-            </p>
-            <article className={`kb-page ${excerptOpen ? "is-open" : ""}`} aria-label="קטע מתוך הסיפור חוף מבטחים">
-              <p className="kb-page-head">קשר של תפילין · חוף מבטחים</p>
-              <div className="kb-page-body" id="kb-excerpt-body">
+            <p className="kb-kicker">קטעים מתוך הספר</p>
+            <h2 id="kb-excerpt-title">קראו לפני שאתם מזמינים</h2>
+            <div className="kb-tabs" role="tablist" aria-label="בחירת קטע">
+              {EXCERPTS.map((x) => (
+                <button
+                  key={x.id}
+                  type="button"
+                  role="tab"
+                  id={`kb-tab-${x.id}`}
+                  aria-selected={excerptTab === x.id}
+                  aria-controls="kb-excerpt-panel"
+                  className={excerptTab === x.id ? "is-active" : ""}
+                  onClick={() => chooseExcerpt(x.id)}
+                >
+                  <strong>{x.quote}</strong>
+                  <small>{x.place}</small>
+                </button>
+              ))}
+            </div>
+            <div id="kb-excerpt-panel" role="tabpanel" aria-labelledby={`kb-tab-${excerptTab}`}>
+              <p className="kb-excerpt-intro">{excerpt.intro}</p>
+              <article className={`kb-page ${excerptOpen ? "is-open" : ""}`} aria-label={`קטע מתוך הסיפור ${excerpt.story}`}>
+                <p className="kb-page-head">קשר של תפילין · {excerpt.story}</p>
+                <div className="kb-page-body" id="kb-excerpt-body">
+                  {excerptTab === "beach" ? (
+                    <>
                 <p>אחרי כמה ימים שהיינו יחד, יצא לנו להיות ביחד על החוף שנינו לבד. אזרתי אומץ, ופניתי אל יובל ואמרתי: "אחי, תגיד, מה קורה איתך? הכל טוב?"</p>
                 <p>יובל שתק. אבל חיכיתי בסבלנות. השקט נמשך כמה דקות, ואני המשכתי לחכות בסבלנות. הרגשתי שהוא שמע את השאלה וחושב על התשובה. לא רציתי ללחוץ. ואז, יובל נעצר לרגע, הסתובב אליי, הסתכל לי בעיניים ולחש: "הייתי בנובה".</p>
                 <p>יותר מזה הוא לא היה צריך להגיד כלום. וואוו. הרגשתי כאילו פצצה נופלת עלי. לא ידעתי מה לענות לו. איך להגיב ומה להגיד, אבל אחרי רגע פשוט מצאתי את עצמי נותן לו חיבוק ענק מכל הלב. הרגשתי את יובל מחבק בחזרה. לחשתי לו באוזן: "אחי, אין כמוך. אוהב אותך!"</p>
@@ -298,22 +342,41 @@ function BookOrderPage() {
                 <p>בזמן שיובל קשר לי את התפילין על היד הרגשתי צמרמורת מוזרה בכל הגוף. אף פעם לא הרגשתי הרגשה כזו. הבנתי שזו לא רק התרגשות, אלא משהו רוחני שאני מתחבר אליו עכשיו. כשסיים להניח את התפילין על הראש שלי הרגשתי שוב את הצמרמורת הזו באופן בלתי מוסבר.</p>
                 <p>עמדתי בשתיקה. הרגליים נוגעות בחול. הראש נמצא בשמיים ועליו התפילין שמחברות את הכל לדבר אחד.</p>
                 <p>הסתכלתי אל מרחבי הים, אל השמיים האין-סופיים ואל קצה האופק המחבר ביניהם ופתאום כאילו הרגשתי את הנשמה שלי – מן הרגשה רוחנית מאוד עמוקה. הדמעות שהופיעו בטבעיות יצרו תחושת מחנק בגרון, ורק החיבוק שקיבלתי מיובל באותו רגע, עזר לי לשחרר אותן בלי להתבייש.</p>
-              </div>
-              {!excerptOpen && (
-                <button
-                  type="button"
-                  className="kb-page-more"
-                  aria-expanded="false"
-                  aria-controls="kb-excerpt-body"
-                  onClick={() => openExcerpt("excerpt")}
-                >
-                  להמשך הקטע
-                </button>
-              )}
-            </article>
-            <p className="kb-excerpt-after">
-              הסיפור של גלי ממשיך בשיחה עם הרב עמיחי. הוא אמר לו ביושר שהוא לא מתכוון להפסיק לגלוש בשבת, וקיבל תפילין.
-            </p>
+                    </>
+                  ) : (
+                    <>
+                      <p className="kb-page-time">8:26</p>
+                      <p>"בוקר טוב, בנק מזרחי, מדברת ורד, במה אפשר לעזור?"</p>
+                      <p>"שלום וברכה, בוקר טוב ורד, מדבר עמיחי. אני מנהל אצלכם חשבון של עמותה ואני צריך להעביר כסף למכון סת"ם שעשה לי עבודה, ומשום מה אני לא מצליח לעשות את זה דרך האתר של הבנק, את יכולה לעזור לי?"</p>
+                      <p>"אין בעיה, בוא נראה... זהו. לבצע העברה?"</p>
+                      <p>"כן. רק בבקשה תוסיפי שהתשלום עבור בדיקה ותיקון של 25 זוגות תפילין"</p>
+                      <p>"סליחה אדוני, אמרת שזה תשלום עבור תפילין וזה קשור לעמותה?"</p>
+                      <p>"כן, ב"ה אני מנהל ארגון ששמו 'קשר של תפילין' והמטרה היא לדאוג לתפילין לאנשים שרוצים להניח ואין להם אפשרות כרגע לרכוש את התפילין בעצמם, ויש מכון סת"ם ש..."</p>
+                      <p>"אני לא מאמינה! אני לא מאמינה! זה פשוט לא יאמן, איזו השגחה פרטית! סליחה אדוני, אבל אני חייבת לספר לך משהו. לפני כמה דקות דיברתי עם קולגה, בנקאי מסניף בדרום. אנחנו מכירים כבר שנים, הוא גר במושב בעוטף עזה ועכשיו הם מפונים. בחור ממש נחמד. לגמרי לא דתי וגם לא קרוב לזה, ועכשיו הוא מספר לי שהוא רוצה להתחיל להניח תפילין ואין לו. לא עברו כמה דקות ואתה מתקשר! אתה תוכל לעזור ולהביא לו תפילין?"</p>
+                      <p>"כן, בוודאי! בשמחה. תמסרי לו את מספר הטלפון שלי ובע"ה אדאג לו לתפילין"</p>
+                      <p>"וואוו, אני עם צמרמורת, אתה מבין מה קורה פה? איזו סיעתא דשמייא. איזו השגחה פרטית! פשוט לא יאמן! אני כבר מתקשרת אליו, קוראים לו ניצן".</p>
+                      <p className="kb-page-time">8:35</p>
+                      <p>הודעה מוֶרד לניצן: "ניצן, אתה לא תאמין! יש לך תפילין! ה' אוהב אותך!"</p>
+                      <p>ניצן: "מה? לא הבנתי. את רצינית?"</p>
+                      <p>ורד: "פשוט נס. אני רצינית לגמרי. בדיוק התקשר לבנק מישהו שמנהל ארגון שמחלק תפילין. דיברתי איתו והוא ישמח לעזור. הוא מכין לך זוג תפילין מהודרות. מתנה מאלוקים ישירות אליך. זה המספר שלו, תתקשר אליו".</p>
+                    </>
+                  )}
+                </div>
+                {!excerptOpen && (
+                  <button
+                    type="button"
+                    className="kb-page-more"
+                    aria-expanded="false"
+                    aria-controls="kb-excerpt-body"
+                    onClick={() => openExcerpt("excerpt")}
+                  >
+                    להמשך הקטע
+                  </button>
+                )}
+              </article>
+              <p className="kb-excerpt-after">{excerpt.after}</p>
+            </div>
+            <p className="kb-excerpt-cta">רוצים לקרוא את הסיפור המלא?</p>
             <a className="kb-btn kb-btn-quiet" href="#kb-order" onClick={ctaClick("excerpt")}>
               להזמנת הספר, מ־78 ₪ <span aria-hidden="true">←</span>
             </a>
@@ -375,7 +438,7 @@ function BookOrderPage() {
                 <p className="kb-kicker">מי שמע את הסיפורים</p>
                 <h2 id="kb-author-title">הרב עמיחי איל</h2>
                 <p>
-                  הרב עמיחי איל מבית אל הקים את מיזם ״קשר של תפילין״, שפועל במסגרת עמותת אור חדש. המיזם אוסף תפילין שאינן בשימוש, בודק ומחדש אותן, ומוסר אותן למי שרוצה להתחיל להניח.
+                  הרב עמיחי איל מבית אל עבד שנים כמחנך. כמה שבועות אחרי 7 באוקטובר התחילו להגיע אליו בקשות לתפילין בלי שפרסם דבר, ואז החליט, כלשונו, ״לעזוב את שאר עיסוקי ולהתמסר לשליחות הזו״. כך קם מיזם ״קשר של תפילין״, שפועל במסגרת עמותת אור חדש. המיזם אוסף תפילין שאינן בשימוש, בודק ומחדש אותן, ומוסר אותן למי שרוצה להתחיל להניח.
                 </p>
                 <p>
                   את כל האנשים שבספר הוא פגש בעצמו ושמע מהם את הסיפור. את הסיפורים כתב יחד איתו שמעון חי בן־שחר. שמות ופרטים מזהים שונו כדי לשמור על פרטיות המספרים.
