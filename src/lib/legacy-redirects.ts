@@ -32,20 +32,31 @@ export const GONE: ReadonlySet<string> = new Set([
 
 /** נתיבים שהתאחדו לעמוד מרכזי, או ששינו כתובת */
 export const MAP: Readonly<Record<string, string>> = {
+  "/wp-content/uploads/2024/01/צפנת-פענח.pdf":
+    "/wp/uploads/2024/01/צפנת-פענח.pdf",
   "/en/letters": "/en/thank-you-letters",
   "/en/letters/2rabbi-yitzhak-zilberstein": "/en/rabbis-agreements",
   "/en/letters/3rabbi-osher-weiss": "/en/rabbis-agreements",
-  "/en/letters/a-heartfelt-thank-you-letter-to-the-brothers": "/en/thank-you-letters",
+  "/en/letters/a-heartfelt-thank-you-letter-to-the-brothers":
+    "/en/thank-you-letters",
   "/en/letters/a-letter-from-rabbi-amihud-shiloh": "/en/thank-you-letters",
   "/en/letters/a-letter-from-the-air-force-base-chief": "/en/thank-you-letters",
-  "/en/letters/a-letter-from-the-commander-of-the-camp-of-zirifin": "/en/thank-you-letters",
-  "/en/letters/a-letter-from-the-commander-of-the-nachshon-battalion": "/en/thank-you-letters",
-  "/en/letters/a-letter-from-the-day-center-to-the-elderly": "/en/thank-you-letters",
-  "/en/letters/a-letter-from-the-maale-adumim-institute": "/en/thank-you-letters",
-  "/en/letters/a-letter-from-the-shavas-major-of-the-northern-command": "/en/thank-you-letters",
-  "/en/letters/a-letter-of-thanks-from-a-father-to-a-bar-mitzvah-boy": "/en/thank-you-letters",
-  "/en/letters/letter-of-thanks-from-rabbi-eitan-eckstein": "/en/thank-you-letters",
-  "/en/letters/letter-of-thanks-from-the-jewish-community-in-romania": "/en/thank-you-letters",
+  "/en/letters/a-letter-from-the-commander-of-the-camp-of-zirifin":
+    "/en/thank-you-letters",
+  "/en/letters/a-letter-from-the-commander-of-the-nachshon-battalion":
+    "/en/thank-you-letters",
+  "/en/letters/a-letter-from-the-day-center-to-the-elderly":
+    "/en/thank-you-letters",
+  "/en/letters/a-letter-from-the-maale-adumim-institute":
+    "/en/thank-you-letters",
+  "/en/letters/a-letter-from-the-shavas-major-of-the-northern-command":
+    "/en/thank-you-letters",
+  "/en/letters/a-letter-of-thanks-from-a-father-to-a-bar-mitzvah-boy":
+    "/en/thank-you-letters",
+  "/en/letters/letter-of-thanks-from-rabbi-eitan-eckstein":
+    "/en/thank-you-letters",
+  "/en/letters/letter-of-thanks-from-the-jewish-community-in-romania":
+    "/en/thank-you-letters",
   "/en/letters/letter-of-thanks-gerin-hadar-haifa": "/en/thank-you-letters",
   "/en/letters/rabbi-eliakim-lebanon": "/en/rabbis-agreements",
   "/en/letters/rabbi-shlomo-moshe-amer": "/en/rabbis-agreements",
@@ -53,13 +64,16 @@ export const MAP: Readonly<Record<string, string>> = {
   "/en/letters/rabbi-zalman-baruch-melamed": "/en/rabbis-agreements",
   "/en/letters/rav-david-yosef": "/en/rabbis-agreements",
   "/en/letters/rebii-aharun-biton": "/en/rabbis-agreements",
-  "/en/letters/thank-you-letter-from-a-soldiers-mother": "/en/thank-you-letters",
-  "/en/letters/thank-you-letter-from-ramat-tamir-sheltered-housing": "/en/thank-you-letters",
+  "/en/letters/thank-you-letter-from-a-soldiers-mother":
+    "/en/thank-you-letters",
+  "/en/letters/thank-you-letter-from-ramat-tamir-sheltered-housing":
+    "/en/thank-you-letters",
   "/en/letters/המלצה-מבית-ספר-חטיבת-הביינים": "/en/thank-you-letters",
   "/en/news-ment": "/en/articles-in-the-media",
   "/en/news-ment/1310": "/en/articles-in-the-media",
   "/en/news-ment/strapped-together": "/en/articles-in-the-media",
-  "/en/news-ment/uniting-the-jewish-people-through-the-mitzva-of-tefillin": "/en/articles-in-the-media",
+  "/en/news-ment/uniting-the-jewish-people-through-the-mitzva-of-tefillin":
+    "/en/articles-in-the-media",
   "/en/news-ment/כתבה-בעיתון-בשבע-מהדקים-את-הקשר": "/en/articles-in-the-media",
   "/en/tefilin": "/en/stories-2",
   "/letters": "/מכתבי-תודה",
