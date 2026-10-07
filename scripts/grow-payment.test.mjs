@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { parseGrowPayment, decodeGrowWebhookBody, cents } from '../src/lib/grow-payment.ts';
+import { parseGrowPayment, decodeGrowWebhookBody, diagnoseGrowPayment, cents } from '../src/lib/grow-payment.ts';
 
 const fixture = { status: '1', data: {
   statusCode: '2', transactionId: 'test-123', sum: '163', fullName: 'בדיקת מערכת',
@@ -45,4 +45,17 @@ test('decodes Grow JSON and form-encoded webhook bodies', () => {
   const encoded = new URLSearchParams({ status: '1', data: JSON.stringify(payload.data) }).toString();
   assert.deepEqual(decodeGrowWebhookBody(encoded), payload);
   assert.equal(decodeGrowWebhookBody(''), null);
+});
+
+test('diagnostics identify validation failures without retaining customer or payment data', () => {
+  const diagnostic = diagnoseGrowPayment({ ...fixture, data: { ...fixture.data,
+    statusCode: '1', fullName: 'private-name', payerEmail: 'private@example.test',
+    sum: 'invalid-money', transactionToken: 'private-secret',
+  } });
+  assert.equal(diagnostic.payment_status_success, false);
+  assert.equal(diagnostic.positive_amount, false);
+  assert.equal(diagnostic.transaction_id_valid, true);
+  assert.equal(/private|must-not-persist|1234|test-123/.test(JSON.stringify(diagnostic)), false);
+  assert.equal(diagnoseGrowPayment({data: []}).data_type, 'array');
+  assert.equal(diagnoseGrowPayment({data: '{}'}).data_type, 'string');
 });

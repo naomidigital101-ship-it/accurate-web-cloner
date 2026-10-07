@@ -1,5 +1,5 @@
 import { adminDb } from "./supabase.server";
-import { decodeGrowWebhookBody, parseGrowPayment } from "./grow-payment";
+import { decodeGrowWebhookBody, diagnoseGrowPayment, parseGrowPayment } from "./grow-payment";
 import { mailConfigured, sendMail } from "./email/send.server";
 import { orderEmailHtml, orderEmailSubject, orderEmailText } from "./order-communication";
 
@@ -42,6 +42,10 @@ export async function handleGrowWebhook(request: Request): Promise<Response> {
   if (request.method !== "POST") return reply(405, "method_not_allowed");
   const key = new URL(request.url).searchParams.get("key") ?? "";
   if (!/^[a-f0-9]{64}$/.test(key)) return reply(401, "unauthorized");
+  const requestId = crypto.randomUUID();
+  const diagnostic = (outcome: string, extra: Record<string, unknown> = {}) => {
+    console.info(JSON.stringify({ event: "grow_webhook", request_id: requestId, outcome, ...extra }));
+  };
   try {
     const hash = Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(key))))
       .map((v) => v.toString(16).padStart(2, "0")).join("");
@@ -50,37 +54,44 @@ export async function handleGrowWebhook(request: Request): Promise<Response> {
       .select("id").eq("id", "grow").eq("secret_hash", hash).maybeSingle();
     if (error) return reply(503, "temporarily_unavailable");
     if (!config) return reply(401, "unauthorized");
+    diagnostic("authenticated");
     // Bound the stream, including chunked requests without Content-Length. Grow sends the
     // documented JSON shape, but different dashboard flows may encode it as JSON or form data.
     const reader = request.body?.getReader();
-    if (!reader) return reply(400, "empty_body");
+    if (!reader) { diagnostic("empty_body"); return reply(400, "empty_body"); }
     const chunks: Uint8Array[] = [];
     let length = 0;
     while (true) {
       const { done, value } = await reader.read();
       if (done) break;
       length += value.length;
-      if (length > 65536) { await reader.cancel(); return reply(413, "too_large"); }
+      if (length > 65536) { await reader.cancel(); diagnostic("too_large"); return reply(413, "too_large"); }
       chunks.push(value);
     }
     const bytes = new Uint8Array(length);
     let offset = 0;
     for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.length; }
     const body = decodeGrowWebhookBody(new TextDecoder().decode(bytes));
-    if (!body) return reply(400, "invalid_body");
+    if (!body) { diagnostic("invalid_body"); return reply(400, "invalid_body"); }
     const payment = parseGrowPayment(body);
-    if (!payment) return reply(422, "not_a_successful_payment");
+    if (!payment) {
+      diagnostic("payment_rejected", diagnoseGrowPayment(body));
+      return reply(422, "not_a_successful_payment");
+    }
     const { error: insertError } = await db.from("book_orders").upsert(payment, {
       onConflict: "provider_transaction_id", ignoreDuplicates: true,
     });
-    if (insertError) return reply(503, "temporarily_unavailable");
+    if (insertError) { diagnostic("order_storage_failed"); return reply(503, "temporarily_unavailable"); }
+    diagnostic("order_recorded");
     await db.from("payment_webhook_config").update({ last_received_at: new Date().toISOString() }).eq("id", "grow");
     // A failed email returns 503 so Grow retries. The saved order is safe, and mail_log plus
     // the provider idempotency key prevent duplicate notifications when the retry arrives.
-    if (!await notifyOrder(payment)) return reply(503, "notification_pending");
+    if (!await notifyOrder(payment)) { diagnostic("notification_pending"); return reply(503, "notification_pending"); }
+    diagnostic("completed");
     return reply(200, "ok");
   } catch {
     // Do not log the URL (bearer credential) or the customer's payload.
+    diagnostic("processing_failed");
     return reply(503, "temporarily_unavailable");
   }
 }

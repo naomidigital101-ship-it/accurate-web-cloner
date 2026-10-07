@@ -24,6 +24,26 @@ export function cents(v: unknown): number | null {
   const n = Math.round(Number(s) * 100);
   return Number.isSafeInteger(n) && n <= 100000000 ? n : null;
 }
+// Diagnostics deliberately contain only fixed field names, types and validation
+// outcomes. Never include payload values, customer details or payment credentials.
+export function diagnoseGrowPayment(input: unknown) {
+  const root = record(input);
+  const nested = root.data !== undefined;
+  const d = nested ? record(root.data) : root;
+  const shape = (v: unknown) => v === null ? "null" : Array.isArray(v) ? "array" : typeof v;
+  const amount = cents(d.sum ?? d.paymentSum);
+  const transactionId = text(d.transactionId ?? d.transactionCode, 120);
+  return {
+    root_type: shape(input), data_type: shape(root.data), nested,
+    envelope_success: text(root.status) === "1",
+    payment_status_success: text(d.statusCode) === "2",
+    legacy_status_success: d.status === undefined || ["שולם", "2"].includes(text(d.status)),
+    transaction_id_type: shape(d.transactionId), transaction_code_type: shape(d.transactionCode),
+    transaction_id_valid: !!transactionId && /^[\w-]+$/.test(transactionId),
+    sum_type: shape(d.sum), payment_sum_type: shape(d.paymentSum),
+    positive_amount: amount !== null && amount > 0,
+  };
+}
 export function parseGrowPayment(input: unknown) {
   const root = record(input);
   const nested = root.data !== undefined;
