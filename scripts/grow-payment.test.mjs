@@ -8,6 +8,31 @@ const fixture = { status: '1', data: {
   productData: [{ name: 'שני עותקים של הספר', quantity: '1', price: '143' }],
   cardSuffix: '1234', cardExp: '1127', transactionToken: 'must-not-persist',
 } };
+
+test('accepts a paid PaymentLinks record without the API envelope', () => {
+  assert.equal(parseGrowPayment(fixture.data)?.amount_agorot, 16300);
+  for (const statusCode of [undefined, '0', '1', '3']) {
+    assert.equal(parseGrowPayment({ ...fixture.data, statusCode }), null);
+  }
+});
+
+test('decodes data serialized inside a JSON envelope', () => {
+  const decoded = decodeGrowWebhookBody(JSON.stringify({status: '1', data: JSON.stringify(fixture.data)}));
+  assert.equal(parseGrowPayment(decoded)?.amount_agorot, 16300);
+});
+
+test('decodes bracket-encoded form fields including products and shipping', () => {
+  const raw = new URLSearchParams({status:'1', 'data[statusCode]':'2',
+    'data[transactionId]':'form-123', 'data[sum]':'163',
+    'data[shipping][type]':'משלוח', 'data[shipping][amount]':'20',
+    'data[productData][0][name]':'שני ספרים',
+    'data[productData][0][quantity]':'1', 'data[productData][0][price]':'143',
+  }).toString();
+  const payment = parseGrowPayment(decodeGrowWebhookBody(raw));
+  assert.equal(payment?.amount_agorot, 16300);
+  assert.equal(payment?.shipping_agorot, 2000);
+  assert.equal(payment?.products[0].name, 'שני ספרים');
+});
 test('preserves exact payment total and separate shipping, excludes payment credentials', () => {
   const p = parseGrowPayment(fixture);
   assert.equal(p.amount_agorot, 16300);
@@ -58,4 +83,28 @@ test('diagnostics identify validation failures without retaining customer or pay
   assert.equal(/private|must-not-persist|1234|test-123/.test(JSON.stringify(diagnostic)), false);
   assert.equal(diagnoseGrowPayment({data: []}).data_type, 'array');
   assert.equal(diagnoseGrowPayment({data: '{}'}).data_type, 'string');
+});
+
+test('malformed, conflicting and prototype-related form keys cannot bypass validation', () => {
+  for (const raw of [
+    'data[statusCode]=1&data[statusCode]=2',
+    'data=garbage&data[statusCode]=2',
+    'data[statusCode]=2&data=garbage',
+    '__proto__[polluted]=true', 'data[constructor][prototype][polluted]=true',
+    'data[productData][999999][name]=bad',
+    'data[statusCode]=2&data[transactionId]=abc&data[sum]=78&status=0',
+  ]) assert.equal(parseGrowPayment(decodeGrowWebhookBody(raw)), null);
+  assert.equal({}.polluted, undefined);
+});
+
+test('all supported encodings reject pending or declined payments', () => {
+  for (const code of ['0', '1', '3']) {
+    const data = { ...fixture.data, statusCode: code };
+    for (const raw of [
+      JSON.stringify({status:'1', data}),
+      JSON.stringify({status:'1', data:JSON.stringify(data)}),
+      JSON.stringify(data),
+      new URLSearchParams({status:'1','data[statusCode]':code,'data[transactionId]':'abc','data[sum]':'78'}).toString(),
+    ]) assert.equal(parseGrowPayment(decodeGrowWebhookBody(raw)), null);
+  }
 });

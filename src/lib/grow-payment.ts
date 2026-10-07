@@ -4,19 +4,54 @@ type RecordValue = Record<string, unknown>;
 const record = (v: unknown): RecordValue => v && typeof v === "object" && !Array.isArray(v) ? v as RecordValue : {};
 const text = (v: unknown, max = 500) => typeof v === "string" || typeof v === "number" ? String(v).slice(0, max) : "";
 
+function decodeContainers(input: unknown): unknown {
+  const root = record(input);
+  const decode = (v: unknown) => {
+    if (typeof v !== "string") return v;
+    try { return JSON.parse(v); } catch { return v; }
+  };
+  if (root.data !== undefined) root.data = decode(root.data);
+  const payment = root.data !== undefined ? record(root.data) : root;
+  for (const key of ["shipping", "productData"]) {
+    if (payment[key] !== undefined) payment[key] = decode(payment[key]);
+  }
+  return input;
+}
+
 export function decodeGrowWebhookBody(raw: string): unknown {
   const trimmed = raw.trim();
   if (!trimmed) return null;
-  try { return JSON.parse(trimmed); } catch { /* Grow may submit form-encoded payloads. */ }
+  try { return decodeContainers(JSON.parse(trimmed)); } catch { /* Form-encoded payload. */ }
 
   const params = new URLSearchParams(trimmed);
-  if (![...params.keys()].length) return null;
+  if (!params.size || params.size > 512) return null;
   const body: RecordValue = {};
-  for (const [key, value] of params) body[key] = value;
-  if (typeof body.data === "string") {
-    try { body.data = JSON.parse(body.data); } catch { /* Keep the original value; validation will reject it. */ }
+  for (const [key, value] of params) {
+    // Support PHP-style data[statusCode] and data[productData][0][name].
+    // Bound nesting/indices and reject duplicate or conflicting assignments.
+    if (!/^[A-Za-z_][\w]*(?:\[(?:[A-Za-z_][\w]*|\d+)\]){0,3}$/.test(key)) return null;
+    const path = key.replace(/\]/g, "").split("[");
+    if (path.some((part) => ["__proto__", "constructor", "prototype"].includes(part))) return null;
+    let target: RecordValue | unknown[] = body;
+    for (let i = 0; i < path.length; i++) {
+      const part = path[i];
+      const numeric = /^\d+$/.test(part);
+      if (numeric && Number(part) >= 50) return null;
+      if (Array.isArray(target) !== numeric) return null;
+      const container = target as RecordValue;
+      if (i === path.length - 1) {
+        if (Object.hasOwn(container, part)) return null;
+        container[part] = value;
+      } else {
+        const nextIsIndex = /^\d+$/.test(path[i + 1]);
+        if (!Object.hasOwn(container, part)) container[part] = nextIsIndex ? [] : {};
+        const next = container[part];
+        if (!next || typeof next !== "object" || Array.isArray(next) !== nextIsIndex) return null;
+        target = next as RecordValue | unknown[];
+      }
+    }
   }
-  return body;
+  return decodeContainers(body);
 }
 export function cents(v: unknown): number | null {
   const s = text(v).trim();
@@ -51,7 +86,9 @@ export function parseGrowPayment(input: unknown) {
   if (nested && (text(root.status) !== "1" || text(d.statusCode) !== "2")) return null;
   if (!nested && (d.statusCode !== undefined && text(d.statusCode) !== "2")) return null;
   if (!nested && (d.status !== undefined && !["שולם", "2"].includes(text(d.status)))) return null;
-  if (!nested && !d.transactionCode) return null;
+  // Legacy notifications identify transactions with transactionCode. PaymentLinks
+  // records use transactionId; without an envelope they still need explicit paid status.
+  if (!nested && !d.transactionCode && (!d.transactionId || text(d.statusCode) !== "2")) return null;
   const transactionId = text(d.transactionId ?? d.transactionCode, 120);
   const amount = cents(d.sum ?? d.paymentSum);
   if (!transactionId || !/^[\w-]+$/.test(transactionId) || amount === null || amount <= 0) return null;
