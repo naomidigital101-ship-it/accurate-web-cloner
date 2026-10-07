@@ -14,7 +14,12 @@ async function mailLog(stage: string, status: string, detail?: string, recipient
 
 async function notifyOrder(payment: ReturnType<typeof parseGrowPayment>): Promise<boolean> {
   if (!payment) return false;
-  const stage = `order:${payment.provider_transaction_id}`;
+  const id = payment.provider_transaction_id;
+  // Keep existing keys stable; encode opaque provider IDs for the email API.
+  const mailId = /^[\w-]+$/.test(id) ? id : Array.from(new Uint8Array(
+    await crypto.subtle.digest("SHA-256", new TextEncoder().encode(id)),
+  )).map((v) => v.toString(16).padStart(2, "0")).join("");
+  const stage = `order:${mailId}`;
   const db = adminDb();
   if (!mailConfigured()) { await mailLog(stage, "failed", "LOVABLE_API_KEY חסר"); return false; }
   // Book purchases have their own recipient and must never inherit the address used

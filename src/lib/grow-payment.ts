@@ -4,6 +4,14 @@ type RecordValue = Record<string, unknown>;
 const record = (v: unknown): RecordValue => v && typeof v === "object" && !Array.isArray(v) ? v as RecordValue : {};
 const text = (v: unknown, max = 500) => typeof v === "string" || typeof v === "number" ? String(v).slice(0, max) : "";
 
+// Provider IDs are opaque strings, not slugs. Do not truncate or discard
+// punctuation: either would reject legitimate IDs or merge distinct payments.
+function transactionKey(v: unknown): string | null {
+  if (typeof v !== "string" && typeof v !== "number") return null;
+  const key = String(v).trim();
+  return key.length > 0 && key.length <= 256 && !/[\u0000-\u001f\u007f]/.test(key) ? key : null;
+}
+
 function decodeContainers(input: unknown): unknown {
   const root = record(input);
   const decode = (v: unknown) => {
@@ -67,14 +75,17 @@ export function diagnoseGrowPayment(input: unknown) {
   const d = nested ? record(root.data) : root;
   const shape = (v: unknown) => v === null ? "null" : Array.isArray(v) ? "array" : typeof v;
   const amount = cents(d.sum ?? d.paymentSum);
-  const transactionId = text(d.transactionId ?? d.transactionCode, 120);
+  const rawId = d.transactionId ?? d.transactionCode;
+  const transactionId = transactionKey(rawId);
   return {
     root_type: shape(input), data_type: shape(root.data), nested,
     envelope_success: text(root.status) === "1",
     payment_status_success: text(d.statusCode) === "2",
     legacy_status_success: d.status === undefined || ["שולם", "2"].includes(text(d.status)),
     transaction_id_type: shape(d.transactionId), transaction_code_type: shape(d.transactionCode),
-    transaction_id_valid: !!transactionId && /^[\w-]+$/.test(transactionId),
+    transaction_id_valid: transactionId !== null,
+    transaction_id_length: typeof rawId === "string" ? rawId.length : null,
+    transaction_id_blank: typeof rawId === "string" && !rawId.trim(),
     sum_type: shape(d.sum), payment_sum_type: shape(d.paymentSum),
     positive_amount: amount !== null && amount > 0,
   };
@@ -89,9 +100,9 @@ export function parseGrowPayment(input: unknown) {
   // Legacy notifications identify transactions with transactionCode. PaymentLinks
   // records use transactionId; without an envelope they still need explicit paid status.
   if (!nested && !d.transactionCode && (!d.transactionId || text(d.statusCode) !== "2")) return null;
-  const transactionId = text(d.transactionId ?? d.transactionCode, 120);
+  const transactionId = transactionKey(d.transactionId ?? d.transactionCode);
   const amount = cents(d.sum ?? d.paymentSum);
-  if (!transactionId || !/^[\w-]+$/.test(transactionId) || amount === null || amount <= 0) return null;
+  if (!transactionId || amount === null || amount <= 0) return null;
   const shipping = record(d.shipping);
   const products = (Array.isArray(d.productData) ? d.productData : []).slice(0, 50).map((p) => {
     const product = record(p);

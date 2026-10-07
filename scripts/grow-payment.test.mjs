@@ -64,6 +64,17 @@ test('money is integer agorot and rejects malformed amounts', () => {
   for (const v of ['', null, '-1', '1.999', 'NaN', '1e3']) assert.equal(cents(v), null);
 });
 
+test('opaque transaction codes preserve punctuation and normalize surrounding whitespace', () => {
+  for (const id of [' abc/def+ghi= ', '{transaction:123}', 'payment.123:456']) {
+    const body = {transactionCode:id,paymentSum:'1'};
+    assert.equal(parseGrowPayment(body)?.provider_transaction_id, id.trim());
+    assert.equal(diagnoseGrowPayment(body).transaction_id_valid, true);
+  }
+  for (const id of ['', '   ', 'a\u0000b', 'a'.repeat(257)]) {
+    assert.equal(parseGrowPayment({transactionCode:id,paymentSum:'1'}), null);
+  }
+});
+
 test('decodes Grow JSON and form-encoded webhook bodies', () => {
   const payload = { status: '1', data: { statusCode: '2', transactionId: 'TX123', sum: '163' } };
   assert.deepEqual(decodeGrowWebhookBody(JSON.stringify(payload)), payload);
