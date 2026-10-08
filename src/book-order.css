@@ -55,8 +55,8 @@
 
 /* פס עליון */
 .kb-top{border-bottom:1px solid var(--line);background:var(--paper)}
-.kb-top-in{display:flex;align-items:center;justify-content:space-between;min-height:56px;gap:12px}
-.kb-top img{width:44px;height:44px}
+.kb-top-in{display:flex;align-items:center;justify-content:space-between;min-height:88px;gap:12px}
+.kb-top img{width:80px;height:80px;object-fit:contain;flex-shrink:0}
 .kb-top span{font-size:14px;color:var(--muted)}
 
 /* 1. הירו */

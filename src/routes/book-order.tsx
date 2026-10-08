@@ -192,7 +192,7 @@ function BookOrderPage() {
 
       <header className="kb-top">
         <div className="kb-wrap kb-top-in">
-          <img src="/wp/img/לוגו-קשר-של-תפילין-01.svg" alt="קשר של תפילין" width="44" height="44" />
+          <img src="/wp/img/לוגו-קשר-של-תפילין-01.svg" alt="קשר של תפילין" width="80" height="80" />
           <span>מיזם של עמותת אור חדש</span>
         </div>
       </header>
