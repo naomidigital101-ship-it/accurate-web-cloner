@@ -16,15 +16,15 @@ const HERO_SIZES = "(min-width: 900px) 420px, (min-width: 600px) 300px, (max-wid
 export const Route = createFileRoute("/book-order")({
   head: () => ({
     meta: [
-      { title: "קשר של תפילין - ספר סיפורים אמיתיים מאת הרב עמיחי איל" },
+      { title: "קשר של תפילין - הספר של הרב עמיחי איל" },
       {
         name: "description",
         content:
-          "הספר של הרב עמיחי איל: 23 סיפורים אמיתיים על אנשים שהתחילו להניח תפילין. 184 עמודים, משלוח עד הבית או איסוף מבית אל.",
+          "מתוך מאות סיפורים שהגיעו לרב עמיחי איל במיזם קשר של תפילין, נבחרו 23 לספר. קראו קטע מהספר והזמינו עם משלוח עד הבית או איסוף מבית אל.",
       },
       { name: "robots", content: "noindex, nofollow" },
       { property: "og:title", content: "קשר של תפילין - הספר של הרב עמיחי איל" },
-      { property: "og:description", content: "23 סיפורים אמיתיים על אנשים שהתחילו להניח תפילין, ועל מה שקרה להם בדרך." },
+      { property: "og:description", content: "מתוך מאות סיפורים שהגיעו לרב עמיחי איל במיזם קשר של תפילין, נבחרו 23 לספר." },
       { property: "og:image", content: `${SITE_URL}/book/mock-two-copies.webp` },
       { property: "og:url", content: `${SITE_URL}/book-order` },
     ],
@@ -205,10 +205,10 @@ function BookOrderPage() {
               <p className="kb-kicker">ספר חדש מאת הרב עמיחי איל</p>
               <h1 id="kb-title">
                 <span className="kb-h1-name">קשר של תפילין</span>
-                <span className="kb-h1-desc">ספר סיפורים אמיתיים על אנשים שהתחילו להניח תפילין, ועל מה שקרה להם בדרך</span>
+                <span className="kb-h1-desc">מתוך מאות סיפורים שהגיעו לרב עמיחי, נבחרו 23 לספר</span>
               </h1>
               <p className="kb-lead">
-                סיפור אחד מתחיל בשתי שיחות טלפון לבנק, בהפרש של 19 דקות. אחר בבר מצווה שנחגגה בגיל תשעים. בספר 23 סיפורים, וכל אחד מהם הרב עמיחי שמע ממי שעבר אותו.
+                במסגרת מיזם ״קשר של תפילין״, הרב עמיחי פגש אנשים שביקשו להתחיל להניח תפילין ושמע את הסיפורים שלהם. לספר הוא בחר את הטובים שבהם: מהבטחה שניתנה בשדה הקרב ועד בר מצווה שנחגגה בגיל תשעים.
               </p>
             </div>
             <figure className="kb-hero-book">
@@ -243,7 +243,7 @@ function BookOrderPage() {
           <div className="kb-narrow" data-reveal>
             <p id="kb-q" className="kb-q-quote">״מה הביא אותך להחלטה להתחיל להניח תפילין?״</p>
             <p>
-              את השאלה הזאת שואל הרב עמיחי איל כל מי שמבקש ממנו תפילין. הוא מדבר בטלפון עם כל אחד, ונותן תפילין רק למי שמתחייב להניח אותן כל יום. לספר הוא בחר 23 מהתשובות.
+              את השאלה הזאת הרב עמיחי איל שואל כל מי שמבקש ממנו תפילין. מהשיחות האלה הצטברו מאות סיפורים. מתוכם הוא בחר את 23 הסיפורים הטובים ביותר לספר.
             </p>
             <blockquote className="kb-q-rabbi">
               <p>
@@ -257,7 +257,7 @@ function BookOrderPage() {
         {/* 3. מה יש בספר */}
         <section className="kb-stories" aria-labelledby="kb-stories-title">
           <div className="kb-wrap">
-            <h2 id="kb-stories-title" data-reveal>שלושה מתוך 23 הסיפורים</h2>
+            <h2 id="kb-stories-title" data-reveal>הכירו שלושה מהסיפורים שנבחרו לספר</h2>
             <ol className="kb-story-list">
               {STORIES.map((s, i) => (
                 <li key={s.who} data-reveal>
@@ -381,7 +381,7 @@ function BookOrderPage() {
                 <p>את הסיפורים כתב יחד איתו שמעון חי בן־שחר. שמות ופרטים מזהים שונו כדי לשמור על פרטיות המספרים.</p>
                 <dl className="kb-numbers">
                   <div><dt>זוגות תפילין נבדקו, חודשו ונמסרו במסגרת המיזם</dt><dd>1,500</dd></div>
-                  <div><dt>סיפורים נבחרו לספר</dt><dd>23</dd></div>
+                  <div><dt>סיפורים נבחרו לספר מתוך מאות שהגיעו למיזם</dt><dd>23</dd></div>
                 </dl>
                 <p className="kb-rabbis-line">
                   המיזם פועל בברכת{" "}
@@ -405,7 +405,7 @@ function BookOrderPage() {
           <div className="kb-wrap">
             <div className="kb-order-head">
               <h2 id="kb-order-title">בחרו כמה עותקים</h2>
-              <p>184 עמודים, כריכה רכה. המחיר הגדול כולל משלוח עד הבית. באיסוף עצמי מבית אל זה עולה פחות, ואת אופן הקבלה בוחרים בדף התשלום.</p>
+              <p>184 עמודים בכריכה רכה. המחירים כוללים משלוח עד הבית. אפשר גם לבחור איסוף עצמי מבית אל בדף התשלום, לפי המחיר שמופיע בכל מארז.</p>
             </div>
 
             <fieldset className="kb-bundles">
@@ -484,7 +484,7 @@ function BookOrderPage() {
         <section className="kb-final" aria-label="סיום">
           <div className="kb-narrow" data-reveal>
             <p className="kb-final-name">קשר של תפילין</p>
-            <p>23 סיפורים, 184 עמודים. משלוח עד הבית או איסוף מבית אל.</p>
+            <p>מתוך מאות סיפורים, הרב עמיחי בחר 23 לספר. אפשר להזמין עם משלוח עד הבית או לאסוף מבית אל.</p>
             <a className="kb-btn" href="#kb-order" onClick={ctaClick("final")}>
               לבחירת מארז <span aria-hidden="true">←</span>
             </a>
@@ -521,7 +521,7 @@ function BookOrderPage() {
             <>
               <span>
                 <strong>קשר של תפילין</strong>
-                <small>23 סיפורים · 184 עמודים</small>
+                <small>23 סיפורים שנבחרו מתוך מאות</small>
               </span>
               <a href="#kb-order" tabIndex={barVisible ? 0 : -1} onClick={ctaClick("sticky")}>
                 לבחירת מארז
