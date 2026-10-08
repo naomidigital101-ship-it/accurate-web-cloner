@@ -82,7 +82,9 @@
 .kb-q-quote{font-family:var(--serif);font-size:clamp(28px,7vw,46px);line-height:1.3;font-weight:500;color:#fff;margin-bottom:26px;text-wrap:balance}
 .kb-question p:not(.kb-q-quote){font-size:18px;line-height:1.8;max-width:600px}
 .kb-question p+p{margin-top:14px}
-.kb-question p:last-child{color:#fff;font-weight:700}
+.kb-q-rabbi{margin-top:30px;padding-inline-start:20px;border-inline-start:3px solid #8f7cf0}
+.kb-question .kb-q-rabbi p{font-family:var(--serif);font-size:19px;line-height:1.8;color:#fff}
+.kb-q-rabbi footer{margin-top:10px;font-size:15px;color:#b9b3e8}
 
 /* 3. שלוש תשובות */
 .kb-stories{padding-block:clamp(52px,9vw,96px)}
@@ -104,14 +106,7 @@
 .kb-excerpt{padding-block:clamp(52px,9vw,96px);background:var(--paper-2);border-block:1px solid var(--line);scroll-margin-top:8px}
 .kb-excerpt h2{font-family:var(--serif);font-weight:700}
 .kb-excerpt-intro{margin-top:12px;font-size:18px;color:var(--text)}
-.kb-tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
-.kb-tabs button{display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-height:64px;padding:10px 14px;background:#fff;border:2px solid var(--line);border-radius:12px;font:inherit;text-align:start;cursor:pointer;color:var(--ink)}
-.kb-tabs button strong{font-family:var(--serif);font-size:17px;line-height:1.3}
-.kb-tabs button small{font-size:14px;color:var(--muted)}
-.kb-tabs button.is-active{border-color:var(--violet);box-shadow:0 8px 20px -12px rgba(67,4,196,.5)}
 .kb-page-time{font-family:Maadim,Heebo,sans-serif;font-size:14px;font-weight:700;color:var(--violet);margin-top:14px}
-.kb-excerpt-cta{margin-top:26px;font-size:18px;font-weight:700;color:var(--ink)}
-.kb-excerpt-cta+.kb-btn{margin-top:10px}
 .kb-page{position:relative;margin-top:26px;padding:26px 22px 30px;background:#fff;border:1px solid var(--line);border-radius:4px;box-shadow:0 1px 0 var(--line),0 18px 40px -18px rgba(22,16,74,.25)}
 .kb-page-head{font-size:13px;color:var(--muted);padding-bottom:12px;margin-bottom:18px;border-bottom:1px solid var(--line);text-align:center;letter-spacing:.02em}
 .kb-page-body{font-family:var(--serif);font-size:19px;line-height:1.85;color:#221e3a}
@@ -146,13 +141,9 @@
 .kb-numbers div{display:flex;flex-direction:column-reverse}
 .kb-numbers dd{font-size:36px;line-height:1.1;font-weight:900;color:var(--violet)}
 .kb-numbers dt{font-size:14px;line-height:1.4;color:var(--muted);max-width:170px}
-.kb-rabbis{margin-top:36px;padding-top:26px;border-top:1px solid rgba(22,16,74,.14)}
-.kb-rabbis h3{margin-bottom:12px}
-.kb-rabbis ul{display:grid;gap:10px}
-.kb-rabbis li{display:grid;grid-template-columns:48px 1fr auto;align-items:center;gap:12px;font-weight:700;color:var(--ink)}
-.kb-rabbis img{width:48px;height:48px;border-radius:50%;object-fit:cover}
-.kb-rabbis a{display:inline-flex;align-items:center;min-height:44px;font-size:15px;font-weight:700}
-.kb-note{margin-top:14px;font-size:14px;color:var(--muted)}
+
+.kb-rabbis-line{margin-top:22px;font-size:16px;color:var(--muted)}
+.kb-rabbis-line a{font-weight:700}
 
 /* 7. הזמנה */
 .kb-order{padding-block:clamp(52px,9vw,96px);scroll-margin-top:8px}
@@ -207,9 +198,8 @@
 
 /* סיום */
 .kb-final{padding-block:clamp(60px,11vw,110px);text-align:center}
-.kb-final blockquote p{text-wrap:balance;font-family:var(--serif);font-size:clamp(28px,7vw,44px);line-height:1.3;color:var(--violet);font-weight:700}
-.kb-final blockquote footer{margin-top:10px;font-size:15px;color:var(--muted)}
-.kb-final>div>p{margin-top:22px;font-size:18px;color:var(--text)}
+.kb-final-name{font-size:clamp(34px,8vw,52px);line-height:1.1;font-weight:900;color:var(--violet)}
+.kb-final>div>p:not(.kb-final-name){margin-top:12px;font-size:18px;color:var(--text)}
 .kb-final .kb-btn{margin-top:22px}
 
 /* פוטר */
@@ -256,9 +246,6 @@
   .kb-author-grid{grid-template-columns:200px 1fr;gap:40px}
   .kb-author-grid>img{width:200px}
   .kb-author-grid>div{grid-column:2}
-  .kb-rabbis ul{grid-template-columns:repeat(3,1fr)}
-  .kb-rabbis li{grid-template-columns:48px 1fr;row-gap:0}
-  .kb-rabbis li a{grid-column:2;min-height:32px}
 }
 @media (min-width:900px){
   .kb{padding-bottom:0}
