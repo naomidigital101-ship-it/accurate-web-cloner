@@ -31,8 +31,14 @@ export const listOrders = createServerFn({ method: "POST" })
     const { data: rows, count, error } = await query.order("received_at", { ascending: false }).order("id")
       .range(from, from + data.limit - 1);
     if (error) throw new Error("load_failed");
-    const { data: config } = await db.from("payment_webhook_config").select("last_received_at").eq("id", "grow").maybeSingle();
-    return { orders: (rows ?? []) as BookOrder[], count: count ?? 0, lastReceived: config?.last_received_at as string | null };
+    // Only deliveries that actually reached the webhook count, never manual entry.
+    const { data: lastEvent } = await db.from("grow_webhook_events").select("received_at, outcome")
+      .order("received_at", { ascending: false }).limit(1).maybeSingle();
+    return {
+      orders: (rows ?? []) as BookOrder[], count: count ?? 0,
+      lastReceived: (lastEvent?.received_at ?? null) as string | null,
+      lastOutcome: (lastEvent?.outcome ?? null) as string | null,
+    };
   });
 
 export const orderCounts = createServerFn({ method: "POST" })

@@ -1,5 +1,5 @@
-// Only documented, successful Grow payment notifications are accepted.
-// Never persist card information, transaction tokens or the raw webhook body.
+// Only successful Grow payment notifications become orders.
+// Never persist card information or transaction tokens (see redactGrowPayload).
 type RecordValue = Record<string, unknown>;
 const record = (v: unknown): RecordValue => v && typeof v === "object" && !Array.isArray(v) ? v as RecordValue : {};
 const text = (v: unknown, max = 500) => typeof v === "string" || typeof v === "number" ? String(v).slice(0, max) : "";
@@ -20,7 +20,7 @@ function decodeContainers(input: unknown): unknown {
   };
   if (root.data !== undefined) root.data = decode(root.data);
   const payment = root.data !== undefined ? record(root.data) : root;
-  for (const key of ["shipping", "productData"]) {
+  for (const key of ["shipping", "productData", "purchaseCustomField", "dynamicFields"]) {
     if (payment[key] !== undefined) payment[key] = decode(payment[key]);
   }
   return input;
@@ -74,9 +74,9 @@ export function diagnoseGrowPayment(input: unknown) {
   const nested = root.data !== undefined;
   const d = nested ? record(root.data) : root;
   const shape = (v: unknown) => v === null ? "null" : Array.isArray(v) ? "array" : typeof v;
-  const amount = cents(d.sum ?? d.paymentSum);
+  const amount = cents(paymentAmount(d));
   const rawId = d.transactionId ?? d.transactionCode;
-  const transactionId = transactionKey(rawId);
+  const transactionId = resolveTransactionId(d);
   return {
     root_type: shape(input), data_type: shape(root.data), nested,
     envelope_success: text(root.status) === "1",
@@ -86,28 +86,72 @@ export function diagnoseGrowPayment(input: unknown) {
     transaction_id_valid: transactionId !== null,
     transaction_id_length: typeof rawId === "string" ? rawId.length : null,
     transaction_id_blank: typeof rawId === "string" && !rawId.trim(),
-    sum_type: shape(d.sum), payment_sum_type: shape(d.paymentSum),
+    asmachta_present: transactionKey(d.asmachta) !== null,
+    sum_type: shape(d.sum), payment_sum_type: shape(d.paymentSum), amount_type: shape(d.amount),
+    explicitly_unpaid: explicitlyUnpaid(root),
     positive_amount: amount !== null && amount > 0,
   };
 }
-export function parseGrowPayment(input: unknown) {
+// Grow sends different shapes per product: PaymentLinks (transactionId, often in a
+// {status, data} envelope), API and static payment pages (transactionCode, paymentSum,
+// purchaseCustomField). The dashboard webhook only fires after a completed transaction,
+// so only an explicit non-paid status rejects a notification.
+function paymentAmount(d: RecordValue): unknown {
+  return d.paymentSum ?? d.sum ?? d.amount;
+}
+export function explicitlyUnpaid(input: unknown): boolean {
   const root = record(input);
   const nested = root.data !== undefined;
   const d = nested ? record(root.data) : root;
-  if (nested && (text(root.status) !== "1" || text(d.statusCode) !== "2")) return null;
-  if (!nested && (d.statusCode !== undefined && text(d.statusCode) !== "2")) return null;
-  if (!nested && (d.status !== undefined && !["שולם", "2"].includes(text(d.status)))) return null;
-  // Legacy notifications identify transactions with transactionCode. PaymentLinks
-  // records use transactionId; without an envelope they still need explicit paid status.
-  if (!nested && !d.transactionCode && (!d.transactionId || text(d.statusCode) !== "2")) return null;
-  const transactionId = transactionKey(d.transactionId ?? d.transactionCode);
-  const amount = cents(d.sum ?? d.paymentSum);
+  if (nested && text(root.status) !== "1") return true;
+  if (d.statusCode !== undefined && d.statusCode !== "" && text(d.statusCode) !== "2") return true;
+  if (d.status !== undefined && d.status !== "" && !["שולם", "2"].includes(text(d.status))) return true;
+  // PaymentLinks records (transactionId, no transactionCode) must carry statusCode 2.
+  return !d.transactionCode && d.transactionId !== undefined && text(d.statusCode) !== "2";
+}
+// The provider transaction code is the canonical key (it is what Grow shows as the
+// transaction number). When a shape carries no usable code, fall back to the bank
+// approval number, then to the process id, so a paid notification is never dropped.
+function resolveTransactionId(d: RecordValue): string | null {
+  const direct = transactionKey(d.transactionId) ?? transactionKey(d.transactionCode);
+  if (direct) return direct;
+  const asmachta = transactionKey(d.asmachta);
+  if (asmachta) return `asmachta:${asmachta}`;
+  const process = transactionKey(d.processId) ?? transactionKey(d.paymentLinkProcessId);
+  return process ? `process:${process}` : null;
+}
+function customFields(d: RecordValue): string {
+  const lines: string[] = [];
+  const custom = d.purchaseCustomField;
+  if (custom && typeof custom === "object" && !Array.isArray(custom)) {
+    for (const [k, v] of Object.entries(custom as RecordValue).slice(0, 30)) {
+      const value = text(v, 300).trim();
+      if (value) lines.push(`${text(k, 80)}: ${value}`);
+    }
+  }
+  for (const f of (Array.isArray(d.dynamicFields) ? d.dynamicFields : []).slice(0, 30)) {
+    const field = record(f);
+    const value = text(field.field_value ?? field.option_label, 300).trim();
+    if (value) lines.push(`${text(field.label ?? field.key, 80)}: ${value}`);
+  }
+  return lines.join("\n");
+}
+/** `fallbackId` (a digest of the body) keeps idempotency when Grow sends no identifier. */
+export function parseGrowPayment(input: unknown, fallbackId?: string) {
+  const root = record(input);
+  const d = root.data !== undefined ? record(root.data) : root;
+  if (explicitlyUnpaid(input)) return null;
+  const transactionId = resolveTransactionId(d) ?? (fallbackId ? `body:${fallbackId}` : null);
+  const amount = cents(paymentAmount(d));
   if (!transactionId || amount === null || amount <= 0) return null;
   const shipping = record(d.shipping);
   const products = (Array.isArray(d.productData) ? d.productData : []).slice(0, 50).map((p) => {
     const product = record(p);
     return { name: text(product.name, 250), quantity: text(product.quantity, 10), price: text(product.price, 30) };
   });
+  const pageTitle = text(d.purchasePageTitle, 250);
+  if (!products.length && pageTitle) products.push({ name: pageTitle, quantity: "1", price: text(paymentAmount(d), 30) });
+  const address = [text(d.address, 500), customFields(d)].filter(Boolean).join("\n");
   return {
     provider_transaction_id: transactionId,
     amount_agorot: amount,
@@ -116,11 +160,24 @@ export function parseGrowPayment(input: unknown) {
     full_name: text(d.fullName, 200),
     phone: text(d.payerPhone, 50),
     email: text(d.payerEmail, 254),
-    address: text(d.address, 500),
+    address: address.slice(0, 2000),
     description: text(d.description ?? d.paymentDesc ?? d.purchasePageTitle, 500),
     provider_payment_date: text(d.paymentDate, 50),
     payment_method: text(d.transactionType ?? d.transactionTypeId, 100),
     products,
   };
+}
+// Stored copy of a notification for diagnosis: payment credentials and tokens removed.
+export function redactGrowPayload(input: unknown, depth = 0): unknown {
+  if (depth > 5) return null;
+  if (Array.isArray(input)) return input.slice(0, 50).map((v) => redactGrowPayload(v, depth + 1));
+  if (input && typeof input === "object") {
+    const out: RecordValue = {};
+    for (const [k, v] of Object.entries(input as RecordValue).slice(0, 100)) {
+      out[k] = /card|token|webhookkey|cvv|exp$|password|secret/i.test(k) ? "[redacted]" : redactGrowPayload(v, depth + 1);
+    }
+    return out;
+  }
+  return typeof input === "string" ? input.slice(0, 1000) : input;
 }
 export type GrowPayment = NonNullable<ReturnType<typeof parseGrowPayment>>;

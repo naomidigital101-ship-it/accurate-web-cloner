@@ -93,3 +93,25 @@ test('unauthenticated and unpaid requests cannot record orders or send mail', as
   assert.equal(h.orders.size, 0);
   assert.equal(h.sent.length, 0);
 });
+
+test('payment-page webhook records the order, mails both recipients once, and stores a redacted event', async () => {
+  const h = harness();
+  const body = JSON.stringify({webhookKey:'k',transactionCode:'86940855',paymentSum:78,asmachta:'1',cardSuffix:'1234',fullName:'בדיקה'});
+  assert.equal((await h.post(body)).status, 200);
+  assert.equal((await h.post(body)).status, 200);
+  assert.equal(h.orders.size, 1);
+  assert.equal(h.sent.length, 1);
+  const events = h.logs.filter(row => row.outcome === 'completed');
+  assert.equal(events.length, 2);
+  assert.equal(events[0].payload.cardSuffix, '[redacted]');
+  assert.equal(events[0].transaction_id, '86940855');
+});
+
+test('an authenticated paid-looking notification that cannot be parsed alerts staff instead of vanishing', async () => {
+  const h = harness();
+  assert.equal((await h.post(JSON.stringify({transactionCode:'x',paymentSum:'abc'}))).status, 422);
+  assert.equal(h.orders.size, 0);
+  assert.equal(h.sent.length, 1);
+  assert.match(h.sent[0].subject, /לא נקלט/);
+  assert.equal(h.logs.filter(row => row.outcome === 'payment_rejected').length, 1);
+});

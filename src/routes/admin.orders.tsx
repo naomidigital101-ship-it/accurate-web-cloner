@@ -31,7 +31,7 @@ function OrdersPage() {
   const [status, setStatus] = useState<Filter>("new");
   const [search, setSearch] = useState(""); const [term, setTerm] = useState("");
   const [page, setPage] = useState(0); const [count, setCount] = useState(0);
-  const [open, setOpen] = useState<string | null>(null); const [last, setLast] = useState<string | null>(null);
+  const [open, setOpen] = useState<string | null>(null); const [last, setLast] = useState<string | null>(null); const [lastOutcome, setLastOutcome] = useState<string | null>(null);
   const [busy, setBusy] = useState(false); const [error, setError] = useState("");
   const [copied, setCopied] = useState<string | null>(null);
 
@@ -42,7 +42,7 @@ function OrdersPage() {
       const [result, totals] = await Promise.all([
         listOrders({ data: { accessToken, page, status, search: term || undefined } }), orderCounts({ data: { accessToken } }),
       ]);
-      setOrders(result.orders); setCount(result.count); setLast(result.lastReceived); setCounts(totals);
+      setOrders(result.orders); setCount(result.count); setLast(result.lastReceived); setLastOutcome(result.lastOutcome); setCounts(totals);
     } catch { setError("טעינת הרכישות נכשלה. נסו לרענן או להתחבר מחדש."); }
   }, [page, status, term]);
   useEffect(() => {
@@ -88,7 +88,7 @@ function OrdersPage() {
         {term && <button type="button" onClick={() => { setSearch(""); setTerm(""); setPage(0); }}>ניקוי</button>}</div>
       <div><button type="button" disabled={busy || !orders?.length} onClick={() => void exportCsv()}>ייצוא לאקסל</button><button type="button" disabled={busy} onClick={() => void load()}>רענון</button></div>
     </div>
-    <div className="adm-order-meta" aria-live="polite"><span>{orders === null ? "טוען רכישות…" : `${count} רכישות בסינון הנוכחי`}</span>{last && <span>דיווח אחרון מ־Grow: {fmt(last)}</span>}</div>
+    <div className="adm-order-meta" aria-live="polite"><span>{orders === null ? "טוען רכישות…" : `${count} רכישות בסינון הנוכחי`}</span>{last && <span>דיווח אחרון מ־Grow: {fmt(last)} ({lastOutcome === "completed" ? "נקלט" : lastOutcome === "notification_pending" ? "נקלט, המייל ממתין" : "לא נקלט - נשלחה התראה במייל"})</span>}</div>
     <p className="adm-orders-note">החיבור מתעד רכישות חדשות ממועד הפעלתו. עסקאות קודמות והחזרים אינם מיובאים אוטומטית.</p>
     {error && <p className="adm-err" role="alert">{error}</p>}
     {orders === null ? <p className="adm-muted">טוען…</p> : orders.length === 0 ? <div className="adm-empty"><b>{status === "new" && !term ? "אין כרגע הזמנות חדשות" : "לא נמצאו רכישות"}</b><p>{status === "new" && !term ? "רכישה חדשה מ־Grow תופיע כאן אוטומטית." : "אפשר לשנות את הסטטוס או לנקות את החיפוש."}</p></div> :
