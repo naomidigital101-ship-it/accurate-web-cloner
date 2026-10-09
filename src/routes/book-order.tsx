@@ -5,7 +5,7 @@ import { track } from "@/lib/analytics";
 import { CHECKOUT_STORAGE_KEY } from "@/lib/book-checkout";
 import campaignCss from "@/book-order.css?url";
 
-const HERO_SRCSET = "/book/amichai-slim-600.webp 600w, /book/amichai-slim-900.webp 900w";
+const HERO_SRCSET = "/book/mock-hands-600.webp 600w, /book/mock-hands.webp 900w";
 const HERO_SIZES = "(min-width: 900px) 420px, (min-width: 600px) 300px, (max-width: 379px) 200px, 250px";
 
 /**
@@ -31,7 +31,7 @@ export const Route = createFileRoute("/book-order")({
     links: [
       { rel: "stylesheet", href: campaignCss },
       { rel: "canonical", href: `${SITE_URL}/book-order` },
-      { rel: "preload", as: "image", href: "/book/amichai-slim-600.webp", imageSrcSet: HERO_SRCSET, imageSizes: HERO_SIZES, fetchPriority: "high" },
+      { rel: "preload", as: "image", href: "/book/mock-hands-600.webp", imageSrcSet: HERO_SRCSET, imageSizes: HERO_SIZES, fetchPriority: "high" },
     ],
   }),
   component: BookOrderPage,
@@ -213,10 +213,10 @@ function BookOrderPage() {
             </div>
             <figure className="kb-hero-book">
               <img
-                src="/book/amichai-slim-600.webp"
+                src="/book/mock-hands-600.webp"
                 srcSet={HERO_SRCSET}
                 sizes={HERO_SIZES}
-                alt="הדמיה של הרב עמיחי איל מחזיק את הספר קשר של תפילין"
+                alt="ידיים מחזיקות את הספר קשר של תפילין"
                 width="600"
                 height="750"
                 fetchPriority="high"
