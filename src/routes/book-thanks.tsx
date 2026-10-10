@@ -7,8 +7,8 @@ import { CHECKOUT_STORAGE_KEY } from "@/lib/book-checkout";
 /**
  * דף החזרה אחרי תשלום מוצלח ב-Grow. עובד רק אם בהגדרות דף התשלום ב-Grow
  * מוגדרת כתובת חזרה אחרי הצלחה: https://or-hadash.org.il/book-thanks
- * מקור האמת לרכישה הוא ה-webhook (/api/grow-webhook); האירוע כאן נועד רק
- * לשייך את הרכישה לקמפיין ב-GA4.
+ * מקור האמת לרכישה הוא ה-webhook (/api/grow-webhook). חזרה לדף הזה אינה
+ * אישור תשלום: כל עוד אין שיוך לעסקה מאומתת, מדווחים רק חזרה מהסליקה.
  */
 export const Route = createFileRoute("/book-thanks")({
   head: () => ({
@@ -28,18 +28,16 @@ function BookThanksPage() {
     try {
       const raw = localStorage.getItem(CHECKOUT_STORAGE_KEY);
       if (!raw) return;
-      // נמחק לפני השליחה, כך שרענון הדף לא ידווח את אותה רכישה פעמיים.
+      // נמחק לפני השליחה כדי שרענון לא ידווח את אותה חזרה פעמיים.
       localStorage.removeItem(CHECKOUT_STORAGE_KEY);
       const c = JSON.parse(raw) as { quantity: number; delivery: string; total: number; at: number };
-      if (!c?.total || Date.now() - c.at > TTL_MS) return;
-      track("purchase", {
+      if (!Number.isFinite(c?.at) || !Number.isFinite(c?.total) || c.total <= 0 ||
+          ![1, 2, 3].includes(c.quantity) || c.at > Date.now() || Date.now() - c.at > TTL_MS) return;
+      track("book_checkout_return", {
         page_type: "book_campaign",
-        transaction_id: `kb-${c.at}`,
-        currency: "ILS",
-        value: c.total,
         delivery: c.delivery,
         bundle: c.quantity,
-        items: [{ item_id: `kesher-book-${c.quantity}`, item_name: "קשר של תפילין", price: c.total, quantity: 1 }],
+        payment_verified: false,
       });
     } catch {
       /* מדידה לא מפילה את הדף */
