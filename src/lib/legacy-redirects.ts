@@ -27,11 +27,26 @@ export const GONE: ReadonlySet<string> = new Set([
   "/languages/en",
   "/languages/אנגלית",
   "/languages/עברית",
+  "/languages/עברית/page/2",
   "/xmlrpc.php",
 ]);
 
 /** נתיבים שהתאחדו לעמוד מרכזי, או ששינו כתובת */
 export const MAP: Readonly<Record<string, string>> = {
+  "/index.html": "/",
+  "/wp-content/uploads/2025/10/yedidya_1164-1.pdf": "/wp/uploads/2025/10/yedidya_1164-1.pdf",
+  "/wp-content/uploads/2024/10/DOC-20241014-WA0015.pdf": "/wp/uploads/2024/10/DOC-20241014-WA0015.pdf",
+  "/news-ment/page/2": "/in-news",
+  "/en/letters/page/2": "/en/thank-you-letters",
+  "/tefilin/page/2": "/stories",
+  "/en/tefilin/page/2": "/en/stories-2",
+  "/tefilin/הסיפור-של-רונן-מקיבוץ-עין-כרמל": "/tefilin/הסיפור-של-ר-מקיבוץ-עין-כרמל",
+  "/tefilin/הסיפור-של-עומר": "/tefilin/הסיפור-של-ע",
+  "/tefilin/וְרָאוּ-כָּל-עַמֵּי-הָאָרֶץ-כִּי-שֵׁם": "/tefilin/וְרָאוּ-כָּל-עַמֵּי-הָאָרֶץ-כִּי-שֵׁם-2",
+  "/en/tefilin/וְרָאוּ-כָּל-עַמֵּי-הָאָרֶץ-כִּי-שֵׁם-3": "/tefilin/וְרָאוּ-כָּל-עַמֵּי-הָאָרֶץ-כִּי-שֵׁם-2",
+  "/en/tefilin/the-story-of-itai-from-rosh-haayin": "/en/tefilin/the-story-of-i-from-rosh-haayin",
+  "/en/tefilin/the-story-of-kobi-from-the-kibbutz-near-the-gaza-strip": "/en/tefilin/the-story-of-k-from-the-kibbutz-near-the-gaza-strip",
+  "/en/tefilin/the-story-of-gilad-from-kiryat-gat": "/en/tefilin/the-story-of-g-from-kiryat-gat",
   "/wp-content/uploads/2024/01/צפנת-פענח.pdf":
     "/wp/uploads/2024/01/צפנת-פענח.pdf",
   "/en/letters": "/en/thank-you-letters",
