@@ -1,3 +1,4 @@
+import { BookMediaSlider } from "@/components/BookMediaSlider";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { SITE_URL } from "@/lib/site";
@@ -401,6 +402,7 @@ function BookOrderPage() {
         </section>
 
         {/* 7. מה מקבלים, כמה זה עולה, מה קורה אחרי הלחיצה */}
+        <BookMediaSlider campaign />
         <section id="kb-order" className="kb-order" aria-labelledby="kb-order-title">
           <div className="kb-wrap">
             <div className="kb-order-head">

@@ -1,3 +1,4 @@
+import { BookMediaSlider } from "@/components/BookMediaSlider";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowLeft, BookOpen, Check, MapPin, Truck } from "lucide-react";
@@ -535,6 +536,7 @@ export function BookPage() {
               <p className="kb-small">כתיבה: שמעון חי בן־שחר והרב עמיחי איל</p>
             </div>
           </section>
+          <BookMediaSlider />
           <section id="kb-trust" className="kb-trust" aria-labelledby="kb-trust-title">
             <div className="kb-wrap">
               <p className="kb-kicker">המיזם שמאחורי הספר</p>
