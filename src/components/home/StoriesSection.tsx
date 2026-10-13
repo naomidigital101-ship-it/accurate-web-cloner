@@ -83,6 +83,18 @@ export function StoriesSection({ items }: { items?: { title: string; href: strin
   const cards = items && items.length > 0 ? items : stories;
   return (
     <section dir="rtl" className="st-e">
+      <article className="initiative-feature" id="initiative-in-media" aria-labelledby="initiative-feature-title">
+        <img className="initiative-feature-photo" src="/home/media/hidabroot-initiative.webp" width="730" height="500" loading="lazy" decoding="async" alt="הרב עמיחי איל מסייע לחייל להניח תפילין, מתוך הכתבה בהידברות" />
+        <div className="initiative-feature-copy">
+          <div className="initiative-feature-source">
+            <span>המיזם בתקשורת</span>
+            <img src="/wp/img/לוגו-הידברות.webp" alt="הידברות" width="100" height="48" loading="lazy" />
+          </div>
+          <h2 id="initiative-feature-title">״כל הפלוגה שלי מניחה תפילין״</h2>
+          <p>הרב עמיחי איל מספר להידברות כיצד התפילין שנתרמות למיזם מגיעות לחיילים ולאנשים שמבקשים להתחיל להניח.</p>
+          <a className="initiative-feature-link" href="https://www.hidabroot.org/article/1228310" target="_blank" rel="noopener noreferrer">לקריאת הכתבה בהידברות <span aria-hidden="true">↗</span><span className="sr-only"> (נפתח בלשונית חדשה)</span></a>
+        </div>
+      </article>
       <div className="st-wrap">
         <div className="st-main">
           <div className="st-head">
