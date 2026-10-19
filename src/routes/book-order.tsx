@@ -40,7 +40,7 @@ export const Route = createFileRoute("/book-order")({
 
 type Bundle = { quantity: number; title: string; price: number; shipping: number; badge?: string };
 
-// price = מחיר באיסוף עצמי (מה שמוגדר ב-Grow). המחיר הבולט בעמוד הוא עם משלוח.
+// price = מחיר באיסוף עצמי (מה שמוגדר ב-Grow). המחיר הבולט בעמוד הוא ללא משלוח, והתוספת מוצגת בנפרד.
 const BUNDLES: Bundle[] = [
   { quantity: 1, title: "עותק אחד", price: 67, shipping: 35 },
   { quantity: 2, title: "שני עותקים", price: 118, shipping: 20, badge: "אחד לכם, אחד למתנה" },
@@ -233,7 +233,7 @@ function BookOrderPage() {
               <ul className="kb-facts" aria-label="פרטי הספר">
                 <li>184 עמודים</li>
                 <li>כריכה רכה</li>
-                <li>102 ₪ עם משלוח, או 67 ₪ באיסוף מבית אל</li>
+                <li>67 ₪ לעותק + 35 ₪ משלוח. איסוף מבית אל ללא עלות</li>
               </ul>
             </div>
           </div>
@@ -407,7 +407,7 @@ function BookOrderPage() {
           <div className="kb-wrap">
             <div className="kb-order-head">
               <h2 id="kb-order-title">בחרו כמה עותקים</h2>
-              <p>184 עמודים בכריכה רכה. המחירים כוללים משלוח עד הבית. אפשר גם לבחור איסוף עצמי מבית אל בדף התשלום, לפי המחיר שמופיע בכל מארז.</p>
+              <p>184 עמודים בכריכה רכה. תוספת המשלוח מפורטת בכל מארז. איסוף עצמי מבית אל ללא עלות.</p>
             </div>
 
             <fieldset className="kb-bundles">
@@ -419,13 +419,13 @@ function BookOrderPage() {
                     <input type="radio" name="kb-qty" checked={selected} onChange={() => chooseBundle(b)} onClick={() => setPicked(true)} />
                     {b.badge && <span className="kb-badge">{b.badge}</span>}
                     <span className="kb-bundle-title">{b.title}</span>
-                    <span className="kb-bundle-price">{withShipping(b)} ₪</span>
+                    <span className="kb-bundle-price">{b.price} ₪</span>
                     <span className="kb-bundle-rows">
-                      <span>כולל משלוח עד הבית</span>
-                      <span>{b.shipping === 0 ? "באיסוף עצמי: אותו מחיר" : `באיסוף עצמי מבית אל: ${b.price} ₪`}</span>
+                      <span>{b.shipping === 0 ? "משלוח עד הבית כלול במחיר" : `משלוח עד הבית בתוספת ${b.shipping} ₪`}</span>
+                      <span>איסוף עצמי מבית אל ללא עלות</span>
                     </span>
                     {b.quantity > 1 && (
-                      <span className="kb-bundle-unit">{perCopy(withShipping(b) / b.quantity)} ₪ לעותק, כולל משלוח</span>
+                      <span className="kb-bundle-unit">{perCopy(b.price / b.quantity)} ₪ לעותק</span>
                     )}
                   </label>
                 );
@@ -510,9 +510,9 @@ function BookOrderPage() {
           {picked ? (
             <>
               <span aria-live="polite">
-                <strong>{bundle.title} · {withShipping(bundle)} ₪</strong>
+                <strong>{bundle.title} · {bundle.price} ₪</strong>
                 <small>
-                  {bundle.shipping === 0 ? "כולל משלוח עד הבית" : `כולל משלוח, או ${bundle.price} ₪ באיסוף`}
+                  {bundle.shipping === 0 ? "כולל משלוח עד הבית" : `משלוח בתוספת ${bundle.shipping} ₪`}
                 </small>
               </span>
               <a href={PURCHASE_LINKS[quantity]} target="_blank" rel="noopener noreferrer" tabIndex={barVisible ? 0 : -1} onClick={checkout("sticky")}>
