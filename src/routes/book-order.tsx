@@ -436,8 +436,7 @@ function BookOrderPage() {
               <div className="kb-summary-row" aria-live="polite">
                 <span>{bundle.title}</span>
                 <dl className="kb-summary-prices">
-                  <div><dt>עם משלוח עד הבית{bundle.shipping === 0 ? " (כלול)" : ""}</dt><dd>{withShipping(bundle)} ₪</dd></div>
-                  <div><dt>באיסוף עצמי מבית אל</dt><dd data-testid="order-total">{bundle.price} ₪</dd></div>
+                  <div><dt>מחיר הספרים</dt><dd data-testid="order-total">{bundle.price} ₪</dd></div><div><dt>משלוח עד הבית</dt><dd>{bundle.shipping === 0 ? "כלול במחיר" : `+ ${bundle.shipping} ₪`}</dd></div><div><dt>סה״כ עם משלוח</dt><dd>{withShipping(bundle)} ₪</dd></div>
                 </dl>
               </div>
               <a

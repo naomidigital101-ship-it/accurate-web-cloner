@@ -347,15 +347,15 @@ export function BookPage() {
                       </span>
                     </div>
                     <strong>
-                      {item.price + (delivery === "shipping" ? item.quantity === 1 ? 35 : item.quantity === 2 ? 20 : 0 : 0)}
+                      {item.price}
                       <small> ₪</small>
                     </strong>
-                    <p>{delivery === "shipping" ? "מחיר סופי כולל משלוח עד הבית" : "מחיר סופי באיסוף עצמי"}</p>
-                    <p>{item.quantity === 3 ? "משלוח עד הבית כלול במחיר" : `משלוח עד הבית: ${item.quantity === 1 ? 35 : 20} ₪`}</p>
+                    <p>מחיר הספרים · איסוף עצמי ללא עלות</p>
+                    <p>{item.quantity === 3 ? "משלוח עד הבית כלול במחיר" : `משלוח עד הבית בתוספת ${item.quantity === 1 ? 35 : 20} ₪`}</p>
                     {item.quantity === 2 && (
                       <div className="kb-bundle-saving">
-                        <span><s>{134 + (delivery === "shipping" ? 20 : 0)} ₪</s> <b>חוסכים 16 ₪ על הספרים</b></span>
-                        <small>בהשוואה ל־2 עותקים במחיר יחיד של 67 ₪{delivery === "shipping" ? ", בתוספת אותם דמי משלוח (20 ₪)" : ""}.</small>
+                        <span><s>134 ₪</s> <b>חוסכים 16 ₪ על הספרים</b></span>
+                        <small>בהשוואה ל־2 עותקים במחיר יחיד של 67 ₪.</small>
                       </div>
                     )}
                     <p className="kb-unit-price">
@@ -671,12 +671,10 @@ export function BookPage() {
         <div className="kb-mobile-bar">
           <div>
             <span>
-              {bundle.title} · {total} ₪
+              {bundle.title} · {bundle.price} ₪
             </span>
             <small>
-              {delivery === "shipping"
-                ? "כולל משלוח עד הבית"
-                : "איסוף עצמי ללא עלות"}
+              {shippingIncluded ? "משלוח עד הבית כלול" : `משלוח בתוספת ${shippingPrice} ₪`}
             </small>
           </div>
           <a className="kb-button" href="#kb-order">
