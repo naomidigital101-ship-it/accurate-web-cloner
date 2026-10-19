@@ -7,21 +7,21 @@ const GROW_TRIPLE = "https://pay.grow.link/MTA1NDQ5~a1922e39c4975492fad2f1321d3c
 const offers = [
   {
     name: "עותק בודד",
-    price: "78",
-    note: "לא כולל משלוח",
+    price: "67",
+    note: "משלוח בתוספת 35 ₪",
     href: GROW_SINGLE,
     best: false,
   },
   {
     name: "זוג עותקים",
-    price: "143",
-    note: "כולל משלוח עד הבית",
+    price: "118",
+    note: "משלוח בתוספת 20 ₪",
     href: GROW_PAIR,
     best: true,
   },
   {
     name: "שלישיית עותקים",
-    price: "199",
+    price: "156",
     note: "כולל משלוח עד הבית",
     href: GROW_TRIPLE,
     best: false,
@@ -34,7 +34,7 @@ export function BookPurchaseSection() {
       <div className="kb-shop-inner">
         <h2 id="kb-shop-title" className="kb-shop-title">לרגל הוצאת הספר</h2>
         <p className="kb-shop-sub">
-          הספר ״קשר של תפילין״ — 23 סיפורים אמיתיים על רגעי התעוררות והשגחה. במארז של שני עותקים ומעלה המשלוח עד הבית כלול במחיר.
+          הספר ״קשר של תפילין״ — 23 סיפורים אמיתיים על רגעי התעוררות והשגחה. משלוח ב־35 ₪ לעותק אחד, ב־20 ₪ לזוג וכלול במחיר השלישייה.
         </p>
         <div className="kb-shop-cards">
           {offers.map((o) => (

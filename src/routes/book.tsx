@@ -45,19 +45,19 @@ const bundles = [
   {
     quantity: 1,
     title: "עותק אחד",
-    price: 78,
-    detail: "איסוף עצמי ללא עלות, או משלוח ב־40 ₪",
+    price: 67,
+    detail: "איסוף עצמי ללא עלות, או משלוח ב־35 ₪",
   },
   {
     quantity: 2,
     title: "שני עותקים",
-    price: 143,
+    price: 118,
     detail: "איסוף עצמי ללא עלות, או משלוח ב־20 ₪",
   },
   {
     quantity: 3,
     title: "שלושה עותקים",
-    price: 199,
+    price: 156,
     detail: "משלוח עד הבית כלול",
   },
 ];
@@ -91,7 +91,7 @@ export function BookPage() {
   const [delivery, setDelivery] = useState<"pickup" | "shipping">("pickup");
   const bundle = bundles.find((item) => item.quantity === quantity)!;
   const shippingIncluded = quantity === 3;
-  const shippingPrice = quantity === 1 ? 40 : quantity === 2 ? 20 : 0;
+  const shippingPrice = quantity === 1 ? 35 : quantity === 2 ? 20 : 0;
   const total =
     bundle.price + (delivery === "shipping" ? shippingPrice : 0);
   // קישורי רכישה אמיתיים לפי המארז — זהים לאזור הרכישה בעמוד הבית.
@@ -143,8 +143,8 @@ export function BookPage() {
                   הספר מביא את האנשים, השאלות והמפגשים שמאחורי ההחלטה להתחיל להניח תפילין — בבית, בצבא, במהלך טיול או בתוך שינוי משפחתי.
                 </p>
                 <div className="kb-hero-price">
-                  <strong>78 ₪</strong>
-                  <span>לעותק · מארז 2 עותקים ב־143 ₪, משלוח בתוספת 20 ₪</span>
+                  <strong>67 ₪</strong>
+                  <span>לעותק · מארז 2 עותקים ב־118 ₪, משלוח בתוספת 20 ₪</span>
                 </div>
                 <div className="kb-actions">
                   <a href="#kb-order" className="kb-button">
@@ -174,7 +174,7 @@ export function BookPage() {
                       <Truck size={18} aria-hidden="true" />
                       <span>
                         <strong>משלוח עד הבית · עד 8 ימי עסקים</strong>
-                        40 ₪ לעותק אחד, 20 ₪ לזוג, כלול במחיר השלישייה
+                        35 ₪ לעותק אחד, 20 ₪ לזוג, כלול במחיר השלישייה
                       </span>
                     </li>
                     <li>
@@ -320,7 +320,7 @@ export function BookPage() {
                 <p className="kb-kicker">לרגל הוצאת הספר</p>
                 <h2 id="kb-order-title">בחרו כמה עותקים להזמין</h2>
                 <p>
-                  משלוח ב־40 ₪ לעותק אחד, ב־20 ₪ לזוג וכלול במחיר השלישייה.
+                  משלוח ב־35 ₪ לעותק אחד, ב־20 ₪ לזוג וכלול במחיר השלישייה.
                 </p>
               </div>
               <fieldset className="kb-bundles">
@@ -347,15 +347,15 @@ export function BookPage() {
                       </span>
                     </div>
                     <strong>
-                      {item.price + (delivery === "shipping" ? item.quantity === 1 ? 40 : item.quantity === 2 ? 20 : 0 : 0)}
+                      {item.price + (delivery === "shipping" ? item.quantity === 1 ? 35 : item.quantity === 2 ? 20 : 0 : 0)}
                       <small> ₪</small>
                     </strong>
                     <p>{delivery === "shipping" ? "מחיר סופי כולל משלוח עד הבית" : "מחיר סופי באיסוף עצמי"}</p>
-                    <p>{item.quantity === 3 ? "משלוח עד הבית כלול במחיר" : `משלוח עד הבית: ${item.quantity === 1 ? 40 : 20} ₪`}</p>
+                    <p>{item.quantity === 3 ? "משלוח עד הבית כלול במחיר" : `משלוח עד הבית: ${item.quantity === 1 ? 35 : 20} ₪`}</p>
                     {item.quantity === 2 && (
                       <div className="kb-bundle-saving">
-                        <span><s>{156 + (delivery === "shipping" ? 20 : 0)} ₪</s> <b>חוסכים 13 ₪ על הספרים</b></span>
-                        <small>בהשוואה ל־2 עותקים במחיר יחיד של 78 ₪{delivery === "shipping" ? ", בתוספת אותם דמי משלוח (20 ₪)" : ""}.</small>
+                        <span><s>{134 + (delivery === "shipping" ? 20 : 0)} ₪</s> <b>חוסכים 16 ₪ על הספרים</b></span>
+                        <small>בהשוואה ל־2 עותקים במחיר יחיד של 67 ₪{delivery === "shipping" ? ", בתוספת אותם דמי משלוח (20 ₪)" : ""}.</small>
                       </div>
                     )}
                     <p className="kb-unit-price">
@@ -608,7 +608,7 @@ export function BookPage() {
               ],
               [
                 "כמה עולה המשלוח ומתי הוא מגיע?",
-                "משלוח עד הבית עולה 40 ₪ לעותק אחד ו־20 ₪ לזוג עותקים. במארז של שלושה עותקים המשלוח כלול במחיר. זמן האספקה הוא עד שמונה ימי עסקים. איסוף עצמי מבית אל הוא ללא תוספת תשלום. את אופן הקבלה בוחרים במסך התשלום. להזמנה גדולה יותר מתאמים מראש את אופן המשלוח והעלות.",
+                "משלוח עד הבית עולה 35 ₪ לעותק אחד ו־20 ₪ לזוג עותקים. במארז של שלושה עותקים המשלוח כלול במחיר. זמן האספקה הוא עד שמונה ימי עסקים. איסוף עצמי מבית אל הוא ללא תוספת תשלום. את אופן הקבלה בוחרים במסך התשלום. להזמנה גדולה יותר מתאמים מראש את אופן המשלוח והעלות.",
               ],
               [
                 "אפשר להזמין כמות לכיתה או לעובדים?",
