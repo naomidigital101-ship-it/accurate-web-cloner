@@ -131,10 +131,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
          * הולך לאיבוד, כולל צפיית העמוד הראשונה.
          *
          * הטעינה מתחילה אחרי אירוע load, או אחרי 3 שניות אם הוא כבר עבר.
+         *
+         * Google Ads (AW-18501690637) מופעל רק אחרי הסכמה מפורשת למדידת מודעות
+         * בבאנר. ברירת המחדל היא סירוב לכל אחסון פרסומי, ו-ad_personalization נשאר
+         * מסורב תמיד - אין ריטרגטינג. __adsOn נקראת כאן לגולש שכבר הסכים בעבר,
+         * ומהבאנר ברגע ההסכמה.
          */
         children:
           "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}window.gtag=gtag;" +
+          "gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});" +
           "gtag('js',new Date());gtag('config','G-TG5SE28LKK',{send_page_view:false});" +
+          "window.__adsOn=function(){if(window.__adsCfg)return;window.__adsCfg=1;" +
+          "gtag('consent','update',{ad_storage:'granted',ad_user_data:'granted'});gtag('config','AW-18501690637')};" +
+          "try{var c=JSON.parse(localStorage.getItem('cookie-consent-v1')||'null');if(c&&c.ads)window.__adsOn()}catch(e){}" +
           "(function(){var f=function(){if(window.__gaLoaded)return;window.__gaLoaded=1;" +
           "var s=document.createElement('script');s.async=true;" +
           "s.src='https://www.googletagmanager.com/gtag/js?id=G-TG5SE28LKK';" +

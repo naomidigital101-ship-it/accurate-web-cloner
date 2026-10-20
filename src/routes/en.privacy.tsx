@@ -46,9 +46,11 @@ function Page() {
           access data for operation and security.
         </p>
         <p>
-          <b>What we do not collect.</b> There are no advertising systems, marketing pixels or
-          behavioural tracking tools on this site, and we do not sell or rent information to third
-          parties.
+          <b>Measurement.</b> We use Google Analytics to count visits and see which pages draw
+          interest. If you allow it in the cookie settings, we also use the Google Ads measurement
+          tools to find out whether one of our Google ads led to a visit. We do not use these tools
+          to show ads to past visitors (retargeting), and we do not sell or rent information to
+          third parties.
         </p>
 
         <h2>What it is used for</h2>
@@ -60,7 +62,7 @@ function Page() {
         <p>We do not use your details for marketing mail without separate, explicit consent.</p>
 
         <h2>Cookies and local storage</h2>
-        <p>The site uses three kinds only:</p>
+        <p>The site uses five kinds:</p>
         <ul>
           <li>
             <b>Necessary</b> - session identifiers set by the hosting service, required for
@@ -75,6 +77,14 @@ function Page() {
             them, so without your consent no data reaches YouTube. The background video on the home
             page is served from Vimeo in Do Not Track mode.
           </li>
+          <li>
+            <b>Analytics</b> - Google Analytics, to count visits and understand how the site is
+            used. No name, phone number or address is stored.
+          </li>
+          <li>
+            <b>Ad measurement</b> - Google Ads, to find out whether one of our Google ads led to a
+            visit. It runs only if you allow it and is not used to show you ads again later.
+          </li>
         </ul>
         <p>
           You can change your choice at any time: <CookieSettingsLink en className="a11y-inline-btn" />.
@@ -85,6 +95,7 @@ function Page() {
           <li>The hosting service the site runs on.</li>
           <li>Google Fonts - font delivery.</li>
           <li>YouTube and Vimeo - video playback, subject to the above.</li>
+          <li>Google Analytics and Google Ads - measurement, as described above.</li>
           <li>
             External payment processors on the donation page. Payments take place on their sites;
             card details never pass through this site and are not stored by us.
@@ -118,7 +129,7 @@ function Page() {
           this page.
         </p>
 
-        <p className="a11y-updated">Last updated on 8 August 2026.</p>
+        <p className="a11y-updated">Last updated on 20 October 2026.</p>
       </div>
     </PageShell>
   );

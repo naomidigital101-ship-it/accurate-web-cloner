@@ -93,12 +93,13 @@ const CSP_REPORT_ONLY = [
   "object-src 'none'",
   "frame-ancestors 'self'",
   "form-action 'self'",
-  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com",
+  // googleadservices / googleads.g.doubleclick / www.google.com - Google Ads, נטען רק אחרי הסכמה
+  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net",
   "style-src 'self' 'unsafe-inline'",
   "font-src 'self' data:",
-  "img-src 'self' data: blob: https://www.googletagmanager.com https://www.google-analytics.com",
+  "img-src 'self' data: blob: https://www.googletagmanager.com https://www.google-analytics.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com",
   "media-src 'self'",
-  "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com",
+  "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com",
   "frame-src https://www.youtube.com https://www.youtube-nocookie.com https://player.vimeo.com",
   // upgrade-insecure-requests הושמט בכוונה: הדפדפן מתעלם ממנו במצב דיווח
   // ומדפיס שגיאה בקונסול. יתווסף כשנעבור לאכיפה.
