@@ -10,10 +10,39 @@ export type Consent = {
   necessary: true;
   functional: boolean;
   embeds: boolean;
+  /** מדידת מודעות Google Ads. חסר בהסכמות ישנות - נחשב כסירוב */
+  ads?: boolean;
   decidedAt: string;
 };
 
 const KEY = "cookie-consent-v1";
+
+declare global {
+  interface Window {
+    __adsOn?: () => void;
+  }
+}
+
+/**
+ * מחילה את בחירת מדידת המודעות על gtag. ההפעלה עצמה (consent update + config של AW)
+ * מוגדרת בסקריפט ה-head של ה-root route, כדי שתפעל גם בטעינה הבאה לפני ש-React עולה.
+ * בסירוב: מעדכנים את gtag לסירוב ומוחקים עוגיות _gcl שכבר נוצרו.
+ */
+function applyAdsConsent(on: boolean) {
+  if (on) {
+    window.__adsOn?.();
+    return;
+  }
+  window.gtag?.("consent", "update", { ad_storage: "denied", ad_user_data: "denied" });
+  const host = window.location.hostname.replace(/^www\./, "");
+  for (const part of document.cookie.split(";")) {
+    const name = part.split("=")[0].trim();
+    if (!name.startsWith("_gcl")) continue;
+    for (const domain of ["", `; domain=.${host}`, `; domain=${host}`]) {
+      document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/${domain}`;
+    }
+  }
+}
 
 /**
  * מוחקת בפועל כל אחסון לא-הכרחי. נקראת כשהמשתמש דוחה קטגוריה,
@@ -79,6 +108,7 @@ export function CookieConsent({ en = false }: { en?: boolean } = {}) {
   const [custom, setCustom] = useState(false);
   const [functional, setFunctional] = useState(true);
   const [embeds, setEmbeds] = useState(false);
+  const [ads, setAds] = useState(false);
 
   const t = (he: string, eng: string) => (en ? eng : he);
 
@@ -88,6 +118,7 @@ export function CookieConsent({ en = false }: { en?: boolean } = {}) {
       const c = readConsent();
       setFunctional(c?.functional ?? true);
       setEmbeds(c?.embeds ?? false);
+      setAds(c?.ads ?? false);
       setCustom(true);
       setShow(true);
     };
@@ -96,10 +127,11 @@ export function CookieConsent({ en = false }: { en?: boolean } = {}) {
   }, []);
 
   const decide = useCallback(
-    (f: boolean, e: boolean) => {
+    (f: boolean, e: boolean, a: boolean) => {
     // דחייה חייבת גם למחוק מה שכבר נשמר, לא רק למנוע טעינה עתידית
     if (!f) purgeNonEssential();
-    write({ necessary: true, functional: f, embeds: e, decidedAt: new Date().toISOString() });
+    write({ necessary: true, functional: f, embeds: e, ads: a, decidedAt: new Date().toISOString() });
+    applyAdsConsent(a);
     setShow(false);
     setCustom(false);
   }, []);
@@ -120,8 +152,8 @@ export function CookieConsent({ en = false }: { en?: boolean } = {}) {
         {!custom ? (
           <p className="cc-text">
             {t(
-              "האתר עושה שימוש בעוגיות הכרחיות להפעלתו, ובעוגיות נוספות לשמירת העדפות, להצגת תוכן מוטמע כמו סרטוני וידאו ולמדידת תנועה באתר. אין באתר עוגיות פרסום או ריטרגטינג.",
-              "This site uses cookies that are necessary for it to work, plus optional ones that remember your preferences, allow embedded content such as videos, and measure site traffic. There are no advertising or retargeting cookies on this site.",
+              "האתר עושה שימוש בעוגיות הכרחיות להפעלתו, ובעוגיות נוספות לשמירת העדפות, להצגת תוכן מוטמע כמו סרטוני וידאו ולמדידת תנועה באתר. אם תאשרו, נמדוד גם אם מודעה שלנו בגוגל הובילה אתכם לאתר. איננו משתמשים בעוגיות להצגת מודעות חוזרות.",
+              "This site uses cookies that are necessary for it to work, plus optional ones that remember your preferences, allow embedded content such as videos, and measure site traffic. If you agree, we also measure whether one of our Google ads brought you here. We do not use cookies to show you ads again later.",
             )}
           </p>
         ) : (
@@ -181,6 +213,28 @@ export function CookieConsent({ en = false }: { en?: boolean } = {}) {
 
             <div className="cc-cat">
               <div className="cc-cat-head">
+                <b>{t("מדידת מודעות", "Ad measurement")}</b>
+                <label className={`cc-switch${ads ? " on" : ""}`}>
+                  <input
+                    type="checkbox"
+                    checked={ads}
+                    onChange={(e) => setAds(e.target.checked)}
+                    aria-label={t("הפעלת מדידת מודעות", "Enable ad measurement")}
+                  />
+                  <span />
+                  <em>{ads ? t("פעיל", "On") : t("כבוי", "Off")}</em>
+                </label>
+              </div>
+              <p>
+                {t(
+                  "Google Ads רושם אם הגעתם לאתר דרך מודעה שלנו בגוגל, כדי שנדע אם המודעה עובדת. לא משמש להצגת מודעות חוזרות. כבוי עד שתאשרו.",
+                  "Google Ads records whether you reached the site through one of our Google ads, so we know if the ad works. It is not used to show you ads again later. Off until you agree.",
+                )}
+              </p>
+            </div>
+
+            <div className="cc-cat">
+              <div className="cc-cat-head">
                 <b>{t("תוכן מוטמע מצד שלישי", "Embedded third-party content")}</b>
                 <label className={`cc-switch${embeds ? " on" : ""}`}>
                   <input
@@ -204,10 +258,10 @@ export function CookieConsent({ en = false }: { en?: boolean } = {}) {
         )}
 
         <div className="cc-btns">
-          <button type="button" className="cc-btn cc-accept" onClick={() => decide(true, true)}>
+          <button type="button" className="cc-btn cc-accept" onClick={() => decide(true, true, true)}>
             {t("אישור הכל", "Accept all")}
           </button>
-          <button type="button" className="cc-btn cc-reject" onClick={() => decide(false, false)}>
+          <button type="button" className="cc-btn cc-reject" onClick={() => decide(false, false, false)}>
             {t("דחיית הכל", "Reject all")}
           </button>
           {!custom ? (
@@ -215,7 +269,7 @@ export function CookieConsent({ en = false }: { en?: boolean } = {}) {
               {t("התאמה אישית", "Customise")}
             </button>
           ) : (
-            <button type="button" className="cc-btn cc-custom" onClick={() => decide(functional, embeds)}>
+            <button type="button" className="cc-btn cc-custom" onClick={() => decide(functional, embeds, ads)}>
               {t("שמירת הבחירה", "Save my choice")}
             </button>
           )}
