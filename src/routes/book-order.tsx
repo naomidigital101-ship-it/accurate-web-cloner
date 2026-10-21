@@ -1,3 +1,4 @@
+import { BookLaunchPrice } from "@/components/BookLaunchPrice";
 import { BookMediaSlider } from "@/components/BookMediaSlider";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
@@ -233,7 +234,7 @@ function BookOrderPage() {
               <ul className="kb-facts" aria-label="פרטי הספר">
                 <li>184 עמודים</li>
                 <li>כריכה רכה</li>
-                <li>67 ₪ לעותק + 35 ₪ משלוח. איסוף מבית אל ללא עלות</li>
+                <li><BookLaunchPrice quantity={1} />67 ₪ לעותק + 35 ₪ משלוח. איסוף מבית אל ללא עלות</li>
               </ul>
             </div>
           </div>
@@ -419,7 +420,7 @@ function BookOrderPage() {
                     <input type="radio" name="kb-qty" checked={selected} onChange={() => chooseBundle(b)} onClick={() => setPicked(true)} />
                     {b.badge && <span className="kb-badge">{b.badge}</span>}
                     <span className="kb-bundle-title">{b.title}</span>
-                    <span className="kb-bundle-price">{b.price} ₪</span>
+                    <BookLaunchPrice quantity={b.quantity} /><span className="kb-bundle-price">{b.price} ₪</span>
                     <span className="kb-bundle-rows">
                       <span>{b.shipping === 0 ? "משלוח עד הבית כלול במחיר" : `משלוח עד הבית בתוספת ${b.shipping} ₪`}</span>
                       <span>איסוף עצמי מבית אל ללא עלות</span>

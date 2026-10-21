@@ -2004,3 +2004,9 @@
   .kb .kb-bundle-recommended > strong { margin-top: 8px; }
   .kb .kb-bundle-badge { margin-bottom: 10px; font-size: 13px; }
 }
+
+/* Launch prices keep the same reading order in all mobile bundle cards. */
+@media (max-width: 767px) {
+  .kb .kb-bundle:has(> .book-launch-price) { display: block; }
+  .kb .kb-bundle:has(> .book-launch-price) > strong { display: block; margin-block: 8px; }
+}

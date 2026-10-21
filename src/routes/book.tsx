@@ -1,3 +1,4 @@
+import { BookLaunchPrice } from "@/components/BookLaunchPrice";
 import { BookMediaSlider } from "@/components/BookMediaSlider";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
@@ -143,7 +144,7 @@ export function BookPage() {
                   הספר מביא את האנשים, השאלות והמפגשים שמאחורי ההחלטה להתחיל להניח תפילין — בבית, בצבא, במהלך טיול או בתוך שינוי משפחתי.
                 </p>
                 <div className="kb-hero-price">
-                  <strong>67 ₪</strong>
+                  <div><BookLaunchPrice quantity={1} /><strong>67 ₪</strong></div>
                   <span>לעותק · מארז 2 עותקים ב־118 ₪, משלוח בתוספת 20 ₪</span>
                 </div>
                 <div className="kb-actions">
@@ -346,18 +347,13 @@ export function BookPage() {
                         {quantity === item.quantity && <Check size={14} />}
                       </span>
                     </div>
+                    <BookLaunchPrice quantity={item.quantity} />
                     <strong>
                       {item.price}
                       <small> ₪</small>
                     </strong>
                     <p>מחיר הספרים · איסוף עצמי ללא עלות</p>
                     <p>{item.quantity === 3 ? "משלוח עד הבית כלול במחיר" : `משלוח עד הבית בתוספת ${item.quantity === 1 ? 35 : 20} ₪`}</p>
-                    {item.quantity === 2 && (
-                      <div className="kb-bundle-saving">
-                        <span><s>134 ₪</s> <b>חוסכים 16 ₪ על הספרים</b></span>
-                        <small>בהשוואה ל־2 עותקים במחיר יחיד של 67 ₪.</small>
-                      </div>
-                    )}
                     <p className="kb-unit-price">
                       {unitPriceLabel(item.price, item.quantity)}
                     </p>

@@ -149,7 +149,7 @@
 .kb-order{padding-block:clamp(52px,9vw,96px);scroll-margin-top:8px}
 .kb-order-head p{margin-top:10px;font-size:17px;color:var(--muted)}
 .kb-bundles{display:grid;gap:14px;margin:26px 0 0;padding:0;border:0}
-.kb-bundle{position:relative;display:grid;grid-template-columns:1fr auto;grid-template-areas:"title price" "rows rows" "unit unit";gap:4px 12px;padding:18px 18px 16px;padding-inline-start:52px;background:#fff;border:2px solid var(--line);border-radius:14px;cursor:pointer;transition:border-color .2s,box-shadow .2s}
+.kb-bundle{position:relative;display:grid;grid-template-columns:1fr auto;grid-template-areas:"title price" "launch launch" "rows rows" "unit unit";gap:4px 12px;padding:18px 18px 16px;padding-inline-start:52px;background:#fff;border:2px solid var(--line);border-radius:14px;cursor:pointer;transition:border-color .2s,box-shadow .2s}
 .kb-bundle input{position:absolute;inset-inline-start:18px;top:22px;width:22px;height:22px;margin:0;accent-color:var(--violet)}
 .kb-bundle:hover{border-color:#c9bff0}
 .kb-bundle.is-selected{border-color:var(--violet);box-shadow:0 10px 26px -12px rgba(67,4,196,.45)}
@@ -237,7 +237,7 @@
 @media (min-width:600px){
   .kb-hero-book img{width:300px}
   .kb-bundles{grid-template-columns:repeat(3,1fr);align-items:stretch}
-  .kb-bundle{grid-template-columns:1fr;grid-template-areas:"title" "price" "rows" "unit";padding:26px 20px 20px;padding-inline-start:20px;align-content:start}
+  .kb-bundle{grid-template-columns:1fr;grid-template-areas:"title" "launch" "price" "rows" "unit";padding:26px 20px 20px;padding-inline-start:20px;align-content:start}
   .kb-bundle input{inset-inline-start:auto;inset-inline-end:18px;top:24px}
   .kb-bundle-price{font-size:32px;margin-block:6px 4px}
   .kb-bundle-rows{flex-direction:column}
@@ -272,3 +272,8 @@
   .kb-summary-row{flex-direction:column;align-items:flex-start;gap:6px;margin:0}
   .kb-steps{grid-column:1/-1;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.18)}
 }
+
+.kb-bundle > .book-launch-price{grid-area:launch;color:var(--muted)}
+
+.kb-facts li:has(.book-launch-price){flex-basis:100%}
+.kb-facts li:has(.book-launch-price)::before{display:none}
