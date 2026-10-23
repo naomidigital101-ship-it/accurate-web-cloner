@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Fragment, useCallback, useEffect, useState } from "react";
 import { getAccessToken } from "@/lib/supabase-browser";
 import { listOrders, orderCounts, updateOrder, type BookOrder, type OrderStatus } from "@/lib/api/orders.functions";
-import { shippingWhatsAppText } from "@/lib/order-communication";
+import { shippingWhatsAppText, customerWhatsAppUrl } from "@/lib/order-communication";
 
 export const Route = createFileRoute("/admin/orders")({
   validateSearch: (search: Record<string, unknown>) => ({
@@ -111,7 +111,7 @@ function OrdersPage() {
           <td><button type="button" className="adm-linkbtn" onClick={() => setOpen(open === o.id ? null : o.id)}>{open === o.id ? "סגירה" : "פרטים"}</button></td>
         </tr>{open === o.id && <tr className="adm-detail"><td colSpan={7}><dl>
           {([["טלפון", o.phone], ["אימייל", o.email], ["כתובת", o.address], ["מוצרים", productLabel(o)], ["סכום ששולם", money(o.amount_agorot)], ["אופן קבלה", o.shipping_method || "לא נמסר"], ["דמי משלוח", o.shipping_agorot === null ? "לא נמסרו בנפרד" : money(o.shipping_agorot)], ["תאריך תשלום ב־Grow", o.provider_payment_date || "לא נמסר"], ["אסמכתת עסקה", o.provider_transaction_id], ["תיאור", o.description]] as const).filter(([, v]) => v).map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}
-        </dl><div className="adm-detail-actions"><button type="button" onClick={() => void copyShipping(o)}>{copied === o.id ? "ההודעה הועתקה ✓" : "העתקת הודעה לאחראי המשלוחים"}</button>{o.phone && <a href={`https://wa.me/${o.phone.replace(/\D/g, "").replace(/^0/, "972")}`} target="_blank" rel="noopener">פתיחת שיחה עם הלקוח</a>}{o.phone && <a href={`tel:${o.phone}`}>חיוג ללקוח</a>}{o.email && <a href={`mailto:${o.email}`}>שליחת מייל</a>}</div><details><summary>כל הפרטים להעתקה לוואטסאפ</summary><pre style={{ whiteSpace: "pre-wrap", fontFamily: "inherit" }}>{shippingWhatsAppText(o)}</pre></details></td></tr>}</Fragment>)}
+        </dl><div className="adm-detail-actions"><button type="button" onClick={() => void copyShipping(o)}>{copied === o.id ? "ההודעה הועתקה ✓" : "העתקת כל הפרטים לוואטסאפ"}</button>{customerWhatsAppUrl(o.phone) && <a href={customerWhatsAppUrl(o.phone)!} target="_blank" rel="noopener">פתיחת שיחה עם הלקוח</a>}{o.phone && <a href={`tel:${o.phone}`}>חיוג ללקוח</a>}{o.email && <a href={`mailto:${o.email}`}>שליחת מייל</a>}</div><details><summary>כל הפרטים להעתקה לוואטסאפ</summary><pre style={{ whiteSpace: "pre-wrap", fontFamily: "inherit" }}>{shippingWhatsAppText(o)}</pre></details></td></tr>}</Fragment>)}
       </tbody></table></div>}
     <nav className="adm-orders-pages" aria-label="עמודי רכישות"><button disabled={page === 0} onClick={() => { setPage((p) => p - 1); setOpen(null); }}>הקודם</button><span>עמוד {page + 1}</span><button disabled={(page + 1) * 50 >= count} onClick={() => { setPage((p) => p + 1); setOpen(null); }}>הבא</button></nav>
   </>;
