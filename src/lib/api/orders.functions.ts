@@ -15,12 +15,13 @@ export const listOrders = createServerFn({ method: "POST" })
   .inputValidator(z.object({
     accessToken: z.string().optional(), page: z.number().int().min(0).max(100000).default(0),
     status: z.union([z.literal("all"), Status]).default("new"),
-    search: z.string().trim().max(200).optional(), limit: z.number().int().min(1).max(20000).default(50),
+    search: z.string().trim().max(200).optional(), transaction: z.string().max(256).optional(), limit: z.number().int().min(1).max(20000).default(50),
   }))
   .handler(async ({ data }) => {
     await staff(data.accessToken);
     const db = adminDb();
     let query = db.from("book_orders").select("*", { count: "exact" });
+    if (data.transaction) query = query.eq("provider_transaction_id", data.transaction);
     if (data.status !== "all") query = query.eq("fulfillment", data.status);
     const safe = data.search?.replace(/[%_,()]/g, " ").trim();
     if (safe) query = query.or([

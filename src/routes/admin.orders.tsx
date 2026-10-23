@@ -4,7 +4,12 @@ import { getAccessToken } from "@/lib/supabase-browser";
 import { listOrders, orderCounts, updateOrder, type BookOrder, type OrderStatus } from "@/lib/api/orders.functions";
 import { shippingWhatsAppText } from "@/lib/order-communication";
 
-export const Route = createFileRoute("/admin/orders")({ component: OrdersPage });
+export const Route = createFileRoute("/admin/orders")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    transaction: typeof search.transaction === "string" && search.transaction.length <= 256 ? search.transaction : undefined,
+  }),
+  component: OrdersPage,
+});
 const STATUS: Record<OrderStatus, string> = { new: "חדש", processing: "בטיפול", fulfilled: "נשלח / נאסף" };
 type Filter = OrderStatus | "all";
 type Counts = Record<Filter, number>;
@@ -26,9 +31,10 @@ function csv(rows: BookOrder[]) {
 }
 
 function OrdersPage() {
+  const { transaction } = Route.useSearch();
   const [orders, setOrders] = useState<BookOrder[] | null>(null);
   const [counts, setCounts] = useState<Counts | null>(null);
-  const [status, setStatus] = useState<Filter>("new");
+  const [status, setStatus] = useState<Filter>(transaction ? "all" : "new");
   const [search, setSearch] = useState(""); const [term, setTerm] = useState("");
   const [page, setPage] = useState(0); const [count, setCount] = useState(0);
   const [open, setOpen] = useState<string | null>(null); const [last, setLast] = useState<string | null>(null); const [lastOutcome, setLastOutcome] = useState<string | null>(null);
@@ -40,11 +46,12 @@ function OrdersPage() {
     try {
       const accessToken = await getAccessToken() ?? undefined;
       const [result, totals] = await Promise.all([
-        listOrders({ data: { accessToken, page, status, search: term || undefined } }), orderCounts({ data: { accessToken } }),
+        listOrders({ data: { accessToken, page, status, search: term || undefined, transaction } }), orderCounts({ data: { accessToken } }),
       ]);
       setOrders(result.orders); setCount(result.count); setLast(result.lastReceived); setLastOutcome(result.lastOutcome); setCounts(totals);
+      if (transaction && result.orders.length === 1) setOpen(result.orders[0].id);
     } catch { setError("טעינת הרכישות נכשלה. נסו לרענן או להתחבר מחדש."); }
-  }, [page, status, term]);
+  }, [page, status, term, transaction]);
   useEffect(() => {
     setOrders(null); void load();
     const timer = setInterval(() => { if (!document.hidden) void load(); }, 15000);
@@ -71,13 +78,17 @@ function OrdersPage() {
       await navigator.clipboard.writeText(message);
     } catch {
       const area = document.createElement("textarea"); area.value = message; area.style.position = "fixed"; area.style.opacity = "0";
-      document.body.appendChild(area); area.select(); document.execCommand("copy"); area.remove();
+      document.body.appendChild(area); area.select();
+      let success = false;
+      try { success = document.execCommand("copy"); } finally { area.remove(); }
+      if (!success) { setError("לא ניתן להעתיק אוטומטית. סמנו והעתיקו את ההודעה המוכנה שמתחת לפרטי ההזמנה."); return; }
     }
     setCopied(order.id); window.setTimeout(() => setCopied((id) => id === order.id ? null : id), 2500);
   };
 
   return <>
     <header className="adm-head"><h1>רכישות ותשלומים</h1><p>כל תשלום חדש שמתקבל מ־Grow נכנס לכאן. ברירת המחדל היא הזמנות חדשות שממתינות לטיפול.</p></header>
+    {transaction && <p>ההזמנה שנפתחה מהמייל. לחצו על כפתור ההעתקה בפרטי ההזמנה והדביקו בוואטסאפ. <a href="/admin/orders">לכל הרכישות</a></p>}
     <div className="adm-queues">{(["new", "processing", "fulfilled", "all"] as Filter[]).map((item) =>
       <button key={item} type="button" className={status === item ? "on" : ""} onClick={() => choose(item)}>
         {item === "all" ? "כל הרכישות" : STATUS[item]}<span className="adm-qnum">{counts?.[item] ?? "–"}</span>
@@ -100,7 +111,7 @@ function OrdersPage() {
           <td><button type="button" className="adm-linkbtn" onClick={() => setOpen(open === o.id ? null : o.id)}>{open === o.id ? "סגירה" : "פרטים"}</button></td>
         </tr>{open === o.id && <tr className="adm-detail"><td colSpan={7}><dl>
           {([["טלפון", o.phone], ["אימייל", o.email], ["כתובת", o.address], ["מוצרים", productLabel(o)], ["סכום ששולם", money(o.amount_agorot)], ["אופן קבלה", o.shipping_method || "לא נמסר"], ["דמי משלוח", o.shipping_agorot === null ? "לא נמסרו בנפרד" : money(o.shipping_agorot)], ["תאריך תשלום ב־Grow", o.provider_payment_date || "לא נמסר"], ["אסמכתת עסקה", o.provider_transaction_id], ["תיאור", o.description]] as const).filter(([, v]) => v).map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}
-        </dl><div className="adm-detail-actions"><button type="button" onClick={() => void copyShipping(o)}>{copied === o.id ? "ההודעה הועתקה ✓" : "העתקת הודעה לאחראי המשלוחים"}</button>{o.phone && <a href={`https://wa.me/${o.phone.replace(/\D/g, "").replace(/^0/, "972")}`} target="_blank" rel="noopener">פתיחת שיחה עם הלקוח</a>}{o.phone && <a href={`tel:${o.phone}`}>חיוג ללקוח</a>}{o.email && <a href={`mailto:${o.email}`}>שליחת מייל</a>}</div></td></tr>}</Fragment>)}
+        </dl><div className="adm-detail-actions"><button type="button" onClick={() => void copyShipping(o)}>{copied === o.id ? "ההודעה הועתקה ✓" : "העתקת הודעה לאחראי המשלוחים"}</button>{o.phone && <a href={`https://wa.me/${o.phone.replace(/\D/g, "").replace(/^0/, "972")}`} target="_blank" rel="noopener">פתיחת שיחה עם הלקוח</a>}{o.phone && <a href={`tel:${o.phone}`}>חיוג ללקוח</a>}{o.email && <a href={`mailto:${o.email}`}>שליחת מייל</a>}</div><details><summary>כל הפרטים להעתקה לוואטסאפ</summary><pre style={{ whiteSpace: "pre-wrap", fontFamily: "inherit" }}>{shippingWhatsAppText(o)}</pre></details></td></tr>}</Fragment>)}
       </tbody></table></div>}
     <nav className="adm-orders-pages" aria-label="עמודי רכישות"><button disabled={page === 0} onClick={() => { setPage((p) => p - 1); setOpen(null); }}>הקודם</button><span>עמוד {page + 1}</span><button disabled={(page + 1) * 50 >= count} onClick={() => { setPage((p) => p + 1); setOpen(null); }}>הבא</button></nav>
   </>;
