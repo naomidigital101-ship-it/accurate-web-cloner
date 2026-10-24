@@ -4,6 +4,7 @@ import { consumeLastCapturedError } from "./lib/error-capture";
 import { renderErrorPage } from "./lib/error-page";
 import { LEGACY_HOST, legacyTarget, normalizePath } from "./lib/legacy-redirects";
 import { SITE_URL } from "./lib/site";
+import { invalidPathResponse } from "./lib/request-path";
 
 type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
@@ -130,6 +131,8 @@ export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
       const url = new URL(request.url);
+      const invalidPath = invalidPathResponse(url.pathname);
+      if (invalidPath) return withSecurityHeaders(invalidPath);
       if (normalizePath(url.pathname) === "/book-new") {
         return withSecurityHeaders(
           new Response(null, {
