@@ -13,7 +13,20 @@ function harness() {
   const state = { mailFails: false };
   const key = 'a'.repeat(64);
   let expectedHash;
-  const db = { from(table) {
+  const db = { async rpc(name, {payment: incoming}) {
+    assert.equal(name, 'record_grow_order');
+    const id = incoming.provider_transaction_id;
+    if (!orders.has(id)) orders.set(id, {...incoming, fulfillment:'new', delivery_revision:0});
+    const saved = orders.get(id);
+    let changed = false;
+    for (const field of ['address', 'shipping_method', 'shipping_agorot']) {
+      if ((saved[field] === null || saved[field] === '') && incoming[field] !== null && incoming[field] !== '') {
+        saved[field] = incoming[field]; changed = true;
+      }
+    }
+    if (changed) saved.delivery_revision++;
+    return {data:{...saved},error:null};
+  }, from(table) {
     const filters = {};
     const query = {
       select() { return query; },
@@ -42,7 +55,7 @@ function harness() {
       sent.push(input);
       return state.mailFails ? {sent:false,error:'test failure'} : {sent:true};
     }},
-    './order-communication': {orderEmailSubject:() => 'test', orderEmailHtml:() => '<p>test</p>', orderEmailText:() => 'test'},
+    './order-communication': {orderEmailSubject:(_,updated) => updated ? 'updated' : 'new', orderEmailHtml:p => p.address, orderEmailText:p => p.address},
   };
   const source = readFileSync(new URL('../src/lib/grow-webhook.server.ts', import.meta.url), 'utf8');
   const js = ts.transpileModule(source, {compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
@@ -114,4 +127,30 @@ test('an authenticated paid-looking notification that cannot be parsed alerts st
   assert.equal(h.sent.length, 1);
   assert.match(h.sent[0].subject, /לא נקלט/);
   assert.equal(h.logs.filter(row => row.outcome === 'payment_rejected').length, 1);
+});
+
+test('later delivery fills missing address once, retains fulfillment and survives email failure/retries', async () => {
+  const h = harness();
+  const base = {transactionCode:'enrich-test',paymentSum:156,fullName:'בדיקה'};
+  assert.equal((await h.post(JSON.stringify(base))).status, 200);
+  h.orders.get('enrich-test').fulfillment = 'fulfilled';
+  const enriched = {...base,address:'ירושלים, רחוב לדוגמה 12',shipping:{type:'משלוח',amount:0}};
+  h.state.mailFails = true;
+  assert.equal((await h.post(JSON.stringify(enriched))).status, 503);
+  assert.equal(h.orders.get('enrich-test').address, enriched.address);
+  h.state.mailFails = false;
+  assert.equal((await h.post(JSON.stringify(enriched))).status, 200);
+  const count = h.sent.length;
+  for (const value of [enriched,base,{...enriched,address:'כתובת אחרת',paymentSum:999}]) {
+    assert.equal((await h.post(JSON.stringify(value))).status, 200);
+  }
+  assert.equal(h.orders.size, 1);
+  assert.equal(h.orders.get('enrich-test').fulfillment, 'fulfilled');
+  assert.equal(h.orders.get('enrich-test').amount_agorot, 15600);
+  assert.equal(h.orders.get('enrich-test').address, enriched.address);
+  assert.equal(h.orders.get('enrich-test').delivery_revision, 1);
+  assert.equal(h.sent.length, count);
+  assert.equal(h.sent.at(-1).subject, 'updated');
+  assert.equal(h.sent.at(-1).html, enriched.address);
+  assert.equal(h.sent.at(-1).idempotencyKey, h.sent.at(-2).idempotencyKey);
 });

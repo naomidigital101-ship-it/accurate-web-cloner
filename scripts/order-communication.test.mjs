@@ -5,8 +5,15 @@ import { test } from 'node:test';
 const source = readFileSync(new URL('../src/lib/order-communication.ts', import.meta.url), 'utf8')
   .replace('import { SITE_URL } from "@/lib/site";', 'const SITE_URL = "https://or-hadash.org.il";');
 const { outputText } = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.ESNext } });
-const { orderEmailHtml, shippingWhatsAppText, customerWhatsAppUrl } = await import(`data:text/javascript;base64,${Buffer.from(outputText).toString('base64')}`);
+const { orderEmailHtml, orderEmailSubject, orderEmailText, shippingWhatsAppText, customerWhatsAppUrl } = await import(`data:text/javascript;base64,${Buffer.from(outputText).toString('base64')}`);
 const order = { full_name: 'לקוח לבדיקה', phone: '0500000000', email: 'test@example.com', address: 'רחוב לדוגמה 12\nדירה 3, ירושלים', products: [{name:'שני ספרים',quantity:'1'}], amount_agorot:13800, shipping_agorot:2000, shipping_method:'משלוח', provider_transaction_id:'test:a&b/1', provider_payment_date:'2026-10-23' };
+test('delivery update is clearly an existing order, with address in HTML and text', () => {
+  assert.match(orderEmailSubject(order, true), /עודכנו פרטי המשלוח/);
+  for (const content of [orderEmailHtml(order,true),orderEmailText(order,true)]) {
+    assert.ok(content.includes(order.address));
+    assert.ok(content.includes('לא בוצע חיוב נוסף'));
+  }
+});
 test('email preserves address lines and links to the exact authenticated order', () => {
   const html = orderEmailHtml(order);
   assert.ok(html.includes(order.address));

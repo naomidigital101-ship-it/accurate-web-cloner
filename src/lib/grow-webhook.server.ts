@@ -41,12 +41,12 @@ async function alertUnrecognized(requestId: string, digest: string) {
   }
 }
 
-async function notifyOrder(payment: ReturnType<typeof parseGrowPayment>): Promise<boolean> {
+async function notifyOrder(payment: ReturnType<typeof parseGrowPayment>, revision = 0): Promise<boolean> {
   if (!payment) return false;
   const id = payment.provider_transaction_id;
   // Keep existing keys stable; encode opaque provider IDs for the email API.
   const mailId = /^[\w-]+$/.test(id) ? id : await sha256(id);
-  const stage = `order:${mailId}`;
+  const stage = `order:${mailId}${revision > 0 ? `:delivery:${revision}` : ""}`;
   const db = adminDb();
   if (!mailConfigured()) { await mailLog(stage, "failed", "LOVABLE_API_KEY חסר"); return false; }
   const recipients = await bookOrderRecipients();
@@ -57,7 +57,7 @@ async function notifyOrder(payment: ReturnType<typeof parseGrowPayment>): Promis
     if (alreadySent) continue;
     const result = await sendMail({
       to: recipient,
-      subject: orderEmailSubject(payment), html: orderEmailHtml(payment), text: orderEmailText(payment),
+      subject: orderEmailSubject(payment, revision > 0), html: orderEmailHtml(payment, revision > 0), text: orderEmailText(payment, revision > 0),
       replyTo: payment.email || undefined,
       idempotencyKey: stage,
     });
@@ -129,10 +129,8 @@ export async function handleGrowWebhook(request: Request): Promise<Response> {
       return reply(422, "not_a_successful_payment");
     }
     event.transaction_id = payment.provider_transaction_id;
-    const { error: insertError } = await db.from("book_orders").upsert(payment, {
-      onConflict: "provider_transaction_id", ignoreDuplicates: true,
-    });
-    if (insertError) {
+    const { data: saved, error: insertError } = await db.rpc("record_grow_order", { payment });
+    if (insertError || !saved) {
       diagnostic("order_storage_failed");
       await recordEvent("order_storage_failed");
       return reply(503, "temporarily_unavailable");
@@ -141,7 +139,9 @@ export async function handleGrowWebhook(request: Request): Promise<Response> {
     await db.from("payment_webhook_config").update({ last_received_at: new Date().toISOString() }).eq("id", "grow");
     // A failed email returns 503 so Grow retries. The saved order is safe, and mail_log plus
     // the provider idempotency key prevent duplicate notifications when the retry arrives.
-    if (!await notifyOrder(payment)) {
+    // Use persisted details and revision, including on a retry after mail failure.
+    // Repeated/less complete payloads cannot erase an address or resend the update.
+    if (!await notifyOrder(saved, saved.delivery_revision)) {
       diagnostic("notification_pending");
       await recordEvent("notification_pending");
       return reply(503, "notification_pending");
