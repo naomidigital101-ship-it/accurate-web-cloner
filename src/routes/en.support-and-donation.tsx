@@ -55,7 +55,8 @@ function Page() {
         <div className="donate-card donate-card-onetime">
           <span className="donate-card-icon"><HeartIcon /></span>
           <h2>For tax purposes in Israel</h2>
-          <p>Donations are tax-deductible</p>
+          <p>Or Hadash holds approval under Section 46 of Israel’s Income Tax Ordinance, valid until 31 December 2028.</p>
+          <p><a href="/documents/section-46-2026-2028.pdf" target="_blank" rel="noopener" style={{ textDecoration: "underline" }}>View the Israeli Tax Authority approval (PDF, Hebrew)</a></p>
           <a href={onetime} target="_blank" rel="noopener" className="btn-donate">Donate</a>
         </div>
         <div className="donate-card donate-card-recurring">

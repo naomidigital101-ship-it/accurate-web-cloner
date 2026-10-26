@@ -58,6 +58,11 @@ function Landing() {
         <a className="lp-cta" href={donate} target="_blank" rel="noopener">
           לתרומה למיזם
         </a>
+        <p style={{ marginTop: "1rem", lineHeight: 1.8 }}>
+          לעמותה אישור לעניין תרומות לפי סעיף 46 לפקודת מס הכנסה.
+          <br />
+          <a href="/documents/section-46-2026-2028.pdf" target="_blank" rel="noopener" style={{ color: "inherit", textDecoration: "underline" }}>לצפייה באישור רשות המסים</a>
+        </p>
       </div>
     </main>
   );
