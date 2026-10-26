@@ -56,6 +56,11 @@ function DonatePage() {
           <a href={recurring} target="_blank" rel="noopener" className="btn-donate">לתרומה</a>
         </div>
       </div>
+      <p style={{ textAlign: "center", marginTop: "2rem", lineHeight: 1.8 }}>
+        לעמותה אישור לעניין תרומות לפי סעיף 46 לפקודת מס הכנסה, בתוקף עד 31.12.2028.
+        <br />
+        <a href="/documents/section-46-2026-2028.pdf" target="_blank" rel="noopener" style={{ textDecoration: "underline" }}>לצפייה באישור רשות המסים</a>
+      </p>
     </PageShell>
   );
 }
