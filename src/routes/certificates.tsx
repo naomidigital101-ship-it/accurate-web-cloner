@@ -56,6 +56,17 @@ function heDate(iso: string | null) {
 
 function CertificatesPage() {
   const { certs } = Route.useLoaderData();
+  const section46: Cert = {
+    id: "section-46-2026-2028",
+    title: "אישור תרומות לפי סעיף 46",
+    issuer: "רשות המסים בישראל",
+    description: "אישור לעמותת אור חדש לקידום והעצמה של בעלי תשובה (580703965), בתוקף מ־21.10.2026 עד 31.12.2028. האישור חל על תרומות בהתאם לתנאים המפורטים במסמך.",
+    valid_from: "2026-10-21",
+    valid_until: "2028-12-31",
+    file_url: "/documents/section-46-2026-2028.pdf",
+    thumb_url: null,
+  };
+  const displayedCerts = certs.some((c) => c.title.includes("46")) ? certs : [section46, ...certs];
 
   return (
     <PageShell title="אישורי העמותה">
@@ -66,7 +77,7 @@ function CertificatesPage() {
           בעצמו למי הוא נותן.
         </p>
 
-        {certs.length === 0 ? (
+        {displayedCerts.length === 0 ? (
           <div className="bk-empty">
             <b>האישורים בהעלאה</b>
             <p>
@@ -75,7 +86,7 @@ function CertificatesPage() {
           </div>
         ) : (
           <div className="cert-grid">
-            {certs.map((c) => {
+            {displayedCerts.map((c) => {
               const until = heDate(c.valid_until);
               return (
                 <article key={c.id} className="cert-item">
