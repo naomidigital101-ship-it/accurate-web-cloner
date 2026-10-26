@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
+import { Section46Notice } from "@/components/Section46Notice";
 import { useSetting } from "@/lib/settings";
 import { SITE_URL } from "@/lib/site";
 
@@ -43,6 +44,7 @@ function DonatePage() {
         <strong>השותפות שלך חשובה לנו!</strong><br />
         עלויות הפרויקט גבוהות והוא מתקיים הודות לשותפים רבים שלוקחים חלק בזיכוי הרבים שאין כמותו.
       </p>
+      <Section46Notice />
       <div className="donate-cards">
         <div className="donate-card donate-card-onetime">
           <span className="donate-card-icon"><HeartIcon /></span>
@@ -56,11 +58,6 @@ function DonatePage() {
           <a href={recurring} target="_blank" rel="noopener" className="btn-donate">לתרומה</a>
         </div>
       </div>
-      <p style={{ textAlign: "center", marginTop: "2rem", lineHeight: 1.8 }}>
-        לעמותה אישור לעניין תרומות לפי סעיף 46 לפקודת מס הכנסה, בתוקף עד 31.12.2028.
-        <br />
-        <a href="/documents/section-46-2026-2028.pdf" target="_blank" rel="noopener" style={{ textDecoration: "underline" }}>לצפייה באישור רשות המסים</a>
-      </p>
     </PageShell>
   );
 }

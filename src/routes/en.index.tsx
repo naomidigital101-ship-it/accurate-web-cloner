@@ -35,6 +35,7 @@ function ConsentedYouTube({ src, title, en = false }: { src: string; title: stri
 }
 
 import { createFileRoute } from "@tanstack/react-router";
+import { Section46Notice } from "@/components/Section46Notice";
 import { useEffect, useRef, useState } from "react";
 import { Header } from "@/components/home/Header";
 import { Footer } from "@/components/home/Footer";
@@ -166,6 +167,7 @@ function EnHero() {
         <p className="hero-par">
           Our objective: to connect between a Jew who wishes to begin wearing Tefillin, and one who has Tefillin that are not in use.
         </p>
+        <Section46Notice en compact dark />
       </div>
 
       <div className="hero-shape" aria-hidden="true">
@@ -806,7 +808,7 @@ function EnContributions() {
           call upon you to donate now, giving you the merit of enabling another Jew to don
           tefillin!
         </p>
-        <p className="partners-note">— Donations are tax-deductible in Israel, the U.S., and Canada. —</p>
+        <Section46Notice en dark />
         <div className="partners-btns">
           <a href={onetime} target="_blank" rel="noopener" className="btn-e btn-outline-light">
             Donate

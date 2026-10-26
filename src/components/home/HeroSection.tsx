@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Section46Notice } from "@/components/Section46Notice";
 
 function useCountUp(to: number, duration = 2000) {
   const [val, setVal] = useState(to);
@@ -113,6 +114,7 @@ export function HeroSection() {
         <p className="hero-par">
           מטרתינו לעזור לכל יהודי שרוצה להתחיל להניח תפילין ולהיות יותר מחובר לה' יתברך.
         </p>
+        <Section46Notice compact dark />
 
       </div>
 

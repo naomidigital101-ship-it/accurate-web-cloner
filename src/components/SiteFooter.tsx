@@ -1,4 +1,5 @@
 import { CookieSettingsLink } from "@/components/CookieConsent";
+import { Section46Notice } from "@/components/Section46Notice";
 import { useSetting, useWhatsAppLink } from "@/lib/settings";
 
 function PhoneIcon() {
@@ -45,6 +46,7 @@ export function SiteFooter({ en = false }: { en?: boolean } = {}) {
         <br />
         {en ? `Registered NGO: ${orgNumber}` : `ע"ר: ${orgNumber}`}
       </h2>
+      <Section46Notice compact dark en={en} />
       <div className="footer-contact-row">
         <a href={`tel:${phone.replace(/[^\d+]/g, "")}`} aria-label={en ? `Call us: ${phone}` : `התקשרו אלינו: ${phone}`}>
           <PhoneIcon />

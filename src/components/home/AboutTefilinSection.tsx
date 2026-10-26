@@ -1,3 +1,5 @@
+import { Section46Notice } from "@/components/Section46Notice";
+
 export function AboutTefilinSection() {
   return (
     <section dir="rtl" className="about-e">
@@ -25,6 +27,7 @@ export function AboutTefilinSection() {
           לשניהם – האחד זוכה לקיים את המצווה החשובה של הנחת תפילין, והשני זוכה שבתפילין שלו
           יהיה שימוש מדי יום.
         </p>
+        <Section46Notice compact />
       </div>
     </section>
   );

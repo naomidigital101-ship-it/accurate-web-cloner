@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import { PageShell } from "@/components/PageShell";
+import { Section46Notice } from "@/components/Section46Notice";
 import { publicDb } from "@/lib/supabase.server";
 import { SITE_URL } from "@/lib/site";
 
@@ -112,6 +113,7 @@ function CertificatesPage() {
           </div>
         )}
 
+        <Section46Notice />
         <h2>שקיפות</h2>
         <p>
           כעמותה רשומה, הדוחות הכספיים והמילוליים של עמותת אור חדש מוגשים לרשם העמותות וזמינים

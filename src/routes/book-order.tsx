@@ -449,6 +449,7 @@ function BookOrderPage() {
               >
                 למעבר לתשלום מאובטח <span aria-hidden="true">←</span>
               </a>
+              <p style={{ fontSize: 14, lineHeight: 1.6, margin: "12px 0" }}>רכישת הספר אינה תרומה ואינה מזכה בהטבת מס לפי סעיף 46. לתרומה נפרדת לעמותה: <a href="/donate" style={{ textDecoration: "underline" }}>עמוד התרומות</a>.</p>
               <ol className="kb-steps">
                 <li>נפתח דף תשלום של Grow עם מספר העותקים שבחרתם.</li>
                 <li>שם בוחרים משלוח או איסוף עצמי, ממלאים פרטים ומשלמים.</li>
@@ -501,6 +502,7 @@ function BookOrderPage() {
             <a href="/accessibility">הצהרת נגישות</a>
             <a href="/privacy">מדיניות פרטיות</a>
             <a href="/terms">תקנון וביטול עסקה</a>
+            <a href="/certificates">אישורי העמותה וסעיף 46 לתרומות</a>
           </nav>
         </div>
       </footer>

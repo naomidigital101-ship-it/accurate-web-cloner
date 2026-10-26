@@ -360,6 +360,7 @@ export function BookPage() {
                   </label>
                 ))}
               </fieldset>
+              <p style={{ fontSize: 14, lineHeight: 1.6 }}>רכישת הספר אינה תרומה ואינה מזכה בהטבת מס לפי סעיף 46. לתרומה נפרדת לעמותה: <a href="/donate" style={{ textDecoration: "underline" }}>עמוד התרומות</a>.</p>
               <div className="kb-order-bottom">
                 <div className="kb-delivery">
                     <fieldset>
