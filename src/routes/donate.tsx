@@ -48,8 +48,8 @@ function DonatePage() {
       <div className="donate-cards">
         <div className="donate-card donate-card-onetime">
           <span className="donate-card-icon"><HeartIcon /></span>
-          <h2>תרומה דרך משולם</h2>
-          <p>מוכר לצרכי מס</p>
+          <h2>תרומה למיזם</h2>
+          <p>תרומה חד־פעמית או חודשית, בתשלום מאובטח דרך משולם.</p>
           <a href={recurring} target="_blank" rel="noopener" className="btn-donate">לתרומה</a>
         </div>
         <div className="donate-card donate-card-recurring">

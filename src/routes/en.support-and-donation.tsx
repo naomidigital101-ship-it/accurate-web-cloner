@@ -55,7 +55,7 @@ function Page() {
       <div className="donate-cards">
         <div className="donate-card donate-card-onetime">
           <span className="donate-card-icon"><HeartIcon /></span>
-          <h2>Donate through Meshulam</h2>
+          <h2>Support the initiative</h2><p>One-time or monthly donations, securely processed by Meshulam.</p>
           <Section46Notice en />
           <a href={onetime} target="_blank" rel="noopener" className="btn-donate">Donate</a>
         </div>
