@@ -26,11 +26,11 @@ export const SETTING_DEFAULTS = {
   founder_age: "50",
   founder_city: "בית אל",
   founder_children: "שמונה",
-  donate_onetime_url: "https://bit.ly/tfil",
+  donate_onetime_url: "https://meshulam.co.il/s/08cd0725-9e8a-ece2-1540-638f28f8919f",
   donate_recurring_url: "https://meshulam.co.il/s/08cd0725-9e8a-ece2-1540-638f28f8919f",
   // ערוצי תרומה לעמודים באנגלית. ריק = ליפול חזרה לערוץ הישראלי.
-  donate_onetime_url_en: "",
-  donate_recurring_url_en: "",
+  donate_onetime_url_en: "https://www.neemanfoundation.com/projects/or-chadash-kesher-shel-teffilin",
+  donate_recurring_url_en: "https://www.neemanfoundation.com/projects/or-chadash-kesher-shel-teffilin",
   pairs_delivered: "1,500",
   rabbi_letters_count: "9",
 } as const;

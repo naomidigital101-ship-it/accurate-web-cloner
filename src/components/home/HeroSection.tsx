@@ -113,9 +113,7 @@ export function HeroSection() {
         <p className="hero-par">
           מטרתינו לעזור לכל יהודי שרוצה להתחיל להניח תפילין ולהיות יותר מחובר לה' יתברך.
         </p>
-        <p style={{ margin: "20px auto 0", fontSize: 16, lineHeight: 1.65, color: "#fff", textAlign: "center" }}>
-          התרומות לעמותה מוכרות לזיכוי מס לפי סעיף 46
-        </p>
+
 
       </div>
 

@@ -167,7 +167,7 @@ function EnHero() {
         <p className="hero-par">
           Our objective: to connect between a Jew who wishes to begin wearing Tefillin, and one who has Tefillin that are not in use.
         </p>
-        <Section46Notice en compact dark />
+
       </div>
 
       <div className="hero-shape" aria-hidden="true">
