@@ -8,9 +8,9 @@ export const Route = createFileRoute("/donate")({
   head: () => ({
     meta: [
       { title: "תרומה למיזם | קשר של תפילין" },
-      { name: "description", content: "היו שותפים במיזם קשר של תפילין - תרומה דרך משולם. עלויות חידוש וחלוקת התפילין גבוהות וכל תרומה מזכה יהודי במצווה." },
+      { name: "description", content: "היו שותפים במיזם קשר של תפילין. עלויות חידוש וחלוקת התפילין גבוהות וכל תרומה מזכה יהודי במצווה." },
       { property: "og:title", content: "תרומה למיזם | קשר של תפילין" },
-      { property: "og:description", content: "היו שותפים במיזם קשר של תפילין - תרומה דרך משולם. עלויות חידוש וחלוקת התפילין גבוהות וכל תרומה מזכה יהודי במצווה." },
+      { property: "og:description", content: "היו שותפים במיזם קשר של תפילין. עלויות חידוש וחלוקת התפילין גבוהות וכל תרומה מזכה יהודי במצווה." },
       { property: "og:url", content: `${SITE_URL}/donate` },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/donate` }],
@@ -49,13 +49,13 @@ function DonatePage() {
         <div className="donate-card donate-card-onetime">
           <span className="donate-card-icon"><HeartIcon /></span>
           <h2>תרומה למיזם</h2>
-          <p>תרומה חד־פעמית או חודשית, בתשלום מאובטח דרך משולם.</p>
+          <p>תרומה חד־פעמית או חודשית, בתשלום מאובטח.</p>
           <a href={recurring} target="_blank" rel="noopener" className="btn-donate">לתרומה</a>
         </div>
         <div className="donate-card donate-card-recurring">
           <span className="donate-card-icon"><CardIcon /></span>
-          <h2>תרומה מארה״ב</h2>
-          <p>דרך קרן נאמן ארה״ב, עם קבלה לצורכי מס בארה״ב.</p>
+          <h2>תרומה מארה״ב ומקנדה</h2>
+          <p>עם קבלה לצורכי מס בארה״ב ובקנדה.</p>
           <a href={international} target="_blank" rel="noopener" className="btn-donate">לתרומה</a>
         </div>
       </div>

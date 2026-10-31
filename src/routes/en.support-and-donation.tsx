@@ -38,12 +38,6 @@ function CardIcon() {
 }
 
 function Page() {
-  /**
-   * שני הכרטיסים בעמוד האנגלי אינם "חד פעמי מול הוראת קבע" אלא שני ערוצי
-   * סליקה בשתי מדינות: הכרטיס עם הלב מוביל לערוץ הישראלי, והשני לקרן נאמן
-   * שהיא עמותה אמריקאית. לכן הכותרות מציינות את המדינה שבה התרומה מוכרת
-   * לצרכי מס - זה ההבדל שמעניין את התורם, וזה גם מה שקורה בפועל בקישורים.
-   */
   const onetime = useSetting("donate_onetime_url");
   const recurring = useDonateUrl("recurring", true);
   return (
@@ -55,14 +49,14 @@ function Page() {
       <div className="donate-cards">
         <div className="donate-card donate-card-onetime">
           <span className="donate-card-icon"><HeartIcon /></span>
-          <h2>Support the initiative</h2><p>One-time or monthly donations, securely processed by Meshulam.</p>
+          <h2>Support the initiative</h2><p>Secure one-time or monthly donations.</p>
           <Section46Notice en />
           <a href={onetime} target="_blank" rel="noopener" className="btn-donate">Donate</a>
         </div>
         <div className="donate-card donate-card-recurring">
           <span className="donate-card-icon"><CardIcon /></span>
-          <h2>Donate from the USA</h2>
-          <p>Through Ne’eman Foundation USA, with a US tax receipt.</p>
+          <h2>Donate from the USA and Canada</h2>
+          <p>With a tax receipt for the USA or Canada.</p>
           <a href={recurring} target="_blank" rel="noopener" className="btn-donate">Donate</a>
         </div>
       </div>
