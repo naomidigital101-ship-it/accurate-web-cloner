@@ -1,3 +1,4 @@
+import { BookReaderReviews } from "@/components/BookReaderReviews";
 import { BookLaunchPrice } from "@/components/BookLaunchPrice";
 import { BookMediaSlider } from "@/components/BookMediaSlider";
 import { createFileRoute } from "@tanstack/react-router";
@@ -534,6 +535,7 @@ export function BookPage() {
             </div>
           </section>
           <BookMediaSlider />
+          <BookReaderReviews />
           <section id="kb-trust" className="kb-trust" aria-labelledby="kb-trust-title">
             <div className="kb-wrap">
               <p className="kb-kicker">המיזם שמאחורי הספר</p>
