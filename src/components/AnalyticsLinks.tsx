@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { track, pageLang } from "@/lib/analytics";
+import { track, pageLang, contactLinkType, trackContactClick } from "@/lib/analytics";
 import { useDonateUrl } from "@/lib/settings";
 
 /**
@@ -48,12 +48,12 @@ export function AnalyticsLinks() {
       const lang = pageLang();
       const location = locationOf(a);
 
-      if (href.startsWith("tel:")) {
-        track("contact_click", { method: "phone", location, lang });
-        return;
-      }
-      if (href.startsWith("mailto:")) {
-        track("contact_click", { method: "email", location, lang });
+      // אירועי ההמרה האחידים (phone_click / whatsapp_click / email_click) לצד
+      // contact_click הקיים, כדי לא לשבור דוחות קיימים.
+      const contact = contactLinkType(href);
+      if (contact) {
+        trackContactClick(contact, { location, lang });
+        track("contact_click", { method: contact, location, lang });
         return;
       }
       if (href.includes("wa.me") || href.includes("whatsapp.com")) {

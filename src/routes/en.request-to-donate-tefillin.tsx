@@ -3,7 +3,7 @@ import { leadSource } from "@/lib/lead-source";
 import { useRef, useState } from "react";
 
 import { submitLead } from "@/lib/api/leads.functions";
-import { track } from "@/lib/analytics";
+import { track, trackLead } from "@/lib/analytics";
 import { PageShell } from "@/components/PageShell";
 import { SITE_URL } from "@/lib/site";
 import { HONEYPOT_STYLE } from "@/lib/honeypot";
@@ -109,7 +109,7 @@ function EnDonateForm() {
             condition: values.current.condition,
             value: 1,
           });
-          track("generate_lead", { lead_type: "donate", lang: "en", value: 1, currency: "ILS" });
+          trackLead("tefillin_donation", { lead_type: "donate", lang: "en", value: 1, currency: "ILS" });
           setSent(true);
         } catch {
           track("form_error", { form_type: "donate", lang: "en" });
