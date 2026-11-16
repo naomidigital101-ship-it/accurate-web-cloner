@@ -40,6 +40,9 @@ import { useEffect, useRef, useState } from "react";
 import { Header } from "@/components/home/Header";
 import { Footer } from "@/components/home/Footer";
 import { SITE_URL } from "@/lib/site";
+import { submitLead } from "@/lib/api/leads.functions";
+import { leadSource } from "@/lib/lead-source";
+import { track, trackLead } from "@/lib/analytics";
 
 /** לואודר משותף לשני הראוטים של עמוד הבית האנגלי */
 export async function enHomeLoader() {
@@ -237,9 +240,60 @@ function EnSelectField({
   );
 }
 
-function EnRequestForm() {
+/**
+ * הטפסים בדף הבית האנגלי הציגו "נשלח" בלי לשמור כלום, והפניות אבדו.
+ * עכשיו הם נשמרים בדיוק כמו בעמודי /en/request-for-tefillin ו-/en/request-to-donate-tefillin:
+ * אותו submitLead, אותם שמות שדות, אותה מלכודת בוטים, ואותה מדידה.
+ * הטופס רב-שלבי ומסיר שדות מה-DOM בין שלבים, לכן שומרים ערכים בכל מעבר.
+ */
+function useEnLeadForm(kind: "request" | "donate") {
   const [step, setStep] = useState(1);
   const [sent, setSent] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+  const values = useRef<Record<string, string>>({});
+  const capture = () => {
+    if (!formRef.current) return;
+    for (const [k, v] of new FormData(formRef.current).entries()) {
+      if (typeof v === "string" && v.trim() !== "") values.current[k] = v.trim();
+    }
+  };
+  const go = (n: number) => {
+    capture();
+    setStep(n);
+  };
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    capture();
+    setBusy(true);
+    setErr(null);
+    try {
+      await submitLead({ data: { kind, lang: "en", ...values.current, ...leadSource() } });
+      track(kind === "request" ? "lead_request" : "lead_donate_tefilin", { form_type: kind, lang: "en", form_page: "en_home", value: 1 });
+      trackLead(kind === "request" ? "tefillin_request" : "tefillin_donation", { lead_type: kind, lang: "en", value: 1, currency: "ILS" });
+      setSent(true);
+    } catch {
+      track("form_error", { form_type: kind, lang: "en", form_page: "en_home" });
+      setErr("Sending failed. Please try again or call +972-54-6713966.");
+    } finally {
+      setBusy(false);
+    }
+  };
+  return { step, go, sent, err, busy, formRef, onSubmit };
+}
+
+function EnHoneyPot() {
+  return (
+    <div aria-hidden="true" style={{ position: "absolute", left: "-10000px", width: 1, height: 1, overflow: "hidden" }}>
+      <label htmlFor="en-home-website">website</label>
+      <input id="en-home-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+    </div>
+  );
+}
+
+function EnRequestForm() {
+  const { step, go: setStep, sent, err, busy, formRef, onSubmit } = useEnLeadForm("request");
   if (sent)
     return (
       <p className="form-card-sub" role="status">
@@ -247,12 +301,8 @@ function EnRequestForm() {
       </p>
     );
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        setSent(true);
-      }}
-    >
+    <form ref={formRef} onSubmit={onSubmit}>
+      <EnHoneyPot />
       {step === 1 && (
         <div className="e-form-fields">
           <EnSelectField
@@ -279,8 +329,8 @@ function EnRequestForm() {
       )}
       {step === 2 && (
         <div className="e-form-fields">
-          <EnField label="First name" col={50} name="first" />
-          <EnField label="Last Name" col={50} name="last" />
+          <EnField label="First name" col={50} name="first_name" />
+          <EnField label="Last Name" col={50} name="last_name" />
           <EnField label="Delivery address" col={60} name="address" />
           <EnField label="city/town" col={40} name="city" />
           <div className="e-field-group col-100">
@@ -307,10 +357,11 @@ function EnRequestForm() {
               <button type="button" className="e-btn-step e-btn-prev" onClick={() => setStep(2)}>
                 previous
               </button>
-              <button type="submit" className="e-btn-step">
-                Send
+              <button type="submit" className="e-btn-step" disabled={busy}>
+                {busy ? "Sending..." : "Send"}
               </button>
             </div>
+            {err ? <p className="e-form-note" role="alert">{err}</p> : null}
           </div>
         </div>
       )}
@@ -319,8 +370,7 @@ function EnRequestForm() {
 }
 
 function EnDonateForm() {
-  const [step, setStep] = useState(1);
-  const [sent, setSent] = useState(false);
+  const { step, go: setStep, sent, err, busy, formRef, onSubmit } = useEnLeadForm("donate");
   if (sent)
     return (
       <p className="form-card-sub" role="status">
@@ -328,17 +378,12 @@ function EnDonateForm() {
       </p>
     );
   return (
-    <form
-      className="donate-form"
-      onSubmit={(e) => {
-        e.preventDefault();
-        setSent(true);
-      }}
-    >
+    <form ref={formRef} className="donate-form" onSubmit={onSubmit}>
+      <EnHoneyPot />
       {step === 1 && (
         <div className="e-form-fields">
-          <EnField label="full name" col={100} name="name" />
-          <EnField label="address for pick up" col={60} name="pickup" />
+          <EnField label="full name" col={100} name="full_name" />
+          <EnField label="address for pick up" col={60} name="address" />
           <EnSelectField
             label="condition of the tefillin"
             col={40}
@@ -367,10 +412,11 @@ function EnDonateForm() {
               <button type="button" className="e-btn-step e-btn-prev" onClick={() => setStep(1)}>
                 previous
               </button>
-              <button type="submit" className="e-btn-step">
-                send
+              <button type="submit" className="e-btn-step" disabled={busy}>
+                {busy ? "sending..." : "send"}
               </button>
             </div>
+            {err ? <p className="e-form-note" role="alert">{err}</p> : null}
           </div>
         </div>
       )}
