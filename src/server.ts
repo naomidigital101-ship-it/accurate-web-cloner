@@ -95,12 +95,12 @@ const CSP_REPORT_ONLY = [
   "frame-ancestors 'self'",
   "form-action 'self'",
   // googleadservices / googleads.g.doubleclick / www.google.com - Google Ads, נטען רק אחרי הסכמה
-  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net",
+  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://*.clarity.ms",
   "style-src 'self' 'unsafe-inline'",
   "font-src 'self' data:",
-  "img-src 'self' data: blob: https://www.googletagmanager.com https://www.google-analytics.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com",
+  "img-src 'self' data: blob: https://www.googletagmanager.com https://www.google-analytics.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com https://*.clarity.ms https://c.bing.com",
   "media-src 'self'",
-  "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com",
+  "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com https://*.clarity.ms https://c.bing.com",
   "frame-src https://www.youtube.com https://www.youtube-nocookie.com https://player.vimeo.com",
   // upgrade-insecure-requests הושמט בכוונה: הדפדפן מתעלם ממנו במצב דיווח
   // ומדפיס שגיאה בקונסול. יתווסף כשנעבור לאכיפה.
