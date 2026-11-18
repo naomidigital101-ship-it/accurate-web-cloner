@@ -90,6 +90,7 @@ const letters = [
 
 export function BookPage() {
   const [quantity, setQuantity] = useState(2);
+  const [picked, setPicked] = useState(false);
   const [delivery, setDelivery] = useState<"pickup" | "shipping">("pickup");
   const bundle = bundles.find((item) => item.quantity === quantity)!;
   const shippingIncluded = quantity === 3;
@@ -337,7 +338,8 @@ export function BookPage() {
                       name="book-quantity"
                       value={item.quantity}
                       checked={quantity === item.quantity}
-                      onChange={() => setQuantity(item.quantity)}
+                      onChange={() => { setQuantity(item.quantity); setPicked(true); }}
+                      onClick={() => setPicked(true)}
                     />
                     {item.quantity === 2 && (
                       <span className="kb-bundle-badge">הבחירה המומלצת</span>
@@ -676,8 +678,21 @@ export function BookPage() {
               {shippingIncluded ? "משלוח עד הבית כלול" : `משלוח בתוספת ${shippingPrice} ₪`}
             </small>
           </div>
-          <a className="kb-button" href="#kb-order">
-            להזמנה <ArrowLeft size={16} aria-hidden="true" />
+          <a
+            className="kb-button"
+            href={picked ? purchaseUrl : "#kb-order"}
+            onClick={() => {
+              if (picked) track("begin_checkout", {
+                currency: "ILS",
+                value: total,
+                page_type: "book_organic",
+                location: "sticky",
+                delivery,
+                items: [{ item_name: "קשר של תפילין", quantity, price: bundle.price }],
+              });
+            }}
+          >
+            {picked ? "לתשלום מאובטח" : "לבחירת כמות"} <ArrowLeft size={16} aria-hidden="true" />
           </a>
         </div>
       </div>
