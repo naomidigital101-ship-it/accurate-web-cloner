@@ -1,3 +1,5 @@
+import { track } from "@/lib/analytics";
+
 const PURCHASE_ID = "kb-purchase";
 
 const GROW_SINGLE = "https://pay.grow.link/MTA1NDQ5~49262f78c08b742d6ad21b74b49de3e5-Mzk4OTY3OA?price_check=20261019";
@@ -6,6 +8,7 @@ const GROW_TRIPLE = "https://pay.grow.link/MTA1NDQ5~a1922e39c4975492fad2f1321d3c
 
 const offers = [
   {
+    quantity: 1,
     name: "עותק בודד",
     price: "67",
     note: "משלוח בתוספת 35 ₪",
@@ -13,6 +16,7 @@ const offers = [
     best: false,
   },
   {
+    quantity: 2,
     name: "זוג עותקים",
     price: "118",
     note: "משלוח בתוספת 20 ₪",
@@ -20,6 +24,7 @@ const offers = [
     best: true,
   },
   {
+    quantity: 3,
     name: "שלישיית עותקים",
     price: "156",
     note: "כולל משלוח עד הבית",
@@ -50,6 +55,18 @@ export function BookPurchaseSection() {
                 href={o.href}
                 target="_blank"
                 rel="noopener"
+                onClick={() =>
+                  /* אותו אירוע כמו בעמודי הספר: לחיצה על הזמנה. התשלום עצמו קורה ב-Grow ולא נמדד כאן */
+                  track("begin_checkout", {
+                    page_type: "home",
+                    location: "home_shop",
+                    currency: "ILS",
+                    value: Number(o.price),
+                    bundle: o.quantity,
+                    transport_type: "beacon",
+                    items: [{ item_id: `kesher-book-${o.quantity}`, item_name: `קשר של תפילין - ${["", "עותק אחד", "שני עותקים", "שלושה עותקים"][o.quantity]}`, price: Number(o.price), quantity: 1 }],
+                  })
+                }
                 aria-label={`לרכישה — ${o.name}, ${o.price} שקלים`}
               >
                 לרכישה
